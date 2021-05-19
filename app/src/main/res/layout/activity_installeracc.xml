@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/relativeLayout"
+android:layout_height="match_parent"
+android:screenOrientation="portrait"
+android:background="#FBFBFB"
+tools:context=".Activityinstalleracc">
+
+
+    <Button
+        android:id="@+id/newprofilebutton"
+        android:layout_width="372dp"
+        android:layout_height="44dp"
+        android:background="@drawable/myrndbutton"
+        android:fontFamily="casual"
+        android:text="Create your profile - Blockchain secured !"
+        android:textAlignment="center"
+
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.893" />
+
+    <Button
+        android:id="@+id/usethisaccbutton"
+        android:layout_width="200dp"
+        android:layout_height="37dp"
+        android:background="@drawable/myrndbutton"
+        android:fontFamily="casual"
+        android:text="Save your PIN#"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.485" />
+
+    <!-- android:textColorHint="@color/colorAccent" --><![CDATA[
+    android:textSize="14sp"
+    android:textStyle="normal|bold"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.074"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.428" />
+
+    ]]><!--android:textColorHint="@color/colorAccent"--><![CDATA[
+    android:textColorLink="#FFFFFF"
+    android:textSize="14sp"
+    android:textStyle="normal|bold"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.909"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.432" />
+
+
+
+    ]]>
+
+    <EditText
+        android:id="@+id/newpin1editText"
+        android:layout_width="195dp"
+        android:layout_height="64dp"
+        android:ems="10"
+        android:fontFamily="casual"
+        android:hint="Enter a new 5 digit PIN#"
+        android:inputType="number|textPersonName"
+        android:textAlignment="textStart"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.34" />
+
+    <EditText
+        android:id="@+id/newpin2editText"
+        android:layout_width="179dp"
+        android:layout_height="66dp"
+        android:ems="10"
+        android:fontFamily="casual"
+        android:hint="Re-Enter the new PIN here"
+        android:inputType="number|textPersonName"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.342" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="208dp"
+        android:layout_height="128dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.107"
+        app:srcCompat="@drawable/logo_run_it" />
+
+<TextView
+    android:id="@+id/msglinetextView2"
+    android:layout_width="402dp"
+    android:layout_height="24dp"
+    android:textAlignment="center"
+    android:textSize="12sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.444"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.974" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="123dp"
+        android:layout_height="101dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.733"
+        app:srcCompat="@drawable/icon_red_create" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

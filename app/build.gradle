@@ -58,6 +58,8 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
+    implementation 'com.yakivmospan:scytale:1.0.1'
+
     // as above
 
     testImplementation 'junit:junit:4.13.2'

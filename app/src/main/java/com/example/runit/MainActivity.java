@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import com.goodiebag.pinview.Pinview;
+import com.yakivmospan.scytale.Store;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openActivityinstallacc () {
-      //  Intent intent = new Intent(this, com.example.runit.Activityinstalleracc.class);
-      //  startActivity(intent);
+       Intent intent = new Intent(this, com.example.runit.Activityinstalleracc.class);
+       startActivity(intent);
     }
 
 
