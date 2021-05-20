@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/relativeLayout"
-android:layout_height="match_parent"
-android:screenOrientation="portrait"
-android:background="#FBFBFB"
-tools:context=".Activityinstalleracc">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ED0847"
+    android:screenOrientation="portrait"
+    tools:context=".Activityinstalleracc">
 
 
     <Button
         android:id="@+id/newprofilebutton"
-        android:layout_width="372dp"
-        android:layout_height="44dp"
+        android:layout_width="382dp"
+        android:layout_height="52dp"
         android:background="@drawable/myrndbutton"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="Create your profile - Blockchain secured !"
         android:textAlignment="center"
 
         android:textAllCaps="false"
+        android:textColor="#F6F4F4"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,10 +34,11 @@ tools:context=".Activityinstalleracc">
         android:layout_width="200dp"
         android:layout_height="37dp"
         android:background="@drawable/myrndbutton"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="Save your PIN#"
         android:textAlignment="center"
         android:textAllCaps="false"
+        android:textColor="#F8F5F5"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,13 +75,14 @@ tools:context=".Activityinstalleracc">
 
     <EditText
         android:id="@+id/newpin1editText"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="195dp"
         android:layout_height="64dp"
         android:ems="10"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:hint="Enter a new 5 digit PIN#"
         android:inputType="number|textPersonName"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,7 +97,7 @@ tools:context=".Activityinstalleracc">
         android:layout_width="179dp"
         android:layout_height="66dp"
         android:ems="10"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:hint="Re-Enter the new PIN here"
         android:inputType="number|textPersonName"
         android:textAlignment="center"
@@ -119,18 +122,18 @@ tools:context=".Activityinstalleracc">
         app:layout_constraintVertical_bias="0.107"
         app:srcCompat="@drawable/logo_run_it" />
 
-<TextView
-    android:id="@+id/msglinetextView2"
-    android:layout_width="402dp"
-    android:layout_height="24dp"
-    android:textAlignment="center"
-    android:textSize="12sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.444"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.974" />
+    <TextView
+        android:id="@+id/msglinetextView2"
+        android:layout_width="402dp"
+        android:layout_height="24dp"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.974" />
 
     <ImageView
         android:id="@+id/imageView14"
@@ -141,6 +144,6 @@ tools:context=".Activityinstalleracc">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.733"
-        app:srcCompat="@drawable/icon_red_create" />
+        app:srcCompat="@drawable/icon_white_profile" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

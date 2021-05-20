@@ -86,7 +86,7 @@ public class Activityinstalleracc extends AppCompatActivity {
 
                 messagelineout.setText("The new PIN# " + pin1in + "is safely encrypted in your phone's keystore !");
 
-                Toast.makeText(getApplicationContext(), "Your JOYN App is now secured, Press Back Button to re-enter App.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Your Run.it App is now secured, Press Back Button to re-enter App.", Toast.LENGTH_LONG).show();
 
 
 
@@ -103,7 +103,7 @@ public class Activityinstalleracc extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Coming Soon !", Toast.LENGTH_LONG).show();
 
-                messagelineout.setText("Create a new JOYN Account will be in the MVP App");
+                messagelineout.setText("Create a new Run.it Account will be in the MVP App");
 
 
 

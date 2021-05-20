@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void openActivityhbal() {
-     //   Intent intent = new Intent(this, com.example.runit.Activityhbal.class);
-        // intent.putExtra("pin", pinstring);
-      //  startActivity(intent);
+       Intent intent = new Intent(this, com.example.runit.Activityhbal.class);
+           intent.putExtra("pin", pinstring);
+           startActivity(intent);
     }
 
     public void openActivityinstallacc () {
