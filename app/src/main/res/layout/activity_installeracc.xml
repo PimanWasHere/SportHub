@@ -11,25 +11,6 @@
 
 
     <Button
-        android:id="@+id/newprofilebutton"
-        android:layout_width="382dp"
-        android:layout_height="52dp"
-        android:background="@drawable/myrndbutton"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="Create your profile - Blockchain secured !"
-        android:textAlignment="center"
-
-        android:textAllCaps="false"
-        android:textColor="#F6F4F4"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
-
-    <Button
         android:id="@+id/usethisaccbutton"
         android:layout_width="200dp"
         android:layout_height="37dp"
@@ -81,7 +62,8 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:hint="Enter a new 5 digit PIN#"
-        android:inputType="number|textPersonName"
+        android:background="@color/white"
+        android:inputType="number"
         android:textAlignment="center"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -99,7 +81,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:hint="Re-Enter the new PIN here"
-        android:inputType="number|textPersonName"
+        android:inputType="number"
         android:textAlignment="center"
         android:textSize="14sp"
         android:textStyle="bold"

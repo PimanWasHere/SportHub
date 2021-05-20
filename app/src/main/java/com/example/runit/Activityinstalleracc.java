@@ -1,6 +1,7 @@
 package com.example.runit;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +45,7 @@ public class Activityinstalleracc extends AppCompatActivity {
 
                 messagelineout.setText(" ");
 
-                Toast.makeText(getApplicationContext(), "Created a new PIN#, keep it safe.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Created a new PIN# and Run.it Hedera Ledger Account, keep it safe.", Toast.LENGTH_LONG).show();
 
 
                 //  ask for new 5 digit pin twice
@@ -81,37 +82,43 @@ public class Activityinstalleracc extends AppCompatActivity {
                 }
 
 
+                //  here we show Spinner !   TBD
+
                 SecretKey key = store.generateSymmetricKey(pin1.getText().toString(), null);
 
 
-                messagelineout.setText("The new PIN# " + pin1in + "is safely encrypted in your phone's keystore !");
+                //  disable Spinner and show exceptions or success.
 
-                Toast.makeText(getApplicationContext(), "Your Run.it App is now secured, Press Back Button to re-enter App.", Toast.LENGTH_LONG).show();
+               // messagelineout.setText("The new PIN# " + pin1in + "is safely encrypted in your phone's keystore !");
 
 
+                Toast.makeText(getApplicationContext(), "Your Run.it App is now secured, Create a quick short profile and your roles.", Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(this, com.example.runit.Activitycreateacc.class);
+                startActivity(intent);
 
 
             }
 
         });
 
-
+/*
         createprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(), "Coming Soon !", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(), "Coming Soon !", Toast.LENGTH_LONG).show();
 
-                messagelineout.setText("Create a new Run.it Account will be in the MVP App");
+               // messagelineout.setText("Created a new Run.it Account will be in the MVP App");
 
-
+                Intent intent = new Intent(this, com.example.runit.Activitycreateacc.class);
+                startActivity(intent);
 
             }
 
         });
 
-
+*/
 
     }
 

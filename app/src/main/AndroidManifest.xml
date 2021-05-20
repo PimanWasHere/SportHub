@@ -27,6 +27,10 @@
             android:name=".Activityinstalleracc"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".Activitycreateacc"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>
