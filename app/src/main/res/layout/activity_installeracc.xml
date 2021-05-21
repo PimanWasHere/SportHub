@@ -39,26 +39,13 @@
 
 
 
-    ]]>
 
-    <Button
-        android:id="@+id/newpinback"
-        android:layout_width="144dp"
-        android:layout_height="52dp"
-        android:background="@drawable/myrndbackbutton"
-        android:fontFamily="monospace"
-        android:text="BACK"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#F8F5F5"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.161"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
+
+
+
+
+
+    ]]>
 
     <Button
         android:id="@+id/usethisaccbutton"
@@ -74,10 +61,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
+        app:layout_constraintVertical_bias="0.944" />
 
     <EditText
         android:id="@+id/newpin1editText"

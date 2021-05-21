@@ -40,16 +40,10 @@ public class Activityinstalleracc extends AppCompatActivity {
 
         EditText pin1 = (EditText) findViewById(R.id.newpin1editText);
         EditText pin2 = (EditText) findViewById(R.id.newpin2editText);
-        TextView messagelineout = (TextView) findViewById(R.id.msglinetextView2);
-
 
         acceptthishhac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                messagelineout.setText(" ");
-
-                Toast.makeText(getApplicationContext(), "Created a new PIN# and Run.it Hedera Ledger Account, keep it safe.", Toast.LENGTH_LONG).show();
 
 
                 //  ask for new 5 digit pin twice
@@ -59,14 +53,17 @@ public class Activityinstalleracc extends AppCompatActivity {
 
                 if ((pin1.getText().equals("")) || (pin2.getText().equals(""))) {
 
-                    messagelineout.setText("Your PINs must NOT be empty.");
+
+                    Toast.makeText(getApplicationContext(), "PIN cannot be blank", Toast.LENGTH_LONG).show();
+
 
                     return;
                 }
 
                 if ((pin1.length()!= 5) || (pin2.length()!=5)) {
 
-                    messagelineout.setText("Your PINs must both be 5 digits.");
+
+                    Toast.makeText(getApplicationContext(), "PIN must be 5 digits.", Toast.LENGTH_LONG).show();
 
                     return;
                 }
@@ -78,23 +75,13 @@ public class Activityinstalleracc extends AppCompatActivity {
 
                 if (!pin1in.equals(pin2in)) {
 
-                    messagelineout.setText("Your Pins must match.");
-
-                    System.out.println("Pins do not match ");
+                    Toast.makeText(getApplicationContext(), "PINs do not match, please re-enter", Toast.LENGTH_LONG).show();
 
                     return;
                 }
 
 
-                //  here we show Spinner !   TBD
-
                 SecretKey key = store.generateSymmetricKey(pin1.getText().toString(), null);
-
-
-                //  disable Spinner and show exceptions or success.
-
-               // messagelineout.setText("The new PIN# " + pin1in + "is safely encrypted in your phone's keystore !");
-
 
                 Toast.makeText(getApplicationContext(), "Your Run.it App is now secured, Create a quick short profile and your roles.", Toast.LENGTH_LONG).show();
 
