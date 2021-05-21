@@ -10,10 +10,28 @@
     tools:visibility="visible">
 
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="202dp"
+        android:layout_height="20dp"
+        android:background="#ED0847"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Forgot PIN code ?"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mypinview"
+        app:layout_constraintVertical_bias="0.076" />
+
     <com.goodiebag.pinview.Pinview
         android:id="@+id/mypinview"
-        android:layout_width="356dp"
-        android:layout_height="85dp"
+        android:layout_width="354dp"
+        android:layout_height="94dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -43,18 +61,18 @@
         android:layout_width="202dp"
         android:layout_height="20dp"
         android:background="#ED0847"
-        android:fontFamily="casual"
-        android:text="Powered by Hedera Hashgraph"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Alpha Version 0.1"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mypinview"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintVertical_bias="0.934" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -65,30 +83,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.074"
-        app:srcCompat="@drawable/logo_name" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="82dp"
-        android:layout_height="33dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.936"
-        app:srcCompat="@drawable/logo_name" />
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="175dp"
-        android:layout_height="123dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598"
-        app:srcCompat="@drawable/logo_icon" />
+        app:srcCompat="@drawable/logo_name"
+        tools:srcCompat="@drawable/image__1_" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

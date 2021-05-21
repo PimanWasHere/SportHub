@@ -13,14 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yakivmospan.scytale.Store;
 
+import java.io.IOException;
 import java.math.BigInteger;
+import java.security.GeneralSecurityException;
 
 import javax.crypto.SecretKey;
 
 public class Activityinstalleracc extends AppCompatActivity {
 
 
-    static Activityinstalleracc context;
+    public void Activityinstalleraccc() throws IOException, GeneralSecurityException {
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,34 +98,19 @@ public class Activityinstalleracc extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Your Run.it App is now secured, Create a quick short profile and your roles.", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(this, com.example.runit.Activitycreateacc.class);
-                startActivity(intent);
+                openActivitycreateacc();
 
 
             }
 
         });
-
-/*
-        createprofile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-               // Toast.makeText(getApplicationContext(), "Coming Soon !", Toast.LENGTH_LONG).show();
-
-               // messagelineout.setText("Created a new Run.it Account will be in the MVP App");
-
-                Intent intent = new Intent(this, com.example.runit.Activitycreateacc.class);
-                startActivity(intent);
-
-            }
-
-        });
-
-*/
 
     }
 
+    public void openActivitycreateacc () {
+        Intent intent = new Intent(this, com.example.runit.Activitycreateacc.class);
+        startActivity(intent);
+    }
 
 
 }

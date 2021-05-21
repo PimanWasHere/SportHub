@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         pinview = (Pinview) findViewById(R.id.mypinview);
+
         pinview.setPinViewEventListener(new Pinview.PinViewEventListener() {
             @Override
             public void onDataEntered(Pinview pinview, boolean fromUser) {
