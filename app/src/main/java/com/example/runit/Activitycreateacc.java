@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hedera.hashgraph.sdk.AccountId;
 import com.hedera.hashgraph.sdk.BadMnemonicException;
+import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.FileId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
@@ -230,7 +231,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 // Note platform has to pay 3HBAR or so to create Souls new Account so new Soul can OWN their own SC ie profile data SC
 
                 try {
-                    TransactionRecord resultback = HederaServices.transferhbar(OPERATING, 3, newAccount.toString(), "Welcome - xfer from Run.it Operating Account");
+                    TransactionRecord resultback = HederaServices.transferhbarfromrunit((long) 3, newAccount.toString(), "Welcome - xfer from Run.it Operating Account");
                 } catch (ReceiptStatusException e) {
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
 
@@ -245,8 +246,28 @@ public class Activitycreateacc extends AppCompatActivity {
                     return;
                 }
 
-                // now deploy the Souls profile SC
+                // now deploy the Souls profile SC under their own Client instance.
 
+
+                ContractId newcontractid = null;
+
+                try {
+                    newcontractid = HederaServices.createdeployedprofile("Simon" , "Jackson",  "Piman" , "14178490705", "Australian", rolecode, newhederaFileid.toString(), "");
+                } catch (TimeoutException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created " + e, Toast.LENGTH_LONG).show();
+                     return;
+                } catch (PrecheckStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created " + e, Toast.LENGTH_LONG).show();
+                     return;
+                } catch (ReceiptStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created " + e, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (newcontractid == null || newcontractid.toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created ", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
 
                 spinner.setVisibility(View.GONE);
@@ -254,7 +275,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 runitaccountnum.setText(newhederaFileid.toString());
                 runitaccountnum.setVisibility(View.VISIBLE);
 
-                Toast.makeText(getApplicationContext(), "Your Run.it Account has been created, please keep your new Account " + newhederaFileid + " number written down and safe!, it is encrypted with and secured by your password.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Your Run.it Account has been created!, please keep your new Account " + newhederaFileid + " number written down and safe!, it is encrypted with and secured by your password.", Toast.LENGTH_LONG).show();
 
             }
 

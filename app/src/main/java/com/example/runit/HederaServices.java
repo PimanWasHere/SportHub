@@ -257,34 +257,11 @@ public final class HederaServices {
         return balance;
     }
 
-    public static String createdeployedprofile(String hbarpricetarget, String numberofdaysoffering, String numberofexpirationdays, String creatorpayoutaccountin, long hbarin, long gasinlong) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+
+    public static ContractId createdeployedprofile(String _fname, String _lname, String _nickname, String _phone, String _nationality, String _rolecodes, String _profilehederafileid, String _profiledataipfshash) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
         String newcontractid = null;
 
-        // constructor (address _creatordepositaccount, uint256 _creatorhbarpriceincents, uint256 _numberofofferingdays, uint256 _numberofopendays, address payable _creatorpayoutaccount) public payable {
-
-        // if new contractid create ok then append it to hedera file if < (1MB - 8K))
-        // max size is 1MB for hedera file.. 1 million characters / 6 or 7 per new Sc =
-        // current envelope limit is 140,000 contracts but all contracts will expire 90days after creation date
-        // number of days until expiration will never exceed autorenew period of 90 days - so SCs will be immutable for the max
-        // period of expiration time window.
-        // and Hedera Exception will be checked to see if after 90days any SC was expired by Hedera
-        // IF the owners Hbar futures contract is on zero hbars.
-
-        // use the fileId of the Audited and verified bytecode - also on dragonglass.com( like Etherscan is for Ethereum
-
-        System.out.println(" hbarprice target " + hbarpricetarget);
-        System.out.println(" nub of days off " + numberofdaysoffering);
-        System.out.println(" numb of days to expir " + numberofexpirationdays);
-        System.out.println(" payout accnt " + creatorpayoutaccountin);
-        System.out.println(" hbars sent in  " + hbarin);
-        System.out.println(" gas in is hbar " + gasinlong);
-
-        BigInteger minhbarvalue = new BigInteger("500000000"); // arbitary minimum setting
-        BigInteger hbarpricetargetbigint = new BigInteger(hbarpricetarget);
-        BigInteger numberofofferingdaysbigint = new BigInteger(numberofdaysoffering);
-        BigInteger numberofopendaysbigint = new BigInteger(numberofexpirationdays);
-
-        String creatorpayoutaccountsol = AccountId.fromString(creatorpayoutaccountin).toSolidityAddress();
+        // constructor(string _fname, string _lname, string _nickname, string _phone, string _nationality, string _rolecodes, string _profilehederafileid, string _profiledataipfshash, address _platformaddress) public {
 
         // set admin key to zero address - this is done by Hedera as default.
 
@@ -296,45 +273,22 @@ public final class HederaServices {
                 .setBytecodeFileId(hbarfutbytecodefile)
                 .setConstructorParameters(
                         new ContractFunctionParameters()
-                                .addUint256(minhbarvalue)
-                                .addUint256(hbarpricetargetbigint)
-                                .addUint256(numberofofferingdaysbigint)
-                                .addUint256(numberofopendaysbigint)
-                                .addAddress(creatorpayoutaccountsol))
-                .setInitialBalance(new Hbar(hbarin))
-                .setContractMemo("HBARFutures Smart Contract")
+                                .addString(_fname)
+                                .addString(_lname)
+                                .addString(_nickname)
+                                .addString(_phone)
+                                .addString(_nationality)
+                                .addString(_rolecodes)
+                                .addString(_profilehederafileid)
+                                .addString(_profiledataipfshash))
+                .setContractMemo("A Run.it profile Smart Contract")
                 .execute(USER_ACCOUNT);
 
         TransactionReceipt createreceipt = contractcreatetran.getReceipt(USER_ACCOUNT);
 
         ContractId provisionalcontractid = Objects.requireNonNull(createreceipt.contractId);
 
-        StringBuilder newcontractidstring = new StringBuilder();
-
-        newcontractidstring.append(SolidityUtil.addressFor(provisionalcontractid )+ "/");
-
-        System.out.println("file append new SC  is  " + provisionalcontractid);
-
-        System.out.println("file append new SC in .sol is  " + newcontractidstring);
-
-
-
-        // ok appending new SC to the end of the file
-
-        TransactionReceipt fileappendtran = new FileAppendTransaction()
-                .setFileId(hbarfuturesfileofscs)
-                .setContents(newcontractidstring.toString())
-                .execute(OPERATING_ACCOUNT)
-                .getReceipt(OPERATING_ACCOUNT);
-
-        String fileappendreceipt = fileappendtran.toString();
-
-        System.out.println("file append for new sc added receipt " + fileappendreceipt);
-        // if the above does not throw then file is appended to successfully.
-
-        newcontractid = provisionalcontractid.toString();
-
-        return newcontractid;
+        return provisionalcontractid;
 
 
     }
@@ -858,11 +812,10 @@ public final class HederaServices {
 
 
 
-    public static TransactionRecord transferhbar(String fromaccnt,Long hbartosendlong, String destaccnt, String memo) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
+    public static TransactionRecord transferhbarfromrunit(Long hbartosendlong, String destaccnt, String memo) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
 
         Boolean resultstate = false;
 
-        AccountId sendingaccount = AccountId.fromString(fromaccnt);
         AccountId recipientaccount = AccountId.fromString(destaccnt);
 
         if (memo.isEmpty()) memo = " ";
@@ -872,14 +825,12 @@ public final class HederaServices {
         TransactionResponse transactionResponse = new TransferTransaction()
                 // .addSender and .addRecipient can be called as many times as you want as long as the total sum from
                 // both sides is equivalent
-                .addHbarTransfer(sendingaccount, amount.negated())
+                .addHbarTransfer(OPERATING_ACCOUNT.getOperatorAccountId(), amount.negated())
                 .addHbarTransfer(recipientaccount, amount)
                 .setTransactionMemo(memo)
-                .execute(USER_ACCOUNT);
+                .execute(OPERATING_ACCOUNT);
 
-        System.out.println("transaction ID: " + transactionResponse);
-
-        TransactionRecord record = transactionResponse.getRecord(USER_ACCOUNT);
+        TransactionRecord record = transactionResponse.getRecord(OPERATING_ACCOUNT);
 
         return record;
 
