@@ -247,7 +247,7 @@ public final class HederaServices {
     }
 
 
-    public static ContractId createdeployedprofile(String _fname, String _lname, String _nickname, String _phone, String _nationality, String _rolecodes, String _runaccountid, BigInteger _initialrunbal, String _profilehederafileid, String _profiledataipfshash) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+    public static ContractId createdeployedprofile(String _fname, String _lname, String _nickname, String _phone, String _nationality, String _rolecode, String _accountid, BigInteger _runbal, String _hederafileid, String _dataipfshash) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
         String newcontractid = null;
 
         // constructor(string _fname, string _lname, string _nickname, string _phone, string _nationality, string _rolecodes, string _profilehederafileid, string _profiledataipfshash, address _platformaddress) public {
@@ -265,11 +265,12 @@ public final class HederaServices {
                                 .addString(_nickname)
                                 .addString(_phone)
                                 .addString(_nationality)
-                                .addString(_rolecodes)
-                                .addString(_runaccountid)
-                                .addUint256(_initialrunbal)
-                                .addString(_profilehederafileid)
-                                .addString(_profiledataipfshash))
+                                .addString(_rolecode)
+                                .addAddress(_accountid)
+                                .addUint256(_runbal)
+                                .addString(_hederafileid)
+                                .addString(_dataipfshash)
+                                .addAddress(OPERATOR_ID.toSolidityAddress()))
                 .setContractMemo("This is a Run.it profile Smart Contract")
                 .execute(USER_ACCOUNT);
 

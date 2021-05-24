@@ -254,7 +254,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 BigInteger initialrunbal = new BigInteger("0");
 
                 try {
-                    newcontractid = HederaServices.createdeployedprofile("Simon" , "Jackson",  "Piman" , "14178490705", "Australian", rolecode, newcontractid.toString(), initialrunbal, newhederaFileid.toString(), "ipfs profile hash tbd");
+                    newcontractid = HederaServices.createdeployedprofile("Simon" , "Jackson",  "Piman" , "14178490705", "Australian", rolecode, newAccount.toSolidityAddress(), initialrunbal, newhederaFileid.toString(), "ipfs profile hash tbd");
                 } catch (TimeoutException e) {
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                      return;
