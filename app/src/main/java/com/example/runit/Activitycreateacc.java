@@ -77,7 +77,7 @@ public class Activitycreateacc extends AppCompatActivity {
         CheckBox developer = (CheckBox) findViewById(R.id.chkboxdeveloper);
 
         EditText newpassword =(EditText) findViewById(R.id.editTextTextPassword);
-        newpassword.setVisibility(View.GONE);
+
         TextView runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountnum);
         runitaccountnum.setVisibility(View.GONE);
 
@@ -251,8 +251,10 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 ContractId newcontractid = null;
 
+                BigInteger initialrunbal = new BigInteger("0");
+
                 try {
-                    newcontractid = HederaServices.createdeployedprofile("Simon" , "Jackson",  "Piman" , "14178490705", "Australian", rolecode, newhederaFileid.toString(), "");
+                    newcontractid = HederaServices.createdeployedprofile("Simon" , "Jackson",  "Piman" , "14178490705", "Australian", rolecode, newcontractid.toString(), initialrunbal, newhederaFileid.toString(), "ipfs profile hash tbd");
                 } catch (TimeoutException e) {
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                      return;

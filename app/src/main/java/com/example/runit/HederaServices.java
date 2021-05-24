@@ -3,7 +3,7 @@ package com.example.runit;
 
 import com.google.protobuf.ByteString;
 import com.hedera.hashgraph.sdk.*;
-
+import org.threeten.bp.Duration;
 import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -15,7 +15,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeoutException;
 
@@ -25,21 +24,13 @@ public final class HederaServices {
 
     private static final AccountId OPERATOR_ID = AccountId.fromString("0.0.6655");
     private static final PrivateKey OPERATOR_KEY = PrivateKey.fromString("302e020100300506032b657004220420163d9853ea3297b26863c0956c8085516c86a756be0819d655ab61cfdadbb1ab");
-    // final mainnet op accnt below..
-    // final AccountId OPERATOR_ID = AccountId.fromString("0.0.199327");
-    // final PrivateKey OPERATOR_KEY = PrivateKey.fromString("302e020100300506032b657004220420b0d50bf0fd1282ec23e164b99cb5921adbf63553dffba0bf2777935f031acd72");
-
-    // private static final AccountId OPERATOR_ID = AccountId.fromString("0.0.910");
-    // private static final PrivateKey OPERATOR_KEY = PrivateKey.fromString("302e020100300506032b657004220420ed273f33e01e572f82e556dcf72f671743fb177cee668d7aa8461409f9279ba1");
 
     private static Client OPERATING_ACCOUNT = null;
     private static Client USER_ACCOUNT = null;
     private static GennedAccount GENNED_ACCOUNT = null;
 
-    private static final FileId hbarfuturesfileofscs = FileId.fromString("0.0.405428");
-
-    private static final FileId hbarfutbytecodefile = FileId.fromString("0.0.611694");
-    // test on mainnet fileid 0.0.193436
+    private static final ContractId runtokensc= ContractId.fromString("0.0.651281");
+    private static final FileId runitprofilefile = FileId.fromString("0.0.      ");
 
 
     public static void createoperatorClient() {
@@ -75,12 +66,11 @@ public final class HederaServices {
 
         System.out.println("using operating Account.. " + OPERATOR_ID.toString());
 
-
     }
 
     public static void createuserClient(AccountId useraccount, PrivateKey userskey)  {
 
-        System.out.println(".. to pay for SC calls.., SC display list, Contract create, Payout etc");
+        System.out.println(".. to pay for SC deploy.. and subsequent calls.., SC display list, Contract create, Payout etc");
  /*
 
 
@@ -110,7 +100,6 @@ public final class HederaServices {
 
         System.out.println("Connected to User's Account.. " + useraccount.toString());
 
-
     }
 
 
@@ -127,7 +116,7 @@ public final class HederaServices {
 
         TransactionResponse newAccounttx = new AccountCreateTransaction()
                 .setKey(GENNED_ACCOUNT.newPublicKey)
-                .setInitialBalance(new Hbar(201))
+                .setInitialBalance(new Hbar(2))
                 //.setInitialBalance(100_000_000) // not mandatory for create?
                 .execute(OPERATING_ACCOUNT);
 
@@ -258,19 +247,17 @@ public final class HederaServices {
     }
 
 
-    public static ContractId createdeployedprofile(String _fname, String _lname, String _nickname, String _phone, String _nationality, String _rolecodes, String _profilehederafileid, String _profiledataipfshash) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+    public static ContractId createdeployedprofile(String _fname, String _lname, String _nickname, String _phone, String _nationality, String _rolecodes, String _runaccountid, BigInteger _initialrunbal, String _profilehederafileid, String _profiledataipfshash) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
         String newcontractid = null;
 
         // constructor(string _fname, string _lname, string _nickname, string _phone, string _nationality, string _rolecodes, string _profilehederafileid, string _profiledataipfshash, address _platformaddress) public {
 
         // set admin key to zero address - this is done by Hedera as default.
 
-        System.out.println("bytecode file " +  hbarfutbytecodefile.toString());
-
         TransactionResponse contractcreatetran = new ContractCreateTransaction()
-                .setAutoRenewPeriod(Duration.ofSeconds(7890000)) //   90 days in seconds, is the autorenew when the creator account will have to pay modest renewfee
-                .setGas(gasinlong) // set by user
-                .setBytecodeFileId(hbarfutbytecodefile)
+                .setAutoRenewPeriod(Duration.ofDays(90)) //   90 days in seconds, is the autorenew when the creator account will have to pay modest renewfee
+                .setGas(3) // set by user
+                .setBytecodeFileId(runitprofilefile)
                 .setConstructorParameters(
                         new ContractFunctionParameters()
                                 .addString(_fname)
@@ -279,9 +266,11 @@ public final class HederaServices {
                                 .addString(_phone)
                                 .addString(_nationality)
                                 .addString(_rolecodes)
+                                .addString(_runaccountid)
+                                .addUint256(_initialrunbal)
                                 .addString(_profilehederafileid)
                                 .addString(_profiledataipfshash))
-                .setContractMemo("A Run.it profile Smart Contract")
+                .setContractMemo("This is a Run.it profile Smart Contract")
                 .execute(USER_ACCOUNT);
 
         TransactionReceipt createreceipt = contractcreatetran.getReceipt(USER_ACCOUNT);
@@ -290,8 +279,9 @@ public final class HederaServices {
 
         return provisionalcontractid;
 
-
     }
+
+
 
     public static String getutcstringtimestamp(BigInteger timeinmilliseconds) {
 
@@ -326,465 +316,46 @@ public final class HederaServices {
 
     public static Runitprofile getacontract(ContractId existingcontractid) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
 
-        System.out.println(" contract id in " + existingcontractid.toString());
 
-        // first we call the timecheck function to refesh any status - ie state
-
-        TransactionResponse refreshstatusduetotime = new ContractExecuteTransaction()
-                .setGas(100000000)
-                .setContractId(existingcontractid)
-                .setFunction("timecheckstatuschange")
-                .execute(USER_ACCOUNT);
-
-        refreshstatusduetotime.getReceipt(USER_ACCOUNT);
-
-        System.out.println("1" +  refreshstatusduetotime.getReceipt(USER_ACCOUNT).toString());
         // creating contract POJO
 
         Runitprofile contractdetails = new Runitprofile();
 
 
-        ContractFunctionResult result1 = new ContractCallQuery()
+        // .. get all the profile details - all held private in the SC - only accessible via modifier 'only owner' - see the solidity for details
+
+
+        ContractFunctionResult result_1 = new ContractCallQuery()
                 .setGas(30000)
                 .setContractId(existingcontractid)
-                .setFunction("lastconsensustimestamp")
+                .setFunction("getfname")
                 .execute(USER_ACCOUNT);
 
-        if (result1.errorMessage != null) {
-            System.out.println("Error calling Contract " + result1.errorMessage);
-            return contractdetails;
-        }
-        System.out.println("2");
-
-        System.out.println("time from hedera consensus-time in seconds from sc is " + result1.getUint256(0));
-
-        contractdetails.timefromhederautc = getutcstringtimestamp(result1.getUint256(0));
-
-
-        ContractFunctionResult result2 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("offeringclosedday_inseconds")
-                .execute(USER_ACCOUNT);
-
-        if (result2.errorMessage != null) {
-            System.out.println("Error calling Contract " + result2.errorMessage);
+        if (result_1.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_1.errorMessage);
             return contractdetails;
         }
 
-        contractdetails.offeringclosedday_inseconds = result2.getUint256(0);
+        contractdetails.fname = result_1.getString(0);
 
-        System.out.println("3");
 
-        ContractFunctionResult result3 = new ContractCallQuery()
+
+        ContractFunctionResult result_2 = new ContractCallQuery()
                 .setGas(30000)
                 .setContractId(existingcontractid)
-                .setFunction("expirationday_inseconds")
+                .setFunction("getlname")
                 .execute(USER_ACCOUNT);
 
-        if (result3.errorMessage != null) {
-            System.out.println("Error calling Contract " + result3.errorMessage);
+        if (result_2.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_2.errorMessage);
             return contractdetails;
         }
 
-        System.out.println("4");
+        contractdetails.lname = result_2.getString(0);
 
-        contractdetails.expirationday_inseconds = result3.getUint256(0);
-        System.out.println("expiration time in seconds from sc is " + contractdetails.expirationday_inseconds);
 
-        // in hbar not tbar denominations
-        ContractFunctionResult result4 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("hbarheldlockedin")
-                .execute(USER_ACCOUNT);
 
-        if (result4.errorMessage != null) {
-            System.out.println("Error calling Contract " + result4.errorMessage);
 
-        }
-
-        System.out.println("5");
-
-        contractdetails.hbarheldlockedin = result4.getUint256(0);
-
-        // get contractcreatted tstamp
-
-        ContractFunctionResult result5 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("contractcreatedtimestamp")
-                .execute(USER_ACCOUNT);
-
-        if (result5.errorMessage != null) {
-            System.out.println("Error calling Contract " + result5.errorMessage);
-        }
-
-        contractdetails.contractcreatedtimestamp = result5.getUint256(0);
-
-        System.out.println("6");
-
-
-        ContractFunctionResult result7 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("creatordepositaccount")
-                .execute(USER_ACCOUNT);
-
-        if (result7.errorMessage != null) {
-            System.out.println("Error calling Contract " + result7.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.creatordepositaccount = result7.getAddress(0);
-
-        System.out.println("8");
-
-        ContractFunctionResult result8 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("creatorpayoutaccount")
-                .execute(USER_ACCOUNT);
-
-        if (result8.errorMessage != null) {
-            System.out.println("Error calling Contract " + result8.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.creatorpayoutaccount = result8.getAddress(0);
-
-        System.out.println("9");
-
-        ContractFunctionResult result9 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("creatorhbarprice")
-                .execute(USER_ACCOUNT);
-
-        if (result9.errorMessage != null) {
-            System.out.println("Error calling Contract " + result9.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.creatorhbarprice = result9.getUint256(0);
-
-        // get ALL statuses !
-
-        System.out.println("11");
-
-        ContractFunctionResult result11 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("contract_open")
-                .execute(USER_ACCOUNT);
-
-        if (result11.errorMessage != null) {
-            System.out.println("Error calling Contract " + result11.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.contract_open = result11.getBool(0);
-        System.out.println("12");
-
-
-        ContractFunctionResult result12 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("contract_expired")
-                .execute(USER_ACCOUNT);
-
-        if (result12.errorMessage != null) {
-            System.out.println("Error calling Contract " + result12.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.contract_expired = result12.getBool(0);
-        System.out.println("13");
-
-
-        ContractFunctionResult result13 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("contract_paidout")
-                .execute(USER_ACCOUNT);
-
-        if (result13.errorMessage != null) {
-            System.out.println("Error calling Contract " + result13.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.contract_paidout = result13.getBool(0);
-
-        System.out.println("14");
-
-        ContractFunctionResult result14 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("contract_locked_until_expiration")
-                .execute(USER_ACCOUNT);
-
-        if (result14.errorMessage != null) {
-            System.out.println("Error calling Contract " + result14.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.contract_locked_until_expiration = result14.getBool(0);
-        System.out.println("15");
-
-        ContractFunctionResult result15 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("counterpartydepositaccount")
-                .execute(USER_ACCOUNT);
-
-        if (result15.errorMessage != null) {
-            System.out.println("Error calling Contract " + result15.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.counterpartydepositaccount = result15.getAddress(0);
-
-        System.out.println("16");
-
-        ContractFunctionResult result16 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("counterpartypayoutaccount")
-                .execute(USER_ACCOUNT);
-
-        if (result16.errorMessage != null) {
-            System.out.println("Error calling Contract " + result16.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.counterpartypayoutaccount = result16.getAddress(0);
-
-        System.out.println("17");
-
-        ContractFunctionResult result17 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("counterpartyhbarprice")
-                .execute(USER_ACCOUNT);
-
-        if (result17.errorMessage != null) {
-            System.out.println("Error calling Contract " + result17.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.counterpartyhbarprice = result17.getUint256(0);
-
-        System.out.println("18");
-
-        ContractFunctionResult result18 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("hbarstrikeprice")
-                .execute(USER_ACCOUNT);
-
-        if (result18.errorMessage != null) {
-            System.out.println("Error calling Contract " + result18.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.hbarstrikeprice = result18.getUint256(0);
-        System.out.println("19");
-
-
-        ContractFunctionResult result19 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("creatordifferential")
-                .execute(USER_ACCOUNT);
-
-        if (result19.errorMessage != null) {
-            System.out.println("Error calling Contract " + result19.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.creatordifferential = result19.getUint256(0);
-        System.out.println("20");
-
-        ContractFunctionResult result20 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("counterpartydifferential")
-                .execute(USER_ACCOUNT);
-
-        if (result20.errorMessage != null) {
-            System.out.println("Error calling Contract " + result20.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.counterpartydifferential = result20.getUint256(0);
-        System.out.println("21");
-
-        ContractFunctionResult result21 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("paidouttoaccount_nosplit")
-                .execute(USER_ACCOUNT);
-
-        if (result21.errorMessage != null) {
-            System.out.println("Error calling Contract " + result21.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.paidouttoaccount_nosplit = result21.getAddress(0);
-
-        // get trade data creator
-        System.out.println("22");
-
-        ContractFunctionResult result22 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("creator_stake_forsale_flag")
-                .execute(USER_ACCOUNT);
-
-        if (result22.errorMessage != null) {
-            System.out.println("Error calling Contract " + result22.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.creator_stake_forsale_flag = result22.getBool(0);
-        System.out.println("23");
-
-        ContractFunctionResult result23 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("creator_forsale_price")
-                .execute(USER_ACCOUNT);
-
-        if (result23.errorMessage != null) {
-            System.out.println("Error calling Contract " + result23.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.creator_forsale_price = result23.getUint256(0);
-        System.out.println("24");
-
-
-        ContractFunctionResult result24 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("previous_creators_dep_account")
-                .execute(USER_ACCOUNT);
-
-        if (result24.errorMessage != null) {
-            System.out.println("Error calling Contract " + result24.errorMessage);
-            return contractdetails;
-        }
-        System.out.println("25");
-
-        contractdetails.previous_creators_dep_account = result24.getAddress(0);
-
-        ContractFunctionResult result25 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("previous_creators_pay_account")
-                .execute(USER_ACCOUNT);
-
-        if (result25.errorMessage != null) {
-            System.out.println("Error calling Contract " + result25.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.previous_creators_pay_account = result25.getAddress(0);
-        System.out.println("26");
-
-        ContractFunctionResult result25_1 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("currentcreatorseller_nameemailphone")
-                .execute(USER_ACCOUNT);
-
-        if (result25_1.errorMessage != null) {
-            System.out.println("Error calling Contract " + result25_1.errorMessage);
-            return contractdetails;
-        }
-
-        System.out.println("27");
-
-        // System.out.println("contact in as bytes32 " + result25_1.getBytes32(0));
-        // System.out.println("contact in as bytes32 tostring " + infoin);
-
-        contractdetails.currentcreator_as_seller_contactinfo =  result25_1.getString(0);
-
-
-        // now for counterparty trade data..
-
-        ContractFunctionResult result26 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("counterparty_stake_forsale_flag")
-                .execute(USER_ACCOUNT);
-
-        if (result26.errorMessage != null) {
-            System.out.println("Error calling Contract " + result26.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.counterparty_stake_forsale_flag = result26.getBool(0);
-        System.out.println("28");
-
-        ContractFunctionResult result27 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("counterparty_forsale_price")
-                .execute(USER_ACCOUNT);
-
-        if (result27.errorMessage != null) {
-            System.out.println("Error calling Contract " + result27.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.counterparty_forsale_price = result27.getUint256(0);
-
-        System.out.println("29");
-
-        ContractFunctionResult result28 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("previous_counterparty_dep_account")
-                .execute(USER_ACCOUNT);
-
-        if (result28.errorMessage != null) {
-            System.out.println("Error calling Contract " + result28.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.previous_counterparty_dep_account = result28.getAddress(0);
-
-        System.out.println("30");
-
-        ContractFunctionResult result29 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("previous_counterparty_pay_account")
-                .execute(USER_ACCOUNT);
-
-        if (result29.errorMessage != null) {
-            System.out.println("Error calling Contract " + result29.errorMessage);
-            return contractdetails;
-        }
-
-        contractdetails.previous_counterparty_pay_account = result29.getAddress(0);
-
-
-        ContractFunctionResult result29_1 = new ContractCallQuery()
-                .setGas(30000)
-                .setContractId(existingcontractid)
-                .setFunction("currentcounterpartyseller_nameemailphone")
-                .execute(USER_ACCOUNT);
-
-        if (result29_1.errorMessage != null) {
-            System.out.println("Error calling Contract " + result29_1.errorMessage);
-            return contractdetails;
-        }
-
-        System.out.println("31");
-
-        contractdetails.currentcounterparty_as_seller_contactinfo = result29_1.getString(0);
 
 
         // also get the hedera info
