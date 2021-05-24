@@ -1,15 +1,35 @@
 package com.example.runit;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.hedera.hashgraph.sdk.AccountId;
+import com.hedera.hashgraph.sdk.BadMnemonicException;
+import com.hedera.hashgraph.sdk.FileId;
+import com.hedera.hashgraph.sdk.PrecheckStatusException;
+import com.hedera.hashgraph.sdk.ReceiptStatusException;
+import com.hedera.hashgraph.sdk.TransactionRecord;
+
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.concurrent.TimeoutException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class Activitycreateacc extends AppCompatActivity {
 
@@ -23,9 +43,14 @@ public class Activitycreateacc extends AppCompatActivity {
 
     String rolecode;
 
+    private GennedAccount newDetails;
+    private AccountId newAccount;
+    private FileId newhederaFileid;
+
     public Activitycreateacc() throws IOException, GeneralSecurityException {
        }
 
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +59,32 @@ public class Activitycreateacc extends AppCompatActivity {
 
         Button createprofilebut = (Button) findViewById(R.id.newprofilebutton);
 
-        EditText nicknamein = (EditText) findViewById(R.id.nickname);
-        EditText fnamein = (EditText) findViewById(R.id.fname);
-        EditText lnamein = (EditText) findViewById(R.id.lname);
-        EditText nationality = (EditText) findViewById(R.id.nationality);
+        spinner=(ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
 
-        CheckBox athlete = (CheckBox) findViewById(R.id.chkboxathlete);
+        //  EditText nicknamein = (EditText) findViewById(R.id.nickname);
+      //  EditText fnamein = (EditText) findViewById(R.id.fname);
+      //  EditText lnamein = (EditText) findViewById(R.id.lname);
+      //  EditText nationality = (EditText) findViewById(R.id.nationality);
+
+        CheckBox participant = (CheckBox) findViewById(R.id.chkboxparticipant);
         CheckBox fan = (CheckBox) findViewById(R.id.chkboxfan);
+        CheckBox spectator = (CheckBox) findViewById(R.id.chkboxspectator);
+        CheckBox club = (CheckBox) findViewById(R.id.chkboxclub);
+        CheckBox brand = (CheckBox) findViewById(R.id.chkboxbrand);
         CheckBox sponsor = (CheckBox) findViewById(R.id.chkboxsponsor);
-        CheckBox organiser = (CheckBox) findViewById(R.id.chkboxevntorg);
-        CheckBox partner = (CheckBox) findViewById(R.id.chkboxpartner);
-        CheckBox contentprov = (CheckBox) findViewById(R.id.chkboxcontentprov);
+        CheckBox developer = (CheckBox) findViewById(R.id.chkboxdeveloper);
+
+        EditText newpassword =(EditText) findViewById(R.id.editTextTextPassword);
+        newpassword.setVisibility(View.GONE);
+        TextView runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountnum);
+        runitaccountnum.setVisibility(View.GONE);
 
 
-        // Soul can be Athlete, Fan, Sponsor, Organizer, Content generator, Partner .. many roles at same or differing times
-       // string private rolecodes;  // A/F/S/O/C/P
 
         // validation
+
+        /*
 
         if (nicknamein.getText().equals(null)) {
             Toast.makeText(getApplicationContext(), "Nickname cannot be blank", Toast.LENGTH_LONG).show();
@@ -67,53 +101,164 @@ public class Activitycreateacc extends AppCompatActivity {
             return;
         }
 
-
-        if (!athlete.hasSelection() && !fan.hasSelection() && !sponsor.hasSelection() && !organiser.hasSelection() && !partner.hasSelection() && !contentprov.hasSelection())
-        {
-        Toast.makeText(getApplicationContext(), "Must have a current role, 1 selection minimum", Toast.LENGTH_LONG).show();
-        return;
-        }
-
-            // build role string
+*/
 
 
-        if (athlete.hasSelection()) {
-            //append to getString()
+        createprofilebut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-            rolecode = rolecode + "A/";
-            return;
-        }
+                if (!participant.hasSelection() && !fan.hasSelection() && !spectator.hasSelection() && !club.hasSelection() && !brand.hasSelection() && !sponsor.hasSelection() && !developer.hasSelection())
+                {
+                    Toast.makeText(getApplicationContext(), "Must have a current role, 1 selection minimum", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-        if (fan.hasSelection()) {
-            //append to getString()
+                // build role string
 
-            rolecode = rolecode + "F/";
-            return;
-        }
-        if (sponsor.hasSelection()) {
-            //append to getString()
 
-            rolecode = rolecode + "S";
-            return;
-        }
-        if (organiser.hasSelection()) {
-            //append to getString()
+                if (participant.hasSelection()) {
+                    //append to getString()
 
-            rolecode = rolecode + "O/";
-            return;
-        }
-        if (contentprov.hasSelection()) {
-            //append to getString()
+                    rolecode = rolecode + "P/";
+                    return;
+                }
 
-            rolecode = rolecode + "C/";
-            return;
-        }
-        if (partner.hasSelection()) {
-            //append to getString()
+                if (fan.hasSelection()) {
+                    //append to getString()
 
-            rolecode = rolecode + "P/";
-            return;
-        }
+                    rolecode = rolecode + "F/";
+                    return;
+                }
+                if (spectator.hasSelection()) {
+                    //append to getString()
+
+                    rolecode = rolecode + "S/";
+                    return;
+                }
+                if (club.hasSelection()) {
+                    //append to getString()
+
+                    rolecode = rolecode + "C/";
+                    return;
+                }
+                if (brand.hasSelection()) {
+                    //append to getString()
+
+                    rolecode = rolecode + "B/";
+                    return;
+                }
+                if (sponsor.hasSelection()) {
+                    //append to getString()
+
+                    rolecode = rolecode + "R/";
+                    return;
+                }
+
+                if (developer.hasSelection()) {
+                    //append to getString()
+
+                    rolecode = rolecode + "D/";
+                    return;
+                }
+
+
+                // completed role code appended string - now to start Spinner and create Hedera based Run.it new account and secure with password
+                // THEN deploy profile Smart Contract with role definitions
+
+                spinner.setVisibility(View.VISIBLE);
+
+                // call hedera new account and keypair gen
+
+                HederaServices.createoperatorClient();
+
+                try {
+                    newDetails = HederaServices.createnewkeypair();
+                } catch (BadMnemonicException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera", Toast.LENGTH_LONG).show();
+
+                    return;
+                }
+
+
+
+                try {
+                    newAccount = HederaServices.createnewaccount();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (PrecheckStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                } catch (ReceiptStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                }
+
+                // HH account created - now to create a Run.it account as hedera
+
+
+                if (newpassword.getText().equals(null) || (newpassword.getText().length() < 8)) {
+                    Toast.makeText(getApplicationContext(), "Password MUST not be empty and must be a minimum 8 alphanumeric characters - Please re-enter", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                try {
+                    newhederaFileid = HederaServices.createuserstore(newAccount, newpassword.getText().toString());
+
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                } catch (PrecheckStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                } catch (ReceiptStatusException | NoSuchAlgorithmException | InvalidKeySpecException | UnsupportedEncodingException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - file create " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                }
+
+
+
+                // Note platform has to pay 3HBAR or so to create Souls new Account so new Soul can OWN their own SC ie profile data SC
+
+                try {
+                    TransactionRecord resultback = HederaServices.transferhbar(OPERATING, 3, newAccount.toString(), "Welcome - xfer from Run.it Operating Account");
+                } catch (ReceiptStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                } catch (PrecheckStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                } catch (TimeoutException e) {
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                }
+
+                // now deploy the Souls profile SC
+
+
+
+                spinner.setVisibility(View.GONE);
+
+                runitaccountnum.setText(newhederaFileid.toString());
+                runitaccountnum.setVisibility(View.VISIBLE);
+
+                Toast.makeText(getApplicationContext(), "Your Run.it Account has been created, please keep your new Account " + newhederaFileid + " number written down and safe!, it is encrypted with and secured by your password.", Toast.LENGTH_LONG).show();
+
+            }
+
+        });
 
 
 
