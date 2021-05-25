@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,11 +34,11 @@ public class Activityinstalleracc extends AppCompatActivity {
 
         Store store = new Store(getApplicationContext());
 
-        Button acceptthishhac = (Button) findViewById(R.id.usethisaccbutton);
+        Button acceptthishhac = (Button) findViewById(R.id.logonaccbutton);
         Button createprofile = (Button) findViewById(R.id.newprofilebutton);
 
         EditText pin1 = (EditText) findViewById(R.id.newpin1editText);
-        EditText pin2 = (EditText) findViewById(R.id.newpin2editText);
+        EditText pin2 = (EditText) findViewById(R.id.runitaccountidText);
 
         acceptthishhac.setOnClickListener(new View.OnClickListener() {
             @Override

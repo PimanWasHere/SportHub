@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("found pin in store !!");
 
 
-                    // open wallet !
+                    // open run.it DApp to logon screen !
                     // pinstring = pinin;
 
-                    openActivityhbal();
+                    openActivitylogon();
                 }
 
                 // temp to enable testing install
@@ -77,10 +77,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void openActivityhbal() {
-      // Intent intent = new Intent(this, com.example.runit.Activitymenu.class);
-        //   intent.putExtra("pin", pinstring);
-          // startActivity(intent);
+    public void openActivitylogon() {
+      Intent intent = new Intent(this, com.example.runit.Activitylogon.class);
+      intent.putExtra("pin", pinstring);
+      startActivity(intent);
     }
 
     public void openActivityinstallacc () {
