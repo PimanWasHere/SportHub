@@ -58,7 +58,7 @@ public class Activitycreateacc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createacc);
 
-        Button createprofilebut = (Button) findViewById(R.id.newprofilebutton);
+        Button createprofilebut = (Button) findViewById(R.id.dataprefconfirmbutt);
 
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);

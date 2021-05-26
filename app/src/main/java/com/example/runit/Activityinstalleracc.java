@@ -35,7 +35,7 @@ public class Activityinstalleracc extends AppCompatActivity {
         Store store = new Store(getApplicationContext());
 
         Button acceptthishhac = (Button) findViewById(R.id.logonaccbutton);
-        Button createprofile = (Button) findViewById(R.id.newprofilebutton);
+        Button createprofile = (Button) findViewById(R.id.dataprefconfirmbutt);
 
         EditText pin1 = (EditText) findViewById(R.id.newpin1editText);
         EditText pin2 = (EditText) findViewById(R.id.runitaccountidText);
