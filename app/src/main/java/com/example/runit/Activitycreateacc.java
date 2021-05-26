@@ -179,8 +179,8 @@ public class Activitycreateacc extends AppCompatActivity {
                 try {
                     newDetails = HederaServices.createnewkeypair();
                 } catch (BadMnemonicException e) {
+                    spinner.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera", Toast.LENGTH_LONG).show();
-
                     return;
                 }
 
@@ -189,16 +189,17 @@ public class Activitycreateacc extends AppCompatActivity {
                 try {
                     newAccount = HederaServices.createnewaccount();
                 } catch (TimeoutException e) {
-                    e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
+                    spinner.setVisibility(View.GONE);
+
                     return;
                 } catch (PrecheckStatusException e) {
+                    spinner.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
-
                     return;
                 } catch (ReceiptStatusException e) {
+                    spinner.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
-
                     return;
                 }
 
@@ -215,17 +216,18 @@ public class Activitycreateacc extends AppCompatActivity {
                     newhederaFileid = HederaServices.createuserstore(newAccount, newpassword.getText().toString());
 
                 } catch (TimeoutException e) {
-                    e.printStackTrace();
+                    spinner.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
 
                     return;
                 } catch (PrecheckStatusException e) {
+                    spinner.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
 
                     return;
                 } catch (ReceiptStatusException | NoSuchAlgorithmException | InvalidKeySpecException | UnsupportedEncodingException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+                    spinner.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - file create " + e, Toast.LENGTH_LONG).show();
-
                     return;
                 }
 
@@ -236,14 +238,20 @@ public class Activitycreateacc extends AppCompatActivity {
                 try {
                     TransactionRecord resultback = HederaServices.transferhbarfromrunit((long) 3, newAccount.toString(), "Welcome - xfer from Run.it Operating Account");
                 } catch (ReceiptStatusException e) {
+                    spinner.setVisibility(View.GONE);
+
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
 
                     return;
                 } catch (PrecheckStatusException e) {
+                    spinner.setVisibility(View.GONE);
+
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
 
                     return;
                 } catch (TimeoutException e) {
+                    spinner.setVisibility(View.GONE);
+
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
 
                     return;
@@ -259,18 +267,51 @@ public class Activitycreateacc extends AppCompatActivity {
                 try {
                     newcontractid = HederaServices.createdeployedprofile("Simon" , "Jackson",  "Piman" , "14178490705", "Australian", rolecode, newAccount.toSolidityAddress(), initialrunbal, newhederaFileid.toString(), "ipfs profile hash tbd");
                 } catch (TimeoutException e) {
+                    spinner.setVisibility(View.GONE);
+
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                      return;
                 } catch (PrecheckStatusException e) {
+                    spinner.setVisibility(View.GONE);
+
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                      return;
                 } catch (ReceiptStatusException e) {
+                    spinner.setVisibility(View.GONE);
+
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (newcontractid == null || newcontractid.toString().isEmpty()) {
+                    spinner.setVisibility(View.GONE);
+
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created ", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                //  Credit 1000 RUN tokens to new Account
+
+                BigInteger rungift = new BigInteger("1000000000000000000000");
+
+
+                try {
+                    HederaServices.runtokensfromplatform(rungift,newAccount.toSolidityAddress());
+                } catch (ReceiptStatusException e) {
+                    spinner.setVisibility(View.GONE);
+
+                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (PrecheckStatusException e) {
+                    spinner.setVisibility(View.GONE);
+
+                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (TimeoutException e) {
+                    spinner.setVisibility(View.GONE);
+
+                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -286,7 +327,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 runitlogonidnum.setVisibility(View.VISIBLE);
 
 
-                Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep VERY safe, & written down. " + newAccount+ " and " + newhederaFileid + " number written down and safe!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep VERY safe, & written down. We gifted you 1000 RUN Tokens to your AccountID" + newAccount+ " and " + newhederaFileid + " number written down and safe!", Toast.LENGTH_LONG).show();
 
             }
 

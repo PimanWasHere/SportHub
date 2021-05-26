@@ -409,9 +409,9 @@ public final class HederaServices {
     }
 
 
-    public void runtokensfromplatform(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
+    public static void runtokensfromplatform(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
 
-        // plartform pays the gas to send Welcome tokens
+        // platform pays the gas to send Welcome tokens
 
         TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
                 .setContractId(runtokensc)
@@ -429,9 +429,9 @@ public final class HederaServices {
     }
 
 
-    public void runtokensfromuser(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
+    public static void runtokensfromuser(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
 
-        // plartform pays the gas to send Welcome tokens
+        // platform pays the gas to send Welcome tokens
 
         TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
                 .setContractId(runtokensc)
