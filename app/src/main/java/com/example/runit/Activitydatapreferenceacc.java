@@ -1,4 +1,6 @@
 package com.example.runit;
 
-public class Activitydatapreferenceacc {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Activitydatapreferenceacc  extends AppCompatActivity {
 }

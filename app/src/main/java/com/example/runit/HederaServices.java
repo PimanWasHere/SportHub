@@ -408,4 +408,44 @@ public final class HederaServices {
 
     }
 
+
+    public void runtokensfromplatform(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
+
+        // plartform pays the gas to send Welcome tokens
+
+        TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
+                .setContractId(runtokensc)
+                .setGas(100_000_000)
+                .setFunction("transfer", new ContractFunctionParameters()
+                        .addAddress(destaccnt)
+                        .addUint256(runtosendlong))
+                .execute(OPERATING_ACCOUNT);
+
+
+        // if this doesn't throw then we know the contract executed successfully
+
+        contractExecTransactionResponse.getReceipt(OPERATING_ACCOUNT);
+
+    }
+
+
+    public void runtokensfromuser(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
+
+        // plartform pays the gas to send Welcome tokens
+
+        TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
+                .setContractId(runtokensc)
+                .setGas(100_000_000)
+                .setFunction("transfer", new ContractFunctionParameters()
+                        .addAddress(destaccnt)
+                        .addUint256(runtosendlong))
+                .execute(USER_ACCOUNT);
+
+
+        // if this doesn't throw then we know the contract executed successfully
+
+        contractExecTransactionResponse.getReceipt(OPERATING_ACCOUNT);
+
+    }
+
 }

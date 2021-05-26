@@ -76,7 +76,7 @@
         android:layout_height="58dp"
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
-        android:hint="Enter your Run.it AccountID"
+        android:hint="Enter your Run.it Logon ID x.x.xxxxx"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#FFFFFF"

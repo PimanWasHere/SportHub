@@ -79,7 +79,10 @@ public class Activitycreateacc extends AppCompatActivity {
         EditText newpassword =(EditText) findViewById(R.id.editTextTextPassword);
 
         TextView runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountnum);
+        TextView runitlogonidnum = (TextView) findViewById(R.id.textViewnewlogonID);
+
         runitaccountnum.setVisibility(View.GONE);
+        runitlogonidnum.setVisibility((View.GONE));
 
 
 
@@ -274,10 +277,16 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 spinner.setVisibility(View.GONE);
 
-                runitaccountnum.setText(newhederaFileid.toString());
+
+
+                runitaccountnum.setText(newAccount.toString());
                 runitaccountnum.setVisibility(View.VISIBLE);
 
-                Toast.makeText(getApplicationContext(), "Your Run.it Account has been created!, please keep your new Account " + newhederaFileid + " number written down and safe!, it is encrypted with and secured by your password.", Toast.LENGTH_LONG).show();
+                runitlogonidnum.setText(newhederaFileid.toString());
+                runitlogonidnum.setVisibility(View.VISIBLE);
+
+
+                Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep VERY safe, & written down. " + newAccount+ " and " + newhederaFileid + " number written down and safe!", Toast.LENGTH_LONG).show();
 
             }
 
