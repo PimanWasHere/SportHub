@@ -24,6 +24,23 @@ public class Runitprofile {
     public String sizeinkbytes;
     public String expiration;
 
+    // Likes and interests - PoC small interest selection for demo purposes. 'categories to choose from or indexes'.
+
+    public String interest1;
+    public String interest2;
+    public String interest3;
+
+    public boolean demographic;
+    public boolean behavioral;
+    public boolean interests;
+
+    public BigInteger sponsorslevel;
+    public BigInteger grpsponsorslevel;
+
+    public boolean kycapproved;           //  set true or false - after 3rd party plugin/ or in App KYC - driv lic pic or other TBD
+
+
+
     public Runitprofile() {
 
     }

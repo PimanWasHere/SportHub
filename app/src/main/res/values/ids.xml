@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="seekBar1" type="id">isseek</item>
-    <item name="seekBar2" type="id">idseek</item>
-    <item name="switch3" type="id">idswitch</item>
-    <item name="switch3" type="id">idswitch2</item>
-    <item name="switch1" type="id">idswitch3</item>
-    <item name="textView1" type="id">idtextveiw1</item>
-    <item name="textView12" type="id">idtextview2</item>
-    <item name="textView13" type="id">idtextview3</item>
-    <item name="textView6" type="id">idtextview6</item>
-    <item name="textView10" type="id">idtextview10</item>
-    <item name="textView4" type="id">idtextview11</item>
+    <item name="seekBar1" type="id"/>
+    <item name="seekBar2" type="id"/>
+    <item name="switch1" type="id"/>
+    <item name="switch2" type="id"/>
+    <item name="switch3" type="id"/>
+    <item name="textView1" type="id"/>
+    <item name="textView12" type="id"/>
+    <item name="textView13" type="id"/>
+    <item name="textView6" type="id"/>
+    <item name="textView10" type="id"/>
+    <item name="textView4" type="id"/>
 </resources>

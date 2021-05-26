@@ -28,7 +28,7 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
             EditText like3 = (EditText) findViewById(R.id.editTextlike3);   // demographics
 
             Switch switchdemo = (Switch) findViewById(R.id.switch1);
-            Switch switchbehav = (Switch) findViewById(R.id.switch3);
+            Switch switchactivity = (Switch) findViewById(R.id.switch2);
             Switch switchint = (Switch) findViewById(R.id.switch3);
 
             SeekBar seekbar1 = (SeekBar) findViewById(R.id.seekBar1);

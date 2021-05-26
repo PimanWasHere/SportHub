@@ -48,7 +48,7 @@ public class Activitycreateacc extends AppCompatActivity {
     private AccountId newAccount;
     private FileId newhederaFileid;
 
-    public Activitycreateacc() throws IOException, GeneralSecurityException {
+    public Activitycreateacc()  {
        }
 
     private ProgressBar spinner;
@@ -317,8 +317,6 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
                 spinner.setVisibility(View.GONE);
-
-
 
                 runitaccountnum.setText(newAccount.toString());
                 runitaccountnum.setVisibility(View.VISIBLE);

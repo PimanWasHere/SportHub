@@ -11,6 +11,23 @@
 <!--  style="@style/Widget.AppCompat.EditText"-->
 
 
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="152dp"
+        android:layout_height="26dp"
+        android:fontFamily="casual"
+        android:text="Activity"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="79dp"
@@ -60,22 +77,6 @@
 
     <Switch
         android:id="@+id/switch3"
-        android:layout_width="155dp"
-        android:layout_height="31dp"
-        android:fontFamily="casual"
-        android:text="Behavioural"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:id="@+id/switch3"
         android:layout_width="154dp"
         android:layout_height="28dp"
         android:fontFamily="casual"
@@ -86,10 +87,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.563" />
+        app:layout_constraintVertical_bias="0.573" />
 
     <Switch
         android:id="@+id/switch1"
@@ -155,13 +156,14 @@
         android:background="#ED0847"
 
         android:ems="10"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
+        android:foregroundTint="#F6F0F0"
         android:hint="open text.."
         android:inputType="textPersonName"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/colorPrimaryDark"
+        android:textAlignment="center"
 
-        android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,13 +179,14 @@
         android:background="#ED0847"
 
         android:ems="10"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
+        android:foregroundTint="#FBF9F9"
         android:hint="open text..."
         android:inputType="textPersonName"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/colorPrimaryDark"
+        android:textAlignment="center"
 
-        android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -199,13 +202,14 @@
         android:background="#ED0847"
 
         android:ems="10"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
+        android:foregroundTint="#F8F0F0"
         android:hint="open text ..."
         android:inputType="textPersonName"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/colorPrimaryDark"
+        android:textAlignment="center"
 
-        android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -21,7 +21,7 @@ import javax.crypto.SecretKey;
 public class Activityinstalleracc extends AppCompatActivity {
 
 
-    public void Activityinstalleraccc() throws IOException, GeneralSecurityException {
+    public void Activityinstalleraccc()  {
     }
 
 
