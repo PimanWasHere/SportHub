@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,13 +69,13 @@ public class Activitycreateacc extends AppCompatActivity {
       //  EditText lnamein = (EditText) findViewById(R.id.lname);
       //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
-        CheckBox participant = (CheckBox) findViewById(R.id.chkboxparticipant);
-        CheckBox fan = (CheckBox) findViewById(R.id.chkboxfan);
-        CheckBox spectator = (CheckBox) findViewById(R.id.chkboxspectator);
-        CheckBox club = (CheckBox) findViewById(R.id.chkboxclub);
-        CheckBox brand = (CheckBox) findViewById(R.id.chkboxbrand);
-        CheckBox sponsor = (CheckBox) findViewById(R.id.chkboxsponsor);
-        CheckBox developer = (CheckBox) findViewById(R.id.chkboxdeveloper);
+        Switch participant = (Switch) findViewById(R.id.switch10);
+        Switch fan = (Switch) findViewById(R.id.switch11);
+        Switch spectator = (Switch) findViewById(R.id.switch12);
+        Switch club = (Switch) findViewById(R.id.switch13);
+        Switch brand = (Switch) findViewById(R.id.switch14);
+        Switch sponsor = (Switch) findViewById(R.id.switch15);
+        Switch developer = (Switch) findViewById(R.id.switch16);
 
         EditText newpassword =(EditText) findViewById(R.id.editTextTextPassword);
 

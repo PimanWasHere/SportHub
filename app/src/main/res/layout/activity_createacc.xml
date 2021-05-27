@@ -11,6 +11,101 @@
     <!--  style="@style/Widget.AppCompat.EditText"-->
 
     <TextView
+        android:id="@+id/textView8"
+        android:layout_width="291dp"
+        android:layout_height="31dp"
+        android:background="#0040EB"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Create a Password below .."
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.694" />
+
+    <Switch
+        android:id="@+id/switch16"
+        android:layout_width="122dp"
+        android:layout_height="38dp"
+        android:text="Developer"
+        android:textColor="#FAF9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
+
+    <Switch
+        android:id="@+id/switch15"
+        android:layout_width="122dp"
+        android:layout_height="38dp"
+        android:text="Sponsor"
+        android:textColor="#FAF9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.525" />
+
+    <Switch
+        android:id="@+id/switch14"
+        android:layout_width="121dp"
+        android:layout_height="37dp"
+        android:text="Brand"
+        android:textColor="#FAF9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.471" />
+
+    <Switch
+        android:id="@+id/switch13"
+        android:layout_width="123dp"
+        android:layout_height="36dp"
+        android:text="Club"
+        android:textColor="#FAF9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.418" />
+
+    <Switch
+        android:id="@+id/switch12"
+        android:layout_width="126dp"
+        android:layout_height="36dp"
+        android:text="Spectator"
+        android:textColor="#FAF9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362" />
+
+    <Switch
+        android:id="@+id/switch11"
+        android:layout_width="121dp"
+        android:layout_height="36dp"
+        android:text="Fan"
+        android:textColor="#FAF9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.31" />
+
+    <TextView
         android:id="@+id/textViewnewlogonID"
         android:layout_width="340dp"
         android:layout_height="37dp"
@@ -47,57 +142,16 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="64dp"
-        android:layout_height="41dp"
+        android:layout_width="67dp"
+        android:layout_height="68dp"
         android:layout_alignParentBottom="true"
         android:progressDrawable="@drawable/circular_progress_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
-
-    <CheckBox
-        android:id="@+id/chkboxbrand"
-        android:layout_width="162dp"
-        android:layout_height="43dp"
-        android:text="Brand"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/chkboxclub"
-        android:layout_width="162dp"
-        android:layout_height="43dp"
-        android:text="Club"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
-
-    <CheckBox
-        android:id="@+id/chkboxspectator"
-        android:layout_width="162dp"
-        android:layout_height="43dp"
-        android:text="Spectator"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375" />
+        app:layout_constraintVertical_bias="0.616" />
 
     <TextView
         android:id="@+id/textView7"
@@ -116,48 +170,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.087" />
-
-    <CheckBox
-        android:id="@+id/chkboxsponsor"
-        android:layout_width="164dp"
-        android:layout_height="42dp"
-        android:text="Sponsor"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.573" />
-
-    <CheckBox
-        android:id="@+id/chkboxdeveloper"
-        android:layout_width="161dp"
-        android:layout_height="39dp"
-        android:text="Developer"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.631" />
-
-    <CheckBox
-        android:id="@+id/chkboxfan"
-        android:layout_width="165dp"
-        android:layout_height="36dp"
-        android:text="Fan"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.319" />
 
     <TextView
         android:id="@+id/textView3"
@@ -196,21 +208,7 @@
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83" />
-
-    <CheckBox
-        android:id="@+id/chkboxparticipant"
-        android:layout_width="155dp"
-        android:layout_height="36dp"
-        android:text="Participant"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
+        app:layout_constraintVertical_bias="0.851" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -218,12 +216,30 @@
         android:layout_height="41dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#ED0847"
+        android:textColorHint="#ED0847"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.747" />
+
+    <Switch
+        android:id="@+id/switch10"
+        android:layout_width="121dp"
+        android:layout_height="38dp"
+        android:text="Participant"
+        android:textColor="#FAF9F9"
+        android:thumbTint="#ED0847"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.256" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
