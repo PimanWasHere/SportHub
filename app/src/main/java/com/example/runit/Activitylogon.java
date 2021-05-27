@@ -65,7 +65,7 @@ public class Activitylogon extends AppCompatActivity {
                     return;
                 }
 
-                if (accountpword.getText().equals(null) || (accountpword.getText().equals(" ")))
+                if (accountpword.getText().equals(null) || (accountpword.getText().equals("")))
                 {
                     Toast.makeText(getApplicationContext(), "No password entered", Toast.LENGTH_LONG).show();
                     return;

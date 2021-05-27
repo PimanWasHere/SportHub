@@ -167,6 +167,11 @@ public class Activitycreateacc extends AppCompatActivity {
                     return;
                 }
 
+                if (newpassword.getText().equals(null) || (newpassword.getText().length() == 0)) {
+                    Toast.makeText(getApplicationContext(), "Password cannot be empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
 
                 // completed role code appended string - now to start Spinner and create Hedera based Run.it new account and secure with password
                 // THEN deploy profile Smart Contract with role definitions
