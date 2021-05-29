@@ -3,7 +3,6 @@ package com.example.runit;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -20,10 +19,8 @@ import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 import com.hedera.hashgraph.sdk.TransactionRecord;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -59,7 +56,7 @@ public class Activitycreateacc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createacc);
 
-        Button createprofilebut = (Button) findViewById(R.id.dataprefconfirmbutt);
+        Button createprofilebut = (Button) findViewById(R.id.selectbutt);
 
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);

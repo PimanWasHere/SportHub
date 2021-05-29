@@ -40,6 +40,9 @@
             android:name=".Activitylogon"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".Activitydashboard"
+            android:theme="@style/AppTheme" />
 
     </application>
 

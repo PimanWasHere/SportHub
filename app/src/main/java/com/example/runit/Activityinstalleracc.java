@@ -12,9 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yakivmospan.scytale.Store;
 
-import java.io.IOException;
 import java.math.BigInteger;
-import java.security.GeneralSecurityException;
 
 import javax.crypto.SecretKey;
 
@@ -35,7 +33,7 @@ public class Activityinstalleracc extends AppCompatActivity {
         Store store = new Store(getApplicationContext());
 
         Button acceptthishhac = (Button) findViewById(R.id.logonaccbutton);
-        Button createprofile = (Button) findViewById(R.id.dataprefconfirmbutt);
+        Button createprofile = (Button) findViewById(R.id.selectbutt);
 
         EditText pin1 = (EditText) findViewById(R.id.newpin1editText);
         EditText pin2 = (EditText) findViewById(R.id.runitaccountidText);

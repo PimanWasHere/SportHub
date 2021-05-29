@@ -84,7 +84,6 @@ public class Activitylogon extends AppCompatActivity {
                     encrypted = HederaServices.gethederafile(accountinput.getText().toString());
 
                 } catch (TimeoutException | PrecheckStatusException hederaStatusException) {
-                    System.out.println("Hedera msg : " + hederaStatusException);
                     Toast.makeText(getApplicationContext(), "Sorry this is not a valid Run.it logon ID", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -158,8 +157,8 @@ public class Activitylogon extends AppCompatActivity {
 
 
     public void openActivitydashboard () {
-      //  Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
-      //  startActivity(intent);
+      Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
+      startActivity(intent);
     }
 
 }
