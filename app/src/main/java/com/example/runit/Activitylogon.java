@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.protobuf.ByteString;
 import com.hedera.hashgraph.sdk.AccountId;
+import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.PrivateKey;
+import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -34,6 +36,8 @@ public class Activitylogon extends AppCompatActivity {
 
 
     private ProgressBar spinner;
+    private Runitprofile runitprofile;
+    private DecodeFileid decodedfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +93,7 @@ public class Activitylogon extends AppCompatActivity {
                 }
 
 
-                DecodeFileid decodedfile = null;
+
 
                 try {
                     decodedfile = new DecodeFileid(encrypted, accountpword.getText().toString());
@@ -140,7 +144,22 @@ public class Activitylogon extends AppCompatActivity {
 
                 spinner.setVisibility(View.GONE);
 
-                //.. call method to open dashboard
+                // Now create instance of Runitprofile and pass the profile and Client object to dashboard activity
+
+
+                // only open IF profile is found and object returned not null
+
+                try {
+                    runitprofile = HederaServices.getacontract(decodedfile.usrprofilecontractid);
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (PrecheckStatusException e) {
+                    e.printStackTrace();
+                } catch (ReceiptStatusException e) {
+                    e.printStackTrace();
+                }
+
+                //.. call method to open dashboard - pass profile object and decodedfile object
 
                 openActivitydashboard();
             }
@@ -156,9 +175,12 @@ public class Activitylogon extends AppCompatActivity {
     }
 
 
+
     public void openActivitydashboard () {
       Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
-      startActivity(intent);
+      intent.putExtra("profile obj", runitprofile);
+      intent.putExtra("profile obj", decodedfile);
+        startActivity(intent);
     }
 
 }

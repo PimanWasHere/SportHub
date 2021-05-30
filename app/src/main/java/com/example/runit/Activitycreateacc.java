@@ -175,7 +175,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 spinner.setVisibility(View.VISIBLE);
 
-                // call hedera new account and keypair gen
+                // call hedera new account and keypair
 
                 HederaServices.createoperatorClient();
 
@@ -210,29 +210,11 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
                 if (newpassword.getText().equals(null) || (newpassword.getText().length() < 8)) {
+                    spinner.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Password MUST not be empty and must be a minimum 8 alphanumeric characters - Please re-enter", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-
-                try {
-                    newhederaFileid = HederaServices.createuserstore(newAccount, newpassword.getText().toString());
-
-                } catch (TimeoutException e) {
-                    spinner.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
-
-                    return;
-                } catch (PrecheckStatusException e) {
-                    spinner.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
-
-                    return;
-                } catch (ReceiptStatusException | NoSuchAlgorithmException | InvalidKeySpecException | UnsupportedEncodingException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
-                    spinner.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - file create " + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
 
 
 
@@ -292,6 +274,30 @@ public class Activitycreateacc extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created ", Toast.LENGTH_LONG).show();
                     return;
                 }
+
+
+                // now create users run.it account which is the hedera fileid which holds their enrypted key and profile smart contractid
+
+                try {
+                    newhederaFileid = HederaServices.createuserstore(newAccount, newpassword.getText().toString(), newcontractid);
+
+                } catch (TimeoutException e) {
+                    spinner.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                } catch (PrecheckStatusException e) {
+                    spinner.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
+
+                    return;
+                } catch (ReceiptStatusException | NoSuchAlgorithmException | InvalidKeySpecException | UnsupportedEncodingException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+                    spinner.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - file create " + e, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
 
 
                 //  Credit 1000 RUN tokens to new Account

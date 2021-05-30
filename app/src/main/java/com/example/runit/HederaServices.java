@@ -7,6 +7,8 @@ import org.threeten.bp.Duration;
 import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.InvalidKeyException;
@@ -19,7 +21,7 @@ import java.util.*;
 import java.util.concurrent.TimeoutException;
 
 
-public final class HederaServices {
+public final class HederaServices implements  Serializable{
 
 
     private static final AccountId OPERATOR_ID = AccountId.fromString("0.0.6655");
@@ -31,6 +33,8 @@ public final class HederaServices {
 
     private static final ContractId runtokensc= ContractId.fromString("0.0.651281");
     private static final FileId runitprofilefile = FileId.fromString("0.0.      ");
+
+    private static ContractId profileid;
 
 
     public static void createoperatorClient() {
@@ -130,7 +134,7 @@ public final class HederaServices {
     }
 
 
-    public static FileId createuserstore(AccountId newaccountId, String pword) throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, TimeoutException, PrecheckStatusException, ReceiptStatusException {
+    public static FileId createuserstore(AccountId newaccountId, String pword, ContractId profileid) throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, TimeoutException, PrecheckStatusException, ReceiptStatusException {
 
         // salt and then hash, then composite then encrypt with operating key then write to Hedera file
         // PBKDF2 in Java for hash - about as secure as it gets.. THEN it is AES/ECB/PKCS5Padding encrypted
@@ -142,9 +146,8 @@ public final class HederaServices {
 
         // for testing   String kycin = "0.0.12345/thebprivate999key/" + generatedSecuredPasswordHash;
 
-        String accntandkeyhash = newaccountId.toString() + "/" + GENNED_ACCOUNT.newPrivKey.toString() + "/" + generatedSecuredPasswordHash;
+        String accntandkeyhash = newaccountId.toString() + "/" + GENNED_ACCOUNT.newPrivKey.toString() + "/" + generatedSecuredPasswordHash + "/" + profileid.toString();
 
-        System.out.println("FOR TESTING - : " + accntandkeyhash);
 
         // less than 6K so no append needed
 
@@ -315,44 +318,45 @@ public final class HederaServices {
     }
 
 
-    public static Runitprofile getacontract(ContractId existingcontractid) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+
+
+    public static Runitprofile getacontract(String existingcontractid)  throws TimeoutException, PrecheckStatusException, ReceiptStatusException{
 
 
         // creating contract POJO
 
-        Runitprofile contractdetails = new Runitprofile();
-
+        Runitprofile runitdetails = new Runitprofile();
 
         // .. get all the profile details - all held private in the SC - only accessible via modifier 'only owner' - see the solidity for details
 
 
         ContractFunctionResult result_1 = new ContractCallQuery()
                 .setGas(30000)
-                .setContractId(existingcontractid)
+                .setContractId(ContractId.fromString(existingcontractid))
                 .setFunction("getfname")
                 .execute(USER_ACCOUNT);
 
         if (result_1.errorMessage != null) {
             System.out.println("Error calling Contract " + result_1.errorMessage);
-            return contractdetails;
+            return runitdetails;
         }
 
-        contractdetails.fname = result_1.getString(0);
+        runitdetails.fname = result_1.getString(0);
 
 
 
         ContractFunctionResult result_2 = new ContractCallQuery()
                 .setGas(30000)
-                .setContractId(existingcontractid)
+                .setContractId(ContractId.fromString(existingcontractid))
                 .setFunction("getlname")
                 .execute(USER_ACCOUNT);
 
         if (result_2.errorMessage != null) {
             System.out.println("Error calling Contract " + result_2.errorMessage);
-            return contractdetails;
+            return runitdetails;
         }
 
-        contractdetails.lname = result_2.getString(0);
+        runitdetails.lname = result_2.getString(0);
 
 
 
@@ -363,17 +367,17 @@ public final class HederaServices {
         // for transparency and pas back in the object
 
         ContractInfo info = new ContractInfoQuery()
-                .setContractId(existingcontractid)
+                .setContractId(ContractId.fromString(existingcontractid))
                 .execute(USER_ACCOUNT);
 
-        contractdetails.accountid = info.accountId.toString();
-        contractdetails.adminkey = info.adminKey.toString();
-        contractdetails.autorenew = Long.toString(info.autoRenewPeriod.toDays());
-        contractdetails.sizeinkbytes = Long.toString(info.storage);
-        contractdetails.expiration = Long.toString(info.expirationTime.toEpochMilli());
+        runitdetails.accountid = info.accountId.toString();
+        runitdetails.adminkey = info.adminKey.toString();
+        runitdetails.autorenew = Long.toString(info.autoRenewPeriod.toDays());
+        runitdetails.sizeinkbytes = Long.toString(info.storage);
+        runitdetails.expiration = Long.toString(info.expirationTime.toEpochMilli());
 
 
-        return contractdetails;
+        return runitdetails;
     }
 
 

@@ -2,6 +2,7 @@ package com.example.runit;
 
 import com.google.protobuf.ByteString;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
@@ -18,7 +19,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class DecodeFileid {
+public class DecodeFileid implements Serializable {
 
 
     String filedecoded;
@@ -26,6 +27,7 @@ public class DecodeFileid {
     boolean matchedok;
     String usrpkey;
     String usraccnt;
+    String usrprofilecontractid;
 
     public  DecodeFileid(ByteString filein, String pwordin) throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, InvalidKeySpecException {
 
@@ -51,9 +53,11 @@ public class DecodeFileid {
         // check password is valid
 
         String array[] = (filedecoded).split("/");
-        String accnt = array[0], pkey = array[1], hashout = array[2];
+        String accnt = array[0], pkey = array[1], hashout = array[2], contractid = array[3];
 
         usraccnt = accnt;
+
+        usrprofilecontractid = contractid;
 
         matchedok = validatePassword(pwordin,hashout);
 

@@ -1,8 +1,9 @@
 package com.example.runit;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
-public class Runitprofile {
+public class Runitprofile implements Serializable {
 
 
     // to as a POJO for the profile SC
