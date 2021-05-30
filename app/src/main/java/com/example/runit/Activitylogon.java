@@ -178,8 +178,8 @@ public class Activitylogon extends AppCompatActivity {
 
     public void openActivitydashboard () {
       Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
-      intent.putExtra("profile obj", runitprofile);
-      intent.putExtra("profile obj", decodedfile);
+      intent.putExtra("profileobj", runitprofile);
+      //intent.putExtra("profile obj", decodedfile);
         startActivity(intent);
     }
 

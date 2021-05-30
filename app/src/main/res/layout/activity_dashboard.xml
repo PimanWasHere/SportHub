@@ -71,45 +71,8 @@
         app:layout_constraintVertical_bias="0.545" />
 
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="417dp"
-        android:layout_height="114dp"
-        android:background="#0040E0"
-        android:fontFamily="sans-serif-condensed"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/selectbutt"
-        android:layout_width="266dp"
-        android:layout_height="61dp"
-        android:background="@drawable/myrndredkbutton"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="DASHBOARD"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.223" />
-
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imagemenubar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,22 +84,24 @@
         app:srcCompat="@drawable/footer_1" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imageViewdashbaord"
         android:layout_width="55dp"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/imagemenubar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975"
-        app:srcCompat="@drawable/icon_red_manage" />
+        app:srcCompat="@drawable/icon_red_dashbaord" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/imageViewassets"
         android:layout_width="55dp"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/imagemenubar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.373"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,10 +110,11 @@
         app:srcCompat="@drawable/icon_white_manage" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/imageViewcreate"
         android:layout_width="55dp"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/imagemenubar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.655"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,9 +123,10 @@
         app:srcCompat="@drawable/icon_white_create" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/imageViewprofile"
         android:layout_width="55dp"
         android:layout_height="60dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.926"
@@ -167,5 +134,50 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975"
         app:srcCompat="@drawable/icon_white_profile" />
+
+    <TextView
+        android:id="@+id/textviewmenuselection"
+        android:layout_width="387dp"
+        android:layout_height="62dp"
+        android:background="#FFFFFF"
+        android:text="Dashboard"
+        android:textColor="#ED0847"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.708"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="169dp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024"
+        app:srcCompat="@drawable/image__1_" />
+
+
+    <TextView
+        android:id="@+id/textViewusername"
+        android:layout_width="203dp"
+        android:layout_height="65dp"
+        android:background="#0040E0"
+        android:text="Name.."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
