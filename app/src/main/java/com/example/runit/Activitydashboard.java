@@ -53,7 +53,7 @@ public class Activitydashboard extends AppCompatActivity {
 
         }
 
-        name.setText(runitprofile.fname.toString() + " " + runitprofile.lname.toString() + " " + roles);
+        name.setText(runitprofile.fname + " " + runitprofile.lname + " " + roles);
 
 
         dashboard.setOnClickListener(new View.OnClickListener() {
@@ -98,9 +98,24 @@ public class Activitydashboard extends AppCompatActivity {
             }
         });
 
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                // set new image
+                menu.setImageResource(R.drawable.footer_3);
+
+                create.setImageResource(R.drawable.icon_red_create);
+
+                // set all others to inverse ie to white
+                manage.setImageResource(R.drawable.icon_white_manage);
+                dashboard.setImageResource(R.drawable.icon_white_dashboard);
+                profile.setImageResource(R.drawable.icon_white_profile);
+
+                // evaluate role array and display buttons/ image assets accordingly
+
 
             }
         });
@@ -108,6 +123,18 @@ public class Activitydashboard extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // set new image
+                menu.setImageResource(R.drawable.footer_4);
+
+                profile.setImageResource(R.drawable.icon_red_profile);
+
+                // set all others to inverse ie to white
+                manage.setImageResource(R.drawable.icon_white_manage);
+                dashboard.setImageResource(R.drawable.icon_white_dashboard);
+                create.setImageResource(R.drawable.icon_white_create);
+
+                // evaluate role array and display buttons/ image assets accordingly
 
             }
         });

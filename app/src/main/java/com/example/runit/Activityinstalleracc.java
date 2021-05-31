@@ -7,16 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.yakivmospan.scytale.Store;
 
 import java.math.BigInteger;
 
-import javax.crypto.SecretKey;
 
 public class Activityinstalleracc extends AppCompatActivity {
+
+    String newpin;
 
 
     public void Activityinstalleraccc()  {
@@ -28,12 +26,7 @@ public class Activityinstalleracc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_installeracc);
 
-
-
-        Store store = new Store(getApplicationContext());
-
         Button acceptthishhac = (Button) findViewById(R.id.logonaccbutton);
-        Button createprofile = (Button) findViewById(R.id.selectbutt);
 
         EditText pin1 = (EditText) findViewById(R.id.newpin1editText);
         EditText pin2 = (EditText) findViewById(R.id.runitaccountidText);
@@ -65,6 +58,7 @@ public class Activityinstalleracc extends AppCompatActivity {
                     return;
                 }
 
+                System.out.println("checking pins.");
 
                 BigInteger pin1in = new BigInteger(pin1.getText().toString());
 
@@ -78,11 +72,15 @@ public class Activityinstalleracc extends AppCompatActivity {
                 }
 
 
-                SecretKey key = store.generateSymmetricKey(pin1.getText().toString(), null);
+               // do this after account created ! - SecretKey key = store.generateSymmetricKey(pin1.getText().toString(), null);
 
-                Toast.makeText(getApplicationContext(), "Your Run.it App is now secured, Create a quick short profile and your roles.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please Create a quick short profile and your roles.", Toast.LENGTH_LONG).show();
 
-                openActivitycreateacc();
+                Pinobj newpinobject = new Pinobj();
+
+                newpinobject.newpin = pin1.getText().toString();
+
+                openActivitycreateacc(newpinobject);
 
 
             }
@@ -91,8 +89,10 @@ public class Activityinstalleracc extends AppCompatActivity {
 
     }
 
-    public void openActivitycreateacc () {
+    public void openActivitycreateacc(Pinobj newpinobjectin) {
         Intent intent = new Intent(this, com.example.runit.Activitycreateacc.class);
+        intent.putExtra("newpin", newpinobjectin);
+
         startActivity(intent);
     }
 

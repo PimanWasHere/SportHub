@@ -1,5 +1,6 @@
 package com.example.runit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,27 +9,12 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.hedera.hashgraph.sdk.AccountId;
-import com.hedera.hashgraph.sdk.BadMnemonicException;
-import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.FileId;
-import com.hedera.hashgraph.sdk.PrecheckStatusException;
-import com.hedera.hashgraph.sdk.ReceiptStatusException;
-import com.hedera.hashgraph.sdk.TransactionRecord;
-
-import java.io.UnsupportedEncodingException;
+import com.yakivmospan.scytale.Store;
 import java.math.BigInteger;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.concurrent.TimeoutException;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 public class Activitycreateacc extends AppCompatActivity {
 
@@ -46,20 +32,28 @@ public class Activitycreateacc extends AppCompatActivity {
     private AccountId newAccount;
     private FileId newhederaFileid;
 
+    private ProgressBar spinner;
+
+
     public Activitycreateacc()  {
        }
 
-    private ProgressBar spinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createacc);
 
-        Button createprofilebut = (Button) findViewById(R.id.selectbutt);
+        Button createprofilebut = (Button) findViewById(R.id.createaccountbutt);
+
+        Store store = new Store(getApplicationContext());
 
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
+
+        Intent i = getIntent();
+        Pinobj pinobject = (Pinobj) i.getSerializableExtra("newpin");
 
         //  EditText nicknamein = (EditText) findViewById(R.id.nickname);
       //  EditText fnamein = (EditText) findViewById(R.id.fname);
@@ -81,6 +75,9 @@ public class Activitycreateacc extends AppCompatActivity {
 
         runitaccountnum.setVisibility(View.GONE);
         runitlogonidnum.setVisibility((View.GONE));
+
+        System.out.println("in create.");
+        System.out.println("got pin from suck in ." + pinobject.newpin);
 
 
 
@@ -110,9 +107,31 @@ public class Activitycreateacc extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                rolecode = null;
+
+                System.out.println(" swtich sel test " +  participant.hasSelection());
+                System.out.println(" swtich fan sel test " +  fan.hasSelection());
+
+
+                if (participant.hasSelection()){
+                    Toast.makeText(getApplicationContext(), "Mok test", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                if (!participant.hasSelection() && !fan.hasSelection()){
+                    Toast.makeText(getApplicationContext(), "both not selected", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (participant.hasSelection() && fan.hasSelection()){
+                    Toast.makeText(getApplicationContext(), "both selected", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                /*
+
                 if (!participant.hasSelection() && !fan.hasSelection() && !spectator.hasSelection() && !club.hasSelection() && !brand.hasSelection() && !sponsor.hasSelection() && !developer.hasSelection())
                 {
-                    Toast.makeText(getApplicationContext(), "Must have a current role, 1 selection minimum", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Must have at least one current role", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -120,48 +139,35 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
                 if (participant.hasSelection()) {
-                    //append to getString()
 
                     rolecode = rolecode + "P/";
-                    return;
                 }
 
                 if (fan.hasSelection()) {
-                    //append to getString()
 
                     rolecode = rolecode + "F/";
-                    return;
                 }
                 if (spectator.hasSelection()) {
-                    //append to getString()
 
                     rolecode = rolecode + "S/";
-                    return;
                 }
                 if (club.hasSelection()) {
-                    //append to getString()
 
                     rolecode = rolecode + "C/";
-                    return;
                 }
                 if (brand.hasSelection()) {
-                    //append to getString()
 
                     rolecode = rolecode + "B/";
-                    return;
                 }
                 if (sponsor.hasSelection()) {
-                    //append to getString()
 
                     rolecode = rolecode + "R/";
-                    return;
                 }
 
                 if (developer.hasSelection()) {
-                    //append to getString()
 
                     rolecode = rolecode + "D/";
-                    return;
+
                 }
 
                 if (newpassword.getText().equals(null) || (newpassword.getText().length() == 0)) {
@@ -172,12 +178,17 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 // completed role code appended string - now to start Spinner and create Hedera based Run.it new account and secure with password
                 // THEN deploy profile Smart Contract with role definitions
+                System.out.println("ssetting spinner");
 
                 spinner.setVisibility(View.VISIBLE);
+                System.out.println("spinner set");
+
 
                 // call hedera new account and keypair
 
                 HederaServices.createoperatorClient();
+
+                System.out.println("creating new hedera account.");
 
                 try {
                     newDetails = HederaServices.createnewkeypair();
@@ -334,9 +345,15 @@ public class Activitycreateacc extends AppCompatActivity {
                 runitlogonidnum.setVisibility(View.VISIBLE);
 
 
-                Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep VERY safe, & written down. We gifted you 1000 RUN Tokens to your AccountID" + newAccount+ " and " + newhederaFileid + " number written down and safe!", Toast.LENGTH_LONG).show();
+                SecretKey key = store.generateSymmetricKey(pinobject.newpin, null);
+
+                 */
+
+                Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep your PIN " + pinobject.newpin + " VERY safe, & written down. We gifted you 1000 RUN Tokens to your AccountID because you KYC'd !" + newAccount+ " and " + newhederaFileid + " number written down and safe!", Toast.LENGTH_LONG).show();
 
             }
+
+
 
         });
 

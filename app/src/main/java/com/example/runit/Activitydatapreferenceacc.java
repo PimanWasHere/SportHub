@@ -40,7 +40,7 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
             seekbar2.setMax((max2 - min2));
 
 
-            Button dataprefconfirm = (Button) findViewById(R.id.selectbutt);
+            Button dataprefconfirm = (Button) findViewById(R.id.createaccountbutt);
             Button dataprefback = (Button) findViewById(R.id.dataprefbackbutt);
 
 

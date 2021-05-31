@@ -9,6 +9,18 @@
     tools:context=".MainActivity"
     tools:visibility="visible">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="67dp"
+        android:layout_height="68dp"
+        android:layout_alignParentBottom="true"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257" />
 
     <TextView
         android:id="@+id/textView2"
@@ -52,9 +64,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.434"
         app:password="true"
-        app:pinHeight="40dp"
+        app:pinHeight="50dp"
         app:pinLength="5"
-        app:pinWidth="40dp" />
+        app:pinWidth="50dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -83,7 +95,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.074"
-        app:srcCompat="@drawable/logo_name"
+        app:srcCompat="@drawable/image__1_"
         tools:srcCompat="@drawable/image__1_" />
 
 
