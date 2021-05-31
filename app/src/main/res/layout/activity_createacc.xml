@@ -245,7 +245,7 @@
         android:ems="10"
         android:inputType="textPassword"
         android:textAlignment="center"
-        android:textColor="#ED0847"
+        android:textColor="#0040E0"
         android:textColorHint="#ED0847"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -32,7 +32,7 @@ public final class HederaServices implements  Serializable{
     private static GennedAccount GENNED_ACCOUNT = null;
 
     private static final ContractId runtokensc= ContractId.fromString("0.0.651281");
-    private static final FileId runitprofilefile = FileId.fromString("0.0.      ");
+    private static final FileId runitprofilefile = FileId.fromString("0.0.1863411");
 
     private static ContractId profileid;
 
@@ -100,7 +100,7 @@ public final class HederaServices implements  Serializable{
 
         USER_ACCOUNT.setOperator(useraccount, userskey);
         USER_ACCOUNT.setMaxQueryPayment(new Hbar(5));
-        USER_ACCOUNT.setMaxTransactionFee(new Hbar(100));
+        USER_ACCOUNT.setMaxTransactionFee(new Hbar(50));
 
         System.out.println("Connected to User's Account.. " + useraccount.toString());
 
@@ -120,7 +120,7 @@ public final class HederaServices implements  Serializable{
 
         TransactionResponse newAccounttx = new AccountCreateTransaction()
                 .setKey(GENNED_ACCOUNT.newPublicKey)
-                .setInitialBalance(new Hbar(2))
+                .setInitialBalance(new Hbar(101))
                 //.setInitialBalance(100_000_000) // not mandatory for create?
                 .execute(OPERATING_ACCOUNT);
 
@@ -259,7 +259,7 @@ public final class HederaServices implements  Serializable{
 
         TransactionResponse contractcreatetran = new ContractCreateTransaction()
                 .setAutoRenewPeriod(Duration.ofDays(90)) //   90 days in seconds, is the autorenew when the creator account will have to pay modest renewfee
-                .setGas(3) // set by user
+                .setGas(200_000_000L) // set by user
                 .setBytecodeFileId(runitprofilefile)
                 .setConstructorParameters(
                         new ContractFunctionParameters()
@@ -448,8 +448,28 @@ public final class HederaServices implements  Serializable{
 
         // if this doesn't throw then we know the contract executed successfully
 
-        contractExecTransactionResponse.getReceipt(OPERATING_ACCOUNT);
+        contractExecTransactionResponse.getReceipt(USER_ACCOUNT);
 
+    }
+
+
+    // used to update the profile because the profile SC contractID is stored in the Run.it fileID(ieaccount) But
+    // the profile also is to hold the run.it account (hedera fileid).. chick & egg. So this method below is called after the File create in the DApp
+
+
+    public static void updaterunitaccountid_inprofile(String runitaccountid) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+
+        TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
+                .setContractId(profileid)
+                .setGas(100_000_000)
+                .setFunction("updaterunitaccountid", new ContractFunctionParameters()
+                        .addString(runitaccountid))
+                .execute(USER_ACCOUNT);
+
+
+        // if this doesn't throw then we know the contract executed successfully
+
+        contractExecTransactionResponse.getReceipt(USER_ACCOUNT);
     }
 
 }
