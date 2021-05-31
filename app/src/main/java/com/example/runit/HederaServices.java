@@ -120,7 +120,7 @@ public final class HederaServices implements  Serializable{
 
         TransactionResponse newAccounttx = new AccountCreateTransaction()
                 .setKey(GENNED_ACCOUNT.newPublicKey)
-                .setInitialBalance(new Hbar(101))
+                .setInitialBalance(new Hbar(1000))
                 //.setInitialBalance(100_000_000) // not mandatory for create?
                 .execute(OPERATING_ACCOUNT);
 
@@ -259,7 +259,7 @@ public final class HederaServices implements  Serializable{
 
         TransactionResponse contractcreatetran = new ContractCreateTransaction()
                 .setAutoRenewPeriod(Duration.ofDays(90)) //   90 days in seconds, is the autorenew when the creator account will have to pay modest renewfee
-                .setGas(200_000_000L) // set by user
+                .setGas(100_000_000) // set by user
                 .setBytecodeFileId(runitprofilefile)
                 .setConstructorParameters(
                         new ContractFunctionParameters()
@@ -457,10 +457,10 @@ public final class HederaServices implements  Serializable{
     // the profile also is to hold the run.it account (hedera fileid).. chick & egg. So this method below is called after the File create in the DApp
 
 
-    public static void updaterunitaccountid_inprofile(String runitaccountid) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+    public static void updaterunitaccountid_inprofile(ContractId usersprofilescID, String runitaccountid) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
 
         TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
-                .setContractId(profileid)
+                .setContractId(usersprofilescID)
                 .setGas(100_000_000)
                 .setFunction("updaterunitaccountid", new ContractFunctionParameters()
                         .addString(runitaccountid))
