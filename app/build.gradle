@@ -61,7 +61,7 @@ dependencies {
     implementation 'com.yakivmospan:scytale:1.0.1'
 
     // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk16
-    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.68'
+    // implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.68'
 
 
 

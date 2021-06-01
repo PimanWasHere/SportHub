@@ -43,7 +43,7 @@ public class Activitydashboard extends AppCompatActivity {
 
         System.out.println("profileobj rolecode.." + runitprofile.rolecode);
 
-        String roles = null;
+        String roles = "I'm a ";
         String array[] = (runitprofile.rolecode).split("/");
 
         for(int i = 0; i < array.length; i++)
@@ -58,7 +58,7 @@ public class Activitydashboard extends AppCompatActivity {
 
         }
 
-        name.setText(runitprofile.fname + " " + runitprofile.lname + " " + roles);
+        name.setText("Welcome " + runitprofile.nickname + "!  " + runitprofile.fname + " " + runitprofile.lname + " " + roles);
 
 
         dashboard.setOnClickListener(new View.OnClickListener() {

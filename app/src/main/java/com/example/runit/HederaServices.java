@@ -425,7 +425,8 @@ public final class HederaServices implements  Serializable{
             return runitdetails;
         }
 
-        runitdetails.accountid = SolidityUtil.parseAddress(result_7.getAddress(0), AccountId:: new).toString();
+        // using contractId but it is a fileID - Re Greg Scullard suggestion
+        runitdetails.accountid = ContractId.fromSolidityAddress(result_7.getAddress(0)).toString();
 
         // 8 cut
 
