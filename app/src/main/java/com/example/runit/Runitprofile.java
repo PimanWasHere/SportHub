@@ -14,16 +14,17 @@ public class Runitprofile implements Serializable {
     public String phonenum;
     public String nationality;
     public String rolecode;
-    public String runitrunaccountid;
+    public String runitrunaccountid;  // users HBAR run.it account number
     public BigInteger runtokenbal;
-    public String runitaccountid;
+    public String runitlogonaccountid;  // the fileid ie the run.it logon account !
     public String runitipfshash;
 
-    public String accountid; // the contract ID in this context
+    public String accountid; // the contract ID in this context ie the profile
     public String adminkey;
     public String autorenew;
     public String sizeinkbytes;
     public String expiration;
+    public String memo;
 
     // Likes and interests - PoC small interest selection for demo purposes. 'categories to choose from or indexes'.
 

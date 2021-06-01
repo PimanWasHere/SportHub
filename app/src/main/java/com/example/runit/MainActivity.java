@@ -45,16 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 String pinin = pinview.getValue();
 
 
-                if (store.hasKey(pinin)) {
-
-                    System.out.println("found pin in store !!");
-
-
-                    // open run.it DApp to logon screen !
-                    // pinstring = pinin;
-
-                    openActivitylogon();
-                }
                 // 99999 to install new
 
                 if (pinview.getValue().equals("99999")) {
@@ -63,14 +53,16 @@ public class MainActivity extends AppCompatActivity {
 
                     openActivityinstallacc();
 
+                } else if (store.hasKey(pinin)) {
+
+                    openActivitylogon();
+
                 } else {
                     spinner.setVisibility(View.GONE);
 
                     Toast.makeText(getApplicationContext(), pinview.getValue() + " is not in the keystore.", Toast.LENGTH_LONG).show();
 
                 }
-
-
 
 
             }

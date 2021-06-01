@@ -358,10 +358,89 @@ public final class HederaServices implements  Serializable{
 
         runitdetails.lname = result_2.getString(0);
 
+        ContractFunctionResult result_3 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("getnickname")
+                .execute(USER_ACCOUNT);
+
+        if (result_3.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_3.errorMessage);
+            return runitdetails;
+        }
+
+        runitdetails.nickname = result_3.getString(0);
+
+        ContractFunctionResult result_4 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("getphone")
+                .execute(USER_ACCOUNT);
+
+        if (result_4.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_4.errorMessage);
+            return runitdetails;
+        }
+
+        runitdetails.phonenum = result_4.getString(0);
+
+
+        ContractFunctionResult result_5 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("getnationality")
+                .execute(USER_ACCOUNT);
+
+        if (result_5.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_5.errorMessage);
+            return runitdetails;
+        }
+
+        runitdetails.nationality = result_5.getString(0);
 
 
 
+        ContractFunctionResult result_6 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("getrolecode")
+                .execute(USER_ACCOUNT);
 
+        if (result_6.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_6.errorMessage);
+            return runitdetails;
+        }
+
+        runitdetails.rolecode = result_6.getString(0);
+
+
+        ContractFunctionResult result_7 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("getrunaccountid")
+                .execute(USER_ACCOUNT);
+
+        if (result_7.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_7.errorMessage);
+            return runitdetails;
+        }
+
+        runitdetails.accountid = SolidityUtil.parseAddress(result_7.getAddress(0), AccountId:: new).toString();
+
+        // 8 cut
+
+        ContractFunctionResult result_9 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("gethederafileid")
+                .execute(USER_ACCOUNT);
+
+        if (result_9.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_9.errorMessage);
+            return runitdetails;
+        }
+
+        runitdetails.runitlogonaccountid = result_9.getString(0);
 
         // also get the hedera info
         // for transparency and pas back in the object
@@ -372,6 +451,7 @@ public final class HederaServices implements  Serializable{
 
         runitdetails.accountid = info.accountId.toString();
         runitdetails.adminkey = info.adminKey.toString();
+        runitdetails.memo = info.contractMemo;
         runitdetails.autorenew = Long.toString(info.autoRenewPeriod.toDays());
         runitdetails.sizeinkbytes = Long.toString(info.storage);
         runitdetails.expiration = Long.toString(info.expirationTime.toEpochMilli());

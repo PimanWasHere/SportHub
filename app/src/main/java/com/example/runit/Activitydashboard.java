@@ -15,13 +15,15 @@ public class Activitydashboard extends AppCompatActivity {
     }
 
 
-    Intent i = getIntent();
-    Runitprofile runitprofile = (Runitprofile) i.getSerializableExtra("profileobj");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        Intent intent = getIntent();
+        Runitprofile runitprofile = (Runitprofile) intent.getSerializableExtra("profileobj");
+
+        System.out.println("profileobj fname.." + runitprofile.fname);
 
         TextView menuselection = (TextView) findViewById(R.id.textviewmenuselection);
         TextView name = (TextView) findViewById(R.id.textViewusername);
@@ -33,13 +35,16 @@ public class Activitydashboard extends AppCompatActivity {
 
         ImageView menu = (ImageView) findViewById(R.id.imagemenubar);
 
+
         menuselection.setText("Dashboard - Events");
 
         // set name and role list
         // rolecode permitted values P/F/S/C/B/R/D   R=sponsor - for duplicate and ease of install.
 
+        System.out.println("profileobj rolecode.." + runitprofile.rolecode);
+
         String roles = null;
-        String array[] = (runitprofile.rolecode.toString()).split("/");
+        String array[] = (runitprofile.rolecode).split("/");
 
         for(int i = 0; i < array.length; i++)
         {

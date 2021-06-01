@@ -72,7 +72,7 @@ public class Activitycreateacc extends AppCompatActivity {
         Intent i = getIntent();
         Pinobj pinobject = (Pinobj) i.getSerializableExtra("newpin");
 
-
+        System.out.println("got pin " + pinobject.newpin);
 
         //  EditText nicknamein = (EditText) findViewById(R.id.nickname);
       //  EditText fnamein = (EditText) findViewById(R.id.fname);
@@ -124,7 +124,10 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 rolecode = null;
 
-               // System.out.println("particpant " +  participant.isChecked());
+                Toast.makeText(getApplicationContext(), "thanyou for your patience.. creating account now ..", Toast.LENGTH_LONG).show();
+
+
+                // System.out.println("particpant " +  participant.isChecked());
 
                 if (!participant.isChecked() && !fan.isChecked() && !spectator.isChecked() && !club.isChecked() && !brand.isChecked() && !sponsor.isChecked() && !developer.isChecked()){
                     Toast.makeText(getApplicationContext(), "You must have at least one role or many roles at any time", Toast.LENGTH_LONG).show();

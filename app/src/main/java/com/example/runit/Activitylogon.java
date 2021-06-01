@@ -161,6 +161,10 @@ public class Activitylogon extends AppCompatActivity {
 
                 //.. call method to open dashboard - pass profile object and decodedfile object
 
+                System.out.println("runit profile in logon fname" + runitprofile.fname);
+                System.out.println("runit profile in logon rolecode" + runitprofile.rolecode);
+
+
                 openActivitydashboard();
             }
 
@@ -177,6 +181,9 @@ public class Activitylogon extends AppCompatActivity {
 
 
     public void openActivitydashboard () {
+
+        System.out.println("profile obj fname " + runitprofile.fname + " " + runitprofile.toString());
+
       Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
       intent.putExtra("profileobj", runitprofile);
       //intent.putExtra("profile obj", decodedfile);
