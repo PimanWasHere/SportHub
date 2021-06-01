@@ -15,9 +15,7 @@ import com.hedera.hashgraph.sdk.BadMnemonicException;
 import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.FileId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
-import com.hedera.hashgraph.sdk.PrivateKey;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
-import com.hedera.hashgraph.sdk.TransactionRecord;
 import com.yakivmospan.scytale.Store;
 
 import java.io.UnsupportedEncodingException;
@@ -35,8 +33,7 @@ import javax.crypto.SecretKey;
 
 public class Activitycreateacc extends AppCompatActivity {
 
-    // Soul can be Athlete, Fan, Sponsor, Organizer, Content generator, Partner .. many roles at same or differing times
-    // string public rolecodes;  // A/F/S/O/C/P
+    // Soul can be ..  so rolecode permitted values P/F/S/C/B/R/D   R=sponsor - for duplicate and ease of install.
 
 
     BigInteger multiplier108 = new BigInteger("100000000");
@@ -122,9 +119,9 @@ public class Activitycreateacc extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                rolecode = null;
+                rolecode = "";
 
-                Toast.makeText(getApplicationContext(), "thanyou for your patience.. creating account now ..", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Thankyou for your patience.. creating account now ..", Toast.LENGTH_LONG).show();
 
 
                 // System.out.println("particpant " +  participant.isChecked());
