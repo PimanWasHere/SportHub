@@ -282,6 +282,8 @@ System.out.println("ex1" + e);
                     return;
                 }
 
+                System.out.println("users profile SC id " + newcontractid);
+
 
                 // now create users run.it account which is the hedera fileid which holds their account, encrypted key , password hash, and profile smart contractid
 
@@ -304,7 +306,7 @@ System.out.println("ex1" + e);
                     return;
                 }
 
-
+                System.out.println("file id " + newhederaFileid);
 
 
                 //  Credit 1000 RUN tokens to new Account IF/Assuming TBD the User's KYC status is True
