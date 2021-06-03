@@ -36,6 +36,8 @@ public final class HederaServices implements  Serializable{
 
     private static ContractId profileid;
 
+    private static final BigInteger multiplier1018 = new BigInteger("1000000000000000000");
+
 
     public static void createoperatorClient() {
 
@@ -496,7 +498,7 @@ public final class HederaServices implements  Serializable{
 
     public static void runtokensfromplatform(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
 
-        // platform pays the gas to send Welcome tokens
+        // platform pays the gas to send Welcome tokens - IF USER is KYCd
 
         TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
                 .setContractId(runtokensc)
@@ -531,6 +533,33 @@ public final class HederaServices implements  Serializable{
 
         contractExecTransactionResponse.getReceipt(USER_ACCOUNT);
 
+    }
+
+
+        // uses runitaccount ie the hedera account of HBAR bal and RUN token balance
+
+    public static BigInteger getruntokenbal() throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
+
+        BigInteger tokenbal = new BigInteger("0");
+
+        ContractFunctionResult contractCallResult01 = new ContractCallQuery()
+                .setGas(3000000)
+                .setContractId(runtokensc)
+                .setFunction("balanceOf", new ContractFunctionParameters()
+                        .addAddress(USER_ACCOUNT.getOperatorAccountId().toSolidityAddress()))
+                .execute(USER_ACCOUNT);
+
+
+        if (contractCallResult01.errorMessage != null) {
+            System.out.println("error calling contract: " + contractCallResult01.errorMessage);
+            return tokenbal;
+        }
+
+        BigInteger coinsto18 = contractCallResult01.getInt256(0);
+
+        tokenbal = coinsto18.divide(multiplier1018);
+
+        return tokenbal;
     }
 
 

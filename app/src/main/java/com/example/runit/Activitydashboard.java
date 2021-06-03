@@ -5,8 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.hedera.hashgraph.sdk.PrecheckStatusException;
+import com.hedera.hashgraph.sdk.ReceiptStatusException;
+
+import java.util.concurrent.TimeoutException;
 
 public class Activitydashboard extends AppCompatActivity {
 
@@ -59,6 +65,21 @@ public class Activitydashboard extends AppCompatActivity {
         }
 
         name.setText("Welcome " + runitprofile.nickname + "!  " + runitprofile.fname + " " + runitprofile.lname + " " + roles);
+
+        try {
+            menuselection.setText("Dashboard. " + HederaServices.getruntokenbal().toString() + " Run.it Token Balance.");
+        } catch (ReceiptStatusException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " +e, Toast.LENGTH_LONG).show();
+        return;
+        } catch (PrecheckStatusException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
+        return;
+        } catch (TimeoutException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
+        return;
+        }
+
+
 
 
         dashboard.setOnClickListener(new View.OnClickListener() {
