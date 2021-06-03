@@ -94,12 +94,12 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
                 }
 
                 @Override
-                public void onStartTrackingTouch(SeekBar seekbar2) {
+                public void onStartTrackingTouch(SeekBar seekbar1) {
 
                 }
 
                 @Override
-                public void onStopTrackingTouch(SeekBar seekbar2) {
+                public void onStopTrackingTouch(SeekBar seekbar1) {
 
                 }
             });
@@ -114,12 +114,12 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
                 }
 
                 @Override
-                public void onStartTrackingTouch(SeekBar seekbar3) {
+                public void onStartTrackingTouch(SeekBar seekbar2) {
 
                 }
 
                 @Override
-                public void onStopTrackingTouch(SeekBar seekbar3) {
+                public void onStopTrackingTouch(SeekBar seekbar2) {
 
                 }
             });
