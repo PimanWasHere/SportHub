@@ -12,7 +12,7 @@
 
 
     <Switch
-        android:id="@+id/switch2"
+        android:id="@+id/switch2behavioral"
         android:layout_width="152dp"
         android:layout_height="26dp"
         android:fontFamily="casual"
@@ -277,25 +277,6 @@
         app:layout_constraintVertical_bias="0.342" />
 
     <Button
-        android:id="@+id/dataprefbackbutt"
-        android:layout_width="144dp"
-        android:layout_height="52dp"
-        android:background="@drawable/myrndredkbutton"
-        android:fontFamily="monospace"
-        android:text="BACK"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#F8F5F5"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <Button
         android:id="@+id/createaccountbutt"
         android:layout_width="141dp"
         android:layout_height="52dp"
@@ -311,7 +292,6 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
