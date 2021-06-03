@@ -70,25 +70,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.944" />
 
-    <EditText
-        android:id="@+id/runitaccountidText"
-        android:layout_width="321dp"
-        android:layout_height="58dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-smallcaps"
-        android:hint="Enter your Run.it Logon ID x.x.xxxxx"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.332" />
-
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="208dp"
@@ -121,12 +102,30 @@
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#0040E0"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.478" />
+
+    <TextView
+        android:id="@+id/runitaccountlogonid"
+        android:layout_width="308dp"
+        android:layout_height="49dp"
+        android:hint="Enter your Run.it logon AccountID x.x.xxxxxx"
+        android:textAlignment="center"
+        android:textColor="#0040E0"
+        android:textColorHint="#0040E0"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.384" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

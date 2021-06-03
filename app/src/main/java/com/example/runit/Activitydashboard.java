@@ -3,6 +3,7 @@ package com.example.runit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ public class Activitydashboard extends AppCompatActivity {
 
     }
 
+    Runitprofile runitprofile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class Activitydashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         Intent intent = getIntent();
-        Runitprofile runitprofile = (Runitprofile) intent.getSerializableExtra("profileobj");
+        runitprofile = (Runitprofile) intent.getSerializableExtra("profileobj");
 
         System.out.println("profileobj fname.." + runitprofile.fname);
 
@@ -40,6 +42,11 @@ public class Activitydashboard extends AppCompatActivity {
         ImageView profile = (ImageView) findViewById(R.id.imageViewprofile);
 
         ImageView menu = (ImageView) findViewById(R.id.imagemenubar);
+
+            // action buttons.. switch on or off and label for each menu option selected.
+        Button actionbutt1 = (Button) findViewById(R.id.action1butt);
+        Button actionbutt2 = (Button) findViewById(R.id.action2butt);
+        Button actionbutt3 = (Button) findViewById(R.id.action3butt);
 
 
         menuselection.setText("Dashboard - Events");
@@ -160,11 +167,47 @@ public class Activitydashboard extends AppCompatActivity {
                 dashboard.setImageResource(R.drawable.icon_white_dashboard);
                 create.setImageResource(R.drawable.icon_white_create);
 
+                // set option objects
+
+                actionbutt2.setVisibility(View.GONE);
+                actionbutt3.setVisibility(View.GONE);
+
+                actionbutt1.setText("Data Preferences");
+
                 // evaluate role array and display buttons/ image assets accordingly
+
+
 
             }
         });
 
+
+
+        actionbutt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openActivitydatapreferences();
+
+            }
+        });
+
+
+
+
+
+
+    }
+
+
+    public void openActivitydatapreferences () {
+
+       // System.out.println("profile obj fname " + runitprofile.fname + " " + runitprofile.toString());
+
+        Intent intent = new Intent(this, com.example.runit.Activitydatapreferenceacc.class);
+        intent.putExtra("profileobjtodatapref", runitprofile);
+        //intent.putExtra("profile obj", decodedfile);
+        startActivity(intent);
     }
 
 }

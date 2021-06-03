@@ -1,5 +1,6 @@
 package com.example.runit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,12 +17,15 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
     public Activitydatapreferenceacc() {
     }
 
+        Runitprofile runitprofiledatapref;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_datapreferenceacc);
 
+            Intent intent = getIntent();
+            runitprofiledatapref = (Runitprofile) intent.getSerializableExtra("profileobjdatapref");
 
             EditText like1 = (EditText) findViewById(R.id.editTextlike1); // behavior & likes
             EditText like2 = (EditText) findViewById(R.id.editTextlike2);  // interests
@@ -42,6 +46,9 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
             Button dataprefconfirm = (Button) findViewById(R.id.createaccountbutt);
             Button dataprefback = (Button) findViewById(R.id.dataprefbackbutt);
+
+
+            // show existing settings from ledger POJO
 
 
             dataprefconfirm.setOnClickListener(new View.OnClickListener() {
