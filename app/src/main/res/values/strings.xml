@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Run.it !</string>
+    <string name="app_name">RUN.IT !</string>
     <string name="title_activity_sendactivty">Sendactivty</string>
     <string name="title_activity_profile_activity">profile_activity</string>
     <!-- Strings used for fragments for navigation -->
