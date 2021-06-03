@@ -3,7 +3,7 @@
     <item name="seekBar1" type="id"/>
     <item name="seekBar2" type="id"/>
     <item name="switch1" type="id"/>
-    <item name="switch2behavioral" type="id"/>
+    <item name="switch2" type="id"/>
     <item name="switch3" type="id"/>
     <item name="textView1" type="id"/>
     <item name="textView12" type="id"/>

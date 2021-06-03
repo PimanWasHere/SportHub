@@ -582,4 +582,164 @@ public final class HederaServices implements  Serializable{
         contractExecTransactionResponse.getReceipt(USER_ACCOUNT);
     }
 
+
+
+    public static void updatedataprefsettings(ContractId usersprofilescID, String _interest1, String _interest2, String _interest3, Boolean _demo, Boolean _behav, Boolean _inter, BigInteger _sponsorslevel, BigInteger _grpsponsorslevel) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+
+        //SC methods
+            /*
+            function updateinterests(string _interest1, string _interest2, string _interest3, bool _demo, bool _behav, bool _inter, uint256 _sponsorslevel, uint256 _grpsponsorslevel) public onlyOwner{
+
+            }*/
+
+        TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
+                .setContractId(usersprofilescID)
+                .setGas(100_000_000)
+                .setFunction("updateinterests", new ContractFunctionParameters()
+                        .addString(_interest1)
+                        .addString(_interest2)
+                        .addString(_interest3)
+                        .addBool(_demo)
+                        .addBool(_behav)
+                        .addBool(_inter)
+                        .addUint256(_sponsorslevel)
+                        .addUint256(_grpsponsorslevel))
+                .execute(USER_ACCOUNT);
+
+
+        // if this doesn't throw then we know the contract executed successfully
+
+        contractExecTransactionResponse.getReceipt(USER_ACCOUNT);
+    }
+
+
+
+    public static Runitprofile getdataprefsettings(String existingcontractid)  throws TimeoutException, PrecheckStatusException, ReceiptStatusException{
+
+
+        // creating contract POJO with just the settings and then merge so original POJO has these value
+
+        // hit the SCs public getters. Query.
+
+        // get interests, booleans and 2 sliders ie sponsor exposure
+
+
+        Runitprofile runitprefsettings = new Runitprofile();
+
+        // interests..
+
+        ContractFunctionResult result_1 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("getinterest1")
+                .execute(USER_ACCOUNT);
+
+        if (result_1.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_1.errorMessage);
+            return runitprefsettings;
+        }
+
+        runitprefsettings.interest1 = result_1.getString(0);
+
+        ContractFunctionResult result_2 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("getinterest2")
+                .execute(USER_ACCOUNT);
+
+        if (result_2.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_2.errorMessage);
+            return runitprefsettings;
+        }
+
+        runitprefsettings.interest2 = result_2.getString(0);
+
+        ContractFunctionResult result_3 = new ContractCallQuery()
+                .setGas(30000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("getinterest3")
+                .execute(USER_ACCOUNT);
+
+        if (result_3.errorMessage != null) {
+            System.out.println("Error calling Contract " + result_3.errorMessage);
+            return runitprefsettings;
+        }
+
+        runitprefsettings.interest3 = result_3.getString(0);
+
+
+        // get bools
+
+        ContractFunctionResult result4 = new ContractCallQuery()
+                .setGas(300000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("demographic")
+                .execute(USER_ACCOUNT);
+
+        if (result4.errorMessage != null) {
+            System.out.println("Error calling Contract " + result4.errorMessage);
+            return runitprefsettings;
+        }
+
+       runitprefsettings.demographic = result4.getBool(0);
+
+
+        ContractFunctionResult result5 = new ContractCallQuery()
+                .setGas(300000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("behavioral")
+                .execute(USER_ACCOUNT);
+
+        if (result5.errorMessage != null) {
+            System.out.println("Error calling Contract " + result5.errorMessage);
+            return runitprefsettings;
+        }
+
+        runitprefsettings.behavioral = result5.getBool(0);
+
+
+        ContractFunctionResult result6 = new ContractCallQuery()
+                .setGas(300000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("interests")
+                .execute(USER_ACCOUNT);
+
+        if (result6.errorMessage != null) {
+            System.out.println("Error calling Contract " + result6.errorMessage);
+            return runitprefsettings;
+        }
+
+        runitprefsettings.interests = result6.getBool(0);
+
+       ContractFunctionResult result7 = new ContractCallQuery()
+                .setGas(300000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("sponsorslevel")
+                .execute(USER_ACCOUNT);
+
+        if (result7.errorMessage != null) {
+            System.out.println("Error calling Contract " + result7.errorMessage);
+            return runitprefsettings;
+        }
+
+        runitprefsettings.sponsorslevel = result6.getUint256(0);
+
+        ContractFunctionResult result8= new ContractCallQuery()
+                .setGas(300000)
+                .setContractId(ContractId.fromString(existingcontractid))
+                .setFunction("grpsponsorslevel")
+                .execute(USER_ACCOUNT);
+
+        if (result8.errorMessage != null) {
+            System.out.println("Error calling Contract " + result8.errorMessage);
+            return runitprefsettings;
+        }
+
+        runitprefsettings.grpsponsorslevel = result8.getUint256(0);
+
+        return runitprefsettings;
+    }
+
+
+
 }

@@ -17,6 +17,7 @@ public class Runitprofile implements Serializable {
     public String runitrunaccountid;  // users HBAR run.it account number
     public BigInteger runtokenbal;
     public String runitlogonaccountid;  // the fileid ie the run.it logon account !
+    public String runitprofilescid;
     public String runitipfshash;
 
     public String accountid; // the contract ID in this context ie the profile

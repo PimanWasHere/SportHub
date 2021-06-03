@@ -31,6 +31,7 @@ public class Activitydashboard extends AppCompatActivity {
         Intent intent = getIntent();
         runitprofile = (Runitprofile) intent.getSerializableExtra("profileobj");
 
+
         System.out.println("profileobj fname.." + runitprofile.fname);
 
         TextView menuselection = (TextView) findViewById(R.id.textviewmenuselection);

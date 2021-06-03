@@ -12,23 +12,23 @@
 
 
     <Switch
-        android:id="@+id/switch2behavioral"
+        android:id="@+id/switch2"
         android:layout_width="152dp"
         android:layout_height="26dp"
         android:fontFamily="casual"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         android:text="Activity"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.502" />
+        app:layout_constraintVertical_bias="0.512" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -36,10 +36,10 @@
         android:layout_height="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintHorizontal_bias="0.795"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475"
+        app:layout_constraintVertical_bias="0.473"
         app:srcCompat="@drawable/icon_white_profile" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:fontFamily="sans-serif-condensed"
         android:text="YOUR DATA !"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,19 +82,19 @@
         android:layout_width="154dp"
         android:layout_height="28dp"
         android:fontFamily="casual"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         android:text="Interests"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.573" />
+        app:layout_constraintVertical_bias="0.58" />
 
     <Switch
         android:id="@+id/switch1"
@@ -282,7 +282,7 @@
         android:layout_height="52dp"
         android:background="@drawable/myrndbluebutton"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="CONFIRM"
+        android:text="UPDATE"
         android:textAlignment="center"
 
         android:textAllCaps="false"
