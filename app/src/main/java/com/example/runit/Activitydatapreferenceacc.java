@@ -36,7 +36,9 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
             setContentView(R.layout.activity_datapreferenceacc);
 
             Intent intent = getIntent();
-            runitprofile2 = (Runitprofile) intent.getSerializableExtra("profileobjdatapref");
+            runitprofile2 = (Runitprofile) intent.getSerializableExtra("profileobjtodatapref");
+
+            System.out.println("runit profile2 obj " + runitprofile2.runitprofilescid);
 
             // now pull the data pref from the profile
 

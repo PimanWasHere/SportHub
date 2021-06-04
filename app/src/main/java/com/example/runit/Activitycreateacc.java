@@ -2,7 +2,9 @@ package com.example.runit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -71,9 +73,10 @@ public class Activitycreateacc extends AppCompatActivity {
 
         System.out.println("got pin " + pinobject.newpin);
 
-        TextView nicknamein = (TextView) findViewById(R.id.textViewnickname);
-        TextView fnamein = (TextView) findViewById(R.id.textViewfname);
-        TextView lnamein = (TextView) findViewById(R.id.textViewlname);
+        EditText nicknamein = (EditText) findViewById(R.id.editTextnickname);
+        EditText fnamein = (EditText) findViewById(R.id.editTextfname);
+        EditText lnamein = (EditText) findViewById(R.id.editTextlname);
+
       //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
         Switch participant = (Switch) findViewById(R.id.switch10);
@@ -91,6 +94,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
         runitaccountnum.setVisibility(View.GONE);
         runitlogonidnum.setVisibility((View.GONE));
+
 
 
         // validation
@@ -365,6 +369,8 @@ System.out.println("ex1" + e);
                 runitlogonidnum.setText("Run.it logon AccountID " + newhederaFileid.toString());
                 runitlogonidnum.setVisibility(View.VISIBLE);
 
+                newpassword.setVisibility(View.GONE);
+                createprofilebut.setVisibility(View.GONE);
 
                 SecretKey key = store.generateSymmetricKey(pinobject.newpin, null);
 

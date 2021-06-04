@@ -28,7 +28,7 @@ public class Activityinstalleracc extends AppCompatActivity {
 
         Button acceptthishhac = (Button) findViewById(R.id.logonaccbutton);
 
-        EditText pin1 = (EditText) findViewById(R.id.newpin1editText);
+        EditText pin1 = (EditText) findViewById(R.id.editTextnickname);
         EditText pin2 = (EditText) findViewById(R.id.runitaccountidText);
 
         acceptthishhac.setOnClickListener(new View.OnClickListener() {

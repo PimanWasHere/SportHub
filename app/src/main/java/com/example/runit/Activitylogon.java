@@ -45,7 +45,7 @@ public class Activitylogon extends AppCompatActivity {
         setContentView(R.layout.activity_logon);
 
         Button confirmlogonbut = (Button) findViewById(R.id.logonaccbutton);
-        EditText accountinput = (EditText) findViewById(R.id.runitaccountidText);
+        EditText accountinput = (EditText) findViewById(R.id.editTextrunitaccountid);
         EditText accountpword = (EditText) findViewById(R.id.EditTextlogonTextPassword);
 
         spinner=(ProgressBar)findViewById(R.id.progressBarlogon);

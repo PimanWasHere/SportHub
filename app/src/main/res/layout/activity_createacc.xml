@@ -10,41 +10,65 @@
     tools:context=".Activityinstalleracc">
     <!--  style="@style/Widget.AppCompat.EditText"-->
 
-    <TextView
-        android:id="@+id/textViewnickname"
-        android:layout_width="195dp"
-        android:layout_height="41dp"
-        android:editable="true"
-        android:fontFamily="sans-serif-condensed"
-        android:hint="Nickname .."
-        android:textColor="#0040E0"
-        android:textColorHint="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.063" />
-
-    <TextView
-        android:id="@+id/textViewlname"
-        android:layout_width="119dp"
-        android:layout_height="26dp"
-        android:editable="true"
-        android:fontFamily="sans-serif-condensed"
-        android:hint="Last name .."
+    <EditText
+        android:id="@+id/editTextlname"
+        android:layout_width="183dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="Last Name ?.."
+        android:inputType="text"
+        android:textAlignment="center"
         android:textColor="#0040E0"
         android:textColorHint="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintVertical_bias="0.128" />
+
+    <EditText
+        android:id="@+id/editTextfname"
+        android:layout_width="169dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="First Name ?.."
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#0040E0"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.128" />
+
+    <EditText
+        android:id="@+id/editTextnickname"
+        android:layout_width="140dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="Nickname ?.."
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#0040E0"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046" />
 
     <TextView
         android:id="@+id/textView8"
@@ -224,13 +248,13 @@
         android:background="#ED0847"
         android:fontFamily="sans-serif-condensed"
         android:text="I'm a .."
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.208" />
@@ -273,23 +297,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.747" />
 
-    <TextView
-        android:id="@+id/textViewfname"
-        android:layout_width="119dp"
-        android:layout_height="26dp"
-        android:editable="true"
-        android:fontFamily="sans-serif-condensed"
-        android:hint="First name .."
-        android:textColor="#0040E0"
-        android:textColorHint="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

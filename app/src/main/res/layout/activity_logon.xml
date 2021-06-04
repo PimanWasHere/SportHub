@@ -49,7 +49,29 @@
 
 
 
+
+
     ]]>
+
+    <EditText
+        android:id="@+id/editTextrunitaccountid"
+        android:layout_width="348dp"
+        android:layout_height="51dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="Enter your Run.it Logon accountID x.x.xxxxxx"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#0040E0"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385" />
 
     <Button
         android:id="@+id/logonaccbutton"
@@ -110,22 +132,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.478" />
-
-    <TextView
-        android:id="@+id/runitaccountlogonid"
-        android:layout_width="308dp"
-        android:layout_height="49dp"
-        android:hint="Enter your Run.it logon AccountID x.x.xxxxxx"
-        android:textAlignment="center"
-        android:textColor="#0040E0"
-        android:textColorHint="#0040E0"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

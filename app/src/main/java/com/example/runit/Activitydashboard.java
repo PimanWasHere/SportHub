@@ -105,6 +105,10 @@ public class Activitydashboard extends AppCompatActivity {
                 create.setImageResource(R.drawable.icon_white_create);
                 profile.setImageResource(R.drawable.icon_white_profile);
 
+                actionbutt2.setVisibility(View.VISIBLE);
+                actionbutt3.setVisibility(View.VISIBLE);
+                actionbutt1.setVisibility(View.VISIBLE);
+
                 // evaluate role array and display buttons/ image assets accordingly
 
             }
@@ -128,6 +132,10 @@ public class Activitydashboard extends AppCompatActivity {
 
                 // evaluate role array and display buttons/ image assets accordingly
 
+                actionbutt2.setVisibility(View.VISIBLE);
+                actionbutt3.setVisibility(View.VISIBLE);
+                actionbutt1.setVisibility(View.VISIBLE);
+
 
             }
         });
@@ -147,6 +155,14 @@ public class Activitydashboard extends AppCompatActivity {
                 manage.setImageResource(R.drawable.icon_white_manage);
                 dashboard.setImageResource(R.drawable.icon_white_dashboard);
                 profile.setImageResource(R.drawable.icon_white_profile);
+
+                //reset buttons
+
+                actionbutt2.setVisibility(View.VISIBLE);
+                actionbutt3.setVisibility(View.VISIBLE);
+                actionbutt1.setVisibility(View.VISIBLE);
+
+
 
                 // evaluate role array and display buttons/ image assets accordingly
 

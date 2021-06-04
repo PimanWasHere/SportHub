@@ -157,7 +157,7 @@
         android:layout_height="65dp"
         android:background="#0040E0"
         android:text="Name.."
-        android:textAlignment="center"
+        android:textAlignment="viewEnd"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:textStyle="bold"
