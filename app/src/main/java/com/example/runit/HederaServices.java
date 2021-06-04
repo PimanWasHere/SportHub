@@ -32,9 +32,7 @@ public final class HederaServices implements  Serializable{
     private static GennedAccount GENNED_ACCOUNT = null;
 
     private static final ContractId runtokensc= ContractId.fromString("0.0.651281");
-    private static final FileId runitprofilefile = FileId.fromString("0.0.1863411");
-
-    private static ContractId profileid;
+    private static final FileId runitprofilefile = FileId.fromString("0.0.1874915");
 
     private static final BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 

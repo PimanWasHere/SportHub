@@ -71,9 +71,9 @@ public class Activitycreateacc extends AppCompatActivity {
 
         System.out.println("got pin " + pinobject.newpin);
 
-        //  EditText nicknamein = (EditText) findViewById(R.id.nickname);
-      //  EditText fnamein = (EditText) findViewById(R.id.fname);
-      //  EditText lnamein = (EditText) findViewById(R.id.lname);
+        TextView nicknamein = (TextView) findViewById(R.id.textViewnickname);
+        TextView fnamein = (TextView) findViewById(R.id.textViewfname);
+        TextView lnamein = (TextView) findViewById(R.id.textViewlname);
       //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
         Switch participant = (Switch) findViewById(R.id.switch10);
@@ -95,7 +95,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
         // validation
 
-        /*
+
 
         if (nicknamein.getText().equals(null)) {
             Toast.makeText(getApplicationContext(), "Nickname cannot be blank", Toast.LENGTH_LONG).show();
@@ -112,7 +112,7 @@ public class Activitycreateacc extends AppCompatActivity {
             return;
         }
 
-*/
+
 
 
         createprofilebut.setOnClickListener(new View.OnClickListener() {
@@ -253,7 +253,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 BigInteger initialrunbal = new BigInteger("0");
 
                 try {
-                    newcontractid = HederaServices.createdeployedprofile("Simon" , "Jackson",  "Piman" , "14178490705", "Australian", rolecode, newAccount.toSolidityAddress(), initialrunbal, "0.0.000000", "ipfs profile hash tbd");
+                    newcontractid = HederaServices.createdeployedprofile(fnamein.getText().toString() , lnamein.getText().toString(), nicknamein.getText().toString() , "0", "Earthling", rolecode, newAccount.toSolidityAddress(), initialrunbal, "0.0.000000", "ipfs profile hash tbd");
                 } catch (TimeoutException e) {
                     spinner.setVisibility(View.GONE);
 System.out.println("ex1" + e);
