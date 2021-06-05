@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
+import java.math.BigInteger;
 import java.util.concurrent.TimeoutException;
 
 import static android.widget.Toast.makeText;
@@ -149,7 +151,21 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
                     // call HederaServices and update profile
 
+                    try {
+                        HederaServices.updatedataprefsettings(ContractId.fromString(runitprofile2.runitprofilescid), runitprofiledataprefonly.interest1, runitprofiledataprefonly.interest2, runitprofiledataprefonly.interest3, runitprofiledataprefonly.demographic, runitprofiledataprefonly.behavioral, runitprofiledataprefonly.interests, runitprofiledataprefonly.sponsorslevel, runitprofiledataprefonly.grpsponsorslevel);
+                    } catch (TimeoutException e) {
+                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
+                        return;
+                    } catch (PrecheckStatusException e) {
+                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
+                        return;
+                    } catch (ReceiptStatusException e) {
+                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
+                        return;
 
+                    }
+
+                    makeText(getApplicationContext(), "Press back button -  Data preferences have been updated", Toast.LENGTH_LONG).show();
 
                 }
 

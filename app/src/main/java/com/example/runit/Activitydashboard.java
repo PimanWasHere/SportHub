@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class Activitydashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
 
         Intent intent = getIntent();
         runitprofile = (Runitprofile) intent.getSerializableExtra("profileobj");
@@ -72,7 +74,7 @@ public class Activitydashboard extends AppCompatActivity {
 
         }
 
-        name.setText("Welcome " + runitprofile.nickname + "!  " + runitprofile.fname + " " + runitprofile.lname + " " + roles);
+        name.setText(" Welcome " + runitprofile.nickname + "!  " + runitprofile.fname + " " + runitprofile.lname + " " + roles);
 
         try {
             menuselection.setText("Dashboard. " + HederaServices.getruntokenbal().toString() + " Run.it Token Balance.");
@@ -106,8 +108,8 @@ public class Activitydashboard extends AppCompatActivity {
                 profile.setImageResource(R.drawable.icon_white_profile);
 
                 actionbutt2.setVisibility(View.VISIBLE);
-                actionbutt3.setVisibility(View.VISIBLE);
-                actionbutt1.setVisibility(View.VISIBLE);
+                actionbutt3.setVisibility(View.GONE);
+                actionbutt1.setVisibility(View.GONE);
 
                 // evaluate role array and display buttons/ image assets accordingly
 
@@ -132,7 +134,7 @@ public class Activitydashboard extends AppCompatActivity {
 
                 // evaluate role array and display buttons/ image assets accordingly
 
-                actionbutt2.setVisibility(View.VISIBLE);
+                actionbutt2.setVisibility(View.GONE);
                 actionbutt3.setVisibility(View.VISIBLE);
                 actionbutt1.setVisibility(View.VISIBLE);
 
@@ -159,7 +161,7 @@ public class Activitydashboard extends AppCompatActivity {
                 //reset buttons
 
                 actionbutt2.setVisibility(View.VISIBLE);
-                actionbutt3.setVisibility(View.VISIBLE);
+                actionbutt3.setVisibility(View.GONE);
                 actionbutt1.setVisibility(View.VISIBLE);
 
 

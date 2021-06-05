@@ -48,8 +48,6 @@ public class Activitylogon extends AppCompatActivity {
         EditText accountinput = (EditText) findViewById(R.id.editTextrunitaccountid);
         EditText accountpword = (EditText) findViewById(R.id.EditTextlogonTextPassword);
 
-        spinner=(ProgressBar)findViewById(R.id.progressBarlogon);
-        spinner.setVisibility(View.GONE);
 
 
 
@@ -60,6 +58,7 @@ public class Activitylogon extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                spinner=(ProgressBar)findViewById(R.id.progressBarlogon);
 
                 // Account inputted ok, not null
 
@@ -188,6 +187,9 @@ public class Activitylogon extends AppCompatActivity {
 
         Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
         intent.putExtra("profileobj", runitprofile);
+
+        spinner.setVisibility(View.GONE);
+
         startActivity(intent);
     }
 

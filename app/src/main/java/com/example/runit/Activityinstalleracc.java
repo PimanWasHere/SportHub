@@ -74,7 +74,6 @@ public class Activityinstalleracc extends AppCompatActivity {
 
                // do this after account created ! - SecretKey key = store.generateSymmetricKey(pin1.getText().toString(), null);
 
-                Toast.makeText(getApplicationContext(), "Please Create a quick short profile and your roles.", Toast.LENGTH_LONG).show();
 
                 Pinobj newpinobject = new Pinobj();
 
@@ -92,6 +91,7 @@ public class Activityinstalleracc extends AppCompatActivity {
     public void openActivitycreateacc(Pinobj newpinobjectin) {
         Intent intent = new Intent(this, com.example.runit.Activitycreateacc.class);
         intent.putExtra("newpin", newpinobjectin);
+        Toast.makeText(getApplicationContext(), "Please Create a quick short profile and your roles.", Toast.LENGTH_LONG).show();
 
         startActivity(intent);
     }

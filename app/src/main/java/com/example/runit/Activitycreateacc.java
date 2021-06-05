@@ -2,9 +2,7 @@ package com.example.runit;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -48,8 +46,7 @@ public class Activitycreateacc extends AppCompatActivity {
     private AccountId newAccount;
     private FileId newhederaFileid;
 
-    private ProgressBar spinner;
-
+    private ProgressBar spinner2 = (ProgressBar) findViewById(R.id.progressBar2);
 
     public Activitycreateacc()  {
        }
@@ -65,8 +62,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
         Store store = new Store(getApplicationContext());
 
-        spinner=(ProgressBar)findViewById(R.id.progressBar);
-        spinner.setVisibility(View.GONE);
+        spinner2.setVisibility(View.GONE);
 
         Intent i = getIntent();
         Pinobj pinobject = (Pinobj) i.getSerializableExtra("newpin");
@@ -122,6 +118,8 @@ public class Activitycreateacc extends AppCompatActivity {
         createprofilebut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
                 rolecode = "";
 
@@ -181,9 +179,8 @@ public class Activitycreateacc extends AppCompatActivity {
                 // completed role code appended string - now to start Spinner and create Hedera based Run.it new account and secure with password
                 // THEN deploy profile Smart Contract with role definitions
 
-                spinner.setVisibility(View.VISIBLE);
-                System.out.println("spinner set");
 
+                spinner2.setVisibility(View.VISIBLE);
 
                 // call hedera new account and keypair
 
@@ -194,7 +191,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 try {
                     newDetails = HederaServices.createnewkeypair();
                 } catch (BadMnemonicException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -205,15 +202,15 @@ public class Activitycreateacc extends AppCompatActivity {
                     newAccount = HederaServices.createnewaccount();
                 } catch (TimeoutException e) {
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
 
                     return;
                 } catch (PrecheckStatusException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
                     return;
                 } catch (ReceiptStatusException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -259,18 +256,18 @@ public class Activitycreateacc extends AppCompatActivity {
                 try {
                     newcontractid = HederaServices.createdeployedprofile(fnamein.getText().toString() , lnamein.getText().toString(), nicknamein.getText().toString() , "0", "Earthling", rolecode, newAccount.toSolidityAddress(), initialrunbal, "0.0.000000", "ipfs profile hash tbd");
                 } catch (TimeoutException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
 System.out.println("ex1" + e);
                     Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                      return;
                 } catch (PrecheckStatusException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     System.out.println("ex2" + e);
 
                     Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                      return;
                 } catch (ReceiptStatusException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     System.out.println("ex3" + e);
 
                     Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
@@ -278,7 +275,7 @@ System.out.println("ex1" + e);
                 }
 
                 if (newcontractid == null || newcontractid.toString().isEmpty()) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     System.out.println("ex4" );
 
 
@@ -295,17 +292,17 @@ System.out.println("ex1" + e);
                     newhederaFileid = HederaServices.createuserstore(newAccount, newpassword.getText().toString(), newcontractid);
 
                 } catch (TimeoutException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
 
                     return;
                 } catch (PrecheckStatusException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
 
                     return;
                 } catch (ReceiptStatusException | NoSuchAlgorithmException | InvalidKeySpecException | UnsupportedEncodingException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - file create " + e, Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -321,17 +318,17 @@ System.out.println("ex1" + e);
                 try {
                     HederaServices.runtokensfromplatform(rungift,newAccount.toSolidityAddress());
                 } catch (ReceiptStatusException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
 
                     Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
                     return;
                 } catch (PrecheckStatusException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
 
                     Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
                     return;
                 } catch (TimeoutException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
 
                     Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
                     return;
@@ -346,22 +343,22 @@ System.out.println("ex1" + e);
                 try {
                     HederaServices.updaterunitaccountid_inprofile(newcontractid, newhederaFileid.toString());
                 } catch (TimeoutException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception updating profile with run.it fileid(accnt) " + e, Toast.LENGTH_LONG).show();
                     return;
                 } catch (PrecheckStatusException e) {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception updating profile with run.it fileid(accnt) " + e, Toast.LENGTH_LONG).show();
                      return;
                 } catch (ReceiptStatusException e)  {
-                    spinner.setVisibility(View.GONE);
+                    spinner2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Exception updating profile with run.it fileid(accnt) " + e, Toast.LENGTH_LONG).show();
                     return;
                 }
 
 
 
-                spinner.setVisibility(View.GONE);
+                spinner2.setVisibility(View.GONE);
 
                 runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());
                 runitaccountnum.setVisibility(View.VISIBLE);
@@ -376,7 +373,10 @@ System.out.println("ex1" + e);
 
 
 
-                Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep your PIN " + pinobject.newpin + " VERY safe, & written down. We gifted you 1000 RUN Tokens to your AccountID because you KYC'd !" + newAccount+ " and " + newhederaFileid + " number written down and safe!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep your PIN " + pinobject.newpin + " VERY safe, & written down. We gifted you 1000 RUN Tokens to your AccountID because you KYC'd !" + newAccount+ " and " + newhederaFileid + " number written down and safe!",Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getApplicationContext(), "Press your back button to continue .. ",Toast.LENGTH_LONG).show();
+
 
             }
 
