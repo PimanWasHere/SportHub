@@ -34,8 +34,6 @@ public class Activitylogon extends AppCompatActivity {
     public void Activitylogon()  {
     }
 
-
-    private ProgressBar spinner;
     private Runitprofile runitprofile;
     private DecodeFileid decodedfile;
 
@@ -51,16 +49,14 @@ public class Activitylogon extends AppCompatActivity {
 
 
 
-
-
-
         confirmlogonbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                spinner=(ProgressBar)findViewById(R.id.progressBarlogon);
-
                 // Account inputted ok, not null
+
+                Toast.makeText(getApplicationContext(), "Logging on - processing..", Toast.LENGTH_LONG).show();
+
 
                 if (accountinput.getText().equals(null) || (accountinput.getText().equals(" ")))
                 {
@@ -134,14 +130,13 @@ public class Activitylogon extends AppCompatActivity {
                     return;
                 }
 
-                spinner.setVisibility(View.VISIBLE);
 
 
                 // do Hedera processing - create the user Client now we have the account retrieved
 
                 HederaServices.createuserClient(AccountId.fromString(decodedfile.usraccnt), PrivateKey.fromString(decodedfile.usrpkey));
 
-                spinner.setVisibility(View.GONE);
+
 
                 // Now create instance of Runitprofile and pass the profile and Client object to dashboard activity
 
@@ -187,8 +182,6 @@ public class Activitylogon extends AppCompatActivity {
 
         Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
         intent.putExtra("profileobj", runitprofile);
-
-        spinner.setVisibility(View.GONE);
 
         startActivity(intent);
     }

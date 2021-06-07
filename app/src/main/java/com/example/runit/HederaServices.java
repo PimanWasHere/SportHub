@@ -640,6 +640,8 @@ public final class HederaServices implements  Serializable{
 
         runitprefsettings.interest1 = result_1.getString(0);
 
+        System.out.println("interest 1 in Hedera services " + runitprefsettings.interest1);
+
         ContractFunctionResult result_2 = new ContractCallQuery()
                 .setGas(30000)
                 .setContractId(ContractId.fromString(existingcontractid))
@@ -721,7 +723,7 @@ public final class HederaServices implements  Serializable{
             return runitprefsettings;
         }
 
-        runitprefsettings.sponsorslevel = result6.getUint256(0);
+        runitprefsettings.sponsorslevel = result7.getUint256(0);
 
         ContractFunctionResult result8= new ContractCallQuery()
                 .setGas(300000)

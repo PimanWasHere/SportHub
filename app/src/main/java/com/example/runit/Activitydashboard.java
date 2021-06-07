@@ -107,9 +107,22 @@ public class Activitydashboard extends AppCompatActivity {
                 create.setImageResource(R.drawable.icon_white_create);
                 profile.setImageResource(R.drawable.icon_white_profile);
 
-                actionbutt2.setVisibility(View.VISIBLE);
-                actionbutt3.setVisibility(View.GONE);
-                actionbutt1.setVisibility(View.GONE);
+                if (actionbutt1.getVisibility() != View.VISIBLE){
+                    actionbutt1.setVisibility(View.VISIBLE);
+                    actionbutt1.setClickable(false);
+                }
+
+                if (actionbutt2.getVisibility() != View.VISIBLE) {
+                    actionbutt2.setVisibility(View.VISIBLE);
+                    actionbutt2.setText("My Events");
+                    actionbutt2.setClickable(false);
+                }
+
+                if (actionbutt3.getVisibility() != View.VISIBLE) {
+                    actionbutt3.setVisibility(View.VISIBLE);
+                    actionbutt3.setClickable(false);
+                }
+
 
                 // evaluate role array and display buttons/ image assets accordingly
 
@@ -134,9 +147,27 @@ public class Activitydashboard extends AppCompatActivity {
 
                 // evaluate role array and display buttons/ image assets accordingly
 
-                actionbutt2.setVisibility(View.GONE);
-                actionbutt3.setVisibility(View.VISIBLE);
-                actionbutt1.setVisibility(View.VISIBLE);
+                if (actionbutt1.getVisibility() != View.VISIBLE){
+                    actionbutt1.setVisibility(View.VISIBLE);
+                    if (actionbutt1.isClickable())
+                    actionbutt1.setClickable(false);
+                }
+
+                if (actionbutt2.getVisibility() != View.VISIBLE) {
+                    actionbutt2.setVisibility(View.VISIBLE);
+                    actionbutt2.setText("Manage Event");
+                    if (!actionbutt2.isClickable())
+                    actionbutt2.setClickable(true);
+                }
+
+                if (actionbutt3.getVisibility() != View.VISIBLE) {
+                    actionbutt3.setVisibility(View.VISIBLE);
+                    if (actionbutt3.isClickable())
+                    actionbutt3.setClickable(false);
+                }
+
+
+
 
 
             }
@@ -160,9 +191,24 @@ public class Activitydashboard extends AppCompatActivity {
 
                 //reset buttons
 
-                actionbutt2.setVisibility(View.VISIBLE);
-                actionbutt3.setVisibility(View.GONE);
-                actionbutt1.setVisibility(View.VISIBLE);
+                if (actionbutt1.getVisibility() != View.VISIBLE){
+                    actionbutt1.setVisibility(View.VISIBLE);
+                    if (actionbutt1.isClickable())
+                    actionbutt1.setClickable(false);
+                }
+
+                if (actionbutt2.getVisibility() != View.VISIBLE) {
+                    actionbutt2.setVisibility(View.VISIBLE);
+                    if (actionbutt2.isClickable())
+                    actionbutt2.setClickable(false);
+                }
+
+                if (actionbutt3.getVisibility() != View.VISIBLE) {
+                    actionbutt3.setVisibility(View.VISIBLE);
+                    actionbutt3.setText("Create NFT");
+                    if (!actionbutt3.isClickable())
+                    actionbutt3.setClickable(true);
+                }
 
 
 
@@ -186,31 +232,67 @@ public class Activitydashboard extends AppCompatActivity {
                 dashboard.setImageResource(R.drawable.icon_white_dashboard);
                 create.setImageResource(R.drawable.icon_white_create);
 
-                // set option objects
+                //reset buttons
 
-                actionbutt2.setVisibility(View.GONE);
-                actionbutt3.setVisibility(View.GONE);
+                if (actionbutt1.getVisibility() != View.VISIBLE){
+                    actionbutt1.setVisibility(View.VISIBLE);
+                    actionbutt1.setText("Data Preferences");
+                    if (!actionbutt1.isClickable())
+                    actionbutt1.setClickable(true);
 
-                actionbutt1.setText("Data Preferences");
+                }
+
+                if (actionbutt2.getVisibility() != View.VISIBLE) {
+                    actionbutt2.setVisibility(View.VISIBLE);
+                    if (actionbutt2.isClickable())
+                    actionbutt2.setClickable(false);
+                }
+
+                if (actionbutt3.getVisibility() != View.VISIBLE) {
+                    actionbutt3.setVisibility(View.VISIBLE);
+                    if (actionbutt3.isClickable())
+                    actionbutt3.setClickable(false);
+                }
 
                 // evaluate role array and display buttons/ image assets accordingly
 
-
-
             }
         });
+
+
 
 
 
         actionbutt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Fetching your profile from the Ledger..", Toast.LENGTH_LONG).show();
 
                 openActivitydatapreferences();
 
             }
         });
 
+        actionbutt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(), "Event Button not enabled yet - TBD", Toast.LENGTH_LONG).show();
+
+
+            }
+        });
+
+
+        actionbutt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(), "Creation of new NFT Asset - TBD", Toast.LENGTH_LONG).show();
+
+
+            }
+        });
 
 
 

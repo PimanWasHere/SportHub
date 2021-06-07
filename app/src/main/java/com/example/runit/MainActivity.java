@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     Pinview pinview;
 
-    private ProgressBar spinner1 = (ProgressBar) findViewById(R.id.progressBar1);
 
 
 
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         Store store = new Store(getApplicationContext());
 
-        spinner1.setVisibility(View.GONE);
 
         pinview = (Pinview) findViewById(R.id.mypinview);
 
@@ -36,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataEntered(Pinview pinview, boolean fromUser) {
 
-
-               spinner1.setVisibility(View.VISIBLE);
 
                 // if pin entered is equal to keystore held
 
@@ -57,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     openActivitylogon();
 
                 } else {
-                    spinner1.setVisibility(View.GONE);
+
 
                     Toast.makeText(getApplicationContext(), pinview.getValue() + " is not in the keystore.", Toast.LENGTH_LONG).show();
 
@@ -73,14 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void openActivitylogon() {
-        spinner1.setVisibility(View.GONE);
+
         Intent intent = new Intent(this, com.example.runit.Activitylogon.class);
      // intent.putExtra("pin", pinstring);
       startActivity(intent);
     }
 
     public void openActivityinstallacc () {
-        spinner1.setVisibility(View.GONE);
+
         Intent intent = new Intent(this, com.example.runit.Activityinstalleracc.class);
         startActivity(intent);
     }

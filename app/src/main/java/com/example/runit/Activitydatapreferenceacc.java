@@ -57,6 +57,9 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
                 return;
             }
 
+            System.out.println("interest 1 " + runitprofiledataprefonly.interest1);
+
+
             EditText like1 = (EditText) findViewById(R.id.editTextlike1); // behavior & likes
             EditText like2 = (EditText) findViewById(R.id.editTextlike2);  // interests
             EditText like3 = (EditText) findViewById(R.id.editTextlike3);   // demographics
@@ -151,8 +154,11 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
                     // call HederaServices and update profile
 
+                    Toast.makeText(getApplicationContext(), "Updating your Account - processing..", Toast.LENGTH_LONG).show();
+
+
                     try {
-                        HederaServices.updatedataprefsettings(ContractId.fromString(runitprofile2.runitprofilescid), runitprofiledataprefonly.interest1, runitprofiledataprefonly.interest2, runitprofiledataprefonly.interest3, runitprofiledataprefonly.demographic, runitprofiledataprefonly.behavioral, runitprofiledataprefonly.interests, runitprofiledataprefonly.sponsorslevel, runitprofiledataprefonly.grpsponsorslevel);
+                        HederaServices.updatedataprefsettings(ContractId.fromString(runitprofile2.runitprofilescid), like1.getText().toString(),like2.getText().toString(), like3.getText().toString(), switchdemo.isChecked(), switchbehavioral.isChecked(), switchint.isChecked(), BigInteger.valueOf(current1), BigInteger.valueOf(current2));
                     } catch (TimeoutException e) {
                         makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
                         return;
@@ -165,7 +171,7 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
                     }
 
-                    makeText(getApplicationContext(), "Press back button -  Data preferences have been updated", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Press back button -  Data preferences have been updated", Toast.LENGTH_LONG).show();
 
                 }
 
