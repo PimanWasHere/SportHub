@@ -85,7 +85,7 @@ public class Activitydashboard extends AppCompatActivity {
         try {
             runitbal = HederaServices.getruntokenbal().toString();
 
-            menuselection.setText("Dashboard. " + runitbal+ " Run.it Tokens");
+            menuselection.setText("Dashboard.  " + runitbal+ " Run.it ");
         } catch (ReceiptStatusException e) {
             Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " +e, Toast.LENGTH_LONG).show();
         return;
@@ -105,7 +105,7 @@ public class Activitydashboard extends AppCompatActivity {
                 try {
                     runitbal = HederaServices.getruntokenbal().toString();
 
-                    menuselection.setText("Dashboard. " + runitbal + " Run.it Tokens");
+                    menuselection.setText("Dashboard.  " + runitbal + " Run.it");
                 } catch (ReceiptStatusException e) {
                     Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
                     return;
@@ -119,16 +119,18 @@ public class Activitydashboard extends AppCompatActivity {
             }
         });
 
-        // set dashboard as default on entry
+        // set dashboard as default on entry and default button for dashboard
 
         dashboardflag = 1;
+        actionbutt2.setText("My Events");
+
 
 
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("Dashboard. " + runitbal+ " Run.it Tokens");
+                menuselection.setText("Dashboard.  " + runitbal+ " Run.it");
 
                 dashboardflag = 1;
 
@@ -145,6 +147,7 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
+                    actionbutt1.setText("Action 1");
                 }
                 if (actionbutt1.isClickable())
                 actionbutt1.setClickable(false);
@@ -159,6 +162,8 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt3.getVisibility() != View.VISIBLE) {
                     actionbutt3.setVisibility(View.VISIBLE);
+                    actionbutt3.setText("Action 3");
+
                 }
                 if (actionbutt3.isClickable())
                 actionbutt3.setClickable(false);
@@ -173,7 +178,7 @@ public class Activitydashboard extends AppCompatActivity {
         manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                menuselection.setText("Manage Assets. " + runitbal+ " Run.it Tokens.");
+                menuselection.setText("Manage Assets. " + runitbal+ " Run.it ");
 
                 dashboardflag = 2;
                 // set new image
@@ -189,8 +194,8 @@ public class Activitydashboard extends AppCompatActivity {
 
                 // evaluate role array and display buttons/ image assets accordingly
 
-                if (actionbutt1.getVisibility() != View.VISIBLE){
-                    actionbutt1.setVisibility(View.VISIBLE);
+                if (actionbutt1.getVisibility() == View.VISIBLE){
+                    actionbutt1.setVisibility(View.GONE);
 
                 }
                 if (actionbutt1.isClickable())
@@ -199,14 +204,14 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt2.getVisibility() != View.VISIBLE) {
                     actionbutt2.setVisibility(View.VISIBLE);
-                    actionbutt2.setText("Manage Event");
+                    actionbutt2.setText("Manage Assets");
 
                 }
                 if (!actionbutt2.isClickable())
                     actionbutt2.setClickable(true);
 
-                if (actionbutt3.getVisibility() != View.VISIBLE) {
-                    actionbutt3.setVisibility(View.VISIBLE);
+                if (actionbutt3.getVisibility() == View.VISIBLE) {
+                    actionbutt3.setVisibility(View.GONE);
                 }
                 if (actionbutt3.isClickable())
                     actionbutt3.setClickable(false);
@@ -223,7 +228,7 @@ public class Activitydashboard extends AppCompatActivity {
             public void onClick(View v) {
 
                 dashboardflag = 3;
-                menuselection.setText("Create " + runitbal+ " Run.it Tokens.");
+                menuselection.setText("Create.   " + runitbal+ " Run.it");
 
                 // set new image
                 menu.setImageResource(R.drawable.footer_3);
@@ -237,15 +242,15 @@ public class Activitydashboard extends AppCompatActivity {
 
                 //reset buttons
 
-                if (actionbutt1.getVisibility() != View.VISIBLE){
-                    actionbutt1.setVisibility(View.VISIBLE);
+                if (actionbutt1.getVisibility() == View.VISIBLE){
+                    actionbutt1.setVisibility(View.GONE);
 
                 }
                 if (actionbutt1.isClickable())
                     actionbutt1.setClickable(false);
 
-                if (actionbutt2.getVisibility() != View.VISIBLE) {
-                    actionbutt2.setVisibility(View.VISIBLE);
+                if (actionbutt2.getVisibility() == View.VISIBLE) {
+                    actionbutt2.setVisibility(View.GONE);
 
                 }
                 if (actionbutt2.isClickable())
@@ -271,7 +276,7 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("Profile " + runitbal+ " Run.it Tokens");
+                menuselection.setText("Profile.   " + runitbal+ " Run.it");
 
                 dashboardflag = 4;
 
@@ -295,14 +300,14 @@ public class Activitydashboard extends AppCompatActivity {
 
                 }
 
-                if (actionbutt2.getVisibility() != View.VISIBLE) {
-                    actionbutt2.setVisibility(View.VISIBLE);
+                if (actionbutt2.getVisibility() == View.VISIBLE) {
+                    actionbutt2.setVisibility(View.GONE);
                     if (actionbutt2.isClickable())
                     actionbutt2.setClickable(false);
                 }
 
-                if (actionbutt3.getVisibility() != View.VISIBLE) {
-                    actionbutt3.setVisibility(View.VISIBLE);
+                if (actionbutt3.getVisibility() == View.VISIBLE) {
+                    actionbutt3.setVisibility(View.GONE);
                     if (actionbutt3.isClickable())
                     actionbutt3.setClickable(false);
                 }
@@ -322,8 +327,11 @@ public class Activitydashboard extends AppCompatActivity {
 
                 switch (dashboardflag) {
                     case 1:
+                        break;
                     case 2:
+                        break;
                     case 3:
+                        break;
                     case 4:
 
                         Toast.makeText(getApplicationContext(), "Fetching your profile from the Ledger..", Toast.LENGTH_LONG).show();
@@ -347,7 +355,9 @@ public class Activitydashboard extends AppCompatActivity {
 
                         break;
                     case 2:
+                        break;
                     case 3:
+                        break;
                     case 4:
 
 
@@ -365,7 +375,9 @@ public class Activitydashboard extends AppCompatActivity {
 
                 switch (dashboardflag) {
                     case 1:
+                        break;
                     case 2:
+                        break;
                     case 3:
                         Toast.makeText(getApplicationContext(), "Creation of new NFT Asset - TBD", Toast.LENGTH_LONG).show();
                         break;
