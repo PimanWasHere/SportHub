@@ -24,6 +24,10 @@ public class Activitydashboard extends AppCompatActivity {
 
     Runitprofile runitprofile;
 
+    int dashboardflag = 0;
+
+    String runitbal = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,8 @@ public class Activitydashboard extends AppCompatActivity {
         ImageView manage = (ImageView) findViewById(R.id.imageViewassets);
         ImageView create = (ImageView) findViewById(R.id.imageViewcreate);
         ImageView profile = (ImageView) findViewById(R.id.imageViewprofile);
+        ImageView runitbalrefresh =(ImageView) findViewById(R.id.imageViewrfreshtoken);
+
 
         ImageView menu = (ImageView) findViewById(R.id.imagemenubar);
 
@@ -77,7 +83,9 @@ public class Activitydashboard extends AppCompatActivity {
         name.setText(" Welcome " + runitprofile.nickname + "!  " + runitprofile.fname + " " + runitprofile.lname + " " + roles);
 
         try {
-            menuselection.setText("Dashboard. " + HederaServices.getruntokenbal().toString() + " Run.it Token Balance.");
+            runitbal = HederaServices.getruntokenbal().toString();
+
+            menuselection.setText("Dashboard. " + runitbal+ " Run.it Tokens");
         } catch (ReceiptStatusException e) {
             Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " +e, Toast.LENGTH_LONG).show();
         return;
@@ -91,10 +99,38 @@ public class Activitydashboard extends AppCompatActivity {
 
 
 
+        runitbalrefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    runitbal = HederaServices.getruntokenbal().toString();
+
+                    menuselection.setText("Dashboard. " + runitbal + " Run.it Tokens");
+                } catch (ReceiptStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (PrecheckStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (TimeoutException e) {
+                    Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+        });
+
+        // set dashboard as default on entry
+
+        dashboardflag = 1;
+
 
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                menuselection.setText("Dashboard. " + runitbal+ " Run.it Tokens");
+
+                dashboardflag = 1;
 
                 // set new image
                 menu.setImageResource(R.drawable.footer_1);
@@ -109,19 +145,23 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
-                    actionbutt1.setClickable(false);
                 }
+                if (actionbutt1.isClickable())
+                actionbutt1.setClickable(false);
+
 
                 if (actionbutt2.getVisibility() != View.VISIBLE) {
                     actionbutt2.setVisibility(View.VISIBLE);
                     actionbutt2.setText("My Events");
-                    actionbutt2.setClickable(false);
                 }
+                if (actionbutt2.isClickable())
+                actionbutt2.setClickable(false);
 
                 if (actionbutt3.getVisibility() != View.VISIBLE) {
                     actionbutt3.setVisibility(View.VISIBLE);
-                    actionbutt3.setClickable(false);
                 }
+                if (actionbutt3.isClickable())
+                actionbutt3.setClickable(false);
 
 
                 // evaluate role array and display buttons/ image assets accordingly
@@ -133,7 +173,9 @@ public class Activitydashboard extends AppCompatActivity {
         manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                menuselection.setText("Manage Assets. " + runitbal+ " Run.it Tokens.");
 
+                dashboardflag = 2;
                 // set new image
                 menu.setImageResource(R.drawable.footer_2);
 
@@ -149,23 +191,25 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
-                    if (actionbutt1.isClickable())
-                    actionbutt1.setClickable(false);
+
                 }
+                if (actionbutt1.isClickable())
+                actionbutt1.setClickable(false);
+
 
                 if (actionbutt2.getVisibility() != View.VISIBLE) {
                     actionbutt2.setVisibility(View.VISIBLE);
                     actionbutt2.setText("Manage Event");
-                    if (!actionbutt2.isClickable())
-                    actionbutt2.setClickable(true);
+
                 }
+                if (!actionbutt2.isClickable())
+                    actionbutt2.setClickable(true);
 
                 if (actionbutt3.getVisibility() != View.VISIBLE) {
                     actionbutt3.setVisibility(View.VISIBLE);
-                    if (actionbutt3.isClickable())
-                    actionbutt3.setClickable(false);
                 }
-
+                if (actionbutt3.isClickable())
+                    actionbutt3.setClickable(false);
 
 
 
@@ -178,6 +222,8 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                dashboardflag = 3;
+                menuselection.setText("Create " + runitbal+ " Run.it Tokens.");
 
                 // set new image
                 menu.setImageResource(R.drawable.footer_3);
@@ -193,22 +239,25 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
-                    if (actionbutt1.isClickable())
-                    actionbutt1.setClickable(false);
+
                 }
+                if (actionbutt1.isClickable())
+                    actionbutt1.setClickable(false);
 
                 if (actionbutt2.getVisibility() != View.VISIBLE) {
                     actionbutt2.setVisibility(View.VISIBLE);
-                    if (actionbutt2.isClickable())
-                    actionbutt2.setClickable(false);
+
                 }
+                if (actionbutt2.isClickable())
+                    actionbutt2.setClickable(false);
 
                 if (actionbutt3.getVisibility() != View.VISIBLE) {
                     actionbutt3.setVisibility(View.VISIBLE);
                     actionbutt3.setText("Create NFT");
-                    if (!actionbutt3.isClickable())
-                    actionbutt3.setClickable(true);
+
                 }
+                if (!actionbutt3.isClickable())
+                    actionbutt3.setClickable(true);
 
 
 
@@ -221,6 +270,10 @@ public class Activitydashboard extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                menuselection.setText("Profile " + runitbal+ " Run.it Tokens");
+
+                dashboardflag = 4;
 
                 // set new image
                 menu.setImageResource(R.drawable.footer_4);
@@ -266,9 +319,20 @@ public class Activitydashboard extends AppCompatActivity {
         actionbutt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Fetching your profile from the Ledger..", Toast.LENGTH_LONG).show();
 
-                openActivitydatapreferences();
+                switch (dashboardflag) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+
+                        Toast.makeText(getApplicationContext(), "Fetching your profile from the Ledger..", Toast.LENGTH_LONG).show();
+
+                        openActivitydatapreferences();
+                        break;
+
+                }
+
 
             }
         });
@@ -277,7 +341,18 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), "Event Button not enabled yet - TBD", Toast.LENGTH_LONG).show();
+                switch (dashboardflag) {
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "Event Button not enabled yet - TBD", Toast.LENGTH_LONG).show();
+
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+
+
+                }
+
 
 
             }
@@ -288,7 +363,16 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), "Creation of new NFT Asset - TBD", Toast.LENGTH_LONG).show();
+                switch (dashboardflag) {
+                    case 1:
+                    case 2:
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "Creation of new NFT Asset - TBD", Toast.LENGTH_LONG).show();
+                        break;
+                    case 4:
+
+
+                }
 
 
             }
