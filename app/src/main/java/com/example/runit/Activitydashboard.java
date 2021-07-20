@@ -11,9 +11,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hedera.hashgraph.sdk.AccountId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
+import java.math.BigInteger;
+import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
 public class Activitydashboard extends AppCompatActivity {
@@ -23,6 +26,7 @@ public class Activitydashboard extends AppCompatActivity {
     }
 
     Runitprofile runitprofile;
+
 
     int dashboardflag = 0;
 
@@ -36,6 +40,10 @@ public class Activitydashboard extends AppCompatActivity {
 
         Intent intent = getIntent();
         runitprofile = (Runitprofile) intent.getSerializableExtra("profileobj");
+
+        // new Account obj
+
+        AccountId usraccount = AccountId.fromString(runitprofile.runitrunaccountid);
 
 
         System.out.println("profileobj fname.." + runitprofile.fname);
@@ -85,7 +93,7 @@ public class Activitydashboard extends AppCompatActivity {
         try {
             runitbal = HederaServices.getruntokenbal().toString();
 
-            menuselection.setText("Dashboard.  " + runitbal+ " Run.it ");
+            menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards");
         } catch (ReceiptStatusException e) {
             Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " +e, Toast.LENGTH_LONG).show();
         return;
@@ -102,10 +110,65 @@ public class Activitydashboard extends AppCompatActivity {
         runitbalrefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 7/20/21  SJ request random RUN reward increase and balance refresh
+                int min = 1, max = 5;
+                Random rn = new Random();
+                int randomNum = rn.nextInt((max - min) + 1) + min;
+
+                //i.e. (1 = 50%)   (2 = 25%)   (3 = 12.5%)   (4 = 7.25) ... etc...
+
+                BigInteger runrewardsonrefresh;
+
+                BigInteger runitbalbigint = new BigInteger(runitbal);
+
+                switch(randomNum)
+                {
+                    case 1:
+                         runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(2)));
+                    case 2:
+                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(4)));
+                    case 3:
+                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(8)));
+                    case 4:
+                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(16)));
+                    case 5:
+                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(32)));
+                    default:
+                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(4)));
+
+                }
+
+                // xfer RUN tokens from treasury accnt to User.
+
+
+                try {
+
+                    HederaServices.runtokensfromplatform(runrewardsonrefresh,usraccount.toSolidityAddress());
+                } catch (ReceiptStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (PrecheckStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (TimeoutException e) {
+                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                // pause ui app thread to gain consensus - this will be on new thread in next version of PoC - with a Spinner.
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    Toast.makeText(getApplicationContext(), "Thread sleep exception " + e, Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+
                 try {
                     runitbal = HederaServices.getruntokenbal().toString();
 
-                    menuselection.setText("Dashboard.  " + runitbal + " Run.it");
+                    menuselection.setText("Dashboard.  " + runitbal + " RUN Rewards");
                 } catch (ReceiptStatusException e) {
                     Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
                     return;
