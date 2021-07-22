@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hedera.hashgraph.sdk.AccountId;
+import com.hedera.hashgraph.sdk.Hbar;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
@@ -31,6 +32,9 @@ public class Activitydashboard extends AppCompatActivity {
     int dashboardflag = 0;
 
     String runitbal = null;
+
+    Hbar usrhbarbal = null;
+    String usrhbarbalst = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,18 +97,31 @@ public class Activitydashboard extends AppCompatActivity {
         try {
             runitbal = HederaServices.getruntokenbal().toString();
 
-            menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards");
         } catch (ReceiptStatusException e) {
             Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " +e, Toast.LENGTH_LONG).show();
         return;
         } catch (PrecheckStatusException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
         return;
         } catch (TimeoutException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
         return;
         }
 
+        // get hbar bal of user account
+
+        try {
+            usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
+            usrhbarbalst = usrhbarbal.toString();
+            menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+
+        } catch (TimeoutException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+
+        } catch (PrecheckStatusException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+
+        }
 
 
         runitbalrefresh.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +185,6 @@ public class Activitydashboard extends AppCompatActivity {
                 try {
                     runitbal = HederaServices.getruntokenbal().toString();
 
-                    menuselection.setText("Dashboard.  " + runitbal + " RUN Rewards");
                 } catch (ReceiptStatusException e) {
                     Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
                     return;
@@ -178,6 +194,21 @@ public class Activitydashboard extends AppCompatActivity {
                 } catch (TimeoutException e) {
                     Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
                     return;
+                }
+
+                // get hbar bal of user account
+
+                try {
+                    usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
+                    usrhbarbalst = usrhbarbal.toString();
+                    menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+
+                } catch (TimeoutException e) {
+                    Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+
+                } catch (PrecheckStatusException e) {
+                    Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+
                 }
             }
         });
@@ -193,7 +224,8 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("Dashboard.  " + runitbal+ " Run.it");
+                menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+
 
                 dashboardflag = 1;
 
@@ -210,15 +242,15 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
-                    actionbutt1.setText("Action 1");
+                    actionbutt1.setText("Wallet");
                 }
                 if (actionbutt1.isClickable())
-                actionbutt1.setClickable(false);
+                actionbutt1.setClickable(true);
 
 
                 if (actionbutt2.getVisibility() != View.VISIBLE) {
                     actionbutt2.setVisibility(View.VISIBLE);
-                    actionbutt2.setText("My Events");
+                    actionbutt2.setText("Events");
                 }
                 if (actionbutt2.isClickable())
                 actionbutt2.setClickable(false);
@@ -241,7 +273,7 @@ public class Activitydashboard extends AppCompatActivity {
         manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                menuselection.setText("Manage Assets. " + runitbal+ " Run.it ");
+                menuselection.setText("Manage Assets  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
 
                 dashboardflag = 2;
                 // set new image
@@ -291,7 +323,8 @@ public class Activitydashboard extends AppCompatActivity {
             public void onClick(View v) {
 
                 dashboardflag = 3;
-                menuselection.setText("Create.   " + runitbal+ " Run.it");
+                menuselection.setText("Create.   " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+
 
                 // set new image
                 menu.setImageResource(R.drawable.footer_3);
@@ -339,7 +372,7 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("Profile.   " + runitbal+ " Run.it");
+                menuselection.setText("Profile.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
 
                 dashboardflag = 4;
 
@@ -390,6 +423,11 @@ public class Activitydashboard extends AppCompatActivity {
 
                 switch (dashboardflag) {
                     case 1:
+
+                        // ok wallet clicked
+
+                        Toast.makeText(getApplicationContext(), "Opening your wallet ..", Toast.LENGTH_LONG).show();
+                        openActivitywallet();
                         break;
                     case 2:
                         break;
@@ -466,6 +504,17 @@ public class Activitydashboard extends AppCompatActivity {
 
         Intent intent = new Intent(this, com.example.runit.Activitydatapreferenceacc.class);
         intent.putExtra("profileobjtodatapref", runitprofile);
+        //intent.putExtra("profile obj", decodedfile);
+        startActivity(intent);
+    }
+
+
+    public void openActivitywallet () {
+
+        // System.out.println("profile obj fname " + runitprofile.fname + " " + runitprofile.toString());
+
+        Intent intent = new Intent(this, com.example.runit.Activitywallet.class);
+        intent.putExtra("profileobjtowallet", runitprofile);
         //intent.putExtra("profile obj", decodedfile);
         startActivity(intent);
     }

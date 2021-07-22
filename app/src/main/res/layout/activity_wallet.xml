@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ED0847"
+    android:screenOrientation="portrait"
+    tools:context=".Activityinstalleracc">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="376dp"
+        android:layout_height="54dp"
+        android:background="#ED0847"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Send RUN tokens to another account"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.048" />
+
+    <EditText
+        android:id="@+id/editTextrunmount"
+        android:layout_width="359dp"
+        android:layout_height="77dp"
+        android:background="#ED0847"
+
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
+        android:foregroundTint="#F8F0F0"
+        android:hint="RUN Amount ?"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.224" />
+
+    <EditText
+        android:id="@+id/editTextrunaccountto"
+        android:layout_width="359dp"
+        android:layout_height="77dp"
+        android:background="#ED0847"
+
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
+        android:foregroundTint="#F8F0F0"
+        android:hint=".. to Account (x.x.xxxxx)"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.397" />
+
+    <Button
+        android:id="@+id/sendrunbutt"
+        android:layout_width="141dp"
+        android:layout_height="52dp"
+        android:background="@drawable/myrndbluebutton"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="SEND"
+        android:textAlignment="center"
+
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.874" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

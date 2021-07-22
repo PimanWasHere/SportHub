@@ -289,7 +289,7 @@ public final class HederaServices implements  Serializable{
 
     public static String getutcstringtimestamp(BigInteger timeinmilliseconds) {
 
-        // to show time in UTC Zulu to ALL global traders.
+        // to show time in UTC Zulu
 
         long seconds = 1320105600;
         long millis = timeinmilliseconds.longValue() * 1000;
@@ -303,8 +303,6 @@ public final class HederaServices implements  Serializable{
     }
 
     public static String getlocalstringtimestamp(BigInteger timeinmilliseconds) {
-
-        // to show time in Traders Server ip address timezone
 
         long seconds = 1320105600;
         long millis = timeinmilliseconds.longValue() * 1000;
@@ -516,7 +514,7 @@ public final class HederaServices implements  Serializable{
 
     public static void runtokensfromuser(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
 
-        // platform pays the gas to send Welcome tokens
+        // User pays the gas to send tokens
 
         TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
                 .setContractId(runtokensc)
