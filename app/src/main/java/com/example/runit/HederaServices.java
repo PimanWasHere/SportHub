@@ -31,8 +31,10 @@ public final class HederaServices implements  Serializable{
     private static Client USER_ACCOUNT = null;
     private static GennedAccount GENNED_ACCOUNT = null;
 
-    private static final ContractId runtokensc= ContractId.fromString("0.0.651281");
-    private static final FileId runitprofilefile = FileId.fromString("0.0.1874915");
+    private static final ContractId runtokensc= ContractId.fromString("0.0.2165205");
+
+    private static final FileId runitprofilefile = FileId.fromString("0.0.2165167");
+
 
     private static final BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 
@@ -120,7 +122,7 @@ public final class HederaServices implements  Serializable{
 
         TransactionResponse newAccounttx = new AccountCreateTransaction()
                 .setKey(GENNED_ACCOUNT.newPublicKey)
-                .setInitialBalance(new Hbar(1000))
+                .setInitialBalance(new Hbar(500))
                 //.setInitialBalance(100_000_000) // not mandatory for create?
                 .execute(OPERATING_ACCOUNT);
 

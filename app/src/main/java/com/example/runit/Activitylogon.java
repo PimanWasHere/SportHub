@@ -141,16 +141,21 @@ public class Activitylogon extends AppCompatActivity {
                 // Now create instance of Runitprofile and pass the profile and Client object to dashboard activity
 
 
-                // only open IF profile is found and object returned not null
+                // only open IF profile is found and object returned
+                System.out.println(".. decoded file  user profile contractid " + decodedfile.usrprofilecontractid);
+
 
                 try {
                     runitprofile = HederaServices.getacontract(decodedfile.usrprofilecontractid);
                 } catch (TimeoutException e) {
-                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Failed to get profile ! " + e, Toast.LENGTH_LONG).show();
+                    return;
                 } catch (PrecheckStatusException e) {
-                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Failed to get profile ! " + e, Toast.LENGTH_LONG).show();
+                    return;
                 } catch (ReceiptStatusException e) {
-                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Failed to get profile ! " + e, Toast.LENGTH_LONG).show();
+                    return;
                 }
 
                 //.. call method to open dashboard - pass profile object and decodedfile object
@@ -160,6 +165,7 @@ public class Activitylogon extends AppCompatActivity {
 
                 runitprofile.runitprofilescid = decodedfile.usrprofilecontractid;
 
+                System.out.println(".. profile runit account " + runitprofile.runitrunaccountid);
 
                 openActivitydashboard();
             }

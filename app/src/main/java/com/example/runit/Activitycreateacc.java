@@ -191,6 +191,7 @@ public class Activitycreateacc extends AppCompatActivity {
                     return;
                 }
 
+                System.out.println("new genned accnt ." + newDetails.newPublicKey);
 
 
                 try {
@@ -247,23 +248,21 @@ public class Activitycreateacc extends AppCompatActivity {
                 try {
                     newcontractid = HederaServices.createdeployedprofile(fnamein.getText().toString() , lnamein.getText().toString(), nicknamein.getText().toString() , "0", "Earthling", rolecode, newAccount.toSolidityAddress(), initialrunbal, "0.0.000000", "ipfs profile hash tbd");
                 } catch (TimeoutException e) {
-System.out.println("ex1" + e);
                     Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
-                     return;
+                    System.out.println(" profile create exception "+ e );
+                    return;
                 } catch (PrecheckStatusException e) {
-                    System.out.println("ex2" + e);
+                    System.out.println(" profile create exception "+ e );
                     Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                      return;
                 } catch (ReceiptStatusException e) {
-                    System.out.println("ex3" + e);
+                    System.out.println(" profile create exception "+ e );
                     Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (newcontractid == null || newcontractid.toString().isEmpty()) {
-                    System.out.println("ex4" );
-
-
+                    System.out.println(" profile create exception ");
                     Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created ", Toast.LENGTH_LONG).show();
                     return;
                 }

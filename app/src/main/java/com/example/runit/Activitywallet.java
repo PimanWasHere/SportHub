@@ -25,8 +25,6 @@ public class Activitywallet extends AppCompatActivity {
 
     Runitprofile runitprofile3;
 
-    Runitprofile runitprofilewalletonly;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +35,8 @@ public class Activitywallet extends AppCompatActivity {
 
         System.out.println("runit profile3 obj " + runitprofile3.runitprofilescid);
 
-        Button sendrunbutton = (Button) findViewById(R.id.sendrunbutt);
-        EditText runtokentosend = (EditText) findViewById(R.id.editTextrunmount);
+        Button sendrunbutton = (Button) findViewById(R.id.sendrunbuttwallet);
+        EditText runtokentosend = (EditText) findViewById(R.id.editTextrunmounttosend);
         EditText destaccnt = (EditText) findViewById(R.id.editTextrunaccountto);
 
 

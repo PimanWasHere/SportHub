@@ -39,6 +39,10 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".Activitywallet"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".Activitylogon"
             android:theme="@style/AppTheme" />
 

@@ -47,10 +47,12 @@ public class Activitydashboard extends AppCompatActivity {
 
         // new Account obj
 
+        System.out.println("profileobj runitaccountid.." + runitprofile.runitrunaccountid);
+
         AccountId usraccount = AccountId.fromString(runitprofile.runitrunaccountid);
 
 
-        System.out.println("profileobj fname.." + runitprofile.fname);
+
 
         TextView menuselection = (TextView) findViewById(R.id.textviewmenuselection);
         TextView name = (TextView) findViewById(R.id.textViewusername);

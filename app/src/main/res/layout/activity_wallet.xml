@@ -10,7 +10,7 @@
     tools:context=".Activityinstalleracc">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewwallet1"
         android:layout_width="376dp"
         android:layout_height="54dp"
         android:background="#ED0847"
@@ -28,7 +28,7 @@
         app:layout_constraintVertical_bias="0.048" />
 
     <EditText
-        android:id="@+id/editTextrunmount"
+        android:id="@+id/editTextrunmounttosend"
         android:layout_width="359dp"
         android:layout_height="77dp"
         android:background="#ED0847"
@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.397" />
 
     <Button
-        android:id="@+id/sendrunbutt"
+        android:id="@+id/sendrunbuttwallet"
         android:layout_width="141dp"
         android:layout_height="52dp"
         android:background="@drawable/myrndbluebutton"

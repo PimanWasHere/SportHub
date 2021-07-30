@@ -47,10 +47,14 @@ dependencies {
 
     // as below jda added
     annotationProcessor 'org.apache.logging.log4j:log4j-core:2.8.2'
+    implementation 'org.slf4j:slf4j-simple:1.7.29'
+
     // Android, Corda DJVM, Java 7+
-    implementation 'com.hedera.hashgraph:sdk-jdk7:2.0.5'
+    // implementation 'com.hedera.hashgraph:sdk-jdk7:2.0.5'
+    implementation 'com.hedera.hashgraph:sdk-jdk7:2.0.9'
     // okhttp transport (for lighter-weight applications or Android)
-    implementation 'io.grpc:grpc-okhttp:1.35.0'
+    //implementation 'io.grpc:grpc-okhttp:1.35.0'
+    implementation 'io.grpc:grpc-okhttp:1.38.0'
 
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
 

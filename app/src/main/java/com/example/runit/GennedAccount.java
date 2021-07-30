@@ -15,9 +15,11 @@ public class GennedAccount {
 
     public GennedAccount() throws BadMnemonicException {
         System.out.println("ok.. creating  new keys ..");
-        mnemonic = Mnemonic.generate24();
+        mnemonic = Mnemonic.generate12();
         // Generate a Ed25519 private, public key pair
         newPrivKey = mnemonic.toPrivateKey();
         newPublicKey = newPrivKey.getPublicKey();
+        System.out.println("new keys created " + newPublicKey);
+
     }
 }
