@@ -47,6 +47,8 @@ public class Activitydashboard extends AppCompatActivity {
 
         // new Account obj
 
+        System.out.println("profileobj indashboard fname.." + runitprofile.fname);
+
         System.out.println("profileobj runitaccountid.." + runitprofile.runitrunaccountid);
 
         AccountId usraccount = AccountId.fromString(runitprofile.runitrunaccountid);

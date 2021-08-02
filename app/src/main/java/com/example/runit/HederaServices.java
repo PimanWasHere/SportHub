@@ -256,6 +256,9 @@ public final class HederaServices implements  Serializable{
         String newcontractid = null;
 
         // constructor(string _fname, string _lname, string _nickname, string _phone, string _nationality, string _rolecodes, string _profilehederafileid, string _profiledataipfshash, address _platformaddress) public {
+        System.out.println("run it profile - accountid sent to hedera services for create ." + _accountid);
+
+        System.out.println("run it profile - fileid sent to hedera services for create ." + _hederafileid);
 
         // set admin key to zero address - this is done by Hedera as default.
 
@@ -341,6 +344,8 @@ public final class HederaServices implements  Serializable{
             return runitdetails;
         }
 
+        System.out.println("got first name " + result_1.getString(0));
+
         runitdetails.fname = result_1.getString(0);
 
 
@@ -412,6 +417,7 @@ public final class HederaServices implements  Serializable{
         }
 
         runitdetails.rolecode = result_6.getString(0);
+        System.out.println("got role code " + result_6.getString(0));
 
 
         ContractFunctionResult result_7 = new ContractCallQuery()
@@ -440,6 +446,9 @@ public final class HederaServices implements  Serializable{
             System.out.println("Error calling Contract " + result_9.errorMessage);
             return runitdetails;
         }
+
+        System.out.println("got run it account id (fileid) as string" + result_9.getString(0));
+
 
         runitdetails.runitlogonaccountid = result_9.getString(0);
 
@@ -565,13 +574,13 @@ public final class HederaServices implements  Serializable{
     // the profile also is to hold the run.it account (hedera fileid).. chick & egg. So this method below is called after the File create in the DApp
 
 
-    public static void updaterunitaccountid_inprofile(ContractId usersprofilescID, String runitaccountid) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+    public static void updaterunitaccountid_fileid_inprofile(ContractId usersprofilescID, String runitaccountidfileid) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
 
         TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
                 .setContractId(usersprofilescID)
                 .setGas(100_000_000)
                 .setFunction("updaterunitaccountid", new ContractFunctionParameters()
-                        .addString(runitaccountid))
+                        .addString(runitaccountidfileid))
                 .execute(USER_ACCOUNT);
 
 

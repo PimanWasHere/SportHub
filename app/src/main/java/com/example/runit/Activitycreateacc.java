@@ -288,7 +288,7 @@ public class Activitycreateacc extends AppCompatActivity {
                     return;
                 }
 
-                System.out.println("file id " + newhederaFileid);
+                System.out.println("file id ie the run.it account is.." + newhederaFileid);
 
 
                 //  Credit 1000 RUN tokens to new Account IF/Assuming TBD the User's KYC status is True
@@ -313,10 +313,16 @@ public class Activitycreateacc extends AppCompatActivity {
                 // now we have to update the profile contract with the Users hedera fileid  (run.it account number), account, password hash, profile contract id
 
                 // TBD
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    Toast.makeText(getApplicationContext(), "thread sleep exception " + e, Toast.LENGTH_LONG).show();
+                    return;
+                }
 
 
                 try {
-                    HederaServices.updaterunitaccountid_inprofile(newcontractid, newhederaFileid.toString());
+                    HederaServices.updaterunitaccountid_fileid_inprofile(newcontractid, newhederaFileid.toString());
                 } catch (TimeoutException e) {
                     Toast.makeText(getApplicationContext(), "Exception updating profile with run.it fileid(accnt) " + e, Toast.LENGTH_LONG).show();
                     return;
@@ -329,6 +335,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 }
 
 
+                System.out.println("SC updated for fileid (runit account id) " + newhederaFileid.toString());
 
 
                 runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());

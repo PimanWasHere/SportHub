@@ -166,6 +166,8 @@ public class Activitylogon extends AppCompatActivity {
                 runitprofile.runitprofilescid = decodedfile.usrprofilecontractid;
 
                 System.out.println(".. profile runit account " + runitprofile.runitrunaccountid);
+                System.out.println(".. profile runit fname" + runitprofile.fname);
+
 
                 openActivitydashboard();
             }
