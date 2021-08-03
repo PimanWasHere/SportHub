@@ -123,7 +123,7 @@ public class Activitydashboard extends AppCompatActivity {
         try {
             usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
             usrhbarbalst = usrhbarbal.toString();
-            menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR" );
+            menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
         } catch (TimeoutException e) {
             Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
@@ -133,12 +133,27 @@ public class Activitydashboard extends AppCompatActivity {
 
         }
 
+        //  sett DASHBOARD create buttons - initially.
+
+        // set dashboard as default on entry and default button for dashboard
+
+        dashboardflag = 1;
+
+        actionbutt1.setText("Wallet");
+        actionbutt2.setText("My Events");
+
+        if (!actionbutt1.isClickable()){
+            actionbutt1.setClickable(true);}
+
+        if (!actionbutt2.isClickable()){
+            actionbutt2.setClickable(false);}
+
 
         runitbalrefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), " refresh clicked ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), " Processing more RUN rewards ! ", Toast.LENGTH_LONG).show();
 
                 // 7/20/21  SJ request random RUN reward increase and balance refresh
                 int min = 1, max = 5;
@@ -214,7 +229,7 @@ public class Activitydashboard extends AppCompatActivity {
                 try {
                     usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
                     usrhbarbalst = usrhbarbal.toString();
-                    menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                    menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
                 } catch (TimeoutException e) {
                     Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
@@ -226,18 +241,13 @@ public class Activitydashboard extends AppCompatActivity {
             }
         });
 
-        // set dashboard as default on entry and default button for dashboard
-
-        dashboardflag = 1;
-        actionbutt2.setText("My Events");
-
 
 
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR" );
+                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
 
                 dashboardflag = 1;
@@ -257,7 +267,7 @@ public class Activitydashboard extends AppCompatActivity {
                     actionbutt1.setVisibility(View.VISIBLE);
                     actionbutt1.setText("Wallet");
                 }
-                if (actionbutt1.isClickable())
+                if (!actionbutt1.isClickable())
                 actionbutt1.setClickable(true);
 
 
@@ -286,7 +296,7 @@ public class Activitydashboard extends AppCompatActivity {
         manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                menuselection.setText("Manage Assets  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+                menuselection.setText("MANAGE NFTs " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
                 dashboardflag = 2;
                 // set new image
@@ -336,7 +346,7 @@ public class Activitydashboard extends AppCompatActivity {
             public void onClick(View v) {
 
                 dashboardflag = 3;
-                menuselection.setText("Create.   " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+                menuselection.setText("CREATE   " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
 
                 // set new image
@@ -385,7 +395,7 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("Profile.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR" );
+                menuselection.setText("PROFILE  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
                 dashboardflag = 4;
 
