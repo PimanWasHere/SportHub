@@ -431,8 +431,9 @@ public final class HederaServices implements  Serializable{
             return runitdetails;
         }
 
-        // using contractId but it is a fileID - Re Greg Scullard suggestion
-        runitdetails.accountid = ContractId.fromSolidityAddress(result_7.getAddress(0)).toString();
+        runitdetails.runitrunaccountid = AccountId.fromSolidityAddress(result_7.getAddress(0)).toString();
+
+        System.out.println("got run.it HBAR account id as string" + runitdetails.runitrunaccountid);
 
         // 8 cut
 
@@ -447,7 +448,7 @@ public final class HederaServices implements  Serializable{
             return runitdetails;
         }
 
-        System.out.println("got run it account id (fileid) as string" + result_9.getString(0));
+        System.out.println("got run.it account id (fileid) as string" + result_9.getString(0));
 
 
         runitdetails.runitlogonaccountid = result_9.getString(0);
@@ -459,7 +460,7 @@ public final class HederaServices implements  Serializable{
                 .setContractId(ContractId.fromString(existingcontractid))
                 .execute(USER_ACCOUNT);
 
-        runitdetails.accountid = info.accountId.toString();
+        runitdetails.runitprofilescid= info.accountId.toString();
         runitdetails.adminkey = info.adminKey.toString();
         runitdetails.memo = info.contractMemo;
         runitdetails.autorenew = Long.toString(info.autoRenewPeriod.toDays());

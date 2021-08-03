@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hedera.hashgraph.sdk.AccountId;
 import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
@@ -53,8 +54,12 @@ public class Activitywallet extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Sending your RUN ! - processing..", Toast.LENGTH_LONG).show();
 
+                AccountId destaccountid = AccountId.fromString(destaccnt.getText().toString());
+
+                String destaccnt_sol = destaccountid.toSolidityAddress();
+
                 try {
-                    HederaServices.runtokensfromuser(runtosendin, destaccnt.getText().toString());
+                    HederaServices.runtokensfromuser(runtosendin, destaccnt_sol);
                 } catch (ReceiptStatusException e) {
                     makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
                     return;

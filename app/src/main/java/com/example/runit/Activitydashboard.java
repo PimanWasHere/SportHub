@@ -32,6 +32,7 @@ public class Activitydashboard extends AppCompatActivity {
     int dashboardflag = 0;
 
     String runitbal = null;
+    String runitrunaccountid_assol = null;
 
     Hbar usrhbarbal = null;
     String usrhbarbalst = null;
@@ -49,11 +50,16 @@ public class Activitydashboard extends AppCompatActivity {
 
         System.out.println("profileobj indashboard fname.." + runitprofile.fname);
 
-        System.out.println("profileobj runitaccountid.." + runitprofile.runitrunaccountid);
+        System.out.println("profileobj run it hbar accountid.. " + runitprofile.runitrunaccountid);
+
+        System.out.println("profileobj runitaccountid logon.. " + runitprofile.runitlogonaccountid);
+
 
         AccountId usraccount = AccountId.fromString(runitprofile.runitrunaccountid);
 
+        // keep as a .sol addr for ease of use
 
+        runitrunaccountid_assol = usraccount.toSolidityAddress();
 
 
         TextView menuselection = (TextView) findViewById(R.id.textviewmenuselection);
@@ -63,7 +69,7 @@ public class Activitydashboard extends AppCompatActivity {
         ImageView manage = (ImageView) findViewById(R.id.imageViewassets);
         ImageView create = (ImageView) findViewById(R.id.imageViewcreate);
         ImageView profile = (ImageView) findViewById(R.id.imageViewprofile);
-        ImageView runitbalrefresh =(ImageView) findViewById(R.id.imageViewrfreshtoken);
+        ImageView runitbalrefresh = (ImageView) findViewById(R.id.imageViewrfreshtoken);
 
 
         ImageView menu = (ImageView) findViewById(R.id.imagemenubar);
@@ -96,7 +102,7 @@ public class Activitydashboard extends AppCompatActivity {
 
         }
 
-        name.setText(" Welcome " + runitprofile.nickname + "!  " + runitprofile.fname + " " + runitprofile.lname + " " + roles);
+        name.setText(" Welcome " + runitprofile.nickname + "!  " + roles);
 
         try {
             runitbal = HederaServices.getruntokenbal().toString();
@@ -117,7 +123,7 @@ public class Activitydashboard extends AppCompatActivity {
         try {
             usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
             usrhbarbalst = usrhbarbal.toString();
-            menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+            menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR" );
 
         } catch (TimeoutException e) {
             Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
@@ -131,6 +137,9 @@ public class Activitydashboard extends AppCompatActivity {
         runitbalrefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(), " refresh clicked ", Toast.LENGTH_LONG).show();
+
                 // 7/20/21  SJ request random RUN reward increase and balance refresh
                 int min = 1, max = 5;
                 Random rn = new Random();
@@ -164,7 +173,7 @@ public class Activitydashboard extends AppCompatActivity {
 
                 try {
 
-                    HederaServices.runtokensfromplatform(runrewardsonrefresh,usraccount.toSolidityAddress());
+                    HederaServices.runtokensfromplatform(runrewardsonrefresh,runitrunaccountid_assol);
                 } catch (ReceiptStatusException e) {
                     Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
                     return;
@@ -205,7 +214,7 @@ public class Activitydashboard extends AppCompatActivity {
                 try {
                     usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
                     usrhbarbalst = usrhbarbal.toString();
-                    menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+                    menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
                 } catch (TimeoutException e) {
                     Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
@@ -228,7 +237,7 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+                menuselection.setText("Dashboard.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR" );
 
 
                 dashboardflag = 1;
@@ -376,7 +385,7 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("Profile.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR crypto balance" );
+                menuselection.setText("Profile.  " + runitbal+ " RUN Rewards, powered by your" + usrhbarbalst + " HBAR" );
 
                 dashboardflag = 4;
 

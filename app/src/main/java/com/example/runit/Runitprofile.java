@@ -14,13 +14,13 @@ public class Runitprofile implements Serializable {
     public String phonenum;
     public String nationality;
     public String rolecode;
-    public String runitrunaccountid;  // users HBAR run.it account number
+    public String runitrunaccountid;  // users HBAR run.it account number - held as a solidity address in string
     public BigInteger runtokenbal;
     public String runitlogonaccountid;  // the fileid ie the run.it logon account !
     public String runitprofilescid;
     public String runitipfshash;
 
-    public String accountid; // the contract ID in this context ie the profile
+    // to be removed -  public String accountid; // the contract ID in this context ie the profile
     public String adminkey;
     public String autorenew;
     public String sizeinkbytes;

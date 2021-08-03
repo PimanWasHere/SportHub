@@ -245,6 +245,9 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 BigInteger initialrunbal = new BigInteger("0");
 
+                System.out.println(" new account as .sol " + newAccount.toSolidityAddress());
+
+
                 try {
                     newcontractid = HederaServices.createdeployedprofile(fnamein.getText().toString() , lnamein.getText().toString(), nicknamein.getText().toString() , "0", "Earthling", rolecode, newAccount.toSolidityAddress(), initialrunbal, "0.0.000000", "ipfs profile hash tbd");
                 } catch (TimeoutException e) {
@@ -314,7 +317,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 // TBD
                 try {
-                    Thread.sleep(4000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     Toast.makeText(getApplicationContext(), "thread sleep exception " + e, Toast.LENGTH_LONG).show();
                     return;
