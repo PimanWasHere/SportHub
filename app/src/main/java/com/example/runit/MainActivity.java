@@ -5,10 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.goodiebag.pinview.Pinview;
+import com.hedera.hashgraph.sdk.BadMnemonicException;
+import com.hedera.hashgraph.sdk.ContractId;
+import com.hedera.hashgraph.sdk.PrecheckStatusException;
+import com.hedera.hashgraph.sdk.ReceiptStatusException;
 import com.yakivmospan.scytale.Store;
+
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.concurrent.TimeoutException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Store store = new Store(getApplicationContext());
-
+        Button createviraccntbutt = (Button) findViewById(R.id.createvirginaccnt);
 
         pinview = (Pinview) findViewById(R.id.mypinview);
 
@@ -42,20 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
                 // 99999 to install new
 
-                if (pinview.getValue().equals("99999")) {
-
-                    System.out.println("install - open to set new pin in wallet");
-
-                    openActivityinstallacc();
-
-                } else if (store.hasKey(pinin)) {
+                if (store.hasKey(pinin)) {
 
                     openActivitylogon();
 
                 } else {
 
 
-                    Toast.makeText(getApplicationContext(), pinview.getValue() + " is not in the keystore.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), pinview.getValue() + " is not in the keystore, enter valid PIN, or create a new Account", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -64,15 +76,30 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+
+        createviraccntbutt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openActivityinstallacc();
+            }
+
+        });
+
+
+
     }
+
+
+
 
 
 
     public void openActivitylogon() {
 
         Intent intent = new Intent(this, com.example.runit.Activitylogon.class);
-     // intent.putExtra("pin", pinstring);
-      startActivity(intent);
+       startActivity(intent);
     }
 
     public void openActivityinstallacc () {
