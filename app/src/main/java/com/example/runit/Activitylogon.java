@@ -1,5 +1,6 @@
 package com.example.runit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,9 @@ import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.PrivateKey;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -43,7 +47,6 @@ public class Activitylogon extends AppCompatActivity {
         setContentView(R.layout.activity_logon);
 
         Button confirmlogonbut = (Button) findViewById(R.id.logonaccbutton);
-        EditText accountinput = (EditText) findViewById(R.id.editTextrunitaccountid);
         EditText accountpword = (EditText) findViewById(R.id.EditTextlogonTextPassword);
 
 
@@ -58,11 +61,6 @@ public class Activitylogon extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Logging on - processing..", Toast.LENGTH_LONG).show();
 
 
-                if (accountinput.getText().equals(null) || (accountinput.getText().equals(" ")))
-                {
-                    Toast.makeText(getApplicationContext(), "Run.it logon ID is in format x.x.xxxxxxx", Toast.LENGTH_LONG).show();
-                    return;
-                }
 
                 if (accountpword.getText().equals(null) || (accountpword.getText().equals("")))
                 {
@@ -70,6 +68,22 @@ public class Activitylogon extends AppCompatActivity {
                     return;
                 }
 
+
+                // ok now get Run.it account from save device Cached storage
+
+                Context context = Activitylogon.this;
+
+                File cacheFile = new File(context.getCacheDir(), "runitaccount");
+
+                String accountinput = null;
+
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(cacheFile);
+                    accountinput = fileInputStream.toString();
+                } catch (FileNotFoundException e) {
+                    Toast.makeText(getApplicationContext(), "RUN.it error when reading your Cache file - internal", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
 
                 HederaServices.createoperatorClient();
@@ -80,7 +94,7 @@ public class Activitylogon extends AppCompatActivity {
 
                 try {
 
-                    encrypted = HederaServices.gethederafile(accountinput.getText().toString());
+                    encrypted = HederaServices.gethederafile(accountinput);
 
                 } catch (TimeoutException | PrecheckStatusException hederaStatusException) {
                     Toast.makeText(getApplicationContext(), "Sorry this is not a valid Run.it logon ID", Toast.LENGTH_LONG).show();

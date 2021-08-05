@@ -1,5 +1,6 @@
 package com.example.runit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,11 @@ import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 import com.yakivmospan.scytale.Store;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.InvalidKeyException;
@@ -350,8 +356,44 @@ public class Activitycreateacc extends AppCompatActivity {
                 newpassword.setVisibility(View.GONE);
                 createprofilebut.setVisibility(View.GONE);
 
+                // save pin
+
                 SecretKey key = store.generateSymmetricKey(pinobject.newpin, null);
 
+                // write Run.it Account ID and Hedera Account ID to local file (safe as they are public anyway
+
+                // tbd - check for existance .. if so make visible a account ID prompt and re-save it - as if phone has limited storage, phone may remove this
+
+
+                try {
+
+                    File.createTempFile("runitaccount", null, Activitycreateacc.this.getCacheDir());
+
+                } catch (IOException e) {
+                    Toast.makeText(getApplicationContext(), "Difficulty creating your local secure file for RUN.it account id ",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                byte[] accountoutput = newhederaFileid.toString().getBytes();
+
+                //File file = new File(getCacheDir(), userEmalFileName);
+                //FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+                try {
+                    File runitaccountfile = new File(getCacheDir(), "runitaccount");
+
+                    FileOutputStream runitfileout = new FileOutputStream(runitaccountfile);
+
+                    runitfileout.write(accountoutput);
+
+                } catch (FileNotFoundException e) {
+                    Toast.makeText(getApplicationContext(), "RUN.it error when trying to find newly created account Cache file and then writing to your Cache file - internal " + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (IOException e) {
+                    Toast.makeText(getApplicationContext(), "RUN.it error when trying to write to Cache file - internal " + e, Toast.LENGTH_LONG).show();
+                    return;
+
+                }
 
 
                 Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep your PIN " + pinobject.newpin + " VERY safe, & written down. We gifted you 1000 RUN Tokens to your AccountID because you KYC'd !" + newAccount+ " and " + newhederaFileid + " number written down and safe!",Toast.LENGTH_SHORT).show();

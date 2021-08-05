@@ -51,27 +51,9 @@
 
 
 
-    ]]>
 
-    <EditText
-        android:id="@+id/editTextrunitaccountid"
-        android:layout_width="348dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-smallcaps"
-        android:hint=" Run.it Logon accountID x.x.xxxxxx"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textColor="#0040E0"
-        android:textColorHint="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385" />
+
+    ]]>
 
     <Button
         android:id="@+id/logonaccbutton"
