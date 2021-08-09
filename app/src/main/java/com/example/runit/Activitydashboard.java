@@ -63,25 +63,30 @@ public class Activitydashboard extends AppCompatActivity {
 
 
         TextView menuselection = (TextView) findViewById(R.id.textviewmenuselection);
+        TextView mainmenu1 = (TextView) findViewById(R.id.textViewmainmenu1);
+        TextView mainmenu2 = (TextView) findViewById(R.id.textViewmainmenu2);
+        TextView mainmenu3 = (TextView) findViewById(R.id.textViewmainmenu3);
+
+
         TextView name = (TextView) findViewById(R.id.textViewusername);
 
-        ImageView dashboard = (ImageView) findViewById(R.id.imageViewdashbaord);
-        ImageView manage = (ImageView) findViewById(R.id.imageViewassets);
+        ImageView home = (ImageView) findViewById(R.id.imageViewhome);
+        ImageView manage = (ImageView) findViewById(R.id.imageViewmanage);
+        ImageView assets = (ImageView) findViewById(R.id.imageViewassets);
         ImageView create = (ImageView) findViewById(R.id.imageViewcreate);
-        ImageView profile = (ImageView) findViewById(R.id.imageViewprofile);
+        ImageView account = (ImageView) findViewById(R.id.imageViewaccount);
+
         ImageView runitbalrefresh = (ImageView) findViewById(R.id.imageViewrfreshtoken);
         ImageView runitrandomrewards = (ImageView) findViewById(R.id.imageViewrandomrewards);
-
-
-        ImageView menu = (ImageView) findViewById(R.id.imagemenubar);
 
             // action buttons.. switch on or off and label for each menu option selected.
         Button actionbutt1 = (Button) findViewById(R.id.action1butt);
         Button actionbutt2 = (Button) findViewById(R.id.action2butt);
         Button actionbutt3 = (Button) findViewById(R.id.action3butt);
 
+        mainmenu1.setText("Home");
+        mainmenu2.setText("News");
 
-        menuselection.setText("Dashboard - Events");
 
         // set name and role list
         // rolecode permitted values P/F/S/C/B/R/D   R=sponsor - for duplicate and ease of install.
@@ -107,7 +112,7 @@ public class Activitydashboard extends AppCompatActivity {
 
         refreshbalance();
 
-        menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
+        menuselection.setText(runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
 
         //  sett DASHBOARD create buttons - initially.
 
@@ -115,8 +120,10 @@ public class Activitydashboard extends AppCompatActivity {
 
         dashboardflag = 1;
 
-        actionbutt1.setText("Wallet");
-        actionbutt2.setText("My Events");
+        actionbutt1.setText("NFT 1");
+        actionbutt2.setText("NFT 2");
+        actionbutt2.setText("NFT 3");
+
 
         if (!actionbutt1.isClickable()){
             actionbutt1.setClickable(true);}
@@ -128,8 +135,6 @@ public class Activitydashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                Toast.makeText(getApplicationContext(), " Processing more RUN rewards ! ", Toast.LENGTH_LONG).show();
 
                 // 7/20/21  SJ request random RUN reward increase and balance refresh
                 int min = 1, max = 5;
@@ -188,7 +193,7 @@ public class Activitydashboard extends AppCompatActivity {
 
                 refreshbalance();
 
-                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
+                menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
 
             }
         });
@@ -200,7 +205,7 @@ public class Activitydashboard extends AppCompatActivity {
 
                 refreshbalance();
 
-                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
+                menuselection.setText(runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
 
 
             }
@@ -208,29 +213,30 @@ public class Activitydashboard extends AppCompatActivity {
 
 
 
-        dashboard.setOnClickListener(new View.OnClickListener() {
+        home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                menuselection.setText(runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
+                mainmenu1.setText("Home");
+                mainmenu2.setText("News");
+                mainmenu3.setText("");
 
                 dashboardflag = 1;
 
-                // set new image
-                menu.setImageResource(R.drawable.footer_1);
+                home.setImageResource(R.drawable.logo_1_red_duplicatepng);
 
-                dashboard.setImageResource(R.drawable.icon_red_dashbaord);
+                // set all others to inverse ie to black
 
-                // set all others to inverse ie to white
-
-                manage.setImageResource(R.drawable.icon_white_manage);
-                create.setImageResource(R.drawable.icon_white_create);
-                profile.setImageResource(R.drawable.icon_white_profile);
+                manage.setImageResource(R.drawable.logo_2_black_duplicatepng);
+                create.setImageResource(R.drawable.logo_3_black_duplicatepng);
+                assets.setImageResource(R.drawable.logo_4_black_duplicatepng);
+                account.setImageResource(R.drawable.logo_5_black_duplicatepng);
 
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
-                    actionbutt1.setText("Wallet");
+                    actionbutt1.setText("NFT1");
                 }
                 if (!actionbutt1.isClickable())
                 actionbutt1.setClickable(true);
@@ -238,14 +244,15 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt2.getVisibility() != View.VISIBLE) {
                     actionbutt2.setVisibility(View.VISIBLE);
-                    actionbutt2.setText("Events");
+                    actionbutt2.setText("NFT2");
                 }
+
                 if (actionbutt2.isClickable())
                 actionbutt2.setClickable(false);
 
                 if (actionbutt3.getVisibility() != View.VISIBLE) {
                     actionbutt3.setVisibility(View.VISIBLE);
-                    actionbutt3.setText("Action 3");
+                    actionbutt3.setText("NFT3");
 
                 }
                 if (actionbutt3.isClickable())
@@ -261,41 +268,52 @@ public class Activitydashboard extends AppCompatActivity {
         manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                menuselection.setText("MANAGE NFTs " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+
+                mainmenu1.setText("My Events");
+                mainmenu2.setText("Current Event");
+                mainmenu3.setText("");
 
                 dashboardflag = 2;
-                // set new image
-                menu.setImageResource(R.drawable.footer_2);
 
-                manage.setImageResource(R.drawable.icon_red_manage_1);
+                manage.setImageResource(R.drawable.logo_2_red_duplicatepng);
 
-                // set all others to inverse ie to white
+                // set all others to inverse ie to black
 
-                dashboard.setImageResource(R.drawable.icon_white_dashboard);
-                create.setImageResource(R.drawable.icon_white_create);
-                profile.setImageResource(R.drawable.icon_white_profile);
+                home.setImageResource(R.drawable.logo_1_black_duplicatepng);
+                create.setImageResource(R.drawable.logo_3_black_duplicatepng);
+                assets.setImageResource(R.drawable.logo_4_black_duplicatepng);
+                account.setImageResource(R.drawable.logo_5_black_duplicatepng);
+
 
                 // evaluate role array and display buttons/ image assets accordingly
 
-                if (actionbutt1.getVisibility() == View.VISIBLE){
-                    actionbutt1.setVisibility(View.GONE);
+                if (actionbutt1.getVisibility() != View.VISIBLE){
+                    actionbutt1.setVisibility(View.VISIBLE);
+                    actionbutt1.setText("Event 1");
+
 
                 }
-                if (actionbutt1.isClickable())
-                actionbutt1.setClickable(false);
+
+                if (!actionbutt1.isClickable())
+                actionbutt1.setClickable(true);
 
 
                 if (actionbutt2.getVisibility() != View.VISIBLE) {
                     actionbutt2.setVisibility(View.VISIBLE);
-                    actionbutt2.setText("Manage Assets");
+                    actionbutt2.setText("Event 2");
 
                 }
-                if (!actionbutt2.isClickable())
-                    actionbutt2.setClickable(true);
 
-                if (actionbutt3.getVisibility() == View.VISIBLE) {
-                    actionbutt3.setVisibility(View.GONE);
+                if (actionbutt2.isClickable())
+                    actionbutt2.setClickable(false);
+
+                if (actionbutt3.getVisibility() != View.VISIBLE) {
+                    actionbutt3.setVisibility(View.VISIBLE);
+                    actionbutt3.setText("Event 3");
+
                 }
+
                 if (actionbutt3.isClickable())
                     actionbutt3.setClickable(false);
 
@@ -306,23 +324,25 @@ public class Activitydashboard extends AppCompatActivity {
         });
 
 
+                        // create to be decided.
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 dashboardflag = 3;
-                menuselection.setText("CREATE   " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                mainmenu1.setText("Events");
+                mainmenu2.setText("Team");
+                mainmenu3.setText("Organization");
 
+                create.setImageResource(R.drawable.logo_3_red_duplicatepng);
 
-                // set new image
-                menu.setImageResource(R.drawable.footer_3);
-
-                create.setImageResource(R.drawable.icon_red_create);
-
-                // set all others to inverse ie to white
-                manage.setImageResource(R.drawable.icon_white_manage);
-                dashboard.setImageResource(R.drawable.icon_white_dashboard);
-                profile.setImageResource(R.drawable.icon_white_profile);
+                // set all others to inverse ie to black
+                home.setImageResource(R.drawable.logo_1_black_duplicatepng);
+                manage.setImageResource(R.drawable.logo_2_black_duplicatepng);
+                assets.setImageResource(R.drawable.logo_4_black_duplicatepng);
+                account.setImageResource(R.drawable.logo_5_black_duplicatepng);
 
                 //reset buttons
 
@@ -340,13 +360,11 @@ public class Activitydashboard extends AppCompatActivity {
                 if (actionbutt2.isClickable())
                     actionbutt2.setClickable(false);
 
-                if (actionbutt3.getVisibility() != View.VISIBLE) {
-                    actionbutt3.setVisibility(View.VISIBLE);
-                    actionbutt3.setText("Create NFT");
-
+                if (actionbutt3.getVisibility() == View.VISIBLE) {
+                    actionbutt3.setVisibility(View.GONE);
                 }
                 if (!actionbutt3.isClickable())
-                    actionbutt3.setClickable(true);
+                    actionbutt3.setClickable(false);
 
 
 
@@ -356,52 +374,94 @@ public class Activitydashboard extends AppCompatActivity {
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener() {
+
+        assets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                menuselection.setText("PROFILE  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                mainmenu1.setText("My Apps");
+                mainmenu2.setText("Marketplace");
+                mainmenu3.setText("");
 
                 dashboardflag = 4;
 
-                // set new image
-                menu.setImageResource(R.drawable.footer_4);
+                assets.setImageResource(R.drawable.logo_4_red_duplicatepng);
 
-                profile.setImageResource(R.drawable.icon_red_profile);
+                // set all others to inverse ie to black
+                home.setImageResource(R.drawable.logo_1_black_duplicatepng);
+                manage.setImageResource(R.drawable.logo_2_black_duplicatepng);
+                create.setImageResource(R.drawable.logo_3_black_duplicatepng);
+                account.setImageResource(R.drawable.logo_5_black_duplicatepng);
 
-                // set all others to inverse ie to white
-                manage.setImageResource(R.drawable.icon_white_manage);
-                dashboard.setImageResource(R.drawable.icon_white_dashboard);
-                create.setImageResource(R.drawable.icon_white_create);
+                // .. assets.. TBD.. simon ?
 
                 //reset buttons
 
-                if (actionbutt1.getVisibility() != View.VISIBLE){
-                    actionbutt1.setVisibility(View.VISIBLE);
-                    actionbutt1.setText("Data Preferences");
-                    if (!actionbutt1.isClickable())
-                    actionbutt1.setClickable(true);
+                if (actionbutt1.getVisibility() == View.VISIBLE){
+                    actionbutt1.setVisibility(View.GONE);
 
                 }
-                else {
-                    actionbutt1.setText("Data Preferences");
-                    actionbutt1.setClickable(true);
+                if (actionbutt1.isClickable())
+                    actionbutt1.setClickable(false);
+
+                if (actionbutt2.getVisibility() == View.VISIBLE) {
+                    actionbutt2.setVisibility(View.GONE);
+
+                }
+                if (actionbutt2.isClickable())
+                    actionbutt2.setClickable(false);
+
+                if (actionbutt3.getVisibility() == View.VISIBLE) {
+                    actionbutt3.setVisibility(View.GONE);
+                }
+                if (!actionbutt3.isClickable())
+                    actionbutt3.setClickable(false);
+
+            }
+        });
+
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+
+                mainmenu1.setText("Profile");
+                mainmenu2.setText("Inventory");
+                mainmenu3.setText("Settings");
+
+                dashboardflag = 5;
+
+                account.setImageResource(R.drawable.logo_5_red_duplicatepng);
+
+                // set all others to inverse ie to black
+                home.setImageResource(R.drawable.logo_1_black_duplicatepng);
+                manage.setImageResource(R.drawable.logo_2_black_duplicatepng);
+                create.setImageResource(R.drawable.logo_3_black_duplicatepng);
+                assets.setImageResource(R.drawable.logo_4_black_duplicatepng);
+
+
+
+                //turn off buttons for account page
+
+                if (actionbutt1.getVisibility() == View.VISIBLE){
+                    actionbutt1.setVisibility(View.GONE);
 
                 }
 
                 if (actionbutt2.getVisibility() == View.VISIBLE) {
                     actionbutt2.setVisibility(View.GONE);
-                    if (actionbutt2.isClickable())
-                    actionbutt2.setClickable(false);
+
                 }
 
                 if (actionbutt3.getVisibility() == View.VISIBLE) {
                     actionbutt3.setVisibility(View.GONE);
-                    if (actionbutt3.isClickable())
-                    actionbutt3.setClickable(false);
+
                 }
 
-                // evaluate role array and display buttons/ image assets accordingly
+
 
             }
         });
@@ -409,6 +469,7 @@ public class Activitydashboard extends AppCompatActivity {
 
 
 
+// - below TBD..
 
         actionbutt1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -419,8 +480,8 @@ public class Activitydashboard extends AppCompatActivity {
 
                         // ok wallet clicked
 
-                        Toast.makeText(getApplicationContext(), "Opening your wallet ..", Toast.LENGTH_LONG).show();
-                        openActivitywallet();
+                      //  Toast.makeText(getApplicationContext(), "Opening your wallet ..", Toast.LENGTH_LONG).show();
+                       // openActivitywallet();
                         break;
                     case 2:
                         break;
@@ -428,9 +489,9 @@ public class Activitydashboard extends AppCompatActivity {
                         break;
                     case 4:
 
-                        Toast.makeText(getApplicationContext(), "Fetching your profile data preferences from the Ledger..", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(getApplicationContext(), "Fetching your profile data preferences from the Ledger..", Toast.LENGTH_LONG).show();
 
-                        openActivitydatapreferences();
+                       // openActivitydatapreferences();
                         break;
 
                 }
@@ -438,6 +499,7 @@ public class Activitydashboard extends AppCompatActivity {
 
             }
         });
+
 
         actionbutt2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -461,6 +523,7 @@ public class Activitydashboard extends AppCompatActivity {
 
             }
         });
+
 
 
         actionbutt3.setOnClickListener(new View.OnClickListener() {
