@@ -70,6 +70,7 @@ public class Activitydashboard extends AppCompatActivity {
         ImageView create = (ImageView) findViewById(R.id.imageViewcreate);
         ImageView profile = (ImageView) findViewById(R.id.imageViewprofile);
         ImageView runitbalrefresh = (ImageView) findViewById(R.id.imageViewrfreshtoken);
+        ImageView runitrandomrewards = (ImageView) findViewById(R.id.imageViewrandomrewards);
 
 
         ImageView menu = (ImageView) findViewById(R.id.imagemenubar);
@@ -104,34 +105,9 @@ public class Activitydashboard extends AppCompatActivity {
 
         name.setText(" Welcome " + runitprofile.nickname + "!  " + roles);
 
-        try {
-            runitbal = HederaServices.getruntokenbal().toString();
+        refreshbalance();
 
-        } catch (ReceiptStatusException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " +e, Toast.LENGTH_LONG).show();
-        return;
-        } catch (PrecheckStatusException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
-        return;
-        } catch (TimeoutException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
-        return;
-        }
-
-        // get hbar bal of user account
-
-        try {
-            usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
-            usrhbarbalst = usrhbarbal.toString();
-            menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
-
-        } catch (TimeoutException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
-
-        } catch (PrecheckStatusException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
-
-        }
+        menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
 
         //  sett DASHBOARD create buttons - initially.
 
@@ -148,10 +124,10 @@ public class Activitydashboard extends AppCompatActivity {
         if (!actionbutt2.isClickable()){
             actionbutt2.setClickable(false);}
 
-
-        runitbalrefresh.setOnClickListener(new View.OnClickListener() {
+        runitrandomrewards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 Toast.makeText(getApplicationContext(), " Processing more RUN rewards ! ", Toast.LENGTH_LONG).show();
 
@@ -169,7 +145,7 @@ public class Activitydashboard extends AppCompatActivity {
                 switch(randomNum)
                 {
                     case 1:
-                         runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(2)));
+                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(2)));
                     case 2:
                         runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(4)));
                     case 3:
@@ -203,41 +179,30 @@ public class Activitydashboard extends AppCompatActivity {
                 // pause ui app thread to gain consensus - this will be on new thread in next version of PoC - with a Spinner.
 
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     Toast.makeText(getApplicationContext(), "Thread sleep exception " + e, Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
 
 
-                try {
-                    runitbal = HederaServices.getruntokenbal().toString();
+                refreshbalance();
 
-                } catch (ReceiptStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (PrecheckStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
+                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
-                // get hbar bal of user account
+            }
+        });
 
-                try {
-                    usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
-                    usrhbarbalst = usrhbarbal.toString();
-                    menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+        runitbalrefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                } catch (PrecheckStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+                refreshbalance();
 
-                }
+                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+
+
             }
         });
 
@@ -418,6 +383,11 @@ public class Activitydashboard extends AppCompatActivity {
                     actionbutt1.setClickable(true);
 
                 }
+                else {
+                    actionbutt1.setText("Data Preferences");
+                    actionbutt1.setClickable(true);
+
+                }
 
                 if (actionbutt2.getVisibility() == View.VISIBLE) {
                     actionbutt2.setVisibility(View.GONE);
@@ -458,7 +428,7 @@ public class Activitydashboard extends AppCompatActivity {
                         break;
                     case 4:
 
-                        Toast.makeText(getApplicationContext(), "Fetching your profile from the Ledger..", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Fetching your profile data preferences from the Ledger..", Toast.LENGTH_LONG).show();
 
                         openActivitydatapreferences();
                         break;
@@ -517,6 +487,38 @@ public class Activitydashboard extends AppCompatActivity {
 
 
 
+
+    }
+
+    public void refreshbalance () {
+
+        try {
+            runitbal = HederaServices.getruntokenbal().toString();
+
+        } catch (ReceiptStatusException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
+            return;
+        } catch (PrecheckStatusException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
+            return;
+        } catch (TimeoutException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // get hbar bal of user account
+
+        try {
+            usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
+            usrhbarbalst = usrhbarbal.toString();
+
+        } catch (TimeoutException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+
+        } catch (PrecheckStatusException e) {
+            Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+
+        }
 
     }
 

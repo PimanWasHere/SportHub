@@ -374,7 +374,6 @@ public class Activitycreateacc extends AppCompatActivity {
                     return;
                 }
 
-                byte[] accountoutput = newhederaFileid.toString().getBytes();
 
                 //File file = new File(getCacheDir(), userEmalFileName);
                 //FileOutputStream fileOutputStream = new FileOutputStream(file);
@@ -384,7 +383,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
                     FileOutputStream runitfileout = new FileOutputStream(runitaccountfile);
 
-                    runitfileout.write(accountoutput);
+                    runitfileout.write(newhederaFileid.toString().getBytes());
 
                 } catch (FileNotFoundException e) {
                     Toast.makeText(getApplicationContext(), "RUN.it error when trying to find newly created account Cache file and then writing to your Cache file - internal " + e, Toast.LENGTH_LONG).show();
@@ -394,6 +393,9 @@ public class Activitycreateacc extends AppCompatActivity {
                     return;
 
                 }
+                System.out.println(".. saved to cache file as string " + newhederaFileid.toString());
+
+                System.out.println(".. saved to cache file as bytes " + newhederaFileid.toString().getBytes());
 
 
                 Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep your PIN " + pinobject.newpin + " VERY safe, & written down. We gifted you 1000 RUN Tokens to your AccountID because you KYC'd !" + newAccount+ " and " + newhederaFileid + " number written down and safe!",Toast.LENGTH_SHORT).show();

@@ -10,6 +10,38 @@
     tools:context=".Activitydashboard">
 
 
+    <TextView
+        android:id="@+id/textviewmenuselection2"
+        android:layout_width="91dp"
+        android:layout_height="37dp"
+        android:background="#FFFFFF"
+        android:text="Get Random Rewards !"
+        android:textAlignment="textStart"
+        android:textColor="#ED0847"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.759"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.211" />
+
+    <ImageView
+        android:id="@+id/imageViewrandomrewards"
+        android:layout_width="49dp"
+        android:layout_height="37dp"
+        android:background="#0040E0"
+        android:clickable="true"
+        android:foregroundTint="#EF0A0A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.211"
+        app:srcCompat="@android:drawable/ic_popup_sync" />
+
     <Button
         android:id="@+id/action3butt"
         android:layout_width="165dp"

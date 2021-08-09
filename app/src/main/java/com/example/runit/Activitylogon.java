@@ -21,10 +21,12 @@ import com.hedera.hashgraph.sdk.ReceiptStatusException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
 import java.util.concurrent.TimeoutException;
 
 import javax.crypto.BadPaddingException;
@@ -77,13 +79,24 @@ public class Activitylogon extends AppCompatActivity {
 
                 String accountinput = null;
 
-                try {
-                    FileInputStream fileInputStream = new FileInputStream(cacheFile);
-                    accountinput = fileInputStream.toString();
+                    try (FileInputStream fileInputStream = new FileInputStream(cacheFile)) {
+                        int content;
+
+                        // reads a byte at a time, if it reached end of the file, returns -1
+                        while ((content = fileInputStream.read()) != -1) {
+                            accountinput = accountinput + (char) content;
+                        }
+
                 } catch (FileNotFoundException e) {
-                    Toast.makeText(getApplicationContext(), "RUN.it error when reading your Cache file - internal", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "RUN.it error when reading your Cache file - internal " + e, Toast.LENGTH_LONG).show();
+                    return;
+                } catch (IOException e) {
+                    Toast.makeText(getApplicationContext(), "RUN.it error when reading your Cache file as bytes - internal " + e, Toast.LENGTH_LONG).show();
                     return;
                 }
+
+
+                System.out.println(".. got from cache file " + accountinput);
 
 
                 HederaServices.createoperatorClient();
