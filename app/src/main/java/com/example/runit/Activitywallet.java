@@ -26,6 +26,10 @@ public class Activitywallet extends AppCompatActivity {
 
     Runitprofile runitprofile3;
 
+    BigInteger multiplier108 = new BigInteger("100000000");
+
+    BigInteger multiplier1018 = new BigInteger("1000000000000000000");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,9 @@ public class Activitywallet extends AppCompatActivity {
         runitprofile3 = (Runitprofile) intent.getSerializableExtra("profileobjtowallet");
 
         System.out.println("runit profile3 obj " + runitprofile3.runitprofilescid);
+        System.out.println("runit profile3 run it run accnt " + runitprofile3.runitrunaccountid);
+        System.out.println("runit profile3 run it logon accnt " + runitprofile3.runitlogonaccountid);
+
 
         Button sendrunbutton = (Button) findViewById(R.id.sendrunbuttwallet);
         EditText runtokentosend = (EditText) findViewById(R.id.editTextrunmounttosend);
@@ -47,8 +54,7 @@ public class Activitywallet extends AppCompatActivity {
 
                 // check inputs - to do
 
-
-                BigInteger runtosendin = new BigInteger(runtokentosend.getText().toString());
+                BigInteger runtosendin = new BigInteger(runtokentosend.getText().toString()).multiply(multiplier1018);
 
                 // call HederaServices to send RUN token.. dont send more than your balance - exception handling to add
 
@@ -56,18 +62,23 @@ public class Activitywallet extends AppCompatActivity {
 
                 AccountId destaccountid = AccountId.fromString(destaccnt.getText().toString());
 
+                System.out.println("account to " + destaccountid.toString());
+
                 String destaccnt_sol = destaccountid.toSolidityAddress();
+
+                System.out.println("account to in .sol " + destaccnt_sol);
+
 
                 try {
                     HederaServices.runtokensfromuser(runtosendin, destaccnt_sol);
                 } catch (ReceiptStatusException e) {
-                    makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
                     return;
                 } catch (PrecheckStatusException e) {
-                    makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
                     return;
                 } catch (TimeoutException e) {
-                    makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
                     return;
                 }
 

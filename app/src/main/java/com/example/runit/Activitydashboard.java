@@ -188,7 +188,7 @@ public class Activitydashboard extends AppCompatActivity {
 
                 refreshbalance();
 
-                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
 
             }
         });
@@ -200,7 +200,7 @@ public class Activitydashboard extends AppCompatActivity {
 
                 refreshbalance();
 
-                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+                menuselection.setText("DASHBOARD  " + runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
 
 
             }
