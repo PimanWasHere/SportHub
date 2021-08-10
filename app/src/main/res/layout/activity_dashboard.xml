@@ -7,25 +7,40 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:screenOrientation="portrait"
+
     tools:context=".Activitydashboard">
 
+
+    <TextView
+        android:id="@+id/textViewmainmenu3"
+        android:layout_width="138dp"
+        android:layout_height="34dp"
+        android:background="#0040E0"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.116" />
 
     <TextView
         android:id="@+id/textviewmenumessage1"
         android:layout_width="383dp"
         android:layout_height="27dp"
         android:background="#FFFFFF"
-        android:text="We have 3 NFTs for sale .."
         android:textAlignment="viewStart"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.34" />
+        app:layout_constraintVertical_bias="0.298" />
 
     <ImageView
         android:id="@+id/imageViewaccount"
@@ -53,15 +68,15 @@
 
     <ImageView
         android:id="@+id/imageViewcreate"
-        android:layout_width="54dp"
-        android:layout_height="43dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.97"
-        app:srcCompat="@drawable/_925438_cash_money_personal_personal_wallet_purse_wallet_wallet_icon_111558" />
+        app:srcCompat="@drawable/logo_3_black_duplicatepng" />
 
     <ImageView
         android:id="@+id/imageViewmanage"
@@ -75,12 +90,13 @@
         app:layout_constraintVertical_bias="0.971"
         app:srcCompat="@drawable/logo_2_black_duplicatepng" />
 
+
     <TextView
         android:id="@+id/textViewmainmenu1"
-        android:layout_width="137dp"
-        android:layout_height="39dp"
+        android:layout_width="139dp"
+        android:layout_height="34dp"
         android:background="#0040E0"
-        android:textAlignment="gravity"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -89,71 +105,23 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.116" />
 
     <TextView
         android:id="@+id/textViewmainmenu2"
-        android:layout_width="137dp"
-        android:layout_height="39dp"
+        android:layout_width="135dp"
+        android:layout_height="34dp"
         android:background="#0040E0"
-        android:textAlignment="gravity"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
-
-    <TextView
-        android:id="@+id/textViewmainmenu3"
-        android:layout_width="138dp"
-        android:layout_height="39dp"
-        android:background="#0040E0"
-        android:textAlignment="gravity"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
-
-    <TextView
-        android:id="@+id/textviewmenuselection2"
-        android:layout_width="91dp"
-        android:layout_height="37dp"
-        android:background="#FFFFFF"
-        android:text="Get Random Rewards !"
-        android:textAlignment="textStart"
-        android:textColor="#0040E0"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.746"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255" />
-
-    <ImageView
-        android:id="@+id/imageViewrandomrewards"
-        android:layout_width="49dp"
-        android:layout_height="37dp"
-        android:background="#0040E0"
-        android:clickable="true"
-        android:foregroundTint="#EF0A0A"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255"
-        app:srcCompat="@android:drawable/ic_popup_sync" />
-
+        app:layout_constraintVertical_bias="0.116" />
 
     <Button
         android:id="@+id/action3butt"
@@ -173,7 +141,7 @@
         app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545" />
+        app:layout_constraintVertical_bias="0.53" />
 
     <Button
         android:id="@+id/action2butt"
@@ -193,7 +161,7 @@
         app:layout_constraintHorizontal_bias="0.347"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442" />
+        app:layout_constraintVertical_bias="0.404" />
 
     <Button
         android:id="@+id/action1butt"
@@ -210,19 +178,18 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442" />
-
+        app:layout_constraintVertical_bias="0.405" />
 
     <TextView
         android:id="@+id/textviewmenuselection"
-        android:layout_width="318dp"
-        android:layout_height="43dp"
+        android:layout_width="408dp"
+        android:layout_height="44dp"
         android:background="#FFFFFF"
         android:text="  Welcome,"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="#0040E0"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -231,7 +198,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.194" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <TextView
         android:id="@+id/textViewusername"
@@ -279,21 +246,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo_name" />
-
-    <ImageView
-        android:id="@+id/imageViewrfreshtoken"
-        android:layout_width="49dp"
-        android:layout_height="37dp"
-        android:background="#ED0847"
-        android:clickable="true"
-        android:foregroundTint="#EF0A0A"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184"
-        app:srcCompat="@android:drawable/ic_popup_sync" />
 
     <ImageView
         android:id="@+id/imageView5menu"

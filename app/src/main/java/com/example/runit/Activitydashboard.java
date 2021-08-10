@@ -2,25 +2,34 @@ package com.example.runit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.Window;
+
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 
 import com.hedera.hashgraph.sdk.AccountId;
 import com.hedera.hashgraph.sdk.Hbar;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
-import java.math.BigInteger;
-import java.util.Random;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.concurrent.TimeoutException;
 
-public class Activitydashboard extends AppCompatActivity {
+public class Activitydashboard extends AppCompatActivity implements
+        GestureDetector.OnGestureListener,
+        GestureDetector.OnDoubleTapListener{
+
+    private GestureDetectorCompat mDetector;
+
 
     public Activitydashboard() {
 
@@ -37,11 +46,26 @@ public class Activitydashboard extends AppCompatActivity {
     Hbar usrhbarbal = null;
     String usrhbarbalst = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        mDetector = new GestureDetectorCompat(this,this);
+        mDetector.setOnDoubleTapListener(this);
+     //   Window window = activity.getWindow(); API level 21 ! - try it later
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+       // window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+       // window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+     //   window.setStatusBarColor(ContextCompat.getColor(activity,R.color.colorAccent));
+
+        // View parentView = findViewById(R.id.);
 
         Intent intent = getIntent();
         runitprofile = (Runitprofile) intent.getSerializableExtra("profileobj");
@@ -67,8 +91,11 @@ public class Activitydashboard extends AppCompatActivity {
         TextView mainmenu2 = (TextView) findViewById(R.id.textViewmainmenu2);
         TextView mainmenu3 = (TextView) findViewById(R.id.textViewmainmenu3);
 
+        TextView menumsgline = (TextView) findViewById(R.id.textviewmenumessage1);
+
 
         TextView name = (TextView) findViewById(R.id.textViewusername);
+
 
         ImageView home = (ImageView) findViewById(R.id.imageViewhome);
         ImageView manage = (ImageView) findViewById(R.id.imageViewmanage);
@@ -76,8 +103,6 @@ public class Activitydashboard extends AppCompatActivity {
         ImageView create = (ImageView) findViewById(R.id.imageViewcreate);
         ImageView account = (ImageView) findViewById(R.id.imageViewaccount);
 
-        ImageView runitbalrefresh = (ImageView) findViewById(R.id.imageViewrfreshtoken);
-        ImageView runitrandomrewards = (ImageView) findViewById(R.id.imageViewrandomrewards);
 
             // action buttons.. switch on or off and label for each menu option selected.
         Button actionbutt1 = (Button) findViewById(R.id.action1butt);
@@ -110,9 +135,11 @@ public class Activitydashboard extends AppCompatActivity {
 
         name.setText(" Welcome " + runitprofile.nickname + "!  " + roles);
 
+        menumsgline.setText("We have these 3 NFTs For Sale");
+
         refreshbalance();
 
-        menuselection.setText(runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
+        menuselection.setText(runitbal+ "  RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
         //  sett DASHBOARD create buttons - initially.
 
@@ -131,6 +158,7 @@ public class Activitydashboard extends AppCompatActivity {
         if (!actionbutt2.isClickable()){
             actionbutt2.setClickable(false);}
 
+        /*
         runitrandomrewards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,7 +239,7 @@ public class Activitydashboard extends AppCompatActivity {
             }
         });
 
-
+*/
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,9 +247,13 @@ public class Activitydashboard extends AppCompatActivity {
 
                 menuselection.setText(runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
+                menumsgline.setText("We have these 3 NFTs For Sale");
+
+
                 mainmenu1.setText(" Home");
                 mainmenu2.setText(" News");
                 mainmenu3.setText("");
+
 
                 dashboardflag = 1;
 
@@ -274,6 +306,9 @@ public class Activitydashboard extends AppCompatActivity {
                 mainmenu2.setText(" Current Event");
                 mainmenu3.setText("");
 
+                menumsgline.setText("");
+
+
                 dashboardflag = 2;
 
                 manage.setImageResource(R.drawable.logo_2_red_duplicatepng);
@@ -290,10 +325,8 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
-                    actionbutt1.setText("Event 1");
-
-
                 }
+                actionbutt1.setText("Event 1");
 
                 if (!actionbutt1.isClickable())
                 actionbutt1.setClickable(true);
@@ -301,18 +334,17 @@ public class Activitydashboard extends AppCompatActivity {
 
                 if (actionbutt2.getVisibility() != View.VISIBLE) {
                     actionbutt2.setVisibility(View.VISIBLE);
-                    actionbutt2.setText("Event 2");
-
                 }
+                actionbutt2.setText("Event 2");
+
 
                 if (actionbutt2.isClickable())
                     actionbutt2.setClickable(false);
 
                 if (actionbutt3.getVisibility() != View.VISIBLE) {
                     actionbutt3.setVisibility(View.VISIBLE);
-                    actionbutt3.setText("Event 3");
-
                 }
+                actionbutt3.setText("Event 3");
 
                 if (actionbutt3.isClickable())
                     actionbutt3.setClickable(false);
@@ -335,6 +367,8 @@ public class Activitydashboard extends AppCompatActivity {
                 mainmenu1.setText(" Events");
                 mainmenu2.setText(" Team");
                 mainmenu3.setText(" Organization");
+                menumsgline.setText("");
+
 
                 create.setImageResource(R.drawable.logo_3_red_duplicatepng);
 
@@ -383,6 +417,8 @@ public class Activitydashboard extends AppCompatActivity {
                 mainmenu1.setText(" My Apps");
                 mainmenu2.setText(" Marketplace");
                 mainmenu3.setText("");
+                menumsgline.setText("");
+
 
                 dashboardflag = 4;
 
@@ -431,6 +467,8 @@ public class Activitydashboard extends AppCompatActivity {
                 mainmenu1.setText(" Profile");
                 mainmenu2.setText(" Inventory");
                 mainmenu3.setText(" Settings");
+                menumsgline.setText("");
+
 
                 dashboardflag = 5;
 
@@ -547,11 +585,28 @@ public class Activitydashboard extends AppCompatActivity {
             }
         });
 
+/*
+        parentView.setOnTouchListener(new OnSwipeTouchListener(Activitydashboard.this) {
+            public void onSwipeTop() {
+                Toast.makeText(Activitydashboard.this, "top", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                Toast.makeText(Activitydashboard.this, "right", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                Toast.makeText(Activitydashboard.this, "left", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeBottom() {
+                Toast.makeText(Activitydashboard.this, "bottom", Toast.LENGTH_SHORT).show();
+            }
 
+        });
 
-
+*/
 
     }
+
+
 
     public void refreshbalance () {
 
@@ -573,7 +628,10 @@ public class Activitydashboard extends AppCompatActivity {
 
         try {
             usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
-            usrhbarbalst = usrhbarbal.toString();
+
+            BigDecimal hbarin = usrhbarbal.getValue().setScale(2, RoundingMode.DOWN);
+
+            usrhbarbalst = hbarin.toPlainString();
 
         } catch (TimeoutException e) {
             Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
@@ -607,4 +665,54 @@ public class Activitydashboard extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    @Override
+    public boolean onDown(MotionEvent event) {
+        Toast.makeText(Activitydashboard.this, "on down " + event.toString(), Toast.LENGTH_LONG).show();
+
+        //Log.d(DEBUG_TAG,"onDown: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        Toast.makeText(Activitydashboard.this, "on fling " + e1.toString() + " " + e2.toString(), Toast.LENGTH_LONG).show();
+
+        return false;
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onDoubleTap(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent e) {
+        return false;
+    }
 }
