@@ -245,7 +245,7 @@ public final class HederaServices implements  Serializable{
 
         balance = new AccountBalanceQuery()
                 .setAccountId(accounttoquery)
-                .execute(USER_ACCOUNT)
+                .execute(OPERATING_ACCOUNT)
                 .hbars;
 
         return balance;
