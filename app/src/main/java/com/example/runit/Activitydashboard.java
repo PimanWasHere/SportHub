@@ -84,8 +84,8 @@ public class Activitydashboard extends AppCompatActivity {
         Button actionbutt2 = (Button) findViewById(R.id.action2butt);
         Button actionbutt3 = (Button) findViewById(R.id.action3butt);
 
-        mainmenu1.setText("Home");
-        mainmenu2.setText("News");
+        mainmenu1.setText(" Home");
+        mainmenu2.setText(" News");
 
 
         // set name and role list
@@ -122,7 +122,7 @@ public class Activitydashboard extends AppCompatActivity {
 
         actionbutt1.setText("NFT 1");
         actionbutt2.setText("NFT 2");
-        actionbutt2.setText("NFT 3");
+        actionbutt3.setText("NFT 3");
 
 
         if (!actionbutt1.isClickable()){
@@ -219,8 +219,8 @@ public class Activitydashboard extends AppCompatActivity {
 
                 menuselection.setText(runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
-                mainmenu1.setText("Home");
-                mainmenu2.setText("News");
+                mainmenu1.setText(" Home");
+                mainmenu2.setText(" News");
                 mainmenu3.setText("");
 
                 dashboardflag = 1;
@@ -270,8 +270,8 @@ public class Activitydashboard extends AppCompatActivity {
             public void onClick(View v) {
                 menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
-                mainmenu1.setText("My Events");
-                mainmenu2.setText("Current Event");
+                mainmenu1.setText(" My Events");
+                mainmenu2.setText(" Current Event");
                 mainmenu3.setText("");
 
                 dashboardflag = 2;
@@ -332,9 +332,9 @@ public class Activitydashboard extends AppCompatActivity {
 
                 dashboardflag = 3;
                 menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
-                mainmenu1.setText("Events");
-                mainmenu2.setText("Team");
-                mainmenu3.setText("Organization");
+                mainmenu1.setText(" Events");
+                mainmenu2.setText(" Team");
+                mainmenu3.setText(" Organization");
 
                 create.setImageResource(R.drawable.logo_3_red_duplicatepng);
 
@@ -380,8 +380,8 @@ public class Activitydashboard extends AppCompatActivity {
             public void onClick(View v) {
 
                 menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
-                mainmenu1.setText("My Apps");
-                mainmenu2.setText("Marketplace");
+                mainmenu1.setText(" My Apps");
+                mainmenu2.setText(" Marketplace");
                 mainmenu3.setText("");
 
                 dashboardflag = 4;
@@ -428,9 +428,9 @@ public class Activitydashboard extends AppCompatActivity {
 
                 menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
-                mainmenu1.setText("Profile");
-                mainmenu2.setText("Inventory");
-                mainmenu3.setText("Settings");
+                mainmenu1.setText(" Profile");
+                mainmenu2.setText(" Inventory");
+                mainmenu3.setText(" Settings");
 
                 dashboardflag = 5;
 

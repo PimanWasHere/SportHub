@@ -555,7 +555,7 @@ public final class HederaServices implements  Serializable{
                 .setContractId(runtokensc)
                 .setFunction("balanceOf", new ContractFunctionParameters()
                         .addAddress(USER_ACCOUNT.getOperatorAccountId().toSolidityAddress()))
-                .execute(USER_ACCOUNT);
+                .execute(OPERATING_ACCOUNT);
 
 
         if (contractCallResult01.errorMessage != null) {

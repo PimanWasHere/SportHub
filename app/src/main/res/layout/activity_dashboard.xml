@@ -53,15 +53,15 @@
 
     <ImageView
         android:id="@+id/imageViewcreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.968"
-        app:srcCompat="@drawable/logo_3_black_duplicatepng" />
+        app:layout_constraintVertical_bias="0.97"
+        app:srcCompat="@drawable/_925438_cash_money_personal_personal_wallet_purse_wallet_wallet_icon_111558" />
 
     <ImageView
         android:id="@+id/imageViewmanage"
@@ -108,7 +108,7 @@
 
     <TextView
         android:id="@+id/textViewmainmenu3"
-        android:layout_width="137dp"
+        android:layout_width="138dp"
         android:layout_height="39dp"
         android:background="#0040E0"
         android:textAlignment="gravity"
@@ -224,7 +224,7 @@
         android:text="  Welcome,"
         android:textAlignment="textStart"
         android:textColor="#0040E0"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -235,8 +235,8 @@
 
     <TextView
         android:id="@+id/textViewusername"
-        android:layout_width="151dp"
-        android:layout_height="81dp"
+        android:layout_width="149dp"
+        android:layout_height="78dp"
         android:background="#0040E0"
         android:text="Name.."
         android:textAlignment="center"
@@ -252,8 +252,8 @@
 
     <TextView
         android:id="@+id/textViewleftfiller"
-        android:layout_width="40dp"
-        android:layout_height="81dp"
+        android:layout_width="44dp"
+        android:layout_height="78dp"
         android:background="#0040E0"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -268,8 +268,8 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="198dp"
-        android:layout_height="75dp"
+        android:layout_width="197dp"
+        android:layout_height="78dp"
 
         android:background="#0040E0"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -297,8 +297,8 @@
 
     <ImageView
         android:id="@+id/imageView5menu"
-        android:layout_width="45dp"
-        android:layout_height="76dp"
+        android:layout_width="41dp"
+        android:layout_height="78dp"
         android:background="#0040E0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
