@@ -53,7 +53,17 @@ public class DecodeFileid implements Serializable {
         // check password is valid
 
         String array[] = (filedecoded).split("/");
+
+        System.out.println("RUN hedera file # of parameters in it " + array.length);
+
+        if ( array.length < 4 )  {
+            usraccnt = "0.0.00000";
+            return ;
+        }
+
         String accnt = array[0], pkey = array[1], hashout = array[2], contractid = array[3];
+
+        System.out.println("Hedera File ID contents.. : " + accnt + " " + pkey + " " + hashout + " " + contractid);
 
         usraccnt = accnt;
 

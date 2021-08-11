@@ -7,10 +7,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.Window;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
@@ -46,6 +45,9 @@ public class Activitydashboard extends AppCompatActivity implements
     Hbar usrhbarbal = null;
     String usrhbarbalst = null;
 
+    TextView menuselection;
+    ProgressBar spindash;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +56,7 @@ public class Activitydashboard extends AppCompatActivity implements
 
         mDetector = new GestureDetectorCompat(this,this);
         mDetector.setOnDoubleTapListener(this);
-     //   Window window = activity.getWindow(); API level 21 ! - try it later
 
-// clear FLAG_TRANSLUCENT_STATUS flag:
-       // window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-       // window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-// finally change the color
-     //   window.setStatusBarColor(ContextCompat.getColor(activity,R.color.colorAccent));
-
-        // View parentView = findViewById(R.id.);
 
         Intent intent = getIntent();
         runitprofile = (Runitprofile) intent.getSerializableExtra("profileobj");
@@ -85,15 +76,14 @@ public class Activitydashboard extends AppCompatActivity implements
 
         runitrunaccountid_assol = usraccount.toSolidityAddress();
 
+        spindash = (ProgressBar) findViewById(R.id.progressBardash);
+        menuselection = (TextView) findViewById(R.id.textviewmenuselection);
 
-        TextView menuselection = (TextView) findViewById(R.id.textviewmenuselection);
         TextView mainmenu1 = (TextView) findViewById(R.id.textViewmainmenu1);
         TextView mainmenu2 = (TextView) findViewById(R.id.textViewmainmenu2);
         TextView mainmenu3 = (TextView) findViewById(R.id.textViewmainmenu3);
 
         TextView menumsgline = (TextView) findViewById(R.id.textviewmenumessage1);
-
-
         TextView name = (TextView) findViewById(R.id.textViewusername);
 
 
@@ -102,7 +92,6 @@ public class Activitydashboard extends AppCompatActivity implements
         ImageView assets = (ImageView) findViewById(R.id.imageViewassets);
         ImageView create = (ImageView) findViewById(R.id.imageViewcreate);
         ImageView account = (ImageView) findViewById(R.id.imageViewaccount);
-
 
             // action buttons.. switch on or off and label for each menu option selected.
         Button actionbutt1 = (Button) findViewById(R.id.action1butt);
@@ -135,11 +124,17 @@ public class Activitydashboard extends AppCompatActivity implements
 
         name.setText(" Welcome " + runitprofile.nickname + "!  " + roles);
 
-        menumsgline.setText("We have these 3 NFTs For Sale");
+        spindash.setVisibility(View.VISIBLE);
 
-        refreshbalance();
+        // bump the below to new thread
+
+        Activitydashboard.GetbaldashThread thread = new Activitydashboard.GetbaldashThread();
+        thread.start();
 
         menuselection.setText(runitbal+ "  RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+
+        menumsgline.setText("We have these 3 NFTs For Sale");
+
 
         //  sett DASHBOARD create buttons - initially.
 
@@ -608,40 +603,80 @@ public class Activitydashboard extends AppCompatActivity implements
 
 
 
-    public void refreshbalance () {
+    class GetbaldashThread extends Thread {
+       // String passwordin;
 
-        try {
-            runitbal = HederaServices.getruntokenbal().toString();
-
-        } catch (ReceiptStatusException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance " + e, Toast.LENGTH_LONG).show();
-            return;
-        } catch (PrecheckStatusException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
-            return;
-        } catch (TimeoutException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your Run token Balance" + e, Toast.LENGTH_LONG).show();
-            return;
+        GetbaldashThread() {
+          //  this.passwordin = _passwordin;
         }
 
-        // get hbar bal of user account
+        @Override
+        public void run() {
 
-        try {
-            usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
+            try {
+                runitbal = HederaServices.getruntokenbal().toString();
 
-            BigDecimal hbarin = usrhbarbal.getValue().setScale(2, RoundingMode.DOWN);
+            } catch (ReceiptStatusException e) {
+                showToast("Ledger Error getting your Run token Balance  " + e );
+                return;
+            } catch (PrecheckStatusException e) {
+                showToast("Ledger Error getting your Run token Balance  " + e );
+                return;
+            } catch (TimeoutException e) {
+                showToast("Ledger Error getting your Run token Balance  " + e );
+                return;
+            }
 
-            usrhbarbalst = hbarin.toPlainString();
+            // get hbar bal of user account
 
-        } catch (TimeoutException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+            try {
+                usrhbarbal = HederaServices.getbalance(runitprofile.runitrunaccountid);
 
-        } catch (PrecheckStatusException e) {
-            Toast.makeText(getApplicationContext(), "Ledger Error getting your HBAR Balance " + e, Toast.LENGTH_LONG).show();
+                BigDecimal hbarin = usrhbarbal.getValue().setScale(2, RoundingMode.DOWN);
+
+                usrhbarbalst = hbarin.toPlainString();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        menuselection.setText(runitbal+ "  RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
+
+                        spindash.setVisibility(View.GONE);
+                    }
+                });
+
+
+            } catch (TimeoutException e) {
+                showToast("Ledger Error getting your HBAR Balance " + e );
+                return;
+
+            } catch (PrecheckStatusException e) {
+                showToast("Ledger Error getting your HBAR Balance " + e );
+                return;
+
+            }
 
         }
 
+
+        public void showToast(final String toast)
+        {
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    spindash.setVisibility(View.GONE);
+                }
+            });
+
+            runOnUiThread(() -> Toast.makeText(Activitydashboard.this, toast, Toast.LENGTH_LONG).show());
+
+
+        }
     }
+
+
 
 
     public void openActivitydatapreferences () {

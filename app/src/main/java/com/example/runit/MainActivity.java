@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private Runitprofile runitprofile;
     private DecodeFileid decodedfile;
 
+    ProgressBar spinmain;
+
+
     String accountinput = null;
 
     @Override
@@ -43,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ProgressBar spinmain = (ProgressBar) findViewById(R.id.progressBarmain);
+        spinmain = (ProgressBar) findViewById(R.id.progressBarmain);
+
         Button createviraccntbutt = (Button) findViewById(R.id.createvirginaccnt2button);
         EditText mainactivitylogonpassword = (EditText) findViewById(R.id.editTextlogonTextPasswordmain);
         mainactivitylogonpassword.requestFocus();
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         File cacheFile = new File(context.getCacheDir(), "runitaccount");
 
-        spinmain.setVisibility(View.VISIBLE);
+
 
         try (FileInputStream fileInputStream = new FileInputStream(cacheFile)) {
             int content;
@@ -69,11 +73,11 @@ public class MainActivity extends AppCompatActivity {
             // cache file not there - show create account button
             createviraccntbutt.setVisibility(View.VISIBLE);
             Toast.makeText(getApplicationContext(), "First time in ? .. Please Create or Restore your Account (RUN AccountID needed) ", Toast.LENGTH_LONG).show();
-            spinmain.setVisibility(View.GONE);
+
 
             return;
         } catch (IOException e) {
-            spinmain.setVisibility(View.GONE);
+
 
             Toast.makeText(getApplicationContext(), "RUN cache file there but corrupted - RUN.it error when reading your Cache file as bytes - internal Error" + e, Toast.LENGTH_LONG).show();
             return;
@@ -94,11 +98,14 @@ public class MainActivity extends AppCompatActivity {
 
                 spinmain.setVisibility(View.VISIBLE);
 
+                // need to lock the UI as we bump to bkgrnd
+
                 // bump the below to new thread
 
                 LogonThread thread = new LogonThread(mainactivitylogonpassword.getText().toString());
                 thread.start();
 
+               //  we need to stop the spinner from the backgrnd thread spinmain.setVisibility(View.GONE);
 
 
             }
@@ -140,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 encrypted = HederaServices.gethederafile(accountinput);
 
             } catch (TimeoutException | PrecheckStatusException hederaStatusException) {
-                Toast.makeText(getApplicationContext(), "Sorry this is not a valid Run.it logon ID in your phone stored Cache file! - corrupted", Toast.LENGTH_LONG).show();
+                showToast("Sorry this is not a valid Run.it logon ID in your phone stored Cache file! - corrupted");
                 return;
             }
 
@@ -150,41 +157,45 @@ public class MainActivity extends AppCompatActivity {
             try {
                 decodedfile = new DecodeFileid(encrypted, passwordin);
 
+                if (decodedfile.usraccnt.equals("0.0.00000"))
+                {
+                    showToast("Hedera RUN logon FileID contents less than all 4 parameters");
+                    return;
+                }
+
                 // check to see if account in the hedera file id matches input AND the password matches
 
                 if (!decodedfile.matchedok) {
-                    Toast.makeText(getApplicationContext(), "Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.", Toast.LENGTH_LONG).show();
+                    showToast("Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.");
                     return;
                 }
 
             } catch (UnsupportedEncodingException e) {
-                Toast.makeText(getApplicationContext(), "Incorrect Password, please re-enter", Toast.LENGTH_LONG).show();
-              //  mainactivitylogonpassword.getText().clear();
-                return;
+                showToast("Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.");
+                    return;
             } catch (NoSuchAlgorithmException e) {
-                Toast.makeText(getApplicationContext(), "Incorrect Password, please re-enter", Toast.LENGTH_LONG).show();
-               // mainactivitylogonpassword.getText().clear();
-                return;
+                showToast("Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.");
+                    return;
             } catch (NoSuchPaddingException e) {
-                Toast.makeText(getApplicationContext(), "Incorrect Password, please re-enter", Toast.LENGTH_LONG).show();
-              //  mainactivitylogonpassword.getText().clear();
+                showToast("Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.");
                 return;
+
             } catch (InvalidKeyException e) {
-                Toast.makeText(getApplicationContext(), "Incorrect Password, please re-enter", Toast.LENGTH_LONG).show();
-              //  mainactivitylogonpassword.getText().clear();
+                showToast("Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.");
                 return;
+
             } catch (BadPaddingException e) {
-                Toast.makeText(getApplicationContext(), "Incorrect Password, please re-enter", Toast.LENGTH_LONG).show();
-              //  mainactivitylogonpassword.getText().clear();
+                showToast("Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.");
                 return;
+
             } catch (IllegalBlockSizeException e) {
-                Toast.makeText(getApplicationContext(), "Incorrect Password, please re-enter", Toast.LENGTH_LONG).show();
-               // mainactivitylogonpassword.getText().clear();
+                showToast("Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.");
                 return;
+
             } catch (InvalidKeySpecException e) {
-                Toast.makeText(getApplicationContext(), "Incorrect Password, please re-enter", Toast.LENGTH_LONG).show();
-               // mainactivitylogonpassword.getText().clear();
+                showToast("Your Password on your Hedera File on the Ledger, does NOT match the Password you entered, Please re-enter the correct Password.");
                 return;
+
             }
 
 
@@ -205,13 +216,13 @@ public class MainActivity extends AppCompatActivity {
             try {
                 runitprofile = HederaServices.getacontract(decodedfile.usrprofilecontractid);
             } catch (TimeoutException e) {
-                Toast.makeText(getApplicationContext(), "Failed to get profile ! " + e, Toast.LENGTH_LONG).show();
+                showToast( "Failed to get profile ! ");
                 return;
             } catch (PrecheckStatusException e) {
-                Toast.makeText(getApplicationContext(), "Failed to get profile ! " + e, Toast.LENGTH_LONG).show();
+                showToast( "Failed to get profile ! ");
                 return;
             } catch (ReceiptStatusException e) {
-                Toast.makeText(getApplicationContext(), "Failed to get profile ! " + e, Toast.LENGTH_LONG).show();
+                showToast( "Failed to get profile ! ");
                 return;
             }
 
@@ -225,8 +236,38 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(".. profile runit account " + runitprofile.runitrunaccountid);
             System.out.println(".. profile runit fname" + runitprofile.fname);
 
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    spinmain.setVisibility(View.GONE);
+                }
+            });
+
             openActivitydashboard();
+
+
         }
+
+
+        public void showToast(final String toast)
+        {
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    spinmain.setVisibility(View.GONE);
+                }
+            });
+
+
+
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, toast, Toast.LENGTH_LONG).show());
+
+
+        }
+
     }
 
 
