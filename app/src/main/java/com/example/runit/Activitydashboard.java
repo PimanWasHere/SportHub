@@ -500,7 +500,82 @@ public class Activitydashboard extends AppCompatActivity implements
         });
 
 
+        // top horiz menu events
 
+        mainmenu1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // depending on function
+
+                switch (dashboardflag) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        // For Account - this is profile
+
+                            openActivityupdateprofile();
+                            break;
+
+                }
+
+            }
+        });
+
+
+
+        mainmenu2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // depending on function
+
+                switch (dashboardflag) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        // For Account - this is Inventory
+
+                }
+
+            }
+        });
+
+
+        mainmenu3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // depending on function
+
+                switch (dashboardflag) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        // For Account - this is Settings
+
+                }
+
+            }
+        });
 
 // - below TBD..
 
@@ -526,7 +601,8 @@ public class Activitydashboard extends AppCompatActivity implements
 
                        // openActivitydatapreferences();
                         break;
-
+                    case 5:
+                        break;
                 }
 
 
@@ -548,6 +624,10 @@ public class Activitydashboard extends AppCompatActivity implements
                     case 3:
                         break;
                     case 4:
+                        break;
+
+                        case 5:
+                            break;
 
 
                 }
@@ -572,6 +652,8 @@ public class Activitydashboard extends AppCompatActivity implements
                         Toast.makeText(getApplicationContext(), "Creation of new NFT Asset - TBD", Toast.LENGTH_LONG).show();
                         break;
                     case 4:
+                        break;
+                    case 5:
 
 
                 }
@@ -676,12 +758,17 @@ public class Activitydashboard extends AppCompatActivity implements
         }
     }
 
+    public void openActivityupdateprofile () {
 
+
+        Intent intent = new Intent(this, com.example.runit.Activityupdateprofile.class);
+        intent.putExtra("profileobjtupdateprof", runitprofile);
+
+        startActivity(intent);
+    }
 
 
     public void openActivitydatapreferences () {
-
-       // System.out.println("profile obj fname " + runitprofile.fname + " " + runitprofile.toString());
 
         Intent intent = new Intent(this, com.example.runit.Activitydatapreferenceacc.class);
         intent.putExtra("profileobjtodatapref", runitprofile);

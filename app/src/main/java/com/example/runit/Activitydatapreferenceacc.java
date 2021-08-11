@@ -77,7 +77,7 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
             seekbar2.setMax((max2 - min2));
 
 
-            Button dataprefconfirm = (Button) findViewById(R.id.createaccountbutt);
+            Button dataprefconfirm = (Button) findViewById(R.id.updateaccountbutt);
 
 
             // show existing settings from ledger POJO

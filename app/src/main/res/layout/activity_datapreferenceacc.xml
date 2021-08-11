@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ED0847"
+    android:background="#FFFFF"
     android:screenOrientation="portrait"
     tools:context=".Activityinstalleracc">
 <!--  style="@style/Widget.AppCompat.EditText"-->
@@ -63,7 +63,7 @@
         android:id="@+id/textView5"
         android:layout_width="387dp"
         android:layout_height="48dp"
-        android:background="#ED0847"
+        android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
         android:text="Its Your Data, you own it."
         android:textAlignment="center"
@@ -142,11 +142,11 @@
         android:id="@+id/textView6"
         android:layout_width="409dp"
         android:layout_height="35dp"
-        android:background="#ED0847"
+        android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
         android:text="Express any likes and interests - in your own words.."
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -259,7 +259,7 @@
         app:layout_constraintVertical_bias="0.777" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView3edit"
         android:layout_width="380dp"
         android:layout_height="40dp"
         android:background="#ED0847"
@@ -277,7 +277,7 @@
         app:layout_constraintVertical_bias="0.342" />
 
     <Button
-        android:id="@+id/createaccountbutt"
+        android:id="@+id/updateaccountbutt"
         android:layout_width="141dp"
         android:layout_height="52dp"
         android:background="@drawable/myrndbluebutton"

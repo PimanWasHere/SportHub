@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                openActivityinstallacc();
+               // openActivitycreateacc();
             }
 
         });
@@ -290,9 +290,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void openActivityinstallacc () {
+    public void openActivitycreateacc () {
 
-        Intent intent = new Intent(this, com.example.runit.Activityinstalleracc.class);
+        Intent intent = new Intent(this, com.example.runit.Activitycreateacc.class);
         startActivity(intent);
     }
 

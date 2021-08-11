@@ -1,12 +1,10 @@
 package com.example.runit;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +18,6 @@ import com.hedera.hashgraph.sdk.ReceiptStatusException;
 import com.yakivmospan.scytale.Store;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -63,7 +60,7 @@ public class Activitycreateacc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createacc);
 
-        Button createprofilebut = (Button) findViewById(R.id.createaccountbutt);
+        Button createprofilebut = (Button) findViewById(R.id.updateaccountbutt);
 
         Store store = new Store(getApplicationContext());
 
@@ -73,13 +70,13 @@ public class Activitycreateacc extends AppCompatActivity {
 
         System.out.println("got pin " + pinobject.newpin);
 
-        EditText nicknamein = (EditText) findViewById(R.id.editTextnickname);
-        EditText fnamein = (EditText) findViewById(R.id.editTextfname);
-        EditText lnamein = (EditText) findViewById(R.id.editTextlname);
+        EditText nicknamein = (EditText) findViewById(R.id.editTextnicknameedit);
+        EditText fnamein = (EditText) findViewById(R.id.editTextfnameedit);
+        EditText lnamein = (EditText) findViewById(R.id.editTextlnameedit);
 
       //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
-        Switch participant = (Switch) findViewById(R.id.switch10);
+        Switch participant = (Switch) findViewById(R.id.switch10edit);
         Switch fan = (Switch) findViewById(R.id.switch11);
         Switch spectator = (Switch) findViewById(R.id.switch12);
         Switch club = (Switch) findViewById(R.id.switch13);
@@ -97,32 +94,25 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
 
-        // validation
-
-
-
-        if (nicknamein.getText().equals(null)) {
-            Toast.makeText(getApplicationContext(), "Nickname cannot be blank", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (fnamein.getText().equals(null)) {
-            Toast.makeText(getApplicationContext(), "First name cannot be blank", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (lnamein.getText().equals(null)) {
-            Toast.makeText(getApplicationContext(), "Last name cannot be blank", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-
-
-
         createprofilebut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+
+                if (nicknamein.getText().equals(null)) {
+                    Toast.makeText(getApplicationContext(), "Nickname cannot be blank", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (fnamein.getText().equals(null)) {
+                    Toast.makeText(getApplicationContext(), "First name cannot be blank", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (lnamein.getText().equals(null)) {
+                    Toast.makeText(getApplicationContext(), "Last name cannot be blank", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
 
                 rolecode = "";
