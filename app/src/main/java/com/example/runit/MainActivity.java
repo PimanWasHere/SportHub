@@ -121,14 +121,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         createviraccntbutt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-               // openActivitycreateacc();
+               openActivitycreateacc();
             }
 
         });
+
+
 
         restoreaccntbutt.setOnClickListener(new View.OnClickListener() {
             @Override

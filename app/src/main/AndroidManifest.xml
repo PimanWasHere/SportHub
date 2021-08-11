@@ -39,7 +39,7 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Activitylogon"
+            android:name=".Activityupdateprofile"
             android:theme="@style/AppTheme" />
 
         <activity

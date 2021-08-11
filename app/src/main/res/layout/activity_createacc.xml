@@ -7,11 +7,46 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:screenOrientation="portrait"
-    tools:context=".Activityinstalleracc">
+    tools:context=".Activitycreateacc">
     <!--  style="@style/Widget.AppCompat.EditText"-->
 
+    <Button
+        android:id="@+id/createaccountbutt"
+        android:layout_width="150dp"
+        android:layout_height="44dp"
+        android:background="@drawable/myrndredkbutton"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="CREATE"
+        android:textAlignment="center"
+
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768" />
+
+    <ProgressBar
+        android:id="@+id/progressBarcreate"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.819" />
+
+
     <EditText
-        android:id="@+id/editTextlnameedit"
+        android:id="@+id/editTextlnamecreate"
         android:layout_width="183dp"
         android:layout_height="39dp"
         android:ems="10"
@@ -31,7 +66,7 @@
         app:layout_constraintVertical_bias="0.128" />
 
     <EditText
-        android:id="@+id/editTextfnameedit"
+        android:id="@+id/editTextfnamecreate"
         android:layout_width="169dp"
         android:layout_height="39dp"
         android:ems="10"
@@ -51,7 +86,7 @@
         app:layout_constraintVertical_bias="0.128" />
 
     <EditText
-        android:id="@+id/editTextnicknameedit"
+        android:id="@+id/editTextnicknamecreate"
         android:layout_width="140dp"
         android:layout_height="44dp"
         android:ems="10"
@@ -86,10 +121,10 @@
         app:layout_constraintHorizontal_bias="0.291"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintVertical_bias="0.645" />
 
     <Switch
-        android:id="@+id/switch10edit"
+        android:id="@+id/switch10"
         android:layout_width="121dp"
         android:layout_height="38dp"
         android:scaleX="1.5"
@@ -205,10 +240,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.917" />
 
     <TextView
         android:id="@+id/textViewnewaccountnum"
@@ -222,13 +257,13 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907" />
+        app:layout_constraintVertical_bias="0.847" />
 
     <TextView
-        android:id="@+id/textView3edit"
+        android:id="@+id/textView3create"
         android:layout_width="107dp"
         android:layout_height="32dp"
         android:background="#FFFFFF"
@@ -246,12 +281,12 @@
         app:layout_constraintVertical_bias="0.208" />
 
     <Button
-        android:id="@+id/updateaccountbutt"
+        android:id="@+id/dashboardbutt"
         android:layout_width="150dp"
         android:layout_height="44dp"
         android:background="@drawable/myrndredkbutton"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="CREATE"
+        android:text="Go RUN.it !"
         android:textAlignment="center"
 
         android:textAllCaps="false"
@@ -259,12 +294,13 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="monospace"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.991" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -279,10 +315,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.747" />
+        app:layout_constraintVertical_bias="0.695" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

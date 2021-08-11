@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hedera.hashgraph.sdk.AccountId;
 import com.hedera.hashgraph.sdk.BadMnemonicException;
 import com.hedera.hashgraph.sdk.ContractId;
@@ -31,7 +33,6 @@ import java.util.concurrent.TimeoutException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
 
 
 public class Activitycreateacc extends AppCompatActivity {
@@ -43,11 +44,22 @@ public class Activitycreateacc extends AppCompatActivity {
 
     BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 
-    String rolecode;
+    String passwordglobal, rolecodeglobal, nicknameglobal, fnameglobal, lnameglobal;
 
     private GennedAccount newDetails;
     private AccountId newAccount;
     private FileId newhederaFileid;
+    private Runitprofile runitprofilecreated;
+
+
+    ProgressBar spincreate;
+    Button dashboardbut;
+    Button createprofilebut;
+
+    TextView runitlogonidnum;
+    TextView runitaccountnum;
+
+    EditText newpassword;
 
 
     public Activitycreateacc()  {
@@ -60,23 +72,23 @@ public class Activitycreateacc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createacc);
 
-        Button createprofilebut = (Button) findViewById(R.id.updateaccountbutt);
+
+        spincreate = (ProgressBar) findViewById(R.id.progressBarcreate);
+        dashboardbut = (Button) findViewById(R.id.dashboardbutt);
+
+
+        createprofilebut = (Button) findViewById(R.id.createaccountbutt);
 
         Store store = new Store(getApplicationContext());
 
 
-        Intent i = getIntent();
-        Pinobj pinobject = (Pinobj) i.getSerializableExtra("newpin");
-
-        System.out.println("got pin " + pinobject.newpin);
-
-        EditText nicknamein = (EditText) findViewById(R.id.editTextnicknameedit);
-        EditText fnamein = (EditText) findViewById(R.id.editTextfnameedit);
-        EditText lnamein = (EditText) findViewById(R.id.editTextlnameedit);
+        EditText nicknamein = (EditText) findViewById(R.id.editTextnicknamecreate);
+        EditText fnamein = (EditText) findViewById(R.id.editTextfnamecreate);
+        EditText lnamein = (EditText) findViewById(R.id.editTextlnamecreate);
 
       //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
-        Switch participant = (Switch) findViewById(R.id.switch10edit);
+        Switch participant = (Switch) findViewById(R.id.switch10);
         Switch fan = (Switch) findViewById(R.id.switch11);
         Switch spectator = (Switch) findViewById(R.id.switch12);
         Switch club = (Switch) findViewById(R.id.switch13);
@@ -84,10 +96,10 @@ public class Activitycreateacc extends AppCompatActivity {
         Switch sponsor = (Switch) findViewById(R.id.switch15);
         Switch developer = (Switch) findViewById(R.id.switch16);
 
-        EditText newpassword =(EditText) findViewById(R.id.editTextTextPassword);
+        newpassword =(EditText) findViewById(R.id.editTextTextPassword);
 
-        TextView runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountnum);
-        TextView runitlogonidnum = (TextView) findViewById(R.id.textViewnewlogonID);
+        runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountnum);
+        runitlogonidnum = (TextView) findViewById(R.id.textViewnewlogonID);
 
         runitaccountnum.setVisibility(View.GONE);
         runitlogonidnum.setVisibility((View.GONE));
@@ -114,11 +126,13 @@ public class Activitycreateacc extends AppCompatActivity {
                     return;
                 }
 
+                nicknameglobal = nicknamein.getText().toString();
+                fnameglobal = fnamein.getText().toString();
+                lnameglobal = lnamein.getText().toString();
 
-                rolecode = "";
 
-                Toast.makeText(getApplicationContext(), "Thankyou for your patience.. creating account now ..", Toast.LENGTH_LONG).show();
 
+                rolecodeglobal = "";
 
                 // System.out.println("particpant " +  participant.isChecked());
 
@@ -134,35 +148,37 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 if (participant.isChecked()) {
 
-                    rolecode = rolecode + "P/";
+                    rolecodeglobal = rolecodeglobal + "P/";
                 }
 
                 if (fan.isChecked()) {
 
-                    rolecode = rolecode + "F/";
+                    rolecodeglobal = rolecodeglobal + "F/";
                 }
                 if (spectator.isChecked()) {
 
-                    rolecode = rolecode + "S/";
+                    rolecodeglobal = rolecodeglobal + "S/";
                 }
                 if (club.isChecked()) {
 
-                    rolecode = rolecode + "C/";
+                    rolecodeglobal = rolecodeglobal + "C/";
                 }
                 if (brand.isChecked()) {
 
-                    rolecode = rolecode + "B/";
+                    rolecodeglobal = rolecodeglobal + "B/";
                 }
                 if (sponsor.isChecked()) {
 
-                    rolecode = rolecode + "R/";
+                    rolecodeglobal = rolecodeglobal + "R/";
                 }
 
                 if (developer.isChecked()) {
 
-                    rolecode = rolecode + "D/";
+                    rolecodeglobal = rolecodeglobal + "D/";
 
                 }
+
+
 
                 if (newpassword.getText().equals(null) || (newpassword.getText().length() == 0)) {
                     Toast.makeText(getApplicationContext(), "Password cannot be empty", Toast.LENGTH_LONG).show();
@@ -170,40 +186,81 @@ public class Activitycreateacc extends AppCompatActivity {
                 }
 
 
-                // completed role code appended string - now to start Spinner and create Hedera based Run.it new account and secure with password
-                // THEN deploy profile Smart Contract with role definitions
+                passwordglobal = newpassword.getText().toString();
+
+                spincreate.setVisibility(View.VISIBLE);
+
+                // need to lock the UI as we bump to bkgrnd
+
+                // bump the below to new thread
+
+                Activitycreateacc.CreateaccThread thread = new Activitycreateacc.CreateaccThread();
+                thread.start();
+
+                //  we  stop the spinner from the backgrnd thread spincreate.setVisibility(View.GONE);
 
 
-                // call hedera new account and keypair
-
-                HederaServices.createoperatorClient();
-
-                System.out.println("creating new hedera account.");
-
-                try {
-                    newDetails = HederaServices.createnewkeypair();
-                } catch (BadMnemonicException e) {
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                System.out.println("new genned accnt ." + newDetails.newPublicKey);
+            }
 
 
-                try {
-                    newAccount = HederaServices.createnewaccount();
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (PrecheckStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (ReceiptStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera " + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
 
-                // HH account created - now to create a Run.it account as hedera
+        });
+
+
+        dashboardbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // open dashboard with new account object tbd.
+                openActivitydashboard();
+
+            }
+        });
+
+
+
+    }
+
+
+    class CreateaccThread extends Thread {
+
+        CreateaccThread() {
+        }
+
+        @Override
+        public void run() {
+
+
+            // call hedera new account and keypair
+
+            HederaServices.createoperatorClient();
+
+            System.out.println("creating new hedera account.");
+
+            try {
+                newDetails = HederaServices.createnewkeypair();
+            } catch (BadMnemonicException e) {
+                showToast("Exception hitting Hedera " + e);
+                return;
+            }
+
+            System.out.println("new genned accnt ." + newDetails.newPublicKey);
+
+
+            try {
+                newAccount = HederaServices.createnewaccount();
+            } catch (TimeoutException e) {
+                showToast("Exception hitting Hedera " + e);
+                return;
+            } catch (PrecheckStatusException e) {
+                showToast("Exception hitting Hedera " + e);
+                return;
+            } catch (ReceiptStatusException e) {
+                showToast("Exception hitting Hedera " + e);
+                return;
+            }
+
+            // HH account created - now to create a Run.it account as hedera
 
                 /*  not needed as we create the new account with 5 hbar
                 try {
@@ -229,180 +286,222 @@ public class Activitycreateacc extends AppCompatActivity {
                 }
                 */
 
-                // grab the Users Client of new account - new instance and use their keypair to create their own profile SC
-                // ie the DATA owner will be the OWNER !
+            // grab the Users Client of new account - new instance and use their keypair to create their own profile SC
+            // ie the DATA owner will be the OWNER !
 
-                HederaServices.createuserClient(newAccount,newDetails.newPrivKey);
+            HederaServices.createuserClient(newAccount,newDetails.newPrivKey);
 
-                // now deploy the Souls profile SC under their own Client instance.
-
-
-                ContractId newcontractid = null;
-
-                BigInteger initialrunbal = new BigInteger("0");
-
-                System.out.println(" new account as .sol " + newAccount.toSolidityAddress());
+            // now deploy the Souls profile SC under their own Client instance.
 
 
-                try {
-                    newcontractid = HederaServices.createdeployedprofile(fnamein.getText().toString() , lnamein.getText().toString(), nicknamein.getText().toString() , "0", "Earthling", rolecode, newAccount.toSolidityAddress(), initialrunbal, "0.0.000000", "ipfs profile hash tbd");
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
-                    System.out.println(" profile create exception "+ e );
-                    return;
-                } catch (PrecheckStatusException e) {
-                    System.out.println(" profile create exception "+ e );
-                    Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
-                     return;
-                } catch (ReceiptStatusException e) {
-                    System.out.println(" profile create exception "+ e );
-                    Toast.makeText(getApplicationContext(), "Profile Contract not created " + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
+            ContractId newcontractid = null;
 
-                if (newcontractid == null || newcontractid.toString().isEmpty()) {
-                    System.out.println(" profile create exception ");
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - Profile Contract not created ", Toast.LENGTH_LONG).show();
-                    return;
-                }
+            BigInteger initialrunbal = new BigInteger("0");
 
-                System.out.println("users profile SC id " + newcontractid);
+            System.out.println(" new account as .sol " + newAccount.toSolidityAddress());
 
 
-                // now create users run.it account which is the hedera fileid which holds their account, encrypted key , password hash, and profile smart contractid
+            try {
+                newcontractid = HederaServices.createdeployedprofile(fnameglobal, lnameglobal, nicknameglobal, "0", "Earthling", rolecodeglobal, newAccount.toSolidityAddress(), initialrunbal, "0.0.000000", "ipfs profile hash tbd");
+            } catch (TimeoutException e) {
+                showToast("Exception hitting Hedera " + e);
+                System.out.println(" profile create exception "+ e );
+                return;
+            } catch (PrecheckStatusException e) {
+                System.out.println(" profile create exception "+ e );
+                showToast("Exception hitting Hedera " + e);
+                return;
+            } catch (ReceiptStatusException e) {
+                System.out.println(" profile create exception "+ e );
+                showToast("Exception hitting Hedera " + e);
+                return;
+            }
 
-                try {
-                    newhederaFileid = HederaServices.createuserstore(newAccount, newpassword.getText().toString(), newcontractid);
+            if (newcontractid == null || newcontractid.toString().isEmpty()) {
+                System.out.println(" profile create exception ");
+                showToast("Exception hitting Hedera - Profile Contract not created ");
+                return;
+            }
 
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
+            System.out.println("users profile SC id " + newcontractid);
 
-                    return;
-                } catch (PrecheckStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera -file create " + e, Toast.LENGTH_LONG).show();
+            // create profile object for passing to dashboard
 
-                    return;
-                } catch (ReceiptStatusException | NoSuchAlgorithmException | InvalidKeySpecException | UnsupportedEncodingException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
-                    Toast.makeText(getApplicationContext(), "Exception hitting Hedera - file create " + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
+            runitprofilecreated = new Runitprofile();
 
-                System.out.println("file id ie the run.it account is.." + newhederaFileid);
+            runitprofilecreated.nickname = nicknameglobal;
+            runitprofilecreated.fname = fnameglobal;
+            runitprofilecreated.lname = lnameglobal;
+            runitprofilecreated.rolecode = rolecodeglobal;
+            runitprofilecreated.runitrunaccountid = newAccount.toString();
 
-
-                //  Credit 1000 RUN tokens to new Account IF/Assuming TBD the User's KYC status is True
-
-                BigInteger rungift = new BigInteger("1000000000000000000000");
-
-
-                try {
-                    HederaServices.runtokensfromplatform(rungift,newAccount.toSolidityAddress());
-                } catch (ReceiptStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (PrecheckStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
+            runitprofilecreated.runitprofilescid = newcontractid.toString();
 
 
-                // now we have to update the profile contract with the Users hedera fileid  (run.it account number), account, password hash, profile contract id
+            // now create users run.it account which is the hedera fileid which holds their account, encrypted key , password hash, and profile smart contractid
 
-                // TBD
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    Toast.makeText(getApplicationContext(), "thread sleep exception " + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
+            try {
+                newhederaFileid = HederaServices.createuserstore(newAccount, newpassword.getText().toString(), newcontractid);
 
+            } catch (TimeoutException e) {
+                showToast("Exception hitting Hedera File Create " + e);
+                return;
+            } catch (PrecheckStatusException e) {
+                showToast("Exception hitting Hedera File Create " + e);
+                return;
+            } catch (ReceiptStatusException | NoSuchAlgorithmException | InvalidKeySpecException | UnsupportedEncodingException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+                showToast("Exception hitting Hedera File Create " + e);
+                return;
+            }
 
-                try {
-                    HederaServices.updaterunitaccountid_fileid_inprofile(newcontractid, newhederaFileid.toString());
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Exception updating profile with run.it fileid(accnt) " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (PrecheckStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Exception updating profile with run.it fileid(accnt) " + e, Toast.LENGTH_LONG).show();
-                     return;
-                } catch (ReceiptStatusException e)  {
-                    Toast.makeText(getApplicationContext(), "Exception updating profile with run.it fileid(accnt) " + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
+            System.out.println("file id ie the run.it account is.." + newhederaFileid);
 
+            runitprofilecreated.runitlogonaccountid = newhederaFileid.toString();
 
-                System.out.println("SC updated for fileid (runit account id) " + newhederaFileid.toString());
+            //  Credit 1000 RUN tokens to new Account IF/Assuming TBD the User's KYC status is True
+
+            BigInteger rungift = new BigInteger("1000000000000000000000");
 
 
-                runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());
-                runitaccountnum.setVisibility(View.VISIBLE);
-
-                runitlogonidnum.setText("Run.it logon AccountID " + newhederaFileid.toString());
-                runitlogonidnum.setVisibility(View.VISIBLE);
-
-                newpassword.setVisibility(View.GONE);
-                createprofilebut.setVisibility(View.GONE);
-
-                // save pin
-
-                SecretKey key = store.generateSymmetricKey(pinobject.newpin, null);
-
-                // write Run.it Account ID and Hedera Account ID to local file (safe as they are public anyway
-
-                // tbd - check for existance .. if so make visible a account ID prompt and re-save it - as if phone has limited storage, phone may remove this
-
-
-                try {
-
-                    File.createTempFile("runitaccount", null, Activitycreateacc.this.getCacheDir());
-
-                } catch (IOException e) {
-                    Toast.makeText(getApplicationContext(), "Difficulty creating your local secure file for RUN.it account id ",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-
-                //File file = new File(getCacheDir(), userEmalFileName);
-                //FileOutputStream fileOutputStream = new FileOutputStream(file);
-
-                try {
-                    File runitaccountfile = new File(getCacheDir(), "runitaccount");
-
-                    FileOutputStream runitfileout = new FileOutputStream(runitaccountfile);
-
-                    runitfileout.write(newhederaFileid.toString().getBytes());
-
-                } catch (FileNotFoundException e) {
-                    Toast.makeText(getApplicationContext(), "RUN.it error when trying to find newly created account Cache file and then writing to your Cache file - internal " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (IOException e) {
-                    Toast.makeText(getApplicationContext(), "RUN.it error when trying to write to Cache file - internal " + e, Toast.LENGTH_LONG).show();
-                    return;
-
-                }
-                System.out.println(".. saved to cache file as string " + newhederaFileid.toString());
-
-                System.out.println(".. saved to cache file as bytes " + newhederaFileid.toString().getBytes());
-
-
-                Toast.makeText(getApplicationContext(), "Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created!, please keep your PIN " + pinobject.newpin + " VERY safe, & written down. We gifted you 1000 RUN Tokens to your AccountID because you KYC'd !" + newAccount+ " and " + newhederaFileid + " number written down and safe!",Toast.LENGTH_SHORT).show();
-
-                Toast.makeText(getApplicationContext(), "Press your back button to continue .. ",Toast.LENGTH_LONG).show();
-
-
+            try {
+                HederaServices.runtokensfromplatform(rungift,newAccount.toSolidityAddress());
+            } catch (ReceiptStatusException e) {
+                showToast("Exception gifting RUN tokens " + e);
+                return;
+            } catch (PrecheckStatusException e) {
+                showToast("Exception gifting RUN tokens " + e);
+                return;
+            } catch (TimeoutException e) {
+                showToast("Exception gifting RUN tokens " + e);
+                return;
             }
 
 
+            // now we have to update the profile contract with the Users hedera fileid  (run.it account number), account, password hash, profile contract id
 
-        });
+            // TBD
+            try {
+                Thread.sleep(2000);
+                showToast(".. Quick couple of seconds for Hedera to reach consensus.. ");
+
+            } catch (InterruptedException e) {
+                showToast(".. thread sleep exception " + e);
+                return;
+            }
 
 
+            try {
+                HederaServices.updaterunitaccountid_fileid_inprofile(newcontractid, newhederaFileid.toString());
+            } catch (TimeoutException e) {
+                showToast("Exception updating profile with run.it fileid(accnt) " + e);
+                return;
+            } catch (PrecheckStatusException e) {
+                showToast("Exception updating profile with run.it fileid(accnt) " + e);
+                return;
+            } catch (ReceiptStatusException e)  {
+                showToast("Exception updating profile with run.it fileid(accnt) " + e);
+                return;
+            }
+
+
+            System.out.println("SC updated for fileid (runit account id) " + newhederaFileid.toString());
+
+
+            // write Run.it Account ID and Hedera Account ID to local file (safe as they are public anyway
+
+            // tbd - check for existance .. if so make visible a account ID prompt and re-save it - as if phone has limited storage, phone may remove this
+
+
+            try {
+
+                File.createTempFile("runitaccount", null, Activitycreateacc.this.getCacheDir());
+
+            } catch (IOException e) {
+                showToast("Difficulty creating your local secure file for RUN.it account id " + e);
+                return;
+            }
+
+
+            //File file = new File(getCacheDir(), userEmalFileName);
+            //FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+            try {
+                File runitaccountfile = new File(getCacheDir(), "runitaccount");
+
+                FileOutputStream runitfileout = new FileOutputStream(runitaccountfile);
+
+                runitfileout.write(newhederaFileid.toString().getBytes());
+
+            } catch (FileNotFoundException e) {
+                showToast("RUN.it error when trying to find newly created account Cache file and then writing to your Cache file - internal " + e);
+                return;
+            } catch (IOException e) {
+                showToast("RUN.it error when trying to write to Cache file - internal " + e);
+                return;
+
+            }
+            System.out.println(".. saved to cache file as string " + newhederaFileid.toString());
+
+            System.out.println(".. saved to cache file as bytes " + newhederaFileid.toString().getBytes());
+
+            showToast("Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created and stored on your Phone in its safe cache,  We gifted you 1000 RUN Tokens to your AccountID because you KYC'd ! " + newAccount+ " and " + newhederaFileid + " number written down and safe! ");
+
+
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());
+                    runitaccountnum.setVisibility(View.VISIBLE);
+
+                    runitlogonidnum.setText("Run.it logon AccountID " + newhederaFileid.toString());
+                    runitlogonidnum.setVisibility(View.VISIBLE);
+
+                    newpassword.setVisibility(View.GONE);
+                    createprofilebut.setVisibility(View.GONE);
+
+                    spincreate.setVisibility(View.GONE);
+                    dashboardbut.setVisibility(View.VISIBLE);
+
+                }
+            });
+
+
+
+        }
+
+
+        public void showToast(final String toast)
+        {
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    spincreate.setVisibility(View.GONE);
+                }
+            });
+
+
+
+            runOnUiThread(() -> Toast.makeText(Activitycreateacc.this, toast, Toast.LENGTH_LONG).show());
+
+
+        }
 
     }
 
+    public void openActivitydashboard () {
+
+        System.out.println("profile obj fname " + runitprofilecreated.fname + " " + runitprofilecreated.toString());
+
+        Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
+        intent.putExtra("profileobj", runitprofilecreated);
+
+        startActivity(intent);
+    }
 
 
 }
