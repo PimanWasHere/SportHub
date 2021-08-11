@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
@@ -49,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
         spinmain = (ProgressBar) findViewById(R.id.progressBarmain);
 
         Button createviraccntbutt = (Button) findViewById(R.id.createvirginaccnt2button);
+        Button restoreaccntbutt = (Button) findViewById(R.id.restoreaccountbutton);
+        TextView restoreor = (TextView) findViewById(R.id.textViewrestoreor);
+
         EditText mainactivitylogonpassword = (EditText) findViewById(R.id.editTextlogonTextPasswordmain);
+        EditText mainactivitylogonaccountid = (EditText) findViewById(R.id.editTextlogonRUNaccount);
+
         mainactivitylogonpassword.requestFocus();
 
         Button gorunrunit = (Button) findViewById((R.id.gorunbutton));
@@ -72,7 +78,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             // cache file not there - show create account button
             createviraccntbutt.setVisibility(View.VISIBLE);
-            Toast.makeText(getApplicationContext(), "First time in ? .. Please Create or Restore your Account (RUN AccountID needed) ", Toast.LENGTH_LONG).show();
+            restoreaccntbutt.setVisibility(View.VISIBLE);
+            restoreor.setVisibility(View.VISIBLE);
+            mainactivitylogonaccountid.setVisibility(View.VISIBLE);
+
+            Toast.makeText(getApplicationContext(), "First time in ? .. Please Create or Restore your Account (RUN AccountID AND Password needed) ", Toast.LENGTH_LONG).show();
 
 
             return;
@@ -118,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
                 openActivityinstallacc();
             }
 
+        });
+
+        restoreaccntbutt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // re-build cache file and save to the phone - recover by requesting RUN Hedera File ID AND the password
+
+            }
         });
 
 
