@@ -53,7 +53,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
     ProgressBar spincreate;
-    Button dashboardbut;
+    Button dataprefbut;
     Button createprofilebut;
 
     TextView runitlogonidnum;
@@ -62,9 +62,8 @@ public class Activitycreateacc extends AppCompatActivity {
     EditText newpassword;
 
 
-    public Activitycreateacc()  {
-       }
-
+    public Activitycreateacc() {
+    }
 
 
     @Override
@@ -74,10 +73,10 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
         spincreate = (ProgressBar) findViewById(R.id.progressBarcreate);
-        dashboardbut = (Button) findViewById(R.id.dashboardbutt);
+        dataprefbut = (Button) findViewById(R.id.dataprefbutt);
 
 
-        createprofilebut = (Button) findViewById(R.id.createaccountbutt);
+        createprofilebut = (Button) findViewById(R.id.dataprefbutt);
 
         Store store = new Store(getApplicationContext());
 
@@ -86,7 +85,7 @@ public class Activitycreateacc extends AppCompatActivity {
         EditText fnamein = (EditText) findViewById(R.id.editTextfnamecreate);
         EditText lnamein = (EditText) findViewById(R.id.editTextlnamecreate);
 
-      //  EditText nationality = (EditText) findViewById(R.id.nationality);
+        //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
         Switch participant = (Switch) findViewById(R.id.switch10);
         Switch fan = (Switch) findViewById(R.id.switch11);
@@ -96,14 +95,13 @@ public class Activitycreateacc extends AppCompatActivity {
         Switch sponsor = (Switch) findViewById(R.id.switch15);
         Switch developer = (Switch) findViewById(R.id.switch16);
 
-        newpassword =(EditText) findViewById(R.id.editTextTextPassword);
+        newpassword = (EditText) findViewById(R.id.editTextTextPassword);
 
         runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountnum);
         runitlogonidnum = (TextView) findViewById(R.id.textViewnewlogonID);
 
         runitaccountnum.setVisibility(View.GONE);
         runitlogonidnum.setVisibility((View.GONE));
-
 
 
         createprofilebut.setOnClickListener(new View.OnClickListener() {
@@ -131,16 +129,14 @@ public class Activitycreateacc extends AppCompatActivity {
                 lnameglobal = lnamein.getText().toString();
 
 
-
                 rolecodeglobal = "";
 
                 // System.out.println("particpant " +  participant.isChecked());
 
-                if (!participant.isChecked() && !fan.isChecked() && !spectator.isChecked() && !club.isChecked() && !brand.isChecked() && !sponsor.isChecked() && !developer.isChecked()){
+                if (!participant.isChecked() && !fan.isChecked() && !spectator.isChecked() && !club.isChecked() && !brand.isChecked() && !sponsor.isChecked() && !developer.isChecked()) {
                     Toast.makeText(getApplicationContext(), "You must have at least one role or many roles at any time", Toast.LENGTH_LONG).show();
                     return;
                 }
-
 
 
                 // build role string
@@ -179,7 +175,6 @@ public class Activitycreateacc extends AppCompatActivity {
                 }
 
 
-
                 if (newpassword.getText().equals(null) || (newpassword.getText().length() == 0)) {
                     Toast.makeText(getApplicationContext(), "Password cannot be empty", Toast.LENGTH_LONG).show();
                     return;
@@ -203,20 +198,18 @@ public class Activitycreateacc extends AppCompatActivity {
             }
 
 
-
         });
 
 
-        dashboardbut.setOnClickListener(new View.OnClickListener() {
+        dataprefbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // open dashboard with new account object tbd.
-                openActivitydashboard();
+                // open data preferences with new account object tbd.
+                openActivitydatapreferences();
 
             }
         });
-
 
 
     }
@@ -289,7 +282,7 @@ public class Activitycreateacc extends AppCompatActivity {
             // grab the Users Client of new account - new instance and use their keypair to create their own profile SC
             // ie the DATA owner will be the OWNER !
 
-            HederaServices.createuserClient(newAccount,newDetails.newPrivKey);
+            HederaServices.createuserClient(newAccount, newDetails.newPrivKey);
 
             // now deploy the Souls profile SC under their own Client instance.
 
@@ -305,14 +298,14 @@ public class Activitycreateacc extends AppCompatActivity {
                 newcontractid = HederaServices.createdeployedprofile(fnameglobal, lnameglobal, nicknameglobal, "0", "Earthling", rolecodeglobal, newAccount.toSolidityAddress(), initialrunbal, "0.0.000000", "ipfs profile hash tbd");
             } catch (TimeoutException e) {
                 showToast("Exception hitting Hedera " + e);
-                System.out.println(" profile create exception "+ e );
+                System.out.println(" profile create exception " + e);
                 return;
             } catch (PrecheckStatusException e) {
-                System.out.println(" profile create exception "+ e );
+                System.out.println(" profile create exception " + e);
                 showToast("Exception hitting Hedera " + e);
                 return;
             } catch (ReceiptStatusException e) {
-                System.out.println(" profile create exception "+ e );
+                System.out.println(" profile create exception " + e);
                 showToast("Exception hitting Hedera " + e);
                 return;
             }
@@ -364,7 +357,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
             try {
-                HederaServices.runtokensfromplatform(rungift,newAccount.toSolidityAddress());
+                HederaServices.runtokensfromplatform(rungift, newAccount.toSolidityAddress());
             } catch (ReceiptStatusException e) {
                 showToast("Exception gifting RUN tokens " + e);
                 return;
@@ -398,7 +391,7 @@ public class Activitycreateacc extends AppCompatActivity {
             } catch (PrecheckStatusException e) {
                 showToast("Exception updating profile with run.it fileid(accnt) " + e);
                 return;
-            } catch (ReceiptStatusException e)  {
+            } catch (ReceiptStatusException e) {
                 showToast("Exception updating profile with run.it fileid(accnt) " + e);
                 return;
             }
@@ -444,8 +437,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
             System.out.println(".. saved to cache file as bytes " + newhederaFileid.toString().getBytes());
 
-            showToast("Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created and stored on your Phone in its safe cache,  We gifted you 1000 RUN Tokens to your AccountID because you KYC'd ! " + newAccount+ " and " + newhederaFileid + " number written down and safe! ");
-
+            showToast("Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created and stored on your Phone in its safe cache,  We gifted you 1000 RUN Tokens to your AccountID because you KYC'd ! " + newAccount + " and " + newhederaFileid + " number written down and safe! ");
 
 
             // stop spinner
@@ -463,18 +455,16 @@ public class Activitycreateacc extends AppCompatActivity {
                     createprofilebut.setVisibility(View.GONE);
 
                     spincreate.setVisibility(View.GONE);
-                    dashboardbut.setVisibility(View.VISIBLE);
+                    dataprefbut.setVisibility(View.VISIBLE);
 
                 }
             });
 
 
-
         }
 
 
-        public void showToast(final String toast)
-        {
+        public void showToast(final String toast) {
 
             // stop spinner
             runOnUiThread(new Runnable() {
@@ -485,7 +475,6 @@ public class Activitycreateacc extends AppCompatActivity {
             });
 
 
-
             runOnUiThread(() -> Toast.makeText(Activitycreateacc.this, toast, Toast.LENGTH_LONG).show());
 
 
@@ -493,15 +482,18 @@ public class Activitycreateacc extends AppCompatActivity {
 
     }
 
-    public void openActivitydashboard () {
+
+    public void openActivitydatapreferences() {
 
         System.out.println("profile obj fname " + runitprofilecreated.fname + " " + runitprofilecreated.toString());
 
-        Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
-        intent.putExtra("profileobj", runitprofilecreated);
+        Intent intent = new Intent(this, com.example.runit.Activitydatapreferenceacc.class);
+        intent.putExtra("profileobjtodatapref", runitprofilecreated);
 
         startActivity(intent);
     }
 
-
 }
+
+
+

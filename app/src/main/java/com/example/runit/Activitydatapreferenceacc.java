@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -27,9 +28,11 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
     public Activitydatapreferenceacc() {
     }
 
-        Runitprofile runitprofile2;
+        Runitprofile runitprofiledatapref;
 
-        Runitprofile runitprofiledataprefonly;
+        Runitprofile runitprofiledataprefnew;
+
+        ProgressBar progressbardatapref;
 
 
         @Override
@@ -38,14 +41,15 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
             setContentView(R.layout.activity_datapreferenceacc);
 
             Intent intent = getIntent();
-            runitprofile2 = (Runitprofile) intent.getSerializableExtra("profileobjtodatapref");
+            runitprofiledatapref = (Runitprofile) intent.getSerializableExtra("profileobjtodatapref");
 
-            System.out.println("runit profile2 obj " + runitprofile2.runitprofilescid);
+            progressbardatapref = (ProgressBar) findViewById(R.id.progressbardatapref);
+            System.out.println("runit profile2 obj " + runitprofiledatapref.runitprofilescid);
 
-            // now pull the data pref from the profile
+            // now pull the data pref from the profile object IF this is a update..  if its a create.. will be just blank entries
 
             try {
-                runitprofiledataprefonly = HederaServices.getdataprefsettings(runitprofile2.runitprofilescid);
+                runitprofiledataprefnew = HederaServices.getdataprefsettings(runitprofiledatapref.runitprofilescid);
             } catch (TimeoutException e) {
                 makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
                 return;
@@ -57,8 +61,7 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
                 return;
             }
 
-            System.out.println("interest 1 " + runitprofiledataprefonly.interest1);
-
+            System.out.println("interest 1 " + runitprofiledataprefnew.interest1);
 
             EditText like1 = (EditText) findViewById(R.id.editTextlike1); // behavior & likes
             EditText like2 = (EditText) findViewById(R.id.editTextlike2);  // interests
@@ -77,7 +80,7 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
             seekbar2.setMax((max2 - min2));
 
 
-            Button dataprefconfirm = (Button) findViewById(R.id.createaccountbutt);
+            Button dataprefconfirm = (Button) findViewById(R.id.dataprefbutt);
 
 
             // show existing settings from ledger POJO

@@ -31,11 +31,14 @@ public class Activityupdateprofile extends AppCompatActivity {
     private AccountId newAccount;
     private FileId newhederaFileid;
 
+    private String rolearray[];
+
+
 
     public Activityupdateprofile()  {
        }
 
-    Runitprofile runitprofile3;
+    Runitprofile runitprofilecurrent;
 
 
     @Override
@@ -44,12 +47,9 @@ public class Activityupdateprofile extends AppCompatActivity {
         setContentView(R.layout.activity_createacc);
 
         Intent intent = getIntent();
-        runitprofile3 = (Runitprofile) intent.getSerializableExtra("profileobjtupdateprof");
+        runitprofilecurrent = (Runitprofile) intent.getSerializableExtra("profileobjtupdateprof");
 
-        System.out.println("runit profile3 obj " + runitprofile3.runitprofilescid);
-
-
-        // displaying the existing profile
+        System.out.println("runit profile3 obj " + runitprofilecurrent.runitprofilescid);
 
         Button updateprofilebut = (Button) findViewById(R.id.updateaccountbutt);
 
@@ -68,10 +68,47 @@ public class Activityupdateprofile extends AppCompatActivity {
         Switch developer = (Switch) findViewById(R.id.switch16edit);
 
 
+        // displaying the existing profile
+
+        nicknamein.setText(runitprofilecurrent.nickname);
+        fnamein.setText(runitprofilecurrent.fname);
+        lnamein.setText(runitprofilecurrent.lname);
+
+
+        // parse the rolecode and se the switches
+
+
+        rolearray = (runitprofilecurrent.rolecode).split("/");
+
+        // has to have at min 1 role
+
+
+        for (int i = 0; i < rolearray.length; ++i)
+
+        {
+             if (rolearray[i].equals("P")) participant.setChecked(true);
+
+            if (rolearray[i].equals("F")) fan.setChecked(true);
+
+            if (rolearray[i].equals("S")) spectator.setChecked(true);
+
+            if (rolearray[i].equals("C")) club.setChecked(true);
+
+            if (rolearray[i].equals("R")) sponsor.setChecked(true);
+
+            if (rolearray[i].equals("B")) brand.setChecked(true);
+
+            if (rolearray[i].equals("D")) developer.setChecked(true);
+
+        }
 
 
 
-       updateprofilebut.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+        updateprofilebut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
