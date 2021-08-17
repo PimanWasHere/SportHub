@@ -85,21 +85,21 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
             // show existing settings from ledger POJO
 
-            like1.setText(runitprofiledataprefonly.interest1);
-            like2.setText(runitprofiledataprefonly.interest2);
-            like3.setText(runitprofiledataprefonly.interest3);
+            like1.setText(runitprofiledatapref.interest1);
+            like2.setText(runitprofiledatapref.interest2);
+            like3.setText(runitprofiledatapref.interest3);
 
-            if (runitprofiledataprefonly.demographic)
+            if (runitprofiledataprefnew.demographic)
             switchdemo.setChecked(true);
 
-            if (runitprofiledataprefonly.behavioral)
+            if (runitprofiledataprefnew.behavioral)
                 switchbehavioral.setChecked(true);
 
-            if (runitprofiledataprefonly.interests)
+            if (runitprofiledataprefnew.interests)
                 switchint.setChecked(true);
 
-            current1 = runitprofiledataprefonly.sponsorslevel.intValue();
-            current2 = runitprofiledataprefonly.grpsponsorslevel.intValue();
+            current1 = runitprofiledataprefnew.sponsorslevel.intValue();
+            current2 = runitprofiledataprefnew.grpsponsorslevel.intValue();
 
             seekbar1.setProgress(current1 - min1);
             System.out.println("seek bar 1 " + current1);
@@ -161,7 +161,7 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
 
                     try {
-                        HederaServices.updatedataprefsettings(ContractId.fromString(runitprofile2.runitprofilescid), like1.getText().toString(),like2.getText().toString(), like3.getText().toString(), switchdemo.isChecked(), switchbehavioral.isChecked(), switchint.isChecked(), BigInteger.valueOf(current1), BigInteger.valueOf(current2));
+                        HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledatapref.runitprofilescid), like1.getText().toString(),like2.getText().toString(), like3.getText().toString(), switchdemo.isChecked(), switchbehavioral.isChecked(), switchint.isChecked(), BigInteger.valueOf(current1), BigInteger.valueOf(current2));
                     } catch (TimeoutException e) {
                         makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
                         return;

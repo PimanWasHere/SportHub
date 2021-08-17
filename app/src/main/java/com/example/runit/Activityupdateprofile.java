@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class Activityupdateprofile extends AppCompatActivity {
     BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 
     String rolecode;
+    ProgressBar spinupdate;
 
     private GennedAccount newDetails;
     private AccountId newAccount;
@@ -46,12 +48,15 @@ public class Activityupdateprofile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createacc);
 
+        spinupdate = (ProgressBar) findViewById(R.id.progressBarupdate);
+
         Intent intent = getIntent();
         runitprofilecurrent = (Runitprofile) intent.getSerializableExtra("profileobjtupdateprof");
 
         System.out.println("runit profile3 obj " + runitprofilecurrent.runitprofilescid);
 
         Button updateprofilebut = (Button) findViewById(R.id.updateaccountbutt);
+        Button seedataprefbut = (Button) findViewById(R.id.dataprefbutt);
 
         EditText nicknamein = (EditText) findViewById(R.id.editTextnicknameedit);
         EditText fnamein = (EditText) findViewById(R.id.editTextfnameedit);
@@ -103,7 +108,14 @@ public class Activityupdateprofile extends AppCompatActivity {
         }
 
 
+seedataprefbut.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+        // pass runitprofilecurrent to datapref window
+
+    }
+});
 
 
 
@@ -190,6 +202,15 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     }
 
+
+
+    public void openActivitydatapreferences () {
+
+        Intent intent = new Intent(this, com.example.runit.Activitydatapreferenceacc.class);
+        intent.putExtra("profileobjtodatapref", runitprofilecurrent);
+        //intent.putExtra("profile obj", decodedfile);
+        startActivity(intent);
+    }
 
 
 }
