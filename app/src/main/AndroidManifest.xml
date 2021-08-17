@@ -35,6 +35,10 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".Activitydatapreferenceaccupdate"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".Activitywallet"
             android:theme="@style/AppTheme" />
 
@@ -45,6 +49,10 @@
         <activity
             android:name=".Activitydashboard"
             android:theme="@style/AppTheme" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 

@@ -12,9 +12,26 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hedera.hashgraph.sdk.AccountId;
+import com.hedera.hashgraph.sdk.BadMnemonicException;
+import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.FileId;
+import com.hedera.hashgraph.sdk.PrecheckStatusException;
+import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.concurrent.TimeoutException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 
 public class Activityupdateprofile extends AppCompatActivity {
@@ -36,9 +53,8 @@ public class Activityupdateprofile extends AppCompatActivity {
     private String rolearray[];
 
 
-
-    public Activityupdateprofile()  {
-       }
+    public Activityupdateprofile() {
+    }
 
     Runitprofile runitprofilecurrent;
 
@@ -62,7 +78,7 @@ public class Activityupdateprofile extends AppCompatActivity {
         EditText fnamein = (EditText) findViewById(R.id.editTextfnameedit);
         EditText lnamein = (EditText) findViewById(R.id.editTextlnameedit);
 
-      //  EditText nationality = (EditText) findViewById(R.id.nationality);
+        //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
         Switch participant = (Switch) findViewById(R.id.switch10edit);
         Switch fan = (Switch) findViewById(R.id.switch11edit);
@@ -88,10 +104,8 @@ public class Activityupdateprofile extends AppCompatActivity {
         // has to have at min 1 role
 
 
-        for (int i = 0; i < rolearray.length; ++i)
-
-        {
-             if (rolearray[i].equals("P")) participant.setChecked(true);
+        for (int i = 0; i < rolearray.length; ++i) {
+            if (rolearray[i].equals("P")) participant.setChecked(true);
 
             if (rolearray[i].equals("F")) fan.setChecked(true);
 
@@ -108,16 +122,14 @@ public class Activityupdateprofile extends AppCompatActivity {
         }
 
 
-seedataprefbut.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+        seedataprefbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        // pass runitprofilecurrent to datapref window
+                // pass runitprofilecurrent to datapref window
 
-    }
-});
-
-
+            }
+        });
 
 
         updateprofilebut.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +160,7 @@ seedataprefbut.setOnClickListener(new View.OnClickListener() {
 
                 // System.out.println("particpant " +  participant.isChecked());
 
-                if (!participant.isChecked() && !fan.isChecked() && !spectator.isChecked() && !club.isChecked() && !brand.isChecked() && !sponsor.isChecked() && !developer.isChecked()){
+                if (!participant.isChecked() && !fan.isChecked() && !spectator.isChecked() && !club.isChecked() && !brand.isChecked() && !sponsor.isChecked() && !developer.isChecked()) {
                     Toast.makeText(getApplicationContext(), "You must have at least one role or many roles at any time", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -192,22 +204,81 @@ seedataprefbut.setOnClickListener(new View.OnClickListener() {
 
                 // bump to background thread and update the profile SC
 
-            }
+                spinupdate.setVisibility(View.VISIBLE);
 
+                // need to lock the UI as we bump to bkgrnd
+
+                // bump the below to new thread
+
+                Activityupdateprofile.UpdateaccThread threadupdate = new Activityupdateprofile.UpdateaccThread();
+                threadupdate.start();
+
+
+                //  we  stop the spinner from the backgrnd thread spincreate.setVisibility(View.GONE);
+
+
+            }
 
 
         });
 
+    }
 
+
+    class UpdateaccThread extends Thread {
+
+        UpdateaccThread() {
+        }
+
+        @Override
+        public void run() {
+
+
+            // call hedera update profile basics
+
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    spinupdate.setVisibility(View.GONE);
+
+                }
+            });
+
+
+        }
+
+
+        public void showToast(final String toast) {
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    spinupdate.setVisibility(View.GONE);
+                }
+            });
+
+
+            runOnUiThread(() -> Toast.makeText(Activityupdateprofile.this, toast, Toast.LENGTH_LONG).show());
+
+
+        }
 
     }
 
 
 
-    public void openActivitydatapreferences () {
+
+
+
+
+    public void openActivitydatapreferencesupdate () {
 
         Intent intent = new Intent(this, com.example.runit.Activitydatapreferenceacc.class);
-        intent.putExtra("profileobjtodatapref", runitprofilecurrent);
+        intent.putExtra("profileobjtodataprefupdate", runitprofilecurrent);
         //intent.putExtra("profile obj", decodedfile);
         startActivity(intent);
     }

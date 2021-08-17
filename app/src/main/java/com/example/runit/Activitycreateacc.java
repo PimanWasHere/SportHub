@@ -194,7 +194,6 @@ public class Activitycreateacc extends AppCompatActivity {
 
                 //  we  stop the spinner from the backgrnd thread spincreate.setVisibility(View.GONE);
 
-
             }
 
 
