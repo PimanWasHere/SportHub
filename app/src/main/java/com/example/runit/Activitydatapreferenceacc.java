@@ -12,12 +12,25 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hedera.hashgraph.sdk.BadMnemonicException;
 import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.concurrent.TimeoutException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import static android.widget.Toast.makeText;
 
@@ -25,14 +38,23 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
     int min1 = 0, max1 = 100, min2 = 0, max2 = 100, current1 = 0, current2 = 0;
 
+    Runitprofile runitprofiledatapref;
+
+    Runitprofile runitprofiledataprefnew;
+
+    ProgressBar spinnerdatapref;
+
+    EditText like1, like2, like3;
+    String like1stg, like2stg,like3stg;
+    Boolean switchdemobool, switchbehavioralbool, switchintbool;
+    BigInteger current1big, current2big;
+
+    Switch switchdemo, switchbehavioral, switchint;
+    SeekBar seekbar1, seekbar2;
+
+
     public Activitydatapreferenceacc() {
     }
-
-        Runitprofile runitprofiledatapref;
-
-        Runitprofile runitprofiledataprefnew;
-
-        ProgressBar progressbardatapref;
 
 
         @Override
@@ -42,72 +64,36 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
             Intent intent = getIntent();
             runitprofiledatapref = (Runitprofile) intent.getSerializableExtra("profileobjtodatapref");
-
-            progressbardatapref = (ProgressBar) findViewById(R.id.progressbardatapref);
             System.out.println("runit profile2 obj " + runitprofiledatapref.runitprofilescid);
 
-            // now pull the data pref from the profile object IF this is a update..  if its a create.. will be just blank entries
+            // first time creat - so set to defaults
 
-            try {
-                runitprofiledataprefnew = HederaServices.getdataprefsettings(runitprofiledatapref.runitprofilescid);
-            } catch (TimeoutException e) {
-                makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
-                return;
-            } catch (PrecheckStatusException e) {
-                makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
-                return;
-            } catch (ReceiptStatusException e) {
-                makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
-                return;
-            }
+            spinnerdatapref = (ProgressBar) findViewById(R.id.progressbardatapref);
 
-            System.out.println("interest 1 " + runitprofiledataprefnew.interest1);
 
-            EditText like1 = (EditText) findViewById(R.id.editTextlike1); // behavior & likes
-            EditText like2 = (EditText) findViewById(R.id.editTextlike2);  // interests
-            EditText like3 = (EditText) findViewById(R.id.editTextlike3);   // demographics
+            like1 = (EditText) findViewById(R.id.editTextlike1); // behavior & likes
+            like2 = (EditText) findViewById(R.id.editTextlike2);  // interests
+            like3 = (EditText) findViewById(R.id.editTextlike3);   // demographics
 
-            Switch switchdemo = (Switch) findViewById(R.id.switch1);
-            Switch switchbehavioral = (Switch) findViewById(R.id.switch2);
-            Switch switchint = (Switch) findViewById(R.id.switch3);
+            switchdemo = (Switch) findViewById(R.id.switch1);
+            switchbehavioral = (Switch) findViewById(R.id.switch2);
+            switchint = (Switch) findViewById(R.id.switch3);
 
-            SeekBar seekbar1 = (SeekBar) findViewById(R.id.seekBar1);
+            seekbar1 = (SeekBar) findViewById(R.id.seekBar1);
 
             seekbar1.setMax((max1 - min1));
 
-            SeekBar seekbar2 = (SeekBar) findViewById(R.id.seekBar2);
+            seekbar2 = (SeekBar) findViewById(R.id.seekBar2);
 
             seekbar2.setMax((max2 - min2));
 
-
-            Button dataprefconfirm = (Button) findViewById(R.id.dataprefbutt);
-
-
-            // show existing settings from ledger POJO
-
-            like1.setText(runitprofiledatapref.interest1);
-            like2.setText(runitprofiledatapref.interest2);
-            like3.setText(runitprofiledatapref.interest3);
-
-            if (runitprofiledataprefnew.demographic)
-            switchdemo.setChecked(true);
-
-            if (runitprofiledataprefnew.behavioral)
-                switchbehavioral.setChecked(true);
-
-            if (runitprofiledataprefnew.interests)
-                switchint.setChecked(true);
-
-            current1 = runitprofiledataprefnew.sponsorslevel.intValue();
-            current2 = runitprofiledataprefnew.grpsponsorslevel.intValue();
+            Button dataprefcreate = (Button) findViewById(R.id.dataprefbutt);
 
             seekbar1.setProgress(current1 - min1);
             System.out.println("seek bar 1 " + current1);
 
             seekbar2.setProgress(current2 - min2);
             System.out.println("seek bar 2 " + current2);
-
-
 
 
 
@@ -151,30 +137,31 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
 
 
-            dataprefconfirm.setOnClickListener(new View.OnClickListener() {
+            dataprefcreate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    // call HederaServices and update profile
+                    // now pull the data pref from the screen as this is a  create..
 
-                    Toast.makeText(getApplicationContext(), "Updating your Account - processing..", Toast.LENGTH_LONG).show();
+                    like1stg = like1.getText().toString();
+                    like2stg = like2.getText().toString();
+                    like3stg = like3.getText().toString();
+                    switchdemobool = switchdemo.isChecked();
+                    switchbehavioralbool = switchbehavioral.isChecked();
+                    switchintbool = switchint.isChecked();
+                    current1big = BigInteger.valueOf(current1);
+                    current2big = BigInteger.valueOf(current2);
 
 
-                    try {
-                        HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledatapref.runitprofilescid), like1.getText().toString(),like2.getText().toString(), like3.getText().toString(), switchdemo.isChecked(), switchbehavioral.isChecked(), switchint.isChecked(), BigInteger.valueOf(current1), BigInteger.valueOf(current2));
-                    } catch (TimeoutException e) {
-                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
-                        return;
-                    } catch (PrecheckStatusException e) {
-                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
-                        return;
-                    } catch (ReceiptStatusException e) {
-                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
-                        return;
+                    spinnerdatapref.setVisibility(View.VISIBLE);
 
-                    }
+                    // need to lock the UI as we bump to bkgrnd
 
-                    Toast.makeText(getApplicationContext(), "Press back button -  Data preferences have been updated", Toast.LENGTH_LONG).show();
+                    // bump the below to new thread
+
+                    Activitydatapreferenceacc.CreatedataprefThread threaddatapref = new Activitydatapreferenceacc.CreatedataprefThread();
+                    threaddatapref.start();
+
 
                 }
 
@@ -185,6 +172,52 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
 
         }
+
+
+    class CreatedataprefThread extends Thread {
+
+        CreatedataprefThread() {
+        }
+
+        @Override
+        public void run() {
+
+            // call HederaServices and update profile
+
+
+            try {
+                HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledatapref.runitprofilescid), like1stg,like2stg, like3stg, switchdemobool, switchbehavioralbool, switchintbool, current1big, current2big);
+            } catch (TimeoutException e) {
+                showToast("Ledger Error updating data preferences " + e);
+            } catch (PrecheckStatusException e) {
+                showToast("Ledger Error updating data preferences " + e);
+            } catch (ReceiptStatusException e) {
+                showToast("Ledger Error updating data preferences " + e);
+            }
+
+            showToast("Your Data preferences updated Successfully");
+
+
+        }
+
+
+        public void showToast(final String toast) {
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    spinnerdatapref.setVisibility(View.GONE);
+                }
+            });
+
+
+            runOnUiThread(() -> Toast.makeText(Activitydatapreferenceacc.this, toast, Toast.LENGTH_LONG).show());
+
+
+        }
+
+    }
 
 
 

@@ -5,10 +5,10 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFF"
+    android:background="#FFFFFF"
     android:screenOrientation="portrait"
     tools:context=".Activitydatapreferenceacc">
-<!--  style="@style/Widget.AppCompat.EditText"-->
+    <!--  style="@style/Widget.AppCompat.EditText"-->
 
 
     <Switch

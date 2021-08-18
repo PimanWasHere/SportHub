@@ -38,7 +38,7 @@ public class Activitydatapreferenceaccupdate extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_datapreferenceacc);
+            setContentView(R.layout.activity_datapreferenceaccupdate);
 
             Intent intent = getIntent();
             runitprofiledataprefupdate = (Runitprofile) intent.getSerializableExtra("profileobjtodataprefupdate");
@@ -51,13 +51,13 @@ public class Activitydatapreferenceaccupdate extends AppCompatActivity {
             try {
                 runitprofiledataprefnewupdate = HederaServices.getdataprefsettings(runitprofiledataprefupdate.runitprofilescid);
             } catch (TimeoutException e) {
-                makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
                 return;
             } catch (PrecheckStatusException e) {
-                makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
                 return;
             } catch (ReceiptStatusException e) {
-                makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Ledger Error getting data preferences " +e, Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -157,19 +157,17 @@ public class Activitydatapreferenceaccupdate extends AppCompatActivity {
 
                     // call HederaServices and update profile
 
-                    Toast.makeText(getApplicationContext(), "Updating your Account - processing..", Toast.LENGTH_LONG).show();
-
 
                     try {
                         HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledataprefupdate.runitprofilescid), like1.getText().toString(),like2.getText().toString(), like3.getText().toString(), switchdemo.isChecked(), switchbehavioral.isChecked(), switchint.isChecked(), BigInteger.valueOf(current1), BigInteger.valueOf(current2));
                     } catch (TimeoutException e) {
-                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
                         return;
                     } catch (PrecheckStatusException e) {
-                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
                         return;
                     } catch (ReceiptStatusException e) {
-                        makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
                         return;
 
                     }
