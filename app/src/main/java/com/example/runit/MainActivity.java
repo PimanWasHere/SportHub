@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         spinmain = (ProgressBar) findViewById(R.id.progressBarmain);
 
-        Button createviraccntbutt = (Button) findViewById(R.id.createvirginaccnt2button);
+        Button createviraccntbutt = (Button) findViewById(R.id.createvirginaccnt3button);
         Button restoreaccntbutt = (Button) findViewById(R.id.restoreaccountbutton);
         TextView restoreor = (TextView) findViewById(R.id.textViewrestoreor);
 
@@ -75,6 +75,14 @@ public class MainActivity extends AppCompatActivity {
                 accountinput = accountinput + (char) content;
             }
 
+            System.out.println(".. got from cache file " + accountinput);
+
+            spinmain.setVisibility(View.GONE);
+            mainactivitylogonpassword.setVisibility(View.VISIBLE);
+            gorunrunit.setVisibility(View.VISIBLE);
+
+            Toast.makeText(getApplicationContext(), "Welcome, your password ?", Toast.LENGTH_LONG).show();
+
         } catch (FileNotFoundException e) {
             // cache file not there - show create account button
             createviraccntbutt.setVisibility(View.VISIBLE);
@@ -83,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             restoreaccntbutt.setClickable(true);
             restoreor.setVisibility(View.VISIBLE);
             mainactivitylogonaccountid.setVisibility(View.GONE);
-            mainactivitylogonpassword.setVisibility(View.GONE);
+            mainactivitylogonpassword.setVisibility(View.INVISIBLE);
             gorunrunit.setVisibility(View.GONE);
 
             Toast.makeText(getApplicationContext(), "First time in ? .. Please Create or Restore your Account (RUN AccountID AND Password needed) ", Toast.LENGTH_LONG).show();
@@ -94,17 +102,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             Toast.makeText(getApplicationContext(), "RUN cache file there but corrupted - RUN.it error when reading your Cache file as bytes - internal Error" + e, Toast.LENGTH_LONG).show();
-
         }
 
 
-        System.out.println(".. got from cache file " + accountinput);
-
-        spinmain.setVisibility(View.GONE);
-        mainactivitylogonpassword.setVisibility(View.VISIBLE);
-        gorunrunit.setVisibility(View.VISIBLE);
-
-        Toast.makeText(getApplicationContext(), "Welcome, your password ?", Toast.LENGTH_LONG).show();
 
         gorunrunit.setOnClickListener(new View.OnClickListener() {
             @Override

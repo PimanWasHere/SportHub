@@ -22,6 +22,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.258"
@@ -89,6 +90,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -164,7 +166,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:foregroundTint="#F6F0F0"
-        android:hint="open text.."
+        android:hint="open text ..."
         android:inputType="textPersonName"
         android:textAlignment="center"
 
@@ -187,7 +189,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:foregroundTint="#FBF9F9"
-        android:hint="open text..."
+        android:hint="open text .."
         android:inputType="textPersonName"
         android:textAlignment="center"
 
@@ -210,7 +212,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:foregroundTint="#F8F0F0"
-        android:hint="open text ..."
+        android:hint="open text .."
         android:inputType="textPersonName"
         android:textAlignment="center"
 
