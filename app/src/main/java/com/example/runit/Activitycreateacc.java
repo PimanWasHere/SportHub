@@ -53,8 +53,9 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
     ProgressBar spincreate;
-    Button dataprefbut;
+
     Button createprofilebut;
+    Button dataprefbutt;
 
     TextView runitlogonidnum;
     TextView runitaccountnum;
@@ -73,10 +74,11 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
         spincreate = (ProgressBar) findViewById(R.id.progressBarcreate);
-        dataprefbut = (Button) findViewById(R.id.dataprefbutt);
 
+        createprofilebut = (Button) findViewById(R.id.dataprofilebutton);
 
-        createprofilebut = (Button) findViewById(R.id.dataprefbutt);
+        dataprefbutt = (Button) findViewById(R.id.dataprefbuttonin);
+
 
         Store store = new Store(getApplicationContext());
 
@@ -200,7 +202,7 @@ public class Activitycreateacc extends AppCompatActivity {
         });
 
 
-        dataprefbut.setOnClickListener(new View.OnClickListener() {
+        dataprefbutt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -454,7 +456,7 @@ public class Activitycreateacc extends AppCompatActivity {
                     createprofilebut.setVisibility(View.GONE);
 
                     spincreate.setVisibility(View.GONE);
-                    dataprefbut.setVisibility(View.VISIBLE);
+                    dataprefbutt.setVisibility(View.VISIBLE);
 
                 }
             });

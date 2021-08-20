@@ -78,19 +78,23 @@ public class MainActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             // cache file not there - show create account button
             createviraccntbutt.setVisibility(View.VISIBLE);
+            createviraccntbutt.setClickable(true);
             restoreaccntbutt.setVisibility(View.VISIBLE);
+            restoreaccntbutt.setClickable(true);
             restoreor.setVisibility(View.VISIBLE);
-            mainactivitylogonaccountid.setVisibility(View.VISIBLE);
+            mainactivitylogonaccountid.setVisibility(View.GONE);
+            mainactivitylogonpassword.setVisibility(View.GONE);
+            gorunrunit.setVisibility(View.GONE);
 
             Toast.makeText(getApplicationContext(), "First time in ? .. Please Create or Restore your Account (RUN AccountID AND Password needed) ", Toast.LENGTH_LONG).show();
 
 
-            return;
+
         } catch (IOException e) {
 
 
             Toast.makeText(getApplicationContext(), "RUN cache file there but corrupted - RUN.it error when reading your Cache file as bytes - internal Error" + e, Toast.LENGTH_LONG).show();
-            return;
+
         }
 
 
