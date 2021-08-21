@@ -219,7 +219,7 @@
     <TextView
         android:id="@+id/textViewusername"
         android:layout_width="149dp"
-        android:layout_height="78dp"
+        android:layout_height="77dp"
         android:background="#0040E0"
         android:text="Name.."
         android:textAlignment="center"
@@ -228,7 +228,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -251,8 +251,8 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="197dp"
-        android:layout_height="78dp"
+        android:layout_width="189dp"
+        android:layout_height="76dp"
 
         android:background="#0040E0"
         app:layout_constraintBottom_toBottomOf="parent"

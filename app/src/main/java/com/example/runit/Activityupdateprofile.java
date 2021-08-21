@@ -62,7 +62,7 @@ public class Activityupdateprofile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_createacc);
+        setContentView(R.layout.activity_updateprofile);
 
         spinupdate = (ProgressBar) findViewById(R.id.progressBarupdate);
 
@@ -70,13 +70,16 @@ public class Activityupdateprofile extends AppCompatActivity {
         runitprofilecurrent = (Runitprofile) intent.getSerializableExtra("profileobjtupdateprof");
 
         System.out.println("runit profile3 obj " + runitprofilecurrent.runitprofilescid);
+        System.out.println("nickname " + runitprofilecurrent.nickname);
+
+
 
         Button updateprofilebut = (Button) findViewById(R.id.updateaccountbutt);
-        Button seedataprefbut = (Button) findViewById(R.id.dataprefbutt);
+        Button seedataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
 
-        EditText nicknamein = (EditText) findViewById(R.id.editTextnicknameedit);
-        EditText fnamein = (EditText) findViewById(R.id.editTextfnameedit);
-        EditText lnamein = (EditText) findViewById(R.id.editTextlnameedit);
+        EditText nicknameinputprof = (EditText) findViewById(R.id.editTextnicknameupdate);
+         EditText fnameinputprof = (EditText) findViewById(R.id.editTextfnameedit);
+        EditText lnameinputprof = (EditText) findViewById(R.id.editTextlnameedit);
 
         //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
@@ -91,9 +94,9 @@ public class Activityupdateprofile extends AppCompatActivity {
 
         // displaying the existing profile
 
-        nicknamein.setText(runitprofilecurrent.nickname);
-        fnamein.setText(runitprofilecurrent.fname);
-        lnamein.setText(runitprofilecurrent.lname);
+        nicknameinputprof.setText(runitprofilecurrent.nickname);
+        fnameinputprof.setText(runitprofilecurrent.fname);
+        lnameinputprof.setText(runitprofilecurrent.lname);
 
 
         // parse the rolecode and se the switches
@@ -126,7 +129,7 @@ public class Activityupdateprofile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // pass runitprofilecurrent to datapref window
+                openActivitydatapreferencesupdate();
 
             }
         });
@@ -137,17 +140,17 @@ public class Activityupdateprofile extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (nicknamein.getText().equals(null)) {
+                if (nicknameinputprof.getText().equals(null)) {
                     Toast.makeText(getApplicationContext(), "Nickname cannot be blank", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if (fnamein.getText().equals(null)) {
+                if (fnameinputprof.getText().equals(null)) {
                     Toast.makeText(getApplicationContext(), "First name cannot be blank", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if (lnamein.getText().equals(null)) {
+                if (lnameinputprof.getText().equals(null)) {
                     Toast.makeText(getApplicationContext(), "Last name cannot be blank", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -274,10 +277,9 @@ public class Activityupdateprofile extends AppCompatActivity {
 
 
 
-
     public void openActivitydatapreferencesupdate () {
 
-        Intent intent = new Intent(this, com.example.runit.Activitydatapreferenceacc.class);
+        Intent intent = new Intent(this, com.example.runit.Activitydatapreferenceaccupdate.class);
         intent.putExtra("profileobjtodataprefupdate", runitprofilecurrent);
         //intent.putExtra("profile obj", decodedfile);
         startActivity(intent);

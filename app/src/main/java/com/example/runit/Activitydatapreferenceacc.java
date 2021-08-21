@@ -187,6 +187,8 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
             try {
                 HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledatapref.runitprofilescid), like1stg,like2stg, like3stg, switchdemobool, switchbehavioralbool, switchintbool, current1big, current2big);
+                showToast("Your Data preferences created Successfully");
+
             } catch (TimeoutException e) {
                 showToast("Ledger Error updating data preferences " + e);
             } catch (PrecheckStatusException e) {
@@ -195,7 +197,6 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
                 showToast("Ledger Error updating data preferences " + e);
             }
 
-            showToast("Your Data preferences updated Successfully");
 
 
         }

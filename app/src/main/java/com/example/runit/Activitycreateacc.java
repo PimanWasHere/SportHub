@@ -103,7 +103,7 @@ public class Activitycreateacc extends AppCompatActivity {
         runitlogonidnum = (TextView) findViewById(R.id.textViewnewlogonID);
 
         runitaccountnum.setVisibility(View.GONE);
-        runitlogonidnum.setVisibility((View.GONE));
+        runitlogonidnum.setVisibility(View.GONE);
 
 
         createprofilebut.setOnClickListener(new View.OnClickListener() {
@@ -446,17 +446,20 @@ public class Activitycreateacc extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());
+
+
+                    runitaccountnum.setText("Run.it HBAR AccountID " + runitprofilecreated.runitrunaccountid);
                     runitaccountnum.setVisibility(View.VISIBLE);
 
-                    runitlogonidnum.setText("Run.it logon AccountID " + newhederaFileid.toString());
+                    runitlogonidnum.setText("Run.it logon AccountID " + runitprofilecreated.runitlogonaccountid);
                     runitlogonidnum.setVisibility(View.VISIBLE);
 
                     newpassword.setVisibility(View.GONE);
                     createprofilebut.setVisibility(View.GONE);
 
-                    spincreate.setVisibility(View.GONE);
                     dataprefbutt.setVisibility(View.VISIBLE);
+
+                    spincreate.setVisibility(View.GONE);
 
                 }
             });

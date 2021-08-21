@@ -521,7 +521,7 @@ public class Activitydashboard extends AppCompatActivity implements
                         // For Account - this is profile
 
                             openActivityupdateprofile();
-                            break;
+
 
                 }
 

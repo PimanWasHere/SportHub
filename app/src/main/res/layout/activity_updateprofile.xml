@@ -10,6 +10,26 @@
     tools:context=".Activityupdateprofile">
     <!--  style="@style/Widget.AppCompat.EditText"-->
 
+    <EditText
+        android:id="@+id/editTextnicknameupdate"
+        android:layout_width="140dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="Nickname ?.."
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#0040E0"
+        android:textColorHint="#0040E0"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046" />
+
     <Button
         android:id="@+id/updatedataprefbutt"
         android:layout_width="168dp"
@@ -83,26 +103,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.128" />
-
-    <EditText
-        android:id="@+id/editTextnicknameedit"
-        android:layout_width="140dp"
-        android:layout_height="44dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-smallcaps"
-        android:hint="Nickname ?.."
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textColor="#0040E0"
-        android:textColorHint="#0040E0"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046" />
 
     <Switch
         android:id="@+id/switch10edit"
