@@ -7,7 +7,42 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:screenOrientation="portrait"
-    tools:context=".Activityinstalleracc">
+    tools:context=".Activitywallet">
+
+
+    <ProgressBar
+        android:id="@+id/progressBarwallet"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.819" />
+
+    <Button
+        android:id="@+id/sendrunbuttwallethbar"
+        android:layout_width="141dp"
+        android:layout_height="52dp"
+        android:background="@drawable/myrndredkbutton"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="SEND HBAR"
+        android:textAlignment="center"
+
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.924" />
 
     <TextView
         android:id="@+id/textViewwallet1"
@@ -15,10 +50,10 @@
         android:layout_height="54dp"
         android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
-        android:text="Send RUN tokens to another account"
+        android:text="Send RUN tokens or HBAR "
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +71,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:foregroundTint="#F8F0F0"
-        android:hint="RUN Amount ?"
+        android:hint="RUN Amount ? or HBAR ?"
         android:inputType="textPersonName"
         android:textAlignment="center"
 
@@ -76,9 +111,9 @@
         android:id="@+id/sendrunbuttwallet"
         android:layout_width="141dp"
         android:layout_height="52dp"
-        android:background="@drawable/myrndredkbutton"
+        android:background="@drawable/myrndbluebutton"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="SEND"
+        android:text="SEND RUN"
         android:textAlignment="center"
 
         android:textAllCaps="false"
@@ -88,9 +123,10 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874" />
+        app:layout_constraintVertical_bias="0.923" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

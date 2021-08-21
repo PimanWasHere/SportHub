@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,10 +31,14 @@ public class Activitywallet extends AppCompatActivity {
 
     BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 
+    ProgressBar spinwallet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
+
+        spinwallet = (ProgressBar) findViewById(R.id.progressBarwallet);
 
         Intent intent = getIntent();
         runitprofile3 = (Runitprofile) intent.getSerializableExtra("profileobjtowallet");
@@ -44,7 +49,9 @@ public class Activitywallet extends AppCompatActivity {
 
 
         Button sendrunbutton = (Button) findViewById(R.id.sendrunbuttwallet);
-        EditText runtokentosend = (EditText) findViewById(R.id.editTextrunmounttosend);
+        Button sendhbarbutton = (Button) findViewById(R.id.sendrunbuttwallethbar);
+
+        EditText amountsend = (EditText) findViewById(R.id.editTextrunmounttosend);
         EditText destaccnt = (EditText) findViewById(R.id.editTextrunaccountto);
 
 
@@ -54,41 +61,172 @@ public class Activitywallet extends AppCompatActivity {
 
                 // check inputs - to do
 
-                BigInteger runtosendin = new BigInteger(runtokentosend.getText().toString()).multiply(multiplier1018);
+                spinwallet.setVisibility(View.VISIBLE);
 
-                // call HederaServices to send RUN token.. dont send more than your balance - exception handling to add
+                // need to lock the UI as we bump to bkgrnd
 
-                Toast.makeText(getApplicationContext(), "Sending your RUN ! - processing..", Toast.LENGTH_LONG).show();
-
-                AccountId destaccountid = AccountId.fromString(destaccnt.getText().toString());
-
-                System.out.println("account to " + destaccountid.toString());
-
-                String destaccnt_sol = destaccountid.toSolidityAddress();
-
-                System.out.println("account to in .sol " + destaccnt_sol);
+                // bump the below to new thread
 
 
-                try {
-                    HederaServices.runtokensfromuser(runtosendin, destaccnt_sol);
-                } catch (ReceiptStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (PrecheckStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Ledger Error sending RUN tokens " +e, Toast.LENGTH_LONG).show();
-                    return;
-                }
+                Activitywallet.SendRunThread thread = new Activitywallet.SendRunThread(destaccnt.getText().toString(), amountsend.getText().toString());
+                thread.start();
 
-                Toast.makeText(getApplicationContext(), "RUN sent - Press back button -  refresh your balance.. ", Toast.LENGTH_LONG).show();
+
+            }
+
+        });
+
+
+        sendhbarbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+
+                // check inputs - to do
+
+                spinwallet.setVisibility(View.VISIBLE);
+
+                // need to lock the UI as we bump to bkgrnd
+
+                // bump the below to new thread
+
+
+                Activitywallet.SendHbarThread thread2 = new Activitywallet.SendHbarThread(destaccnt.getText().toString(), amountsend.getText().toString());
+                thread2.start();
+
 
             }
 
         });
 
     }
+
+
+
+    class SendRunThread extends Thread {
+
+        String amounttosend;
+        String destaccount;
+
+        SendRunThread(String _amountin, String _destaccount) {
+            this.amounttosend = _amountin;
+            this.destaccount = _destaccount;
+        }
+
+        @Override
+        public void run() {
+
+            BigInteger runtosendin = new BigInteger(amounttosend).multiply(multiplier1018);
+
+            // call HederaServices to send RUN token.. dont send more than your balance - exception handling to add
+
+            showToast("Sending now .. ");
+
+            AccountId destaccountid = AccountId.fromString(destaccount);
+
+            System.out.println("account to " + destaccountid.toString());
+
+            String destaccnt_sol = destaccountid.toSolidityAddress();
+
+            System.out.println("account to in .sol " + destaccnt_sol);
+
+
+            try {
+                HederaServices.runtokensfromuser(runtosendin, destaccnt_sol);
+
+                showToast("RUN token send successful - Press back button -  refresh your balance.. ");
+
+            } catch (ReceiptStatusException e) {
+                showToast("Ledger Error sending RUN tokens " + e);
+            } catch (PrecheckStatusException e) {
+                showToast("Ledger Error sending RUN tokens " + e);
+            } catch (TimeoutException e) {
+                showToast("Ledger Error sending RUN tokens " + e);
+            }
+
+
+
+        }
+
+
+
+        public void showToast(final String toast)
+        {
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    spinwallet.setVisibility(View.GONE);
+                }
+            });
+
+
+            runOnUiThread(() -> Toast.makeText(Activitywallet.this, toast, Toast.LENGTH_LONG).show());
+
+
+        }
+
+    }
+
+
+
+
+    class SendHbarThread extends Thread {
+
+        String amounttosend;
+        String destaccount;
+
+        SendHbarThread(String _amountin, String _destaccount) {
+            this.amounttosend = _amountin;
+            this.destaccount = _destaccount;
+        }
+
+        @Override
+        public void run() {
+
+            BigInteger runtosendin = new BigInteger(amounttosend);
+
+            // call HederaServices to send RUN token.. dont send more than your balance - exception handling to add
+
+            showToast("Sending now .. ");
+
+
+            System.out.println("account to " + destaccount);
+
+            try {
+                HederaServices.sendhbar(runtosendin, destaccount);
+
+                showToast("HBAR send successful - Press back button -  refresh your balance.. ");
+
+            } catch (ReceiptStatusException e) {
+                showToast("Ledger Error sending RUN tokens " + e);
+            } catch (PrecheckStatusException e) {
+                showToast("Ledger Error sending RUN tokens " + e);
+            } catch (TimeoutException e) {
+                showToast("Ledger Error sending RUN tokens " + e);
+            }
+
+
+        }
+
+
+        public void showToast(final String toast) {
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    spinwallet.setVisibility(View.GONE);
+                }
+            });
+
+
+            runOnUiThread(() -> Toast.makeText(Activitywallet.this, toast, Toast.LENGTH_LONG).show());
+
+
+        }
+    }
+
 
 
 

@@ -38,6 +38,9 @@ public final class HederaServices implements  Serializable{
 
     private static final BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 
+    private static final BigInteger multiplier108 = new BigInteger("100000000");
+
+
 
     public static void createoperatorClient() {
 
@@ -558,6 +561,25 @@ public final class HederaServices implements  Serializable{
         contractExecTransactionResponse.getReceipt(OPERATING_ACCOUNT);
 
     }
+
+public static void sendhbar(BigInteger hbartosend, String destaccnt) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+
+    Hbar amount = Hbar.fromTinybars(multiplier108.multiply(hbartosend).longValue());
+
+    TransactionResponse transactionResponse = new TransferTransaction()
+            // .addSender and .addRecipient can be called as many times as you want as long as the total sum from
+            // both sides is equivalent
+            .addHbarTransfer(USER_ACCOUNT.getOperatorAccountId(), amount.negated())
+            .addHbarTransfer(AccountId.fromString(destaccnt), amount)
+            .setTransactionMemo("transfer via RUN.it")
+            .execute(USER_ACCOUNT);
+
+    System.out.println("transaction ID: " + transactionResponse);
+
+    TransactionRecord record = transactionResponse.getRecord(USER_ACCOUNT);
+}
+
+
 
 
     public static void runtokensfromuser(BigInteger runtosendlong, String destaccnt) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
