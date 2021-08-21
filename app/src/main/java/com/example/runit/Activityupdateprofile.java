@@ -281,6 +281,8 @@ public class Activityupdateprofile extends AppCompatActivity {
 
             try {
                 HederaServices.updateprofile(runitprofilecurrent.runitprofilescid,fnameglobal,lnameglobal,nicknameglobal,phonenum,nationality,rolecode);
+                showToast("Your profile has been successfully updated");
+
             } catch (TimeoutException e) {
                 showToast("Exception updating Profile SC" + e);
             } catch (PrecheckStatusException e) {
