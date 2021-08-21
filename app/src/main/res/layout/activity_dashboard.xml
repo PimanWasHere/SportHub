@@ -218,8 +218,8 @@
 
     <TextView
         android:id="@+id/textViewusername"
-        android:layout_width="149dp"
-        android:layout_height="77dp"
+        android:layout_width="151dp"
+        android:layout_height="76dp"
         android:background="#0040E0"
         android:text="Name.."
         android:textAlignment="center"

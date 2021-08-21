@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ED0847"
+    android:background="#FFFFFF"
     android:screenOrientation="portrait"
     tools:context=".Activityinstalleracc">
 
@@ -13,7 +13,7 @@
         android:id="@+id/textViewwallet1"
         android:layout_width="376dp"
         android:layout_height="54dp"
-        android:background="#ED0847"
+        android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
         android:text="Send RUN tokens to another account"
         android:textAlignment="center"
@@ -31,7 +31,7 @@
         android:id="@+id/editTextrunmounttosend"
         android:layout_width="359dp"
         android:layout_height="77dp"
-        android:background="#ED0847"
+        android:background="#FFFFFF"
 
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
@@ -54,7 +54,7 @@
         android:id="@+id/editTextrunaccountto"
         android:layout_width="359dp"
         android:layout_height="77dp"
-        android:background="#ED0847"
+        android:background="#FFFFFF"
 
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
@@ -76,7 +76,7 @@
         android:id="@+id/sendrunbuttwallet"
         android:layout_width="141dp"
         android:layout_height="52dp"
-        android:background="@drawable/myrndbluebutton"
+        android:background="@drawable/myrndredkbutton"
         android:fontFamily="sans-serif-smallcaps"
         android:text="SEND"
         android:textAlignment="center"

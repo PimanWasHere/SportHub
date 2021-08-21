@@ -157,9 +157,15 @@ public class Activitydatapreferenceaccupdate extends AppCompatActivity {
 
                     // call HederaServices and update profile
 
+                    String like1stg, like2stg, like3stg;
+
+                    like1stg = like1.getText().toString();
+                    like2stg = like2.getText().toString();
+                    like3stg = like3.getText().toString();
+
 
                     try {
-                        HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledataprefupdate.runitprofilescid), like1.getText().toString(),like2.getText().toString(), like3.getText().toString(), switchdemo.isChecked(), switchbehavioral.isChecked(), switchint.isChecked(), BigInteger.valueOf(current1), BigInteger.valueOf(current2));
+                        HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledataprefupdate.runitprofilescid), like1stg,like2stg, like3stg, switchdemo.isChecked(), switchbehavioral.isChecked(), switchint.isChecked(), BigInteger.valueOf(current1), BigInteger.valueOf(current2));
                     } catch (TimeoutException e) {
                         Toast.makeText(getApplicationContext(), "Ledger Error updating data preferences " +e, Toast.LENGTH_LONG).show();
                         return;

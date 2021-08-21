@@ -102,8 +102,8 @@ public class Activitycreateacc extends AppCompatActivity {
         runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountnum);
         runitlogonidnum = (TextView) findViewById(R.id.textViewnewlogonID);
 
-        runitaccountnum.setVisibility(View.GONE);
-        runitlogonidnum.setVisibility(View.GONE);
+        runitaccountnum.setVisibility(View.INVISIBLE);
+        runitlogonidnum.setVisibility(View.INVISIBLE);
 
 
         createprofilebut.setOnClickListener(new View.OnClickListener() {
@@ -448,7 +448,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
 
 
-                    runitaccountnum.setText("Run.it HBAR AccountID " + runitprofilecreated.runitrunaccountid);
+                    runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());
                     runitaccountnum.setVisibility(View.VISIBLE);
 
                     runitlogonidnum.setText("Run.it logon AccountID " + runitprofilecreated.runitlogonaccountid);

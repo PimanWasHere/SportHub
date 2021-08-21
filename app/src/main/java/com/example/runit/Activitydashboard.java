@@ -461,7 +461,7 @@ public class Activitydashboard extends AppCompatActivity implements
 
                 mainmenu1.setText(" Profile");
                 mainmenu2.setText(" Inventory");
-                mainmenu3.setText(" Settings");
+                mainmenu3.setText(" Wallet");
                 menumsgline.setText("");
 
 
@@ -546,7 +546,7 @@ public class Activitydashboard extends AppCompatActivity implements
                     case 4:
                         break;
                     case 5:
-                        // For Account - this is Inventory
+
 
                 }
 
@@ -570,7 +570,10 @@ public class Activitydashboard extends AppCompatActivity implements
                     case 4:
                         break;
                     case 5:
-                        // For Account - this is Settings
+
+                        // Open wallet
+
+                        openActivitywallet();
 
                 }
 
@@ -586,10 +589,6 @@ public class Activitydashboard extends AppCompatActivity implements
                 switch (dashboardflag) {
                     case 1:
 
-                        // ok wallet clicked
-
-                      //  Toast.makeText(getApplicationContext(), "Opening your wallet ..", Toast.LENGTH_LONG).show();
-                       // openActivitywallet();
                         break;
                     case 2:
                         break;
