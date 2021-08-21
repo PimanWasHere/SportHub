@@ -476,6 +476,42 @@ public final class HederaServices implements  Serializable{
 
 
 
+    public static void updateprofile(String usersprofilescID , String _fname, String _lname, String _nickname, String _phone, String _nationality, String _rolecode) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+
+        /* // update profile by Soul ONLY ie OnlyOwner.
+
+  function updateprofile (string _fname, string _lname, string _nickname, string _phone, string _nationality, string _rolecode)  public  onlyOwner{
+
+    fname = _fname;
+    lname = _lname;
+    nickname = _nickname;
+    phone = _phone;
+    nationality = _nationality;
+    rolecode = _rolecode;
+
+  }
+*/
+
+        TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
+                .setContractId(ContractId.fromString(usersprofilescID))
+                .setGas(100_000_000)
+                .setFunction("updateprofile", new ContractFunctionParameters()
+                        .addString(_fname)
+                        .addString(_lname)
+                        .addString(_nickname)
+                        .addString(_phone)
+                        .addString(_nationality)
+                        .addString(_rolecode))
+                .execute(USER_ACCOUNT);
+
+
+        // if this doesn't throw then we know the contract executed successfully
+
+        contractExecTransactionResponse.getReceipt(USER_ACCOUNT);
+
+
+    }
+
 
 
 

@@ -43,7 +43,7 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 
-    String rolecode;
+    String rolecode, nicknameglobal, fnameglobal, lnameglobal;
     ProgressBar spinupdate;
 
     private GennedAccount newDetails;
@@ -53,10 +53,14 @@ public class Activityupdateprofile extends AppCompatActivity {
     private String rolearray[];
 
 
+
+
     public Activityupdateprofile() {
     }
 
     Runitprofile runitprofilecurrent;
+
+    Runitprofile runitprofileupdated;
 
 
     @Override
@@ -204,6 +208,11 @@ public class Activityupdateprofile extends AppCompatActivity {
 
                 }
 
+                System.out.println("new role code string" + rolecode);
+
+                // set global to local
+
+
 
                 // bump to background thread and update the profile SC
 
@@ -238,6 +247,48 @@ public class Activityupdateprofile extends AppCompatActivity {
 
 
             // call hedera update profile basics
+
+            // create new profile object for updating the SC
+
+            runitprofileupdated= new Runitprofile();
+
+            runitprofileupdated.nickname = nicknameglobal;
+            runitprofileupdated.fname = fnameglobal;
+            runitprofileupdated.lname = lnameglobal;
+            runitprofileupdated.rolecode = rolecode;
+            // not needed as it is a subset update of profile in the SC
+            /*
+            runitprofileupdated.runitrunaccountid = runitprofilecurrent.runitrunaccountid;
+
+            runitprofileupdated.runitprofilescid = runitprofilecurrent.runitprofilescid;
+            runitprofileupdated.runitlogonaccountid = runitprofilecurrent.runitlogonaccountid;
+            runitprofileupdated.interest1 = runitprofilecurrent.interest1;
+            runitprofileupdated.interest2 = runitprofilecurrent.interest2;
+            runitprofileupdated.interest3 = runitprofilecurrent.interest3;
+            runitprofileupdated.grpsponsorslevel = runitprofilecurrent.grpsponsorslevel;
+            runitprofileupdated.sponsorslevel = runitprofilecurrent.sponsorslevel;
+            runitprofileupdated.interests = runitprofilecurrent.interests;
+            runitprofileupdated.demographic = runitprofilecurrent.demographic;
+            runitprofileupdated.behavioral = runitprofilecurrent.behavioral;
+            */
+
+            // now update just the name and role selections
+
+             String phonenum = "417 300 4812"; // to be added later.
+             String nationality = "Australian"; // ditto
+
+       //    public static void updateprofile(String usersprofilescID , String _fname, String _lname, String _nickname, String _phone, String _nationality, String _rolecode) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
+
+            try {
+                HederaServices.updateprofile(runitprofilecurrent.runitprofilescid,fnameglobal,lnameglobal,nicknameglobal,phonenum,nationality,rolecode);
+            } catch (TimeoutException e) {
+                showToast("Exception updating Profile SC" + e);
+            } catch (PrecheckStatusException e) {
+                showToast("Exception updating Profile SC" + e);
+            } catch (ReceiptStatusException e) {
+                showToast("Exception updating Profile SC" + e);
+
+            }
 
 
             // stop spinner
