@@ -33,7 +33,9 @@ public final class HederaServices implements  Serializable{
 
     private static final ContractId runtokensc= ContractId.fromString("0.0.2165205");
 
-    private static final FileId runitprofilefile = FileId.fromString("0.0.2165167");
+   // private static final FileId runitprofilefile = FileId.fromString("0.0.2165167");
+   // 0.0.2276665
+    private static final FileId runitprofilefile = FileId.fromString("0.0.2276665");
 
 
     private static final BigInteger multiplier1018 = new BigInteger("1000000000000000000");
@@ -518,6 +520,8 @@ public final class HederaServices implements  Serializable{
 
 
 
+
+
     public static TransactionRecord transferhbarfromrunit(Long hbartosendlong, String destaccnt, String memo) throws ReceiptStatusException, PrecheckStatusException, TimeoutException {
 
         Boolean resultstate = false;
@@ -657,7 +661,7 @@ public static void sendhbar(BigInteger hbartosend, String destaccnt) throws Time
             function updateinterests(string _interest1, string _interest2, string _interest3, bool _demo, bool _behav, bool _inter, uint256 _sponsorslevel, uint256 _grpsponsorslevel) public onlyOwner{
 
             }*/
-
+        System.out.println("_interest1 in " +  _interest1);
 
         TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
                 .setContractId(usersprofilescID)

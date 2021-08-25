@@ -59,6 +59,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
     TextView runitlogonidnum;
     TextView runitaccountnum;
+    TextView passwordquest;
 
     EditText newpassword;
 
@@ -99,11 +100,9 @@ public class Activitycreateacc extends AppCompatActivity {
 
         newpassword = (EditText) findViewById(R.id.editTextTextPassword);
 
-        runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountnum);
+        runitaccountnum = (TextView) findViewById(R.id.textViewnewaccountlogon);
         runitlogonidnum = (TextView) findViewById(R.id.textViewnewlogonID);
-
-        runitaccountnum.setVisibility(View.INVISIBLE);
-        runitlogonidnum.setVisibility(View.INVISIBLE);
+        passwordquest = (TextView) findViewById(R.id.textView8);
 
 
         createprofilebut.setOnClickListener(new View.OnClickListener() {
@@ -447,19 +446,21 @@ public class Activitycreateacc extends AppCompatActivity {
                 public void run() {
 
 
+                    spincreate.setVisibility(View.GONE);
 
-                    runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());
                     runitaccountnum.setVisibility(View.VISIBLE);
+                    runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());
 
-                    runitlogonidnum.setText("Run.it logon AccountID " + runitprofilecreated.runitlogonaccountid);
                     runitlogonidnum.setVisibility(View.VISIBLE);
+                    runitlogonidnum.setText("Run.it logon AccountID " + runitprofilecreated.runitlogonaccountid);
 
                     newpassword.setVisibility(View.GONE);
+                    passwordquest.setVisibility(View.GONE);
                     createprofilebut.setVisibility(View.GONE);
 
                     dataprefbutt.setVisibility(View.VISIBLE);
 
-                    spincreate.setVisibility(View.GONE);
+
 
                 }
             });

@@ -184,9 +184,9 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
             // call HederaServices and update profile
 
-
+            showToast("interest 1 in is " +  like1stg);
             try {
-                HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledatapref.runitprofilescid), like1stg,like2stg, like3stg, switchdemobool, switchbehavioralbool, switchintbool, current1big, current2big);
+                HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledatapref.runitprofilescid), like1stg ,like2stg, like3stg, switchdemobool, switchbehavioralbool, switchintbool, current1big, current2big);
                 showToast("Your Data preferences created Successfully");
 
             } catch (TimeoutException e) {

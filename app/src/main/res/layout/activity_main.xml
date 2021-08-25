@@ -122,7 +122,7 @@
         android:layout_marginBottom="16dp"
         android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
-        android:text="Alpha Version 0.5"
+        android:text="Alpha Version 1"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="14sp"

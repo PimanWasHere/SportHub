@@ -12,26 +12,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hedera.hashgraph.sdk.AccountId;
-import com.hedera.hashgraph.sdk.BadMnemonicException;
-import com.hedera.hashgraph.sdk.ContractId;
 import com.hedera.hashgraph.sdk.FileId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.concurrent.TimeoutException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 
 public class Activityupdateprofile extends AppCompatActivity {
@@ -46,13 +32,15 @@ public class Activityupdateprofile extends AppCompatActivity {
     String rolecode, nicknameglobal, fnameglobal, lnameglobal;
     ProgressBar spinupdate;
 
+    EditText nicknameinputprof, fnameinputprof, lnameinputprof;
+
+    Switch participant, fan, spectator, club, brand, sponsor, developer;
+
     private GennedAccount newDetails;
     private AccountId newAccount;
     private FileId newhederaFileid;
 
     private String rolearray[];
-
-
 
 
     public Activityupdateprofile() {
@@ -77,57 +65,33 @@ public class Activityupdateprofile extends AppCompatActivity {
         System.out.println("nickname " + runitprofilecurrent.nickname);
 
 
-
-        Button updateprofilebut = (Button) findViewById(R.id.updateaccountbutt);
+        Button updateprofilebut = (Button) findViewById(R.id.updateprofbutton);
         Button seedataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
 
-        EditText nicknameinputprof = (EditText) findViewById(R.id.editTextnicknameupdate);
-         EditText fnameinputprof = (EditText) findViewById(R.id.editTextfnameedit);
-        EditText lnameinputprof = (EditText) findViewById(R.id.editTextlnameedit);
+        nicknameinputprof = (EditText) findViewById(R.id.editTextnicknameupdate);
+        fnameinputprof = (EditText) findViewById(R.id.editTextfnameedit);
+        lnameinputprof = (EditText) findViewById(R.id.editTextlnameedit);
 
         //  EditText nationality = (EditText) findViewById(R.id.nationality);
 
-        Switch participant = (Switch) findViewById(R.id.switch10edit);
-        Switch fan = (Switch) findViewById(R.id.switch11edit);
-        Switch spectator = (Switch) findViewById(R.id.switch12edit);
-        Switch club = (Switch) findViewById(R.id.switch13edit);
-        Switch brand = (Switch) findViewById(R.id.switch14edit);
-        Switch sponsor = (Switch) findViewById(R.id.switch15edit);
-        Switch developer = (Switch) findViewById(R.id.switch16edit);
+        participant = (Switch) findViewById(R.id.switch10edit);
+        fan = (Switch) findViewById(R.id.switch11edit);
+        spectator = (Switch) findViewById(R.id.switch12edit);
+        club = (Switch) findViewById(R.id.switch13edit);
+        brand = (Switch) findViewById(R.id.switch14edit);
+        sponsor = (Switch) findViewById(R.id.switch15edit);
+        developer = (Switch) findViewById(R.id.switch16edit);
 
+        spinupdate.setVisibility(View.VISIBLE);
 
-        // displaying the existing profile
+        // need to lock the UI as we bump to bkgrnd
 
-        nicknameinputprof.setText(runitprofilecurrent.nickname);
-        fnameinputprof.setText(runitprofilecurrent.fname);
-        lnameinputprof.setText(runitprofilecurrent.lname);
+        // bump the below to new thread
 
+        Activityupdateprofile.GetLatestaccThread threadget = new Activityupdateprofile.GetLatestaccThread();
+        threadget.start();
 
-        // parse the rolecode and se the switches
-
-
-        rolearray = (runitprofilecurrent.rolecode).split("/");
-
-        // has to have at min 1 role
-
-
-        for (int i = 0; i < rolearray.length; ++i) {
-            if (rolearray[i].equals("P")) participant.setChecked(true);
-
-            if (rolearray[i].equals("F")) fan.setChecked(true);
-
-            if (rolearray[i].equals("S")) spectator.setChecked(true);
-
-            if (rolearray[i].equals("C")) club.setChecked(true);
-
-            if (rolearray[i].equals("R")) sponsor.setChecked(true);
-
-            if (rolearray[i].equals("B")) brand.setChecked(true);
-
-            if (rolearray[i].equals("D")) developer.setChecked(true);
-
-        }
-
+        // .. listeners..
 
         seedataprefbut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +101,6 @@ public class Activityupdateprofile extends AppCompatActivity {
 
             }
         });
-
 
         updateprofilebut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,8 +124,6 @@ public class Activityupdateprofile extends AppCompatActivity {
 
 
                 rolecode = "";
-
-                Toast.makeText(getApplicationContext(), "Thankyou for your patience.. updating your profile  now ..", Toast.LENGTH_LONG).show();
 
 
                 // System.out.println("particpant " +  participant.isChecked());
@@ -212,9 +173,13 @@ public class Activityupdateprofile extends AppCompatActivity {
 
                 // set global to local
 
-
+                nicknameglobal = nicknameinputprof.getText().toString();
+                fnameglobal = fnameinputprof.getText().toString();
+                lnameglobal = lnameinputprof.getText().toString();
 
                 // bump to background thread and update the profile SC
+
+                Toast.makeText(getApplicationContext(), "Thankyou for your patience.. updating your profile  now ..", Toast.LENGTH_LONG).show();
 
                 spinupdate.setVisibility(View.VISIBLE);
 
@@ -227,12 +192,112 @@ public class Activityupdateprofile extends AppCompatActivity {
 
 
                 //  we  stop the spinner from the backgrnd thread spincreate.setVisibility(View.GONE);
-
-
             }
 
 
         });
+
+    }
+
+
+
+    class GetLatestaccThread extends Thread {
+
+        GetLatestaccThread() {
+        }
+
+        @Override
+        public void run() {
+            // we have to re-read the profile from ledger as consensus is consensus - we MUST
+            // get latest profile form ledger.. cannot use old object that dashboard passes!
+
+
+
+            try {
+                runitprofilecurrent = HederaServices.getacontract(runitprofilecurrent.runitprofilescid);
+            } catch (TimeoutException e) {
+                showToast( "Failed to get profile ! ");
+                return;
+            } catch (PrecheckStatusException e) {
+                showToast( "Failed to get profile ! ");
+                return;
+            } catch (ReceiptStatusException e) {
+                showToast( "Failed to get profile ! ");
+                return;
+            }
+
+            nicknameinputprof.setText(runitprofilecurrent.nickname);
+            fnameinputprof.setText(runitprofilecurrent.lname);
+            lnameinputprof.setText(runitprofilecurrent.lname);
+
+            fnameglobal = runitprofilecurrent.fname;
+            lnameglobal = runitprofilecurrent.lname;
+            nicknameglobal = runitprofilecurrent.nickname;
+
+            // parse the rolecode and se the switches
+
+
+            rolearray = (runitprofilecurrent.rolecode).split("/");
+
+            // has to have at min 1 role
+
+
+            for (int i = 0; i < rolearray.length; ++i) {
+                if (rolearray[i].equals("P")) participant.setChecked(true);
+
+                if (rolearray[i].equals("F")) fan.setChecked(true);
+
+                if (rolearray[i].equals("S")) spectator.setChecked(true);
+
+                if (rolearray[i].equals("C")) club.setChecked(true);
+
+                if (rolearray[i].equals("R")) sponsor.setChecked(true);
+
+                if (rolearray[i].equals("B")) brand.setChecked(true);
+
+                if (rolearray[i].equals("D")) developer.setChecked(true);
+
+            }
+
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    spinupdate.setVisibility(View.GONE);
+
+                    nicknameinputprof.setText(nicknameglobal);
+                    fnameinputprof.setText(fnameglobal);
+                    lnameinputprof.setText(lnameglobal);
+
+                    rolearray = null;
+                    rolearray = (rolecode).split("/");
+
+                    // has to have at min 1 role
+
+
+                    for (int i = 0; i < rolearray.length; ++i) {
+                        if (rolearray[i].equals("P")) participant.setChecked(true);
+
+                        if (rolearray[i].equals("F")) fan.setChecked(true);
+
+                        if (rolearray[i].equals("S")) spectator.setChecked(true);
+
+                        if (rolearray[i].equals("C")) club.setChecked(true);
+
+                        if (rolearray[i].equals("R")) sponsor.setChecked(true);
+
+                        if (rolearray[i].equals("B")) brand.setChecked(true);
+
+                        if (rolearray[i].equals("D")) developer.setChecked(true);
+
+                    }
+
+
+                }
+            });
+        }
 
     }
 
@@ -253,6 +318,9 @@ public class Activityupdateprofile extends AppCompatActivity {
             runitprofileupdated= new Runitprofile();
 
             runitprofileupdated.nickname = nicknameglobal;
+
+            System.out.println("new role code string 1" + rolecode);
+
             runitprofileupdated.fname = fnameglobal;
             runitprofileupdated.lname = lnameglobal;
             runitprofileupdated.rolecode = rolecode;
@@ -280,6 +348,9 @@ public class Activityupdateprofile extends AppCompatActivity {
        //    public static void updateprofile(String usersprofilescID , String _fname, String _lname, String _nickname, String _phone, String _nationality, String _rolecode) throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
 
             try {
+
+                System.out.println(" fname" + fnameglobal);
+
                 HederaServices.updateprofile(runitprofilecurrent.runitprofilescid,fnameglobal,lnameglobal,nicknameglobal,phonenum,nationality,rolecode);
                 showToast("Your profile has been successfully updated");
 
@@ -300,6 +371,34 @@ public class Activityupdateprofile extends AppCompatActivity {
 
                     spinupdate.setVisibility(View.GONE);
 
+                    nicknameinputprof.setText(nicknameglobal);
+                    fnameinputprof.setText(fnameglobal);
+                    lnameinputprof.setText(lnameglobal);
+
+                    rolearray = null;
+                    rolearray = (rolecode).split("/");
+
+                    // has to have at min 1 role
+
+
+                    for (int i = 0; i < rolearray.length; ++i) {
+                        if (rolearray[i].equals("P")) participant.setChecked(true);
+
+                        if (rolearray[i].equals("F")) fan.setChecked(true);
+
+                        if (rolearray[i].equals("S")) spectator.setChecked(true);
+
+                        if (rolearray[i].equals("C")) club.setChecked(true);
+
+                        if (rolearray[i].equals("R")) sponsor.setChecked(true);
+
+                        if (rolearray[i].equals("B")) brand.setChecked(true);
+
+                        if (rolearray[i].equals("D")) developer.setChecked(true);
+
+                    }
+
+
                 }
             });
 
@@ -307,26 +406,26 @@ public class Activityupdateprofile extends AppCompatActivity {
         }
 
 
-        public void showToast(final String toast) {
 
-            // stop spinner
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    spinupdate.setVisibility(View.GONE);
-                }
-            });
-
-
-            runOnUiThread(() -> Toast.makeText(Activityupdateprofile.this, toast, Toast.LENGTH_LONG).show());
-
-
-        }
 
     }
 
 
+    public void showToast(final String toast) {
 
+        // stop spinner
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                spinupdate.setVisibility(View.GONE);
+            }
+        });
+
+
+        runOnUiThread(() -> Toast.makeText(Activityupdateprofile.this, toast, Toast.LENGTH_LONG).show());
+
+
+    }
 
 
 

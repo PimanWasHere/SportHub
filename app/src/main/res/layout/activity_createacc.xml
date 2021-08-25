@@ -10,6 +10,24 @@
     tools:context=".Activitycreateacc">
     <!--  style="@style/Widget.AppCompat.EditText"-->
 
+    <TextView
+        android:id="@+id/textViewnewaccountlogon"
+        android:layout_width="340dp"
+        android:layout_height="37dp"
+        android:background="#FFFFFF"
+        android:fontFamily="sans-serif-condensed"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.408"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.842" />
+
     <Button
         android:id="@+id/dataprofilebutton"
         android:layout_width="150dp"
@@ -238,31 +256,13 @@
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.917" />
-
-    <TextView
-        android:id="@+id/textViewnewaccountnum"
-        android:layout_width="340dp"
-        android:layout_height="37dp"
-        android:background="#FFFFFF"
-        android:fontFamily="sans-serif-condensed"
-        android:textAlignment="textStart"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.408"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.847" />
 
     <TextView
         android:id="@+id/textView3create"

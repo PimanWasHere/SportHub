@@ -85,9 +85,9 @@ public class Activitydatapreferenceaccupdate extends AppCompatActivity {
 
             // show existing settings from ledger POJO
 
-            like1.setText(runitprofiledataprefupdate.interest1);
-            like2.setText(runitprofiledataprefupdate.interest2);
-            like3.setText(runitprofiledataprefupdate.interest3);
+            like1.setText(runitprofiledataprefnewupdate.interest1);
+            like2.setText(runitprofiledataprefnewupdate.interest2);
+            like3.setText(runitprofiledataprefnewupdate.interest3);
 
             if (runitprofiledataprefnewupdate.demographic)
             switchdemo.setChecked(true);
