@@ -2,6 +2,7 @@ package com.example.runit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +21,9 @@ import com.hedera.hashgraph.sdk.PrecheckStatusException;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
 public class Activitydashboard extends AppCompatActivity implements
@@ -93,6 +96,8 @@ public class Activitydashboard extends AppCompatActivity implements
         ImageView create = (ImageView) findViewById(R.id.imageViewcreate);
         ImageView account = (ImageView) findViewById(R.id.imageViewaccount);
 
+        ImageView runitbalrefresh = (ImageView) findViewById(R.id.imageView5menu);
+
             // action buttons.. switch on or off and label for each menu option selected.
         Button actionbutt1 = (Button) findViewById(R.id.action1butt);
         Button actionbutt2 = (Button) findViewById(R.id.action2butt);
@@ -153,88 +158,20 @@ public class Activitydashboard extends AppCompatActivity implements
         if (!actionbutt2.isClickable()){
             actionbutt2.setClickable(false);}
 
-        /*
-        runitrandomrewards.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                // 7/20/21  SJ request random RUN reward increase and balance refresh
-                int min = 1, max = 5;
-                Random rn = new Random();
-                int randomNum = rn.nextInt((max - min) + 1) + min;
-
-                //i.e. (1 = 50%)   (2 = 25%)   (3 = 12.5%)   (4 = 7.25) ... etc...
-
-                BigInteger runrewardsonrefresh;
-
-                BigInteger runitbalbigint = new BigInteger(runitbal);
-
-                switch(randomNum)
-                {
-                    case 1:
-                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(2)));
-                    case 2:
-                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(4)));
-                    case 3:
-                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(8)));
-                    case 4:
-                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(16)));
-                    case 5:
-                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(32)));
-                    default:
-                        runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(4)));
-
-                }
-
-                // xfer RUN tokens from treasury accnt to User.
-
-
-                try {
-
-                    HederaServices.runtokensfromplatform(runrewardsonrefresh,runitrunaccountid_assol);
-                } catch (ReceiptStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (PrecheckStatusException e) {
-                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
-                    return;
-                } catch (TimeoutException e) {
-                    Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                // pause ui app thread to gain consensus - this will be on new thread in next version of PoC - with a Spinner.
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Toast.makeText(getApplicationContext(), "Thread sleep exception " + e, Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-
-
-                refreshbalance();
-
-                menuselection.setText( runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
-
-            }
-        });
-
 
         runitbalrefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                refreshbalance();
 
-                menuselection.setText(runitbal+ " RUN Rewards, powered by your " + usrhbarbalst.trim() + " HBAR" );
+                Activitydashboard.GetbaldashThread thread = new Activitydashboard.GetbaldashThread();
+                thread.start();
 
 
             }
         });
 
-*/
+
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,6 +198,10 @@ public class Activitydashboard extends AppCompatActivity implements
                 assets.setImageResource(R.drawable.logo_4_black_duplicatepng);
                 account.setImageResource(R.drawable.logo_5_black_duplicatepng);
 
+
+                if (actionbutt1.getVisibility() == View.VISIBLE){
+                    actionbutt1.setText("NFT1");
+                }
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
                     actionbutt1.setText("NFT1");
@@ -318,9 +259,13 @@ public class Activitydashboard extends AppCompatActivity implements
 
                 // evaluate role array and display buttons/ image assets accordingly
 
+                if (actionbutt1.getVisibility() == View.VISIBLE){
+                }
+
                 if (actionbutt1.getVisibility() != View.VISIBLE){
                     actionbutt1.setVisibility(View.VISIBLE);
                 }
+
                 actionbutt1.setText("Event 1");
 
                 if (!actionbutt1.isClickable())
@@ -477,12 +422,16 @@ public class Activitydashboard extends AppCompatActivity implements
 
 
 
-                //turn off buttons for account page
-
-                if (actionbutt1.getVisibility() == View.VISIBLE){
-                    actionbutt1.setVisibility(View.GONE);
-
+                if (actionbutt1.getVisibility() != View.VISIBLE){
+                    actionbutt1.setVisibility(View.VISIBLE);
                 }
+                actionbutt1.setText("Get RUN");
+
+
+                if (!actionbutt1.isClickable())
+                    actionbutt1.setClickable(true);
+
+                // turn off the rest
 
                 if (actionbutt2.getVisibility() == View.VISIBLE) {
                     actionbutt2.setVisibility(View.GONE);
@@ -601,6 +550,64 @@ public class Activitydashboard extends AppCompatActivity implements
                        // openActivitydatapreferences();
                         break;
                     case 5:
+                        // get random rewards in RUN
+                        // 8/27/22  SJ  request put back random RUN reward increase and balance refresh
+                        int min = 1, max = 5;
+                        Random rn = new Random();
+                        int randomNum = rn.nextInt((max - min) + 1) + min;
+
+                        //i.e. (1 = 50%)   (2 = 25%)   (3 = 12.5%)   (4 = 7.25) ... etc...
+
+                        BigInteger runrewardsonrefresh;
+
+                        BigInteger runitbalbigint = new BigInteger(runitbal);
+
+                        switch(randomNum)
+                        {
+                            case 1:
+                                runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(2)));
+                            case 2:
+                                runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(4)));
+                            case 3:
+                                runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(8)));
+                            case 4:
+                                runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(16)));
+                            case 5:
+                                runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(32)));
+                            default:
+                                runrewardsonrefresh = new BigInteger("1000000000000000000").multiply(runitbalbigint.divide(BigInteger.valueOf(4)));
+
+                        }
+
+                        // xfer RUN tokens from treasury accnt to User.
+
+
+                        try {
+
+                            HederaServices.runtokensfromplatform(runrewardsonrefresh,runitrunaccountid_assol);
+                        } catch (ReceiptStatusException e) {
+                            Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
+                            return;
+                        } catch (PrecheckStatusException e) {
+                            Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
+                            return;
+                        } catch (TimeoutException e) {
+                            Toast.makeText(getApplicationContext(), "Exception gifting RUN tokens " + e, Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        // pause ui app thread to gain consensus - this will be on new thread in next version of PoC - with a Spinner.
+
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            Toast.makeText(getApplicationContext(), "Thread sleep exception " + e, Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+
+                        Activitydashboard.GetbaldashThread thread = new Activitydashboard.GetbaldashThread();
+                        thread.start();
+
                         break;
                 }
 
@@ -696,7 +703,6 @@ public class Activitydashboard extends AppCompatActivity implements
 
             try {
                 runitbal = HederaServices.getruntokenbal().toString();
-
             } catch (ReceiptStatusException e) {
                 showToast("Ledger Error getting your Run token Balance  " + e );
                 return;
@@ -724,6 +730,10 @@ public class Activitydashboard extends AppCompatActivity implements
                         menuselection.setText(runitbal+ "  RUN Rewards, powered by your " + usrhbarbalst + " HBAR" );
 
                         spindash.setVisibility(View.GONE);
+
+                        showToast("Balances refreshed");
+
+
                     }
                 });
 
@@ -741,20 +751,22 @@ public class Activitydashboard extends AppCompatActivity implements
         }
 
 
-        public void showToast(final String toast)
-        {
-            // stop spinner
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    spindash.setVisibility(View.GONE);
-                }
-            });
 
-            runOnUiThread(() -> Toast.makeText(Activitydashboard.this, toast, Toast.LENGTH_LONG).show());
+    }
+
+    public void showToast(final String toast)
+    {
+        // stop spinner
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                spindash.setVisibility(View.GONE);
+            }
+        });
+
+        runOnUiThread(() -> Toast.makeText(Activitydashboard.this, toast, Toast.LENGTH_LONG).show());
 
 
-        }
     }
 
     public void openActivityupdateprofile () {

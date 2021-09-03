@@ -40,11 +40,13 @@ public class Activityupdateprofile extends AppCompatActivity {
     private AccountId newAccount;
     private FileId newhederaFileid;
 
-    private String rolearray[];
+    private String rolearray[] = null;
 
 
     public Activityupdateprofile() {
     }
+
+    Runitprofile runitprofilesource;
 
     Runitprofile runitprofilecurrent;
 
@@ -59,14 +61,14 @@ public class Activityupdateprofile extends AppCompatActivity {
         spinupdate = (ProgressBar) findViewById(R.id.progressBarupdate);
 
         Intent intent = getIntent();
-        runitprofilecurrent = (Runitprofile) intent.getSerializableExtra("profileobjtupdateprof");
+        runitprofilesource = (Runitprofile) intent.getSerializableExtra("profileobjtupdateprof");
 
-        System.out.println("runit profile3 obj " + runitprofilecurrent.runitprofilescid);
-        System.out.println("nickname " + runitprofilecurrent.nickname);
+        System.out.println("runit profile3 obj " + runitprofilesource.runitprofilescid);
+        System.out.println("nickname " + runitprofilesource.nickname);
 
 
         Button updateprofilebut = (Button) findViewById(R.id.updateprofbutton);
-        Button seedataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
+        Button sendataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
 
         nicknameinputprof = (EditText) findViewById(R.id.editTextnicknameupdate);
         fnameinputprof = (EditText) findViewById(R.id.editTextfnameedit);
@@ -82,18 +84,9 @@ public class Activityupdateprofile extends AppCompatActivity {
         sponsor = (Switch) findViewById(R.id.switch15edit);
         developer = (Switch) findViewById(R.id.switch16edit);
 
-        spinupdate.setVisibility(View.VISIBLE);
 
-        // need to lock the UI as we bump to bkgrnd
 
-        // bump the below to new thread
-
-        Activityupdateprofile.GetLatestaccThread threadget = new Activityupdateprofile.GetLatestaccThread();
-        threadget.start();
-
-        // .. listeners..
-
-        seedataprefbut.setOnClickListener(new View.OnClickListener() {
+        sendataprefbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -197,6 +190,18 @@ public class Activityupdateprofile extends AppCompatActivity {
 
         });
 
+
+        spinupdate.setVisibility(View.VISIBLE);
+
+        // need to lock the UI as we bump to bkgrnd
+
+        // bump the below to new thread
+
+        Activityupdateprofile.GetLatestaccThread threadget = new Activityupdateprofile.GetLatestaccThread();
+        threadget.start();
+
+
+
     }
 
 
@@ -212,9 +217,10 @@ public class Activityupdateprofile extends AppCompatActivity {
             // get latest profile form ledger.. cannot use old object that dashboard passes!
 
 
-
             try {
-                runitprofilecurrent = HederaServices.getacontract(runitprofilecurrent.runitprofilescid);
+                runitprofilecurrent = HederaServices.getacontract(runitprofilesource.runitprofilescid);
+                System.out.println("sc id from current " + runitprofilesource.runitprofilescid) ;
+
             } catch (TimeoutException e) {
                 showToast( "Failed to get profile ! ");
                 return;
@@ -226,10 +232,6 @@ public class Activityupdateprofile extends AppCompatActivity {
                 return;
             }
 
-            nicknameinputprof.setText(runitprofilecurrent.nickname);
-            fnameinputprof.setText(runitprofilecurrent.lname);
-            lnameinputprof.setText(runitprofilecurrent.lname);
-
             fnameglobal = runitprofilecurrent.fname;
             lnameglobal = runitprofilecurrent.lname;
             nicknameglobal = runitprofilecurrent.nickname;
@@ -239,25 +241,6 @@ public class Activityupdateprofile extends AppCompatActivity {
 
             rolearray = (runitprofilecurrent.rolecode).split("/");
 
-            // has to have at min 1 role
-
-
-            for (int i = 0; i < rolearray.length; ++i) {
-                if (rolearray[i].equals("P")) participant.setChecked(true);
-
-                if (rolearray[i].equals("F")) fan.setChecked(true);
-
-                if (rolearray[i].equals("S")) spectator.setChecked(true);
-
-                if (rolearray[i].equals("C")) club.setChecked(true);
-
-                if (rolearray[i].equals("R")) sponsor.setChecked(true);
-
-                if (rolearray[i].equals("B")) brand.setChecked(true);
-
-                if (rolearray[i].equals("D")) developer.setChecked(true);
-
-            }
 
 
             // stop spinner
@@ -270,9 +253,6 @@ public class Activityupdateprofile extends AppCompatActivity {
                     nicknameinputprof.setText(nicknameglobal);
                     fnameinputprof.setText(fnameglobal);
                     lnameinputprof.setText(lnameglobal);
-
-                    rolearray = null;
-                    rolearray = (rolecode).split("/");
 
                     // has to have at min 1 role
 
@@ -370,33 +350,6 @@ public class Activityupdateprofile extends AppCompatActivity {
                 public void run() {
 
                     spinupdate.setVisibility(View.GONE);
-
-                    nicknameinputprof.setText(nicknameglobal);
-                    fnameinputprof.setText(fnameglobal);
-                    lnameinputprof.setText(lnameglobal);
-
-                    rolearray = null;
-                    rolearray = (rolecode).split("/");
-
-                    // has to have at min 1 role
-
-
-                    for (int i = 0; i < rolearray.length; ++i) {
-                        if (rolearray[i].equals("P")) participant.setChecked(true);
-
-                        if (rolearray[i].equals("F")) fan.setChecked(true);
-
-                        if (rolearray[i].equals("S")) spectator.setChecked(true);
-
-                        if (rolearray[i].equals("C")) club.setChecked(true);
-
-                        if (rolearray[i].equals("R")) sponsor.setChecked(true);
-
-                        if (rolearray[i].equals("B")) brand.setChecked(true);
-
-                        if (rolearray[i].equals("D")) developer.setChecked(true);
-
-                    }
 
 
                 }

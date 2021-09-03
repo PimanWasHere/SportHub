@@ -68,7 +68,7 @@ public class Activitywallet extends AppCompatActivity {
                 // bump the below to new thread
 
 
-                Activitywallet.SendRunThread thread = new Activitywallet.SendRunThread(destaccnt.getText().toString(), amountsend.getText().toString());
+                Activitywallet.SendRunThread thread = new Activitywallet.SendRunThread( amountsend.getText().toString(),destaccnt.getText().toString());
                 thread.start();
 
 
@@ -90,7 +90,7 @@ public class Activitywallet extends AppCompatActivity {
                 // bump the below to new thread
 
 
-                Activitywallet.SendHbarThread thread2 = new Activitywallet.SendHbarThread(destaccnt.getText().toString(), amountsend.getText().toString());
+                Activitywallet.SendHbarThread thread2 = new Activitywallet.SendHbarThread(amountsend.getText().toString(),destaccnt.getText().toString());
                 thread2.start();
 
 
@@ -184,7 +184,7 @@ public class Activitywallet extends AppCompatActivity {
         @Override
         public void run() {
 
-            BigInteger runtosendin = new BigInteger(amounttosend);
+            BigInteger hbartosend = new BigInteger(amounttosend);
 
             // call HederaServices to send RUN token.. dont send more than your balance - exception handling to add
 
@@ -194,7 +194,7 @@ public class Activitywallet extends AppCompatActivity {
             System.out.println("account to " + destaccount);
 
             try {
-                HederaServices.sendhbar(runtosendin, destaccount);
+                HederaServices.sendhbar(hbartosend, destaccount);
 
                 showToast("HBAR send successful - Press back button -  refresh your balance.. ");
 

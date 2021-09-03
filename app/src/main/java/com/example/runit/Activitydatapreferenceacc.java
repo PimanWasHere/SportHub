@@ -184,7 +184,6 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
 
             // call HederaServices and update profile
 
-            showToast("interest 1 in is " +  like1stg);
             try {
                 HederaServices.updatedataprefsettings(ContractId.fromString(runitprofiledatapref.runitprofilescid), like1stg ,like2stg, like3stg, switchdemobool, switchbehavioralbool, switchintbool, current1big, current2big);
                 showToast("Your Data preferences created Successfully");
@@ -197,7 +196,7 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
                 showToast("Ledger Error updating data preferences " + e);
             }
 
-
+            openActivitydashboard ();
 
         }
 
@@ -221,7 +220,13 @@ public class Activitydatapreferenceacc  extends AppCompatActivity {
     }
 
 
+    public void openActivitydashboard () {
 
+        Intent intent = new Intent(this, com.example.runit.Activitydashboard.class);
+        intent.putExtra("profileobj", runitprofiledatapref);
+
+        startActivity(intent);
+    }
 
     }
 
