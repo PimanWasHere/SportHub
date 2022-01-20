@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:screenOrientation="portrait"
-    tools:context=".Activitydatapreferenceacc">
+    tools:context="com.example.runit.Activitydatapreferenceacc">
     <!--  style="@style/Widget.AppCompat.EditText"-->
 
 

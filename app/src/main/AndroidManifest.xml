@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.runit">
+    package="com.runnerup.runit">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,7 +16,7 @@
         android:roundIcon="@drawable/logo_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name="com.runnerup.runit.MainActivity"
                   android:theme="@style/AppTheme">
 
             <intent-filter>
@@ -27,27 +27,27 @@
         </activity>
 
         <activity
-            android:name=".Activitycreateacc"
+            android:name="com.runnerup.runit.Activitycreateacc"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Activitydatapreferenceacc"
+            android:name="com.runnerup.runit.Activitydatapreferenceacc"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Activitydatapreferenceaccupdate"
+            android:name="com.runnerup.runit.Activitydatapreferenceaccupdate"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Activitywallet"
+            android:name="com.runnerup.runit.Activitywallet"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Activityupdateprofile"
+            android:name="com.runnerup.runit.Activityupdateprofile"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Activitydashboard"
+            android:name="com.runnerup.runit.Activitydashboard"
             android:theme="@style/AppTheme" />
 
         <meta-data
