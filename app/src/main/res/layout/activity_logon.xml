@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:screenOrientation="portrait"
-    tools:context=".Activityinstalleracc">
+    tools:context="com.runnerup.runit.Activityinstalleracc">
 
 
     <!-- android:textColorHint="@color/colorAccent" --><![CDATA[

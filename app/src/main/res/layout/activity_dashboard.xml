@@ -8,7 +8,7 @@
     android:background="#FFFFFF"
     android:screenOrientation="portrait"
 
-    tools:context="com.example.runit.Activitydashboard">
+    tools:context="com.runnerup.runit.Activitydashboard">
 
 
     <TextView

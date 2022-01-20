@@ -5,7 +5,12 @@
       <map>
         <entry key="app/src/main/res/layout/activity_createacc.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_datapreferenceacc.xml" value="0.2726449275362319" />
+        <entry key="app/src/main/res/layout/activity_datapreferenceaccupdate.xml" value="0.2726449275362319" />
+        <entry key="app/src/main/res/layout/activity_logon.xml" value="0.2726449275362319" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_updateprofile.xml" value="0.2726449275362319" />
+        <entry key="app/src/main/res/layout/activity_wallet.xml" value="0.24322916666666666" />
       </map>
     </option>
   </component>
