@@ -1,29 +1,10 @@
 pragma solidity ^0.4.23;
+
 /*
-
-
-      For Full ownership of Run.it Entity.
-
-      Note - The terms Token and Coin, are used interchangeably - same entity.
-
-      The Hedera Client Account will be the Deployer Owner Operator(DOO) of this smart Contracts
-      AKA. the DOO entity as referenced below & Will own the Coin Contract and the Crowdsale contract and the initial
-      supply.
-
-
-      Only the DOO, the Owner can mint more coins AND OR Burn to the zero address and thus reduce the total supply
-      But in this case for objective of finite value-appreciation, if you notice the constructor below you will see
-      that Mint and Burn permissions are denied - and marked as finished, upon deploy.
-
-
-
-    NB:  Upon deploy the Owner DOO must set the Treasury account of the DOO to be the Contract Address of the Buycoin crowdsale aka 'Exchanger' contract
-           - this is where all the coin purchases will be supplied from - from the DOO Treasury Account
-         Upon Deploy also the runitcoinexchanger ie crowdsale contract MUST be set with the contract address of the Run.it coin contract
-
-*/
-
-
+The Run project will change the way we operate the world, since the dawn of time humanity have sought to journey beyond the run and travel further then they have before.
+Run-coin gives the power of the run to the people for shared ownership of The Run Entity ( currently Runnerup Pty Ltd ) provides voting rights with our share hodlers.
+The strategic plan for each quarter will be governed by the principles of YOLO.
+ */
 
 
 
@@ -243,12 +224,12 @@ contract runitcoin is StandardToken, Ownable {
   uint256 public INITIAL_SUPPLY;
 
   constructor () public {
-    name = "Run.it Token";
+    name = "run-coin";
     symbol = "RUN";
     INITIAL_SUPPLY = 5000000000 * (10 ** uint256(decimals));
     totalSupply_ = INITIAL_SUPPLY;
-    balances[msg.sender] = INITIAL_SUPPLY;
-    emit Transfer(address(0), msg.sender, INITIAL_SUPPLY);
+    balances[0x10Fc244e29Cc2dAfcc1fFA36AC280C9f2d6978b9]= INITIAL_SUPPLY;
+    emit Transfer(address(0), 0x10Fc244e29Cc2dAfcc1fFA36AC280C9f2d6978b9, INITIAL_SUPPLY);
     owner = msg.sender;
 
     //  setting to Clients wishes - no mint or burn.
