@@ -10,6 +10,69 @@
     tools:context="com.runnerup.runit.Activitycreateacc">
     <!--  style="@style/Widget.AppCompat.EditText"-->
 
+    <Button
+        android:id="@+id/organisationbuttin"
+        android:layout_width="295dp"
+        android:layout_height="50dp"
+        android:background="@drawable/mywhitebutton"
+        android:fontFamily="sans-serif-condensed"
+        android:text="ORGANISATION"
+        android:textAlignment="center"
+
+        android:textAllCaps="false"
+        android:textColor="#E91E63"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553" />
+
+    <Button
+        android:id="@+id/teambuttin"
+        android:layout_width="295dp"
+        android:layout_height="50dp"
+        android:background="@drawable/mywhitebutton"
+        android:fontFamily="sans-serif-condensed"
+        android:text="TEAM"
+        android:textAlignment="center"
+
+        android:textAllCaps="false"
+        android:textColor="#E91E63"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.439" />
+
+    <Button
+        android:id="@+id/individualbuttin"
+        android:layout_width="295dp"
+        android:layout_height="50dp"
+        android:background="@drawable/mywhitebutton"
+        android:fontFamily="sans-serif-condensed"
+        android:text="INDIVIDUAL"
+        android:textAlignment="center"
+
+        android:textAllCaps="false"
+        android:textColor="#E91E63"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.328" />
+
     <TextView
         android:id="@+id/textViewnewaccountlogon"
         android:layout_width="340dp"
@@ -26,14 +89,14 @@
         app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.842" />
+        app:layout_constraintVertical_bias="0.871" />
 
     <Button
         android:id="@+id/dataprofilebutton"
-        android:layout_width="150dp"
-        android:layout_height="44dp"
+        android:layout_width="295dp"
+        android:layout_height="50dp"
         android:background="@drawable/myrndredkbutton"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="sans-serif-condensed"
         android:text="CREATE"
         android:textAlignment="center"
 
@@ -41,13 +104,12 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:typeface="monospace"
+        android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768" />
+        app:layout_constraintVertical_bias="0.792" />
 
     <ProgressBar
         android:id="@+id/progressBarcreate"
@@ -73,7 +135,7 @@
         android:inputType="text"
         android:textAlignment="center"
         android:textColor="#0040E0"
-        android:textColorHint="#0040E0"
+        android:textColorHint="#E91E63"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +143,7 @@
         app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintVertical_bias="0.164" />
 
     <EditText
         android:id="@+id/editTextfnamecreate"
@@ -93,7 +155,7 @@
         android:inputType="text"
         android:textAlignment="center"
         android:textColor="#0040E0"
-        android:textColorHint="#0040E0"
+        android:textColorHint="#E91E63"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +163,7 @@
         app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintVertical_bias="0.164" />
 
     <EditText
         android:id="@+id/editTextnicknamecreate"
@@ -109,19 +171,19 @@
         android:layout_height="44dp"
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
-        android:hint="Nickname ?.."
+        android:hint="Nick name.. ?"
         android:inputType="text"
         android:textAlignment="center"
         android:textColor="#0040E0"
-        android:textColorHint="#0040E0"
+        android:textColorHint="#E91E63"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.874"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046" />
+        app:layout_constraintVertical_bias="0.229" />
 
     <TextView
         android:id="@+id/textView8"
@@ -131,120 +193,15 @@
         android:fontFamily="sans-serif-condensed"
         android:text="Create a Password below .."
         android:textAlignment="textStart"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.645" />
-
-    <Switch
-        android:id="@+id/switch10"
-        android:layout_width="121dp"
-        android:layout_height="38dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Participant"
-        android:textColor="#0040E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
-
-    <Switch
-        android:id="@+id/switch16"
-        android:layout_width="121dp"
-        android:layout_height="38dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Developer"
-        android:textColor="#0040E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58" />
-
-    <Switch
-        android:id="@+id/switch15"
-        android:layout_width="121dp"
-        android:layout_height="38dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Sponsor"
-        android:textColor="#0040E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525" />
-
-    <Switch
-        android:id="@+id/switch14"
-        android:layout_width="121dp"
-        android:layout_height="38dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Brand"
-        android:textColor="#0040E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
-
-    <Switch
-        android:id="@+id/switch13"
-        android:layout_width="121dp"
-        android:layout_height="31dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Club"
-        android:textColor="#0040E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.418" />
-
-    <Switch
-        android:id="@+id/switch12"
-        android:layout_width="121dp"
-        android:layout_height="31dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Spectator"
-        android:textColor="#0040E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.362" />
-
-    <Switch
-        android:id="@+id/switch11"
-        android:layout_width="121dp"
-        android:layout_height="31dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Fan"
-        android:textColor="#0040E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31" />
+        app:layout_constraintVertical_bias="0.634" />
 
     <TextView
         android:id="@+id/textViewnewlogonID"
@@ -262,25 +219,25 @@
         app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.917" />
+        app:layout_constraintVertical_bias="0.951" />
 
     <TextView
         android:id="@+id/textView3create"
-        android:layout_width="107dp"
-        android:layout_height="32dp"
+        android:layout_width="193dp"
+        android:layout_height="29dp"
         android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
-        android:text="I'm a .."
+        android:text="Hello, I am .."
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintVertical_bias="0.246" />
 
     <Button
         android:id="@+id/dataprefbuttonin"
@@ -321,6 +278,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.695" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="355dp"
+        android:layout_height="73dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.392"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039"
+        app:srcCompat="@drawable/bannernew" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

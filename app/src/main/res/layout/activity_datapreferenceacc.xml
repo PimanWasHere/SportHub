@@ -28,8 +28,7 @@
         app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512" />
-
+        app:layout_constraintVertical_bias="0.525" />
 
     <ProgressBar
         android:id="@+id/progressbardatapref"
@@ -50,9 +49,9 @@
         android:layout_height="26dp"
         android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
-        android:text="RUN.it ! Powered by Smart Contracts"
+        android:text="Powered by Smart Contracts"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,21 +62,21 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="387dp"
-        android:layout_height="48dp"
+        android:layout_width="371dp"
+        android:layout_height="34dp"
         android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
         android:text="Its Your Data, you own it."
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="34sp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.397" />
 
     <Switch
         android:id="@+id/switch3"
@@ -96,7 +95,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintVertical_bias="0.591" />
 
     <Switch
         android:id="@+id/switch1"
@@ -115,7 +114,7 @@
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436" />
+        app:layout_constraintVertical_bias="0.455" />
 
     <SeekBar
         android:id="@+id/seekBar1"
@@ -140,23 +139,6 @@
         app:layout_constraintVertical_bias="0.812" />
 
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="409dp"
-        android:layout_height="35dp"
-        android:background="#FFFFFF"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Express any likes and interests - in your own words.."
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
-
     <EditText
         android:id="@+id/editTextlike1"
         android:layout_width="396dp"
@@ -166,7 +148,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:foregroundTint="#F6F0F0"
-        android:hint="open text .."
+        android:hint="express what you like.. line 1"
         android:inputType="textPersonName"
         android:textAlignment="center"
 
@@ -189,7 +171,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:foregroundTint="#FBF9F9"
-        android:hint="open text .."
+        android:hint="more likes ?"
         android:inputType="textPersonName"
         android:textAlignment="center"
 
@@ -212,7 +194,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-smallcaps"
         android:foregroundTint="#F8F0F0"
-        android:hint="open text .."
+        android:hint="what do you enjoy ? a few words"
         android:inputType="textPersonName"
         android:textAlignment="center"
 
@@ -234,7 +216,7 @@
         android:fontFamily="sans-serif-condensed"
         android:text="Your openness level - to Individual Sponsors"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -251,7 +233,7 @@
         android:fontFamily="sans-serif-condensed"
         android:text="Your openness level - to Groups of Sponsors"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -276,12 +258,12 @@
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342" />
+        app:layout_constraintVertical_bias="0.332" />
 
     <Button
         android:id="@+id/dataprefbutt"
-        android:layout_width="141dp"
-        android:layout_height="52dp"
+        android:layout_width="272dp"
+        android:layout_height="48dp"
         android:background="@drawable/myrndredkbutton"
         android:fontFamily="sans-serif-smallcaps"
         android:text="CREATE PREFERENCES"
@@ -298,6 +280,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.921" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/bannernew" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
