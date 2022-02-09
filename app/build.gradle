@@ -10,8 +10,8 @@ android {
         applicationId "com.runnerup.runit"
         minSdkVersion 30
         targetSdkVersion 30
-        versionCode 2
-        versionName "2.0"
+        versionCode 3
+        versionName "3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -51,7 +51,8 @@ dependencies {
 
     // as below jda added
     annotationProcessor 'org.apache.logging.log4j:log4j-core:2.8.2'
-    implementation 'org.slf4j:slf4j-simple:1.7.29'
+    // remove below to create signed APK for Playconsole.
+    //implementation 'org.slf4j:slf4j-simple:1.7.29'
 
     // Android, Corda DJVM, Java 7+
     // implementation 'com.hedera.hashgraph:sdk-jdk7:2.0.5'

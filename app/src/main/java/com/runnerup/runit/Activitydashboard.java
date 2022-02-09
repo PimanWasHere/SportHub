@@ -116,13 +116,9 @@ public class Activitydashboard extends AppCompatActivity implements
 
         for(int i = 0; i < array.length; i++)
         {
-            if (array[i].equals("P")) roles = roles + "Participant, ";
-            if (array[i].equals("F")) roles = roles + "Fan, ";
-            if (array[i].equals("S")) roles = roles + "Spectator, ";
-            if (array[i].equals("C")) roles = roles + "Club rep, ";
-            if (array[i].equals("B")) roles = roles + "Brand rep, ";
-            if (array[i].equals("R")) roles = roles + "Sponsor, ";
-            if (array[i].equals("D")) roles = roles + "Developer. ";
+
+            if (array[i].equals("T")) roles = roles + "Team &  ";
+            if (array[i].equals("O")) roles = roles + "Organisation, ";
 
         }
 
