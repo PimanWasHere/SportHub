@@ -39,7 +39,7 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     TextView pkey;
 
-    Switch indidivual, team, organisation, showkey ;
+    Switch indidivual, team, organisation, showkeyswitch;
 
     private GennedAccount newDetails;
     private AccountId newAccount;
@@ -75,6 +75,7 @@ public class Activityupdateprofile extends AppCompatActivity {
         Button updateprofilebut = (Button) findViewById(R.id.updateprofbutton);
         Button sendataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
 
+
         nicknameinputprof = (EditText) findViewById(R.id.editTextnicknameupdate);
         fnameinputprof = (EditText) findViewById(R.id.editTextfnameedit);
         lnameinputprof = (EditText) findViewById(R.id.editTextlnameedit);
@@ -84,21 +85,24 @@ public class Activityupdateprofile extends AppCompatActivity {
         indidivual = (Switch) findViewById(R.id.switch1edit);
         team = (Switch) findViewById(R.id.switch2edit);
         organisation = (Switch) findViewById(R.id.switch3edit);
-        showkey = (Switch) findViewById(R.id.switchshowpkey);
+
+        showkeyswitch = (Switch) findViewById(R.id.switchshow);
+
+        pkey = (TextView) findViewById(R.id.TexViewkey);
+        String pkeyout = HederaServices.getkey().toString();
 
 
-        showkey.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
+        showkeyswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+
                 if (isChecked) {
-                    // If the switch button is on
-                    pkey.setText(HederaServices.getkey().toString());
+                    pkey.setText(pkeyout);
+                } else {
+                    pkey.setText("");
                 }
-                else {
-                // If the switch button is off
-                     pkey.setText(" ");
             }
-        }
         });
 
 

@@ -10,44 +10,10 @@
     tools:context="com.runnerup.runit.Activityupdateprofile">
     <!--  style="@style/Widget.AppCompat.EditText"-->
 
-    <Switch
-        android:id="@+id/switchshowpkey"
-        android:layout_width="180dp"
-        android:layout_height="27dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Show private key"
-        android:textAlignment="viewEnd"
-        android:textColor="#E91E63"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.424"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.771" />
-
-    <TextView
-        android:id="@+id/pkey"
-        android:layout_width="396dp"
-        android:layout_height="30dp"
-        android:background="#FFFFFF"
-        android:fontFamily="sans-serif-condensed"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.731" />
-
     <Button
         android:id="@+id/updateprofbutton"
-        android:layout_width="283dp"
-        android:layout_height="42dp"
+        android:layout_width="259dp"
+        android:layout_height="38dp"
         android:background="@drawable/myrndredkbutton"
         android:fontFamily="sans-serif-smallcaps"
         android:text="UPDATE PROFILE"
@@ -60,9 +26,10 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.956" />
 
     <EditText
         android:id="@+id/editTextnicknameupdate"
@@ -86,8 +53,8 @@
 
     <Button
         android:id="@+id/updatedataprefbutt"
-        android:layout_width="291dp"
-        android:layout_height="42dp"
+        android:layout_width="258dp"
+        android:layout_height="41dp"
         android:background="@drawable/myrndredkbutton"
         android:fontFamily="sans-serif-smallcaps"
         android:text="DATA PREFERENCES"
@@ -103,7 +70,7 @@
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="0.869" />
 
     <ProgressBar
         android:id="@+id/progressBarupdate"
@@ -230,6 +197,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.07"
         app:srcCompat="@drawable/bannernew" />
+
+    <TextView
+        android:id="@+id/TexViewkey"
+        android:layout_width="377dp"
+        android:layout_height="46dp"
+        android:editable="true"
+        android:selectAllOnFocus="true"
+        android:textColor="#EC0909"
+        android:textIsSelectable="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.715" />
+
+    <Switch
+        android:id="@+id/switchshow"
+        android:layout_width="192dp"
+        android:layout_height="31dp"
+        android:text="Show Private Key"
+        android:textColor="#E91E63"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.77" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
