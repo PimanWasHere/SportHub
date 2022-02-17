@@ -30,6 +30,7 @@ public final class HederaServices implements  Serializable{
     private static Client OPERATING_ACCOUNT = null;
     private static Client USER_ACCOUNT = null;
     private static GennedAccount GENNED_ACCOUNT = null;
+    private static PrivateKey USERSPK = null;
 
     private static final ContractId runtokensc= ContractId.fromString("0.0.29629502");
 
@@ -108,7 +109,7 @@ public final class HederaServices implements  Serializable{
         USER_ACCOUNT.setOperator(useraccount, userskey);
         USER_ACCOUNT.setMaxQueryPayment(new Hbar(5));
         USER_ACCOUNT.setMaxTransactionFee(new Hbar(50));
-
+        USERSPK = userskey;
         System.out.println("Connected to User's Account.. " + useraccount.toString());
 
     }
@@ -122,12 +123,15 @@ public final class HederaServices implements  Serializable{
 
     }
 
+    public static PrivateKey getkey() { return USERSPK;
+    }
+
 
     public static AccountId createnewaccount() throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
 
         TransactionResponse newAccounttx = new AccountCreateTransaction()
                 .setKey(GENNED_ACCOUNT.newPublicKey)
-                .setInitialBalance(new Hbar(500))
+                .setInitialBalance(new Hbar(5))
                 //.setInitialBalance(100_000_000) // not mandatory for create?
                 .execute(OPERATING_ACCOUNT);
 

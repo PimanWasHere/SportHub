@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hedera.hashgraph.sdk.AccountId;
 import com.hedera.hashgraph.sdk.FileId;
 import com.hedera.hashgraph.sdk.PrecheckStatusException;
+import com.hedera.hashgraph.sdk.PrivateKey;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
 import java.math.BigInteger;
@@ -34,7 +37,9 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     EditText nicknameinputprof, fnameinputprof, lnameinputprof;
 
-    Switch indidivual, team, organisation ;
+    TextView pkey;
+
+    Switch indidivual, team, organisation, showkey ;
 
     private GennedAccount newDetails;
     private AccountId newAccount;
@@ -79,6 +84,22 @@ public class Activityupdateprofile extends AppCompatActivity {
         indidivual = (Switch) findViewById(R.id.switch1edit);
         team = (Switch) findViewById(R.id.switch2edit);
         organisation = (Switch) findViewById(R.id.switch3edit);
+        showkey = (Switch) findViewById(R.id.switchshowpkey);
+
+
+        showkey.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // If the switch button is on
+                    pkey.setText(HederaServices.getkey().toString());
+                }
+                else {
+                // If the switch button is off
+                     pkey.setText(" ");
+            }
+        }
+        });
 
 
         sendataprefbut.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +110,7 @@ public class Activityupdateprofile extends AppCompatActivity {
 
             }
         });
+
 
         updateprofilebut.setOnClickListener(new View.OnClickListener() {
             @Override

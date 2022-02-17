@@ -372,7 +372,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
             //  Credit 1000 RUN tokens to new Account IF/Assuming TBD the User's KYC status is True
 
-            BigInteger rungift = new BigInteger("1000000000000000000000");
+            BigInteger rungift = new BigInteger("100000000000000000000");
 
 
             try {

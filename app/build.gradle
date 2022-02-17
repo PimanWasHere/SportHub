@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     // as below jda added
-    annotationProcessor 'org.apache.logging.log4j:log4j-core:2.8.2'
+    //annotationProcessor 'org.apache.logging.log4j:log4j-core:2.8.2'
     // remove below to create signed APK for Playconsole.
     //implementation 'org.slf4j:slf4j-simple:1.7.29'
 
