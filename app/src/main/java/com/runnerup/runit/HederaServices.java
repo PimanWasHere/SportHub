@@ -126,6 +126,9 @@ public final class HederaServices implements  Serializable{
     public static PrivateKey getkey() { return USERSPK;
     }
 
+    public static AccountId getAccount() { return USER_ACCOUNT.getOperatorAccountId();
+    }
+
 
     public static AccountId createnewaccount() throws TimeoutException, PrecheckStatusException, ReceiptStatusException {
 
@@ -583,17 +586,16 @@ public static void sendhbar(BigInteger hbartosend, String destaccnt) throws Time
 
     Hbar amount = Hbar.fromTinybars(multiplier108.multiply(hbartosend).longValue());
 
-    TransactionResponse transactionResponse = new TransferTransaction()
+    System.out.println(" hbar " + amount + " to " + destaccnt);
+     new TransferTransaction()
             // .addSender and .addRecipient can be called as many times as you want as long as the total sum from
             // both sides is equivalent
             .addHbarTransfer(USER_ACCOUNT.getOperatorAccountId(), amount.negated())
             .addHbarTransfer(AccountId.fromString(destaccnt), amount)
-            .setTransactionMemo("transfer via RUN.it")
-            .execute(USER_ACCOUNT);
+            .setTransactionMemo("HBAR sent via RUN mobile")
+            .execute(USER_ACCOUNT)
+            .getReceipt(USER_ACCOUNT);
 
-    System.out.println("transaction ID: " + transactionResponse);
-
-    TransactionRecord record = transactionResponse.getRecord(USER_ACCOUNT);
 }
 
 
@@ -638,7 +640,7 @@ public static void sendhbar(BigInteger hbartosend, String destaccnt) throws Time
             return tokenbal;
         }
 
-        BigInteger coinsto18 = contractCallResult01.getInt256(0);
+        BigInteger coinsto18 = contractCallResult01.getUint256(0);
 
         tokenbal = coinsto18.divide(multiplier1018);
 

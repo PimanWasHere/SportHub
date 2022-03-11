@@ -52,6 +52,7 @@ public class Activitywallet extends AppCompatActivity {
 
         EditText amountsend = (EditText) findViewById(R.id.editTextrunmounttosend);
         EditText destaccnt = (EditText) findViewById(R.id.editTextrunaccountto);
+        destaccnt.setTextIsSelectable(true);
 
 
         sendrunbutton.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +141,7 @@ public class Activitywallet extends AppCompatActivity {
                 showToast("Ledger Error sending RUN tokens " + e);
             } catch (TimeoutException e) {
                 showToast("Ledger Error sending RUN tokens " + e);
+
             }
 
 
@@ -190,7 +192,7 @@ public class Activitywallet extends AppCompatActivity {
             showToast("Sending now .. ");
 
 
-            System.out.println("account to " + destaccount);
+            System.out.println(hbartosend + " to account " + destaccount);
 
             try {
                 HederaServices.sendhbar(hbartosend, destaccount);
@@ -203,9 +205,10 @@ public class Activitywallet extends AppCompatActivity {
                 showToast("Ledger Error sending RUN tokens " + e);
             } catch (TimeoutException e) {
                 showToast("Ledger Error sending RUN tokens " + e);
+            } catch (IllegalArgumentException e) {
+                showToast("Invalid recipient AccountID ! " + e);
+
             }
-
-
         }
 
 

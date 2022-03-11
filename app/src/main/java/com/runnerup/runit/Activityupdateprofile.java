@@ -37,7 +37,7 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     EditText nicknameinputprof, fnameinputprof, lnameinputprof;
 
-    TextView pkey;
+    TextView pkey, accountid;
 
     Switch indidivual, team, organisation, showkeyswitch;
 
@@ -90,7 +90,8 @@ public class Activityupdateprofile extends AppCompatActivity {
 
         pkey = (TextView) findViewById(R.id.TexViewkey);
         String pkeyout = HederaServices.getkey().toString();
-
+        accountid = (TextView) findViewById(R.id.textViewAccount);
+        String accountout = HederaServices.getAccount().toString();
 
         showkeyswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -99,8 +100,10 @@ public class Activityupdateprofile extends AppCompatActivity {
 
                 if (isChecked) {
                     pkey.setText(pkeyout);
+                    accountid.setText(accountout);
                 } else {
                     pkey.setText("");
+                    accountid.setText("");
                 }
             }
         });
