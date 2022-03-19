@@ -474,7 +474,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
             System.out.println(".. saved to cache file as bytes " + newhederaFileid.toString().getBytes());
 
-            showToast("Your RUN AccountID for Tokens & your HBAR, and the important LogonID has been created and stored on your Phone in its safe cache,  We gifted you 1000 RUN Tokens, keep BOTH Account and Logon Account numbers written down and safe! ");
+            showToast("Your RUN AccountID for Tokens & your HBAR, and the important LogonID has been created and stored on your Phone in its safe cache,  We gifted you 100 RUN Tokens, keep BOTH Account and Logon Account numbers written down and safe! ");
 
             // stop spinner
             runOnUiThread(new Runnable() {

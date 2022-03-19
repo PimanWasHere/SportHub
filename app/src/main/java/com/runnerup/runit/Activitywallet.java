@@ -61,6 +61,10 @@ public class Activitywallet extends AppCompatActivity {
 
                 // check inputs - to do
 
+                if (amountsend.getText().equals(null) || destaccnt.getText().equals(null)) {
+                    // to do.. validation
+                }
+
                 spinwallet.setVisibility(View.VISIBLE);
 
                 // need to lock the UI as we bump to bkgrnd
@@ -119,7 +123,7 @@ public class Activitywallet extends AppCompatActivity {
 
             // call HederaServices to send RUN token.. dont send more than your balance - exception handling to add
 
-            showToast("Sending now .. ");
+            showToast("Sending RUN now .. ");
 
             AccountId destaccountid = AccountId.fromString(destaccount);
 
@@ -189,7 +193,7 @@ public class Activitywallet extends AppCompatActivity {
 
             // call HederaServices to send RUN token.. dont send more than your balance - exception handling to add
 
-            showToast("Sending now .. ");
+            showToast("Sending HBAR now .. ");
 
 
             System.out.println(hbartosend + " to account " + destaccount);

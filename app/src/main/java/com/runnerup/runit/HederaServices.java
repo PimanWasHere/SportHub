@@ -26,8 +26,12 @@ import java.util.concurrent.TimeoutException;
 public final class HederaServices implements  Serializable{
 
 
-    private static final AccountId OPERATOR_ID = AccountId.fromString("0.0.6655");
-    private static final PrivateKey OPERATOR_KEY = PrivateKey.fromString("302e020100300506032b657004220420163d9853ea3297b26863c0956c8085516c86a756be0819d655ab61cfdadbb1ab");
+    private static final AccountId OPERATOR_ID = AccountId.fromString("0.0.33980215");
+    private static final PrivateKey OPERATOR_KEY = PrivateKey.fromString("302e020100300506032b6570042204205153a28ace7c099ae36325105960b59fde660fecd1d123f35068f7c08ff88bbd");
+/*  "accountId": "0.0.33980215",
+  "publicKey": "302a300506032b6570032100a4005d9964605f52260b77dce399689e477127c871f22e415e4ecf1f75d2bf09",
+  "privateKey": "302e020100300506032b6570042204205153a28ace7c099ae36325105960b59fde660fecd1d123f35068f7c08ff88bbd"
+}*/
 
     private static Client OPERATING_ACCOUNT = null;
     private static Client USER_ACCOUNT = null;
