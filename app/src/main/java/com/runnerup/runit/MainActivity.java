@@ -86,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
             // cache file not there - show create account button
             createviraccntbutt.setVisibility(View.VISIBLE);
             createviraccntbutt.setClickable(true);
-            restoreaccntbutt.setVisibility(View.VISIBLE);
-            restoreaccntbutt.setClickable(true);
+            //restoreaccntbutt.setVisibility(View.VISIBLE);
+            //restoreaccntbutt.setClickable(true);
             mainactivitylogonaccountid.setVisibility(View.GONE);
             mainactivitylogonpassword.setVisibility(View.INVISIBLE);
             gorunrunit.setVisibility(View.GONE);
 
-            Toast.makeText(getApplicationContext(), "First time in ? .. Please Create or Restore your Account (RUN AccountID AND Password needed) ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "First time in ? .. Please create new Account ", Toast.LENGTH_LONG).show();
 
 
 

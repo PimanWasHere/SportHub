@@ -140,7 +140,7 @@ public class Activitycreateacc extends AppCompatActivity {
                     return;
                 }
 
-                rolecodeglobal = " ";
+                rolecodeglobal = "";
 
                 if (individualselected.equals("I")) rolecodeglobal = rolecodeglobal + "I/";
 
@@ -311,6 +311,7 @@ public class Activitycreateacc extends AppCompatActivity {
             BigInteger initialrunbal = new BigInteger("0");
 
             System.out.println(" new account as .sol " + newAccount.toSolidityAddress());
+            System.out.println(" rolecodeglobal on create  " + rolecodeglobal);
 
 
             try {

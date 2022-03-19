@@ -111,14 +111,15 @@ public class Activitydashboard extends AppCompatActivity implements
 
         System.out.println("profileobj rolecode.." + runitprofile.rolecode);
 
-        String roles = "I'm a ";
+
+        String roles = " ";
         String array[] = (runitprofile.rolecode).split("/");
 
         for(int i = 0; i < array.length; i++)
         {
-
-            if (array[i].equals("T")) roles = roles + "Team &  ";
-            if (array[i].equals("O")) roles = roles + "Organisation, ";
+            if (array[i].equals("I")) roles = roles + "Individual member, ";
+            if (array[i].equals("T")) roles = roles + "Team, ";
+            if (array[i].equals("O")) roles = roles + "Organisation. ";
 
         }
 

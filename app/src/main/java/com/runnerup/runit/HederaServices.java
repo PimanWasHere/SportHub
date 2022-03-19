@@ -1,6 +1,8 @@
 package com.runnerup.runit;
 
 
+import android.view.View;
+
 import com.google.protobuf.ByteString;
 import com.hedera.hashgraph.sdk.*;
 import org.threeten.bp.Duration;
@@ -31,6 +33,9 @@ public final class HederaServices implements  Serializable{
     private static Client USER_ACCOUNT = null;
     private static GennedAccount GENNED_ACCOUNT = null;
     private static PrivateKey USERSPK = null;
+    private static String accountsplit[] = null;
+    private static String fileidsplit[] = null;
+
 
     private static final ContractId runtokensc= ContractId.fromString("0.0.29629502");
 
@@ -134,13 +139,17 @@ public final class HederaServices implements  Serializable{
 
         TransactionResponse newAccounttx = new AccountCreateTransaction()
                 .setKey(GENNED_ACCOUNT.newPublicKey)
-                .setInitialBalance(new Hbar(5))
+                .setInitialBalance(new Hbar(50))
                 //.setInitialBalance(100_000_000) // not mandatory for create?
                 .execute(OPERATING_ACCOUNT);
 
         TransactionReceipt receipt = newAccounttx.getReceipt(OPERATING_ACCOUNT);
 
-        AccountId newAccountId = receipt.accountId;
+        AccountId newAccountIdchecksum = receipt.accountId;
+
+        accountsplit = (newAccountIdchecksum.toString()).split("-");
+
+        AccountId newAccountId = AccountId.fromString(accountsplit[0]);
 
         System.out.println("created new AccountID is  = " + newAccountId);
 
@@ -199,8 +208,12 @@ public final class HederaServices implements  Serializable{
 
         TransactionReceipt fileReceipt2 = fileTxId2.getReceipt(OPERATING_ACCOUNT);
 
-        FileId newFileId = fileReceipt2.fileId;
+        FileId newFileIdchecksum = fileReceipt2.fileId;
 
+        fileidsplit = (newFileIdchecksum.toString()).split("-");
+
+        FileId newFileId = FileId.fromString(fileidsplit[0]);
+        
         return newFileId;
     }
 
