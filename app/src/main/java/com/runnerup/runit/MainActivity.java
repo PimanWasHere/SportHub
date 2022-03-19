@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         Button createviraccntbutt = (Button) findViewById(R.id.createvirginaccnt3button);
         Button restoreaccntbutt = (Button) findViewById(R.id.restoreaccountbutton);
 
+        ImageView centerlogo = (ImageView) findViewById(R.id.imageViewcenterlogo);
+
         EditText mainactivitylogonpassword = (EditText) findViewById(R.id.editTextlogonTextPasswordmain);
         EditText mainactivitylogonaccountid = (EditText) findViewById(R.id.editTextlogonRUNaccount);
 
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (FileNotFoundException e) {
             // cache file not there - show create account button
+            centerlogo.setVisibility(View.VISIBLE);
             createviraccntbutt.setVisibility(View.VISIBLE);
             createviraccntbutt.setClickable(true);
             //restoreaccntbutt.setVisibility(View.VISIBLE);
@@ -92,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             mainactivitylogonpassword.setVisibility(View.INVISIBLE);
             gorunrunit.setVisibility(View.GONE);
 
-            Toast.makeText(getApplicationContext(), "First time in ? .. Please create new Account ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "First time in ? .. Create new Account ", Toast.LENGTH_LONG).show();
 
 
 

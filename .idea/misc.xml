@@ -5,12 +5,13 @@
       <map>
         <entry key="app/src/main/res/drawable/icon_red_create.xml" value="0.3671875" />
         <entry key="app/src/main/res/drawable/logo_1_black.xml" value="0.3671875" />
+        <entry key="app/src/main/res/drawable/logo_1_red.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/logo_icon.xml" value="0.3671875" />
         <entry key="app/src/main/res/drawable/logo_name.xml" value="0.3671875" />
         <entry key="app/src/main/res/drawable/logo_run_it.xml" value="0.3671875" />
         <entry key="app/src/main/res/drawable/mywhitebutton.xml" value="0.21458333333333332" />
         <entry key="app/src/main/res/drawable/run_it_logo.xml" value="0.3671875" />
-        <entry key="app/src/main/res/layout/activity_createacc.xml" value="0.3724137931034483" />
+        <entry key="app/src/main/res/layout/activity_createacc.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_datapreferenceacc.xml" value="0.2726449275362319" />
         <entry key="app/src/main/res/layout/activity_datapreferenceaccupdate.xml" value="0.2726449275362319" />

@@ -87,7 +87,7 @@ public final class HederaServices implements  Serializable{
 
     public static void createuserClient(AccountId useraccount, PrivateKey userskey)  {
 
-        System.out.println(".. to pay for SC deploy.. and subsequent calls.., SC display list, Contract create, Payout etc");
+        System.out.println(".. to pay for SC deploy.. and subsequent calls.., SC display list, Contract create, Payout etc, user account in ! =  " + useraccount);
  /*
 
 
@@ -213,7 +213,7 @@ public final class HederaServices implements  Serializable{
         fileidsplit = (newFileIdchecksum.toString()).split("-");
 
         FileId newFileId = FileId.fromString(fileidsplit[0]);
-        
+
         return newFileId;
     }
 

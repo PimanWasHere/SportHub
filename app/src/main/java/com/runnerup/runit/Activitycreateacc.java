@@ -272,6 +272,8 @@ public class Activitycreateacc extends AppCompatActivity {
                 return;
             }
 
+            System.out.println("new genned accnt . " + newAccount);
+
             // HH account created - now to create a Run.it account as hedera
 
                 /*  not needed as we create the new account with 5 hbar
@@ -479,10 +481,10 @@ public class Activitycreateacc extends AppCompatActivity {
                     spincreate.setVisibility(View.GONE);
 
                     runitaccountnum.setVisibility(View.VISIBLE);
-                    runitaccountnum.setText("Run.it HBAR AccountID " + newAccount.toString());
+                    runitaccountnum.setText("Run HBAR AccountID " + newAccount);
 
                     runitlogonidnum.setVisibility(View.VISIBLE);
-                    runitlogonidnum.setText("Run.it logon AccountID " + runitprofilecreated.runitlogonaccountid);
+                    runitlogonidnum.setText("Run to logon AccountID " + runitprofilecreated.runitlogonaccountid);
 
                     newpassword.setVisibility(View.GONE);
                     passwordquest.setVisibility(View.GONE);

@@ -50,10 +50,10 @@
         android:layout_height="26dp"
         android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
-        android:text="RUN.it ! Powered by Smart Contracts"
+        android:text="RUN !  Powered by Smart Contracts"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +128,7 @@
         android:layout_height="35dp"
         android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
-        android:text="Edit your linkes and things you enjoy"
+        android:text="Edit likes (above) and things you enjoy"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
@@ -249,7 +249,7 @@
         android:layout_height="36dp"
         android:background="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
-        android:text="Rememeber, RUN tokens are your hard rewards!"
+        android:text="Choose you openness to receive RUN rewards!"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
@@ -283,14 +283,14 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="392dp"
+        android:layout_width="358dp"
         android:layout_height="86dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.315"
+        app:layout_constraintHorizontal_bias="0.339"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/bannernew" />
 
 
