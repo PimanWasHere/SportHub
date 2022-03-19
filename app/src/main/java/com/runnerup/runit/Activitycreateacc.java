@@ -52,6 +52,10 @@ public class Activitycreateacc extends AppCompatActivity {
     private AccountId newAccount;
     private FileId newhederaFileid;
     private Runitprofile runitprofilecreated;
+
+    private static String accountsplit[] = null;
+    private static String fileidsplit[] = null;
+
     String individualselected, teamselected, organizationselected;
 
     ProgressBar spincreate;
@@ -272,6 +276,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 return;
             }
 
+
             System.out.println("new genned accnt . " + newAccount);
 
             // HH account created - now to create a Run.it account as hedera
@@ -442,7 +447,7 @@ public class Activitycreateacc extends AppCompatActivity {
                 File.createTempFile("runitaccount", null, Activitycreateacc.this.getCacheDir());
 
             } catch (IOException e) {
-                showToast("Difficulty creating your local secure file for RUN.it account id " + e);
+                showToast("Difficulty creating your local secure file for RUN  " + e);
                 return;
             }
 
@@ -458,10 +463,10 @@ public class Activitycreateacc extends AppCompatActivity {
                 runitfileout.write(newhederaFileid.toString().getBytes());
 
             } catch (FileNotFoundException e) {
-                showToast("RUN.it error when trying to find newly created account Cache file and then writing to your Cache file - internal " + e);
+                showToast("RUN error when trying to find newly created account Cache file and then writing to your Cache file - internal " + e);
                 return;
             } catch (IOException e) {
-                showToast("RUN.it error when trying to write to Cache file - internal " + e);
+                showToast("RUN error when trying to write to Cache file - internal " + e);
                 return;
 
             }
@@ -469,8 +474,7 @@ public class Activitycreateacc extends AppCompatActivity {
 
             System.out.println(".. saved to cache file as bytes " + newhederaFileid.toString().getBytes());
 
-            showToast("Your Run.it AccountID(for RUN tokens & your HBAR, and the important LogonID has been created and stored on your Phone in its safe cache,  We gifted you 1000 RUN Tokens to your AccountID because you KYC'd ! " + newAccount + " and " + newhederaFileid + " number written down and safe! ");
-
+            showToast("Your RUN AccountID for Tokens & your HBAR, and the important LogonID has been created and stored on your Phone in its safe cache,  We gifted you 1000 RUN Tokens, keep BOTH Account and Logon Account numbers written down and safe! ");
 
             // stop spinner
             runOnUiThread(new Runnable() {
@@ -481,10 +485,14 @@ public class Activitycreateacc extends AppCompatActivity {
                     spincreate.setVisibility(View.GONE);
 
                     runitaccountnum.setVisibility(View.VISIBLE);
-                    runitaccountnum.setText("Run HBAR AccountID " + newAccount);
+
+                    accountsplit = newAccount.toString().split("-");
+                    fileidsplit = runitprofilecreated.runitlogonaccountid.toString().split("-");
+
+                    runitaccountnum.setText("Run HBAR AccountID " + accountsplit[0]);
 
                     runitlogonidnum.setVisibility(View.VISIBLE);
-                    runitlogonidnum.setText("Run to logon AccountID " + runitprofilecreated.runitlogonaccountid);
+                    runitlogonidnum.setText("Run Logon AccountID " + fileidsplit[0]);
 
                     newpassword.setVisibility(View.GONE);
                     passwordquest.setVisibility(View.GONE);
