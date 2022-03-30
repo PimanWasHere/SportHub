@@ -47,6 +47,9 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     private String rolearray[] = null;
 
+    private static String accountoutsplit[] = null;
+
+
 
     public Activityupdateprofile() {
     }
@@ -98,9 +101,11 @@ public class Activityupdateprofile extends AppCompatActivity {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
 
+                accountoutsplit = accountout.split("-");
+
                 if (isChecked) {
                     pkey.setText(pkeyout);
-                    accountid.setText(accountout);
+                    accountid.setText(accountoutsplit[0]);
                 } else {
                     pkey.setText("");
                     accountid.setText("");
