@@ -1,6 +1,7 @@
 package com.runnerup.runit;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,9 +38,12 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     EditText nicknameinputprof, fnameinputprof, lnameinputprof;
 
-    TextView pkey, accountid;
+    TextView pkey, accountid, urllink;
+    View viewbuttview = findViewById(R.id.viewcontractbutt);
+    View acceptbuttview = findViewById(R.id.acceptcontractbutt);
 
-    Switch indidivual, team, organisation, showkeyswitch;
+
+    Switch indidivual, team, organisation, approvedvendor, showkeyswitch;
 
     private GennedAccount newDetails;
     private AccountId newAccount;
@@ -76,7 +80,9 @@ public class Activityupdateprofile extends AppCompatActivity {
 
 
         Button updateprofilebut = (Button) findViewById(R.id.updateprofbutton);
-        Button sendataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
+        Button senddataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
+        Button viewdocument = (Button) findViewById(R.id.viewcontractbutt);
+        Button acceptterms = (Button) findViewById(R.id.acceptcontractbutt);
 
 
         nicknameinputprof = (EditText) findViewById(R.id.editTextnicknameupdate);
@@ -88,6 +94,7 @@ public class Activityupdateprofile extends AppCompatActivity {
         indidivual = (Switch) findViewById(R.id.switch1edit);
         team = (Switch) findViewById(R.id.switch2edit);
         organisation = (Switch) findViewById(R.id.switch3edit);
+        approvedvendor = (Switch) findViewById(R.id.switch4edit);
 
         showkeyswitch = (Switch) findViewById(R.id.switchshow);
 
@@ -95,6 +102,8 @@ public class Activityupdateprofile extends AppCompatActivity {
         String pkeyout = HederaServices.getkey().toString();
         accountid = (TextView) findViewById(R.id.textViewAccount);
         String accountout = HederaServices.getAccount().toString();
+        urllink = (TextView) findViewById(R.id.texViewurl);
+
 
         showkeyswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -113,8 +122,61 @@ public class Activityupdateprofile extends AppCompatActivity {
             }
         });
 
+        approvedvendor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean selected) {
 
-        sendataprefbut.setOnClickListener(new View.OnClickListener() {
+                if (selected) {
+                    urllink.setText("https://docs.google.com/document/d/1w6O1DpdntnMCHLblgCN1Ima6sj6ADreh/edit?usp=sharing&ouid=111079660368986421108&rtpof=true&sd=true");
+                    viewbuttview.setVisibility(View.VISIBLE);
+                } else {
+                    urllink.setText("");
+                    viewbuttview.setVisibility(View.GONE);
+
+                    if (acceptbuttview.getVisibility() == View.VISIBLE) {
+                        acceptbuttview.setVisibility(View.GONE);
+                    }
+
+                }
+            }
+        });
+
+
+        viewdocument.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                acceptbuttview.setVisibility(View.VISIBLE);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://docs.google.com/document/d/1w6O1DpdntnMCHLblgCN1Ima6sj6ADreh/edit?usp=sharing&ouid=111079660368986421108&rtpof=true&sd=true"));
+                startActivity(browserIntent);
+            }
+        });
+
+
+        acceptterms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // make calls to  Ricardian SimpleTerms SC and set state for this Account signing in the mapping
+
+                //  start a new thread to do this and set a toast saying you can now Create your QR codes for your products
+                spinupdate.setVisibility(View.VISIBLE);
+
+                // need to lock the UI as we bump to bkgrnd
+
+                Toast.makeText(getApplicationContext(), "Thankyou for your patience.. Binding Ricardian legal contract to your profile..", Toast.LENGTH_LONG).show();
+
+                // bump the below to new thread
+
+                Activityupdateprofile.SetRicardianThread threadsetric = new Activityupdateprofile.SetRicardianThread();
+                threadsetric.start();
+
+
+
+            }
+        });
+
+
+        senddataprefbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -174,6 +236,11 @@ public class Activityupdateprofile extends AppCompatActivity {
                     rolecode = rolecode + "O/";
                 }
 
+                if (approvedvendor.isChecked()) {
+
+                    rolecode = rolecode + "V/";
+                }
+
 
                 System.out.println("new role code string" + rolecode);
 
@@ -197,7 +264,6 @@ public class Activityupdateprofile extends AppCompatActivity {
                 threadupdate.start();
 
 
-                //  we  stop the spinner from the backgrnd thread spincreate.setVisibility(View.GONE);
             }
 
 
@@ -208,16 +274,12 @@ public class Activityupdateprofile extends AppCompatActivity {
 
         // need to lock the UI as we bump to bkgrnd
 
-        // bump the below to new thread
-
         Activityupdateprofile.GetLatestaccThread threadget = new Activityupdateprofile.GetLatestaccThread();
         threadget.start();
 
 
 
     }
-
-
 
     class GetLatestaccThread extends Thread {
 
@@ -282,6 +344,56 @@ public class Activityupdateprofile extends AppCompatActivity {
 
                 }
             });
+        }
+
+    }
+
+
+
+    class SetRicardianThread extends Thread {
+
+        SetRicardianThread() {
+        }
+
+        @Override
+        public void run() {
+            // we have to update the SimpleTest Ricardian mapping SC wihtin the profile SC
+
+            // edit below for calls to the Sc ... in hedera services.
+
+            try {
+                runitprofilecurrent = HederaServices.getacontract(runitprofilesource.runitprofilescid);
+                System.out.println("sc id from current " + runitprofilesource.runitprofilescid) ;
+
+            } catch (TimeoutException e) {
+                showToast( "Failed to get profile ! ");
+                return;
+            } catch (PrecheckStatusException e) {
+                showToast( "Failed to get profile ! ");
+                return;
+            } catch (ReceiptStatusException e) {
+                showToast( "Failed to get profile ! ");
+                return;
+            }
+
+
+            showToast( "You agreement is now inforce - you may use this Run Wallet to generate QR codes for your Website products for sale.");
+
+            // stop spinner
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    spinupdate.setVisibility(View.GONE);
+
+                    //  then make invisible the url and buttons if call successful !
+
+                    urllink.setText("");
+                    viewbuttview.setVisibility(View.GONE);
+                    acceptbuttview.setVisibility(View.GONE);
+                }
+            });
+
         }
 
     }
