@@ -13,6 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -39,12 +40,13 @@ public final class HederaServices implements  Serializable{
     private static PrivateKey USERSPK = null;
 
 
-    private static final ContractId runtokensc= ContractId.fromString("0.0.29629502");
+    private static final ContractId runtokensc = ContractId.fromString("0.0.29629502");
 
    // private static final FileId runitprofilefile = FileId.fromString("0.0.2165167");
    // 0.0.2276665
-    private static final FileId runitprofilefile = FileId.fromString("0.0.29629416");
+    private static final FileId runitprofilefile = FileId.fromString("0.0.34274636");
 
+    private static final ContractId simpletermssc = ContractId.fromString("0.0.34274617");
 
     private static final BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 
@@ -152,6 +154,37 @@ public final class HederaServices implements  Serializable{
         return newAccountIdchecksum;
     }
 
+    /* no longer used as string is passed.
+    private static byte[] stringtohash32(String input) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String hashurl = generateStorngPasswordHash(input);
+        byte[] byte32output = hashurl.getBytes(StandardCharsets.UTF_8);
+        // return 0 if > 32
+        if (byte32output.length > 32) byte32output = "0".getBytes(StandardCharsets.UTF_8);
+        return byte32output;
+    }
+*/
+
+    public static void setricardian(String usersaccountsc, String urllink) throws ReceiptStatusException, PrecheckStatusException, TimeoutException, NoSuchAlgorithmException, InvalidKeySpecException {
+/* as above no longer used.. going to pass string to contract of the url
+        boolean bytes32ok = true;
+
+        byte[] output32 = stringtohash32(urllink);
+
+        if (output32.equals("0".getBytes(StandardCharsets.UTF_8))){ bytes32ok = false; return bytes32ok;}
+*/
+        TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
+                .setContractId(simpletermssc)
+                .setGas(4000000)
+                .setFunction("accept", new ContractFunctionParameters()
+                        .addString(urllink))
+                .execute(USER_ACCOUNT);
+
+        // if this doesn't throw then we know the contract executed successfully
+
+        contractExecTransactionResponse.getReceipt(USER_ACCOUNT);
+
+       // return bytes32ok;
+    };
 
     public static FileId createuserstore(AccountId newaccountId, String pword, ContractId profileid) throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, TimeoutException, PrecheckStatusException, ReceiptStatusException {
 
@@ -286,6 +319,7 @@ public final class HederaServices implements  Serializable{
                 .setBytecodeFileId(runitprofilefile)
                 .setConstructorParameters(
                         new ContractFunctionParameters()
+                                .addAddress(simpletermssc.toSolidityAddress())
                                 .addString(_fname)
                                 .addString(_lname)
                                 .addString(_nickname)

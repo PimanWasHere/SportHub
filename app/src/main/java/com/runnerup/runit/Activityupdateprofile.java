@@ -21,6 +21,8 @@ import com.hedera.hashgraph.sdk.PrivateKey;
 import com.hedera.hashgraph.sdk.ReceiptStatusException;
 
 import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.concurrent.TimeoutException;
 
 
@@ -53,7 +55,7 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     private static String accountoutsplit[] = null;
 
-
+    private static String urllinktext1 = "https://docs.google.com/document/d/1w6O1DpdntnMCHLblgCN1Ima6sj6ADreh/edit?usp=sharing&ouid=111079660368986421108&rtpof=true&sd=true";
 
     public Activityupdateprofile() {
     }
@@ -127,7 +129,7 @@ public class Activityupdateprofile extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean selected) {
 
                 if (selected) {
-                    urllink.setText("https://docs.google.com/document/d/1w6O1DpdntnMCHLblgCN1Ima6sj6ADreh/edit?usp=sharing&ouid=111079660368986421108&rtpof=true&sd=true");
+                    urllink.setText(urllinktext1);
                     viewbuttview.setVisibility(View.VISIBLE);
                 } else {
                     urllink.setText("");
@@ -146,7 +148,7 @@ public class Activityupdateprofile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 acceptbuttview.setVisibility(View.VISIBLE);
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://docs.google.com/document/d/1w6O1DpdntnMCHLblgCN1Ima6sj6ADreh/edit?usp=sharing&ouid=111079660368986421108&rtpof=true&sd=true"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urllinktext1));
                 startActivity(browserIntent);
             }
         });
@@ -357,26 +359,40 @@ public class Activityupdateprofile extends AppCompatActivity {
 
         @Override
         public void run() {
-            // we have to update the SimpleTest Ricardian mapping SC wihtin the profile SC
+            // we have to update the SimpleTest Ricardian mapping SC within the profile SC
 
-            // edit below for calls to the Sc ... in hedera services.
+            // edit below for calls to the SC ... in hedera services.
+
+            // old code boolean success;
 
             try {
-                runitprofilecurrent = HederaServices.getacontract(runitprofilesource.runitprofilescid);
-                System.out.println("sc id from current " + runitprofilesource.runitprofilescid) ;
-
-            } catch (TimeoutException e) {
-                showToast( "Failed to get profile ! ");
+                HederaServices.setricardian(runitprofilesource.runitprofilescid, urllinktext1);
+            } catch (ReceiptStatusException e) {
+                showToast( "Could not create Ricardian binding : " + e);
                 return;
             } catch (PrecheckStatusException e) {
-                showToast( "Failed to get profile ! ");
+                showToast( "Could not create Ricardian binding : " + e);
                 return;
-            } catch (ReceiptStatusException e) {
-                showToast( "Failed to get profile ! ");
+            } catch (TimeoutException e) {
+                showToast( "Could not create Ricardian binding : " + e);
+                return;
+            } catch (NoSuchAlgorithmException e) {
+                showToast( "Could not create Ricardian binding : on hashing " + e);
+                return;
+            } catch (InvalidKeySpecException e) {
+                showToast( "Could not create Ricardian binding : on hashing " + e);
                 return;
             }
 
+            /* old code  check if bytes32 hash is ok
 
+            if (!success) {
+                showToast( "Terms hash Link is > 32Bytes ");
+                return;
+            }
+            System.out.println("sc id from current " + runitprofilesource.runitprofilescid) ;
+            System.out.println("link 1 " + urllinktext1 ) ;
+            */
             showToast( "You agreement is now inforce - you may use this Run Wallet to generate QR codes for your Website products for sale.");
 
             // stop spinner
