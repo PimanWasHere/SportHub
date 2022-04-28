@@ -44,9 +44,9 @@ public final class HederaServices implements  Serializable{
 
    // private static final FileId runitprofilefile = FileId.fromString("0.0.2165167");
    // 0.0.2276665
-    private static final FileId runitprofilefile = FileId.fromString("0.0.34274636");
+    private static final FileId runitprofilefile = FileId.fromString("0.0.34342791");
 
-    private static final ContractId simpletermssc = ContractId.fromString("0.0.34274617");
+    private static final ContractId simpletermssc = ContractId.fromString("0.0.34342806");
 
     private static final BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 

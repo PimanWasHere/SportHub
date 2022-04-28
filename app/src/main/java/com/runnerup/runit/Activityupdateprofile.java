@@ -129,14 +129,15 @@ public class Activityupdateprofile extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean selected) {
 
                 if (selected) {
+                    urllink.setVisibility(View.VISIBLE);
                     urllink.setText(urllinktext1);
                     viewbuttview.setVisibility(View.VISIBLE);
                 } else {
-                    urllink.setText("");
-                    viewbuttview.setVisibility(View.GONE);
+                    urllink.setVisibility(View.INVISIBLE);
+                    viewbuttview.setVisibility(View.INVISIBLE);
 
                     if (acceptbuttview.getVisibility() == View.VISIBLE) {
-                        acceptbuttview.setVisibility(View.GONE);
+                        acceptbuttview.setVisibility(View.INVISIBLE);
                     }
 
                 }
