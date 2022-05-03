@@ -40,13 +40,13 @@ public final class HederaServices implements  Serializable{
     private static PrivateKey USERSPK = null;
 
 
-    private static final ContractId runtokensc = ContractId.fromString("0.0.29629502");
+    private static final ContractId runtokensc = ContractId.fromString("0.0.34390662");
 
    // private static final FileId runitprofilefile = FileId.fromString("0.0.2165167");
    // 0.0.2276665
-    private static final FileId runitprofilefile = FileId.fromString("0.0.34342791");
+    private static final FileId runitprofilefile = FileId.fromString("0.0.34390688");
 
-    private static final ContractId simpletermssc = ContractId.fromString("0.0.34342806");
+    private static final ContractId simpletermssc = ContractId.fromString("0.0.34390679");
 
     private static final BigInteger multiplier1018 = new BigInteger("1000000000000000000");
 
@@ -164,19 +164,22 @@ public final class HederaServices implements  Serializable{
     }
 */
 
-    public static void setricardian(String usersaccountsc, String urllink) throws ReceiptStatusException, PrecheckStatusException, TimeoutException, NoSuchAlgorithmException, InvalidKeySpecException {
-/* as above no longer used.. going to pass string to contract of the url
+    public static void setricardian(String urllink) throws ReceiptStatusException, PrecheckStatusException, TimeoutException, NoSuchAlgorithmException, InvalidKeySpecException {
+/* as above no longer used.. going to pass string to contract of the url(i)
+
         boolean bytes32ok = true;
 
         byte[] output32 = stringtohash32(urllink);
 
         if (output32.equals("0".getBytes(StandardCharsets.UTF_8))){ bytes32ok = false; return bytes32ok;}
 */
+        String account_urlink =  USER_ACCOUNT.getOperatorAccountId()+urllink;
+
         TransactionResponse contractExecTransactionResponse = new ContractExecuteTransaction()
                 .setContractId(simpletermssc)
                 .setGas(4000000)
                 .setFunction("accept", new ContractFunctionParameters()
-                        .addString(urllink))
+                        .addString(account_urlink))
                 .execute(USER_ACCOUNT);
 
         // if this doesn't throw then we know the contract executed successfully
@@ -326,12 +329,12 @@ public final class HederaServices implements  Serializable{
                                 .addString(_phone)
                                 .addString(_nationality)
                                 .addString(_rolecode)
-                                .addAddress(_accountid)
+                                .addAddress(_accountid) // already solidity
                                 .addUint256(_runbal)
                                 .addString(_hederafileid)
-                                .addString(_dataipfshash)
+                               // .addString(_dataipfshash)
                                 .addAddress(OPERATOR_ID.toSolidityAddress()))
-                .setContractMemo("This is a Run.it profile Smart Contract")
+                .setContractMemo("Run.it profile Smart Contract")
                 .execute(USER_ACCOUNT);
 
         TransactionReceipt createreceipt = contractcreatetran.getReceipt(USER_ACCOUNT);

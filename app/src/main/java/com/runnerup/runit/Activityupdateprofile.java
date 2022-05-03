@@ -55,7 +55,7 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     private static String accountoutsplit[] = null;
 
-    private static String urllinktext1 = "https://docs.google.com/document/d/1w6O1DpdntnMCHLblgCN1Ima6sj6ADreh/edit?usp=sharing&ouid=111079660368986421108&rtpof=true&sd=true";
+    private static String urllinktext1 = "https://runnerup.app";
 
     public Activityupdateprofile() {
     }
@@ -367,7 +367,7 @@ public class Activityupdateprofile extends AppCompatActivity {
             // old code boolean success;
 
             try {
-                HederaServices.setricardian(runitprofilesource.runitprofilescid, urllinktext1);
+                HederaServices.setricardian(urllinktext1);
             } catch (ReceiptStatusException e) {
                 showToast( "Could not create Ricardian binding : " + e);
                 return;
@@ -405,9 +405,9 @@ public class Activityupdateprofile extends AppCompatActivity {
 
                     //  then make invisible the url and buttons if call successful !
 
-                    urllink.setText("");
-                    viewbuttview.setVisibility(View.GONE);
-                    acceptbuttview.setVisibility(View.GONE);
+                    urllink.setVisibility(View.INVISIBLE);
+                    viewbuttview.setVisibility(View.INVISIBLE);
+                    acceptbuttview.setVisibility(View.INVISIBLE);
                 }
             });
 
