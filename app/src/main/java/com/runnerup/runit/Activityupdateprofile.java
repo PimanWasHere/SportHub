@@ -41,9 +41,7 @@ public class Activityupdateprofile extends AppCompatActivity {
     EditText nicknameinputprof, fnameinputprof, lnameinputprof;
 
     TextView pkey, accountid, urllink;
-    View viewbuttview = findViewById(R.id.viewcontractbutt);
-    View acceptbuttview = findViewById(R.id.acceptcontractbutt);
-
+    Button viewdocument, acceptterms, updateprofilebut, senddataprefbut;
 
     Switch indidivual, team, organisation, approvedvendor, showkeyswitch;
 
@@ -81,11 +79,10 @@ public class Activityupdateprofile extends AppCompatActivity {
         System.out.println("nickname " + runitprofilesource.nickname);
 
 
-        Button updateprofilebut = (Button) findViewById(R.id.updateprofbutton);
-        Button senddataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
-        Button viewdocument = (Button) findViewById(R.id.viewcontractbutt);
-        Button acceptterms = (Button) findViewById(R.id.acceptcontractbutt);
-
+        updateprofilebut = (Button) findViewById(R.id.updateprofbutton);
+        senddataprefbut = (Button) findViewById(R.id.updatedataprefbutt);
+        viewdocument = (Button) findViewById(R.id.viewcontractbutt);
+        acceptterms = (Button) findViewById(R.id.acceptcontractbutt);
 
         nicknameinputprof = (EditText) findViewById(R.id.editTextnicknameupdate);
         fnameinputprof = (EditText) findViewById(R.id.editTextfnameedit);
@@ -131,13 +128,13 @@ public class Activityupdateprofile extends AppCompatActivity {
                 if (selected) {
                     urllink.setVisibility(View.VISIBLE);
                     urllink.setText(urllinktext1);
-                    viewbuttview.setVisibility(View.VISIBLE);
+                    viewdocument.setVisibility(View.VISIBLE);
                 } else {
                     urllink.setVisibility(View.INVISIBLE);
-                    viewbuttview.setVisibility(View.INVISIBLE);
+                    viewdocument.setVisibility(View.INVISIBLE);
 
-                    if (acceptbuttview.getVisibility() == View.VISIBLE) {
-                        acceptbuttview.setVisibility(View.INVISIBLE);
+                    if (viewdocument.getVisibility() == View.VISIBLE) {
+                        viewdocument.setVisibility(View.INVISIBLE);
                     }
 
                 }
@@ -148,7 +145,7 @@ public class Activityupdateprofile extends AppCompatActivity {
         viewdocument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                acceptbuttview.setVisibility(View.VISIBLE);
+                acceptterms.setVisibility(View.VISIBLE);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urllinktext1));
                 startActivity(browserIntent);
             }
@@ -406,8 +403,8 @@ public class Activityupdateprofile extends AppCompatActivity {
                     //  then make invisible the url and buttons if call successful !
 
                     urllink.setVisibility(View.INVISIBLE);
-                    viewbuttview.setVisibility(View.INVISIBLE);
-                    acceptbuttview.setVisibility(View.INVISIBLE);
+                    viewdocument.setVisibility(View.INVISIBLE);
+                    acceptterms.setVisibility(View.INVISIBLE);
                 }
             });
 
