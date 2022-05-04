@@ -33,7 +33,6 @@
         android:layout_height="36dp"
         android:editable="true"
         android:selectAllOnFocus="true"
-        android:text="https://runnerup.app/"
         android:textColor="#EC0909"
         android:textIsSelectable="true"
         android:visibility="invisible"

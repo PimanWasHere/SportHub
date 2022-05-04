@@ -53,7 +53,7 @@ public class Activityupdateprofile extends AppCompatActivity {
 
     private static String accountoutsplit[] = null;
 
-    private static String urllinktext1 = "https://runnerup.app";
+    private static String urllinktext1 = "https://runnerup.app/documents";
 
     public Activityupdateprofile() {
     }
