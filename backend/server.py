@@ -86,7 +86,7 @@ async def get_wallet_nfts(account_id: str):
     """Get NFTs owned by a specific wallet"""
     # Mock implementation - will integrate with Hedera
     all_nfts = await get_all_nfts()
-    wallet_nfts = [nft for nft in all_nfts if nft.owner == account_id]
+    wallet_nfts = [nft for nft in all_nfts if nft['owner'] == account_id]
     return wallet_nfts
 
 @app.get("/api/nfts/{token_id}", response_model=NFTModel)
