@@ -93,7 +93,7 @@ async def get_wallet_nfts(account_id: str):
 async def get_nft_details(token_id: str):
     """Get details of a specific NFT"""
     all_nfts = await get_all_nfts()
-    nft = next((nft for nft in all_nfts if nft.token_id == token_id), None)
+    nft = next((nft for nft in all_nfts if nft['token_id'] == token_id), None)
     if not nft:
         raise HTTPException(status_code=404, detail="NFT not found")
     return nft
